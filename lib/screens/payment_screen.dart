@@ -5,14 +5,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:juragan99/data/booking.dart';
-import 'package:juragan99/data/bus.dart';
+import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/food.dart';
 import 'package:juragan99/screens/dashboard/search_ticket_screen.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/back_widget.dart';
-import 'package:juragan99/widgets/bus_ticket_widget.dart';
+import 'package:juragan99/widgets/bus_ticket_pergi_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -23,10 +23,6 @@ import 'package:juragan99/widgets/payment_method_widget.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class PaymentScreen extends StatefulWidget {
-  final Bus bus;
-
-  PaymentScreen({this.bus});
-
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -1215,19 +1211,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             children: [
               _data(
-                  variable.pickup_trip_location +
+                  variable.pergi_pickup_trip_location +
                       " - " +
-                      variable.drop_trip_location +
+                      variable.pergi_drop_trip_location +
                       " x " +
                       variable.selectedJumlahPenumpang,
-                  double.parse(variable.price)),
+                  double.parse(variable.pergi_price)),
               _data("Promo", promoValue),
               Divider(
                 color: Colors.grey,
               ),
               SizedBox(height: 10),
               _data(Strings.total.toUpperCase(),
-                  double.parse(variable.price) - promoValue),
+                  double.parse(variable.pergi_price) - promoValue),
             ],
           ),
         ));

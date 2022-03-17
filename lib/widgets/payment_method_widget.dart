@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
-import 'package:juragan99/data/bus.dart';
-import 'package:juragan99/data/slot.dart';
+import 'package:juragan99/data/bus_pergi.dart';
+import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/data/payment.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';

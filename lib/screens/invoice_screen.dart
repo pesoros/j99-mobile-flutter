@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
-import 'package:juragan99/data/bus.dart';
-import 'package:juragan99/data/slot.dart';
+import 'package:juragan99/data/bus_pergi.dart';
+import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
@@ -16,10 +16,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class InvoiceScreen extends StatefulWidget {
-  final Bus bus;
-
-  InvoiceScreen({this.bus});
-
   @override
   _InvoiceWidgetScreen createState() => _InvoiceWidgetScreen();
 }
@@ -171,12 +167,12 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           child: Column(
             children: [
               _data(
-                  variable.pickup_trip_location +
+                  variable.pergi_pickup_trip_location +
                       " - " +
-                      variable.drop_trip_location +
+                      variable.pergi_drop_trip_location +
                       " x " +
                       variable.selectedJumlahPenumpang,
-                  double.parse(variable.price)),
+                  double.parse(variable.pergi_price)),
               _data("Promo", 0),
               Divider(
                 color: Colors.grey,

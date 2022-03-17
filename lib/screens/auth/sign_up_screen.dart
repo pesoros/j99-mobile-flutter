@@ -469,7 +469,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: TextDecoration.underline),
                 ),
                 onTap: () {
-                  print('go to privacy url');
                   _showTermsConditions();
                 },
               ),

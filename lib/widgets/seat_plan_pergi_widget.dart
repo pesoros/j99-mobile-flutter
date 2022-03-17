@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import, unnecessary_statements
 
-import 'package:juragan99/data/bus.dart';
-import 'package:juragan99/data/slot.dart';
+import 'package:juragan99/data/bus_pergi.dart';
+import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/screens/passengger_form_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
@@ -16,12 +16,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class SeatPlanPergiWidget extends StatefulWidget {
-  final Bus bus;
-
-  SeatPlanPergiWidget({
-    this.bus,
-  });
-
   @override
   _SeatPlanPergiWidgetScreen createState() => _SeatPlanPergiWidgetScreen();
 }
@@ -30,7 +24,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
   List list = [];
   List li = [];
   bool index = false;
-  List<Slot> _slotList = [];
+  List<SlotPergi> _slotList = [];
 
   @override
   void initState() {
@@ -39,7 +33,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
   }
 
   initializeData() async {
-    await SlotList.list().then((value) {
+    await SlotPergiList.list().then((value) {
       setState(() {
         _slotList = value;
       });
@@ -309,14 +303,14 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
         mainAxisSpacing: 10,
         physics: NeverScrollableScrollPhysics(),
         children: List.generate(_slotList.length, (index) {
-          Slot slot = _slotList[index];
-          return slot.isSeat
+          SlotPergi slot = _slotList[index];
+          return slot.pergi_isSeat
               ? Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(
                     child: Container(
                       decoration: BoxDecoration(
-                          color: slot.isAvailable
+                          color: slot.pergi_isAvailable
                               ? list[index]
                                   ? Colors.white
                                   : CustomColor.red
@@ -327,9 +321,9 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                               Radius.circular(Dimensions.radius))),
                       child: Center(
                         child: Text(
-                          '${slot.name}',
+                          '${slot.pergi_name}',
                           style: TextStyle(
-                              color: slot.isAvailable
+                              color: slot.pergi_isAvailable
                                   ? list[index]
                                       ? CustomColor.darkGrey
                                       : CustomColor.white
@@ -342,9 +336,9 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                     onTap: () {
                       if (li.length >=
                               int.parse(variable.selectedJumlahPenumpang) &&
-                          !li.contains(slot.name)) {
+                          !li.contains(slot.pergi_name)) {
                       } else {
-                        if (!slot.isAvailable) {
+                        if (!slot.pergi_isAvailable) {
                           Fluttertoast.showToast(
                             msg: "Kursi sudah dipesan",
                             backgroundColor: CustomColor.red,
@@ -352,15 +346,16 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                             gravity: ToastGravity.CENTER,
                           );
                         } else {
-                          if (li.contains(slot.name)) {
+                          if (li.contains(slot.pergi_name)) {
                             setState(() {
-                              li.removeWhere((element) => element == slot.name);
+                              li.removeWhere(
+                                  (element) => element == slot.pergi_name);
                               list[index] = !list[index];
                             });
                           } else {
                             setState(() {
                               list[index] = !list[index];
-                              li.add(slot.name);
+                              li.add(slot.pergi_name);
                             });
                           }
                         }
@@ -439,7 +434,6 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
           } else {
             if (selectedJumlahPenumpang == 1) {
               variable.seatPergiPassengger1 = li[0].toString();
-              print(variable.seatPergiPassengger1);
               Navigator.pop(context);
             }
             if (selectedJumlahPenumpang == 2) {
@@ -469,10 +463,8 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
   void getSlotList() {
     int data = _slotList.length;
     for (int i = 0; i < data; i++) {
-      Slot slot = _slotList[i];
-      list.add(slot.isAvailable);
-
-      // print('list: ' + list.toString());
+      SlotPergi slot = _slotList[i];
+      list.add(slot.pergi_isAvailable);
     }
   }
 }

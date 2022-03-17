@@ -4,25 +4,7 @@ import 'package:juragan99/utils/variables.dart' as variable;
 
 class BookingList {
   static list() async {
-    print(variable.trip_id_no);
-    print(variable.trip_route_id);
-    print(variable.pickup_trip_location);
-    print(variable.drop_trip_location);
-    print(variable.totalPrice);
-    print(variable.datePergi);
-    print(variable.type);
-    print(variable.kodePromo);
-    print(variable.selectedPaymentCategories);
-    print(variable.selectedPayment);
-    print(variable.namePassengger1);
-    print(variable.seatPergiPassengger1);
-    print(variable.foodIdPassengger1);
-    print(variable.baggagePassengger1);
-    print(variable.nikTypePassengger1);
-    print(variable.nikPassengger1);
-    print(variable.phonePassengger1);
-
-    String url = "http://api-j99.pesoros.com/booking/add";
+    String url = "https://api-j99.pesoros.com/booking/add";
 
     Uri parseUrl = Uri.parse(
       url,
@@ -30,13 +12,13 @@ class BookingList {
     final response = await http.post(parseUrl, headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
-      "trip_id_no": variable.trip_id_no,
-      "trip_route_id": variable.trip_route_id,
-      "pickup_location": variable.pickup_trip_location,
-      "drop_location": variable.drop_trip_location,
+      "trip_id_no": variable.pergi_trip_id_no,
+      "trip_route_id": variable.pergi_trip_route_id,
+      "pickup_location": variable.pergi_pickup_trip_location,
+      "drop_location": variable.pergi_drop_trip_location,
       "pricePerSeat": variable.totalPrice,
       "booking_date": variable.datePergi,
-      "fleet_type_id": variable.type,
+      "fleet_type_id": variable.pergi_type,
       "offer_code": variable.kodePromo,
       "payment_method": variable.selectedPaymentCategories,
       "payment_channel_code": variable.selectedPayment,
@@ -50,7 +32,6 @@ class BookingList {
     });
     if (jsonDecode(response.body)['status'] == true) {
       var payment = jsonDecode(response.body)['payment'];
-      print(payment);
       variable.status = payment['status'];
       variable.bank_code = payment['bank_code'];
       variable.merchant_code = payment['merchant_code'];
@@ -58,9 +39,7 @@ class BookingList {
       variable.account_number = payment['account_number'];
       variable.expiration_date = payment['expiration_date'];
       variable.payment_id = payment['id'];
-    } else {
-      print("Error");
-    }
+    } else {}
   }
 }
 

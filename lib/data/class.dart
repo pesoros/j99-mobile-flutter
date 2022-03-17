@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class ClassModel {
   final String id;
   final String kelas;
@@ -32,4 +35,44 @@ class ClassModel {
 
   @override
   String toString() => kelas;
+}
+
+class GetClassList {
+  static list() async {
+    String url = "https://api-j99.pesoros.com/datakelas";
+
+    Uri parseUrl = Uri.parse(
+      url,
+    );
+    final response = await http.post(parseUrl);
+    List<ClassList> list = [];
+
+    for (var data in jsonDecode(response.body) as List) {
+      list.add(ClassList.fromJson(data));
+    }
+    return list;
+  }
+}
+
+class ClassList {
+  String id;
+  String kelas;
+
+  ClassList({
+    this.id,
+    this.kelas,
+  });
+
+  ClassList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    kelas = json['kelas'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['kelas'] = this.kelas;
+
+    return data;
+  }
 }

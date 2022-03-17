@@ -2,9 +2,9 @@
 
 import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:juragan99/data/bus.dart';
+import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/food.dart';
-import 'package:juragan99/data/slot.dart';
+import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';

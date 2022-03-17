@@ -1,4 +1,4 @@
-#Sat Mar 12 16:03:51 WIB 2022
-base.0=/Users/paratonsp/Documents/flutterProject/juragan99-mobile/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+#Wed Mar 16 16:13:09 WIB 2022
+base.0=/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

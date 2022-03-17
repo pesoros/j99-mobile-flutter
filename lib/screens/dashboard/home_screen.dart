@@ -7,11 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
 import 'package:juragan99/screens/customer_feedback_screen.dart';
-import 'package:juragan99/screens/drawer/change_password_screen.dart';
-import 'package:juragan99/screens/drawer/gift_card_screen.dart';
-import 'package:juragan99/screens/drawer/my_profile_screen.dart';
-import 'package:juragan99/screens/drawer/support_screen.dart';
-import 'package:juragan99/screens/search_result_screen.dart';
+import 'package:juragan99/screens/settings/change_password_screen.dart';
+import 'package:juragan99/screens/settings/gift_card_screen.dart';
+import 'package:juragan99/screens/settings/my_profile_screen.dart';
+import 'package:juragan99/screens/settings/support_screen.dart';
+import 'package:juragan99/screens/search_result_pergi_screen.dart';
 
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
@@ -414,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SearchResultScreen()));
+                        builder: (context) => SearchResultPergiScreen()));
                   }
                 },
               ),

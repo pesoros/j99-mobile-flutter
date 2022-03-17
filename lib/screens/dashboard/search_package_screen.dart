@@ -2,7 +2,7 @@
 
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
-import 'package:juragan99/widgets/bus_ticket_widget.dart';
+import 'package:juragan99/widgets/bus_ticket_pergi_widget.dart';
 import 'package:juragan99/widgets/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';

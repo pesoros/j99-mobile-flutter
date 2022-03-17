@@ -19,7 +19,7 @@ import 'package:flutter_custom_tab_bar/transform/color_transform.dart';
 import 'package:flutter_custom_tab_bar/transform/scale_transform.dart';
 import 'package:flutter_custom_tab_bar/transform/tab_bar_transform.dart';
 
-import 'package:juragan99/screens/drawer/my_profile_screen.dart';
+import 'package:juragan99/screens/settings/my_profile_screen.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class DashboardScreen extends StatefulWidget {
@@ -97,7 +97,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Beli Tiket"),
+                                child: Text(
+                                  "Beli Tiket",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
@@ -108,7 +113,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Cari Tiket"),
+                                child: Text(
+                                  "Cari Tiket",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
@@ -119,7 +129,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Pariwisata"),
+                                child: Text(
+                                  "Pariwisata",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
@@ -130,7 +145,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Cari Paket"),
+                                child: Text(
+                                  "Cari Paket",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),

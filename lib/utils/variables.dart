@@ -27,20 +27,33 @@ String datePulang = 'Pulang';
 bool checkPulangPergi = false;
 
 //Bus
-String bus;
-String trip_id_no;
-String trip_route_id;
-String shedule_id;
-String pickup_trip_location;
-String drop_trip_location;
-String type;
-String fleet_seats;
-String price;
-String duration;
-String start;
-String end;
-String seatPicked;
-String seatAvail;
+String pergi_trip_id_no;
+String pergi_trip_route_id;
+String pergi_shedule_id;
+String pergi_pickup_trip_location;
+String pergi_drop_trip_location;
+String pergi_type;
+String pergi_fleet_seats;
+String pergi_price;
+String pergi_duration;
+String pergi_start;
+String pergi_end;
+String pergi_seatPicked;
+String pergi_seatAvail;
+
+String pulang_trip_id_no;
+String pulang_trip_route_id;
+String pulang_shedule_id;
+String pulang_pickup_trip_location;
+String pulang_drop_trip_location;
+String pulang_type;
+String pulang_fleet_seats;
+String pulang_price;
+String pulang_duration;
+String pulang_start;
+String pulang_end;
+String pulang_seatPicked;
+String pulang_seatAvail;
 
 //PassanggerForm
 bool checkBuyerPassengger = false;

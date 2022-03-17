@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class PaymentList {
   static list() async {
-    String url = "http://api-j99.pesoros.com/datapaymentmethod";
+    String url = "https://api-j99.pesoros.com/datapaymentmethod";
 
     Uri parseUrl = Uri.parse(
       url,

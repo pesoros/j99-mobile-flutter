@@ -806,8 +806,8 @@ androidx.annotation.Nullable
 kotlin.sequences.TakeSequence
 com.google.common.collect.Collections2$TransformedCollection
 com.google.common.graph.BaseGraph
-androidx.core.content.res.ResourcesCompat$FontCallback
 com.google.common.collect.Synchronized$SynchronizedCollection
+androidx.core.content.res.ResourcesCompat$FontCallback
 kotlin.coroutines.experimental.Continuation
 kotlin.random.Random$Default
 kotlin.concurrent.LocksKt
@@ -6051,5 +6051,5 @@ androidx.core.content.res.ResourcesCompat:
     private static final java.util.WeakHashMap sColorStateCaches
     private static final java.lang.Object sColorStateCacheLock
 androidx.lifecycle.DefaultLifecycleObserver$-CC
-io.flutter.plugin.common.BinaryMessenger$-CC
 io.flutter.plugin.platform.PlatformView$-CC
+io.flutter.plugin.common.BinaryMessenger$-CC

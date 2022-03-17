@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/paratonsp/Documents/flutterProject/juragan99-mobile/build/shared_preferences_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-sv/values-sv.xml",
+            "outputFile": "/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/shared_preferences_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-sv/values-sv.xml",
             "map": [
                 {
                     "source": "/Users/paratonsp/.gradle/caches/transforms-2/files-2.1/5f663b08eec19eef9a9d1af662d9025e/core-1.6.0/res/values-sv/values-sv.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/paratonsp/Documents/flutterProject/juragan99-mobile/build/shared_preferences_android/intermediates/res/merged/release/values-sv/values-sv.xml",
+            "outputFile": "/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/shared_preferences_android/intermediates/res/merged/release/values-sv/values-sv.xml",
             "map": [
                 {
                     "source": "/Users/paratonsp/.gradle/caches/transforms-2/files-2.1/5f663b08eec19eef9a9d1af662d9025e/core-1.6.0/res/values-sv/values-sv.xml",
