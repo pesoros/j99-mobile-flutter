@@ -33,10 +33,10 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
         backgroundColor: CustomColor.darkGrey,
         body: Stack(
           children: [
-            BackWidget(
-              title: "Invoice Pembayaran",
-              color: CustomColor.white,
-            ),
+            // BackWidget(
+            //   title: "Invoice Pembayaran",
+            //   color: CustomColor.white,
+            // ),
             bodyWidget(context),
             buttonWidget(context)
           ],
@@ -48,7 +48,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
   Widget bodyWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 70,
+        top: 0,
         bottom: 70,
       ),
       child: SingleChildScrollView(

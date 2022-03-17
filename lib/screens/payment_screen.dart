@@ -16,6 +16,7 @@ import 'package:juragan99/widgets/bus_ticket_pergi_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:juragan99/screens/invoice_screen.dart';
 import 'package:juragan99/widgets/payment_method_widget.dart';
@@ -82,6 +83,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   double totalPrice;
   double promoValue = 0;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -1398,11 +1400,35 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
         ),
         onTap: () async {
-          await BookingList.list();
-          Timer(
-              Duration(seconds: 3),
-              () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => InvoiceScreen())));
+          setState(() {
+            isLoading = true;
+          });
+          isLoading ? _onLoading() : Container();
+          await BookingList.list().then((value) {
+            if (jsonDecode(value)['status'] == true) {
+              var payment = jsonDecode(value)['payment'];
+              variable.status = payment['status'];
+              variable.bank_code = payment['bank_code'];
+              variable.merchant_code = payment['merchant_code'];
+              variable.name = payment['name'];
+              variable.account_number = payment['account_number'];
+              variable.expiration_date = payment['expiration_date'];
+              variable.payment_id = payment['id'];
+              // print(value);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => InvoiceScreen()));
+              setState(() {
+                isLoading = false;
+              });
+            } else {
+              Fluttertoast.showToast(
+                msg: "Pesanan Gagal",
+                backgroundColor: CustomColor.red,
+                textColor: CustomColor.white,
+                gravity: ToastGravity.CENTER,
+              );
+            }
+          });
         },
       ),
     );
@@ -1414,5 +1440,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
       MaterialPageRoute(builder: (context) => PaymentMethodWidget()),
     );
     setState(() {});
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: new CircularProgressIndicator(),
+        );
+      },
+    );
   }
 }

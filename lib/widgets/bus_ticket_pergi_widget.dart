@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, non_constant_identifier_names
+// ignore_for_file: unused_element, non_constant_identifier_names, unused_field
 
 import 'package:dotted_line/dotted_line.dart';
 import 'package:juragan99/data/class.dart';
