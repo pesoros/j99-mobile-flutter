@@ -10,10 +10,10 @@ import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/formater.dart';
 
 import 'package:juragan99/data/bus_pergi.dart';
-import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 import 'package:juragan99/screens/passengger_form_screen.dart';
+import 'package:juragan99/widgets/bus_detail_modal_widget.dart';
 
 class BusTicketPergiWidget extends StatefulWidget {
   final BusPergi bus;
@@ -32,9 +32,6 @@ class BusTicketPergiWidget extends StatefulWidget {
   final String seatPicked;
   final int seatAvail;
 
-  final String selectedJumlahPenumpang;
-  final bool checkPulangPergi;
-
   BusTicketPergiWidget({
     this.bus,
     this.trip_id_no,
@@ -51,8 +48,6 @@ class BusTicketPergiWidget extends StatefulWidget {
     this.end,
     this.seatPicked,
     this.seatAvail,
-    this.selectedJumlahPenumpang,
-    this.checkPulangPergi,
   });
 
   @override
@@ -61,24 +56,12 @@ class BusTicketPergiWidget extends StatefulWidget {
 
 class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
   BusPergi bus;
-  List list = [];
-  List li = [];
-  int index = 0;
-  List<SlotPergi> _slotList = [];
   List<ClassList> _classList = [];
 
   @override
   void initState() {
     super.initState();
     getClass();
-  }
-
-  getSlot() async {
-    await SlotPergiList.list().then((value) {
-      setState(() {
-        _slotList = value;
-      });
-    });
   }
 
   getClass() async {
@@ -177,11 +160,11 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                 Text(widget.bus.pergi_start,
                     style: TextStyle(
                         color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                        fontSize: Dimensions.defaultTextSize)),
                 Text(widget.pickup_trip_location,
                     style: TextStyle(
                         color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                        fontSize: Dimensions.defaultTextSize)),
               ],
             ),
             Column(
@@ -190,7 +173,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                 Text(widget.duration,
                     style: TextStyle(
                         color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                        fontSize: Dimensions.defaultTextSize)),
                 SizedBox(height: 5),
                 DottedLine(
                   direction: Axis.horizontal,
@@ -206,11 +189,11 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                 Text(widget.bus.pergi_end,
                     style: TextStyle(
                         color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                        fontSize: Dimensions.defaultTextSize)),
                 Text(widget.drop_trip_location,
                     style: TextStyle(
                         color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                        fontSize: Dimensions.defaultTextSize)),
               ],
             ),
             GestureDetector(
@@ -228,8 +211,34 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                 ),
               ),
               onTap: () {
-                getSlot();
-                _busDetailModal(context);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                      barrierDismissible: true,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      transitionDuration: Duration(milliseconds: 300),
+                      opaque: false,
+                      pageBuilder: (_, __, ___) => BusDetailModalWidget(
+                            bus: widget.bus,
+                            type: widget.bus.pergi_type,
+                          ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0);
+                        const end = Offset.zero;
+                        const curve = Curves.ease;
+
+                        final tween = Tween(begin: begin, end: end);
+                        final curvedAnimation = CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        );
+
+                        return SlideTransition(
+                          position: tween.animate(curvedAnimation),
+                          child: child,
+                        );
+                      }),
+                );
               },
             ),
             GestureDetector(
@@ -244,7 +253,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   "Pesan",
                   style: TextStyle(
                       color: CustomColor.white,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ),
               onTap: () {
@@ -262,269 +271,6 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
           ],
         ),
       ],
-    );
-  }
-
-  _busDetailModal(BuildContext context) {
-    showGeneralDialog(
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierDismissible: true,
-        barrierColor: Colors.black.withOpacity(0.5),
-        transitionDuration: Duration(milliseconds: 300),
-        context: context,
-        pageBuilder: (_, __, ___) {
-          return Material(
-            type: MaterialType.transparency,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 555,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [_detailModalBody(context)],
-                ),
-              ),
-            ),
-          );
-        },
-        transitionBuilder: (_, anim, __, child) {
-          return SlideTransition(
-            position:
-                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
-            child: child,
-          );
-        });
-  }
-
-  _detailModalBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 20,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          _busInfoWidget(context),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _detailsWidget(context),
-                _availableSeatWidget(context),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
-          _buttonWidget(context),
-        ],
-      ),
-    );
-  }
-
-  _busInfoWidget(BuildContext context) {
-    return Container(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
-          fit: BoxFit.cover,
-          height: 200,
-          width: MediaQuery.of(context).size.width,
-        ),
-      ),
-    );
-  }
-
-  _detailsWidget(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.bus.pergi_type,
-              style: TextStyle(fontSize: Dimensions.smallTextSize)),
-          Row(
-            children: [
-              Icon(
-                Icons.electrical_services,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.smoking_rooms,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.wc,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.coffee,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Text("Harga",
-                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Rp. ' +
-                    currencyFormatter
-                        .format(double.parse(widget.bus.pergi_price)),
-                style: TextStyle(
-                    color: CustomColor.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.smallTextSize),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Text("Sisa Kursi",
-                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                widget.bus.pergi_seatAvail.toString() + " Kursi",
-                style: TextStyle(
-                    color: CustomColor.darkGrey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.smallTextSize),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Text(widget.bus.pergi_start,
-                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                widget.bus.pergi_pickup_trip_location,
-                style: TextStyle(
-                    color: CustomColor.darkGrey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.smallTextSize),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Text(widget.bus.pergi_end,
-                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                widget.bus.pergi_drop_trip_location,
-                style: TextStyle(
-                    color: CustomColor.darkGrey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.smallTextSize),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  _buttonWidget(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        height: Dimensions.buttonHeight,
-        decoration: BoxDecoration(
-            color: CustomColor.red,
-            borderRadius: BorderRadius.circular(Dimensions.radius)),
-        child: Center(
-          child: Text(
-            "Tutup",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: Dimensions.extraSmallTextSize,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-      onTap: () {},
-    );
-  }
-
-  _availableSeatWidget(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(Dimensions.radius)),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          // top: Dimensions.heightSize,
-          bottom: Dimensions.heightSize,
-        ),
-        child: _allTicketWidget(context),
-      ),
-    );
-  }
-
-  _allTicketWidget(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: GridView.count(
-        crossAxisCount: 5,
-        shrinkWrap: true,
-        mainAxisSpacing: 10,
-        physics: NeverScrollableScrollPhysics(),
-        children: List.generate(
-          _slotList.length,
-          (index) {
-            SlotPergi slot = _slotList[index];
-            return slot.pergi_isSeat
-                ? Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: slot.pergi_isAvailable
-                              ? CustomColor.white
-                              : Colors.grey,
-                          border: Border.all(color: CustomColor.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
-                    ),
-                  );
-          },
-        ),
-      ),
     );
   }
 

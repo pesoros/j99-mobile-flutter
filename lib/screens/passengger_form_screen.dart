@@ -227,8 +227,8 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       children: [
                         Text(
                           "Sama dengan pemesan",
-                          style: TextStyle(
-                              fontSize: Dimensions.extraSmallTextSize),
+                          style:
+                              TextStyle(fontSize: Dimensions.defaultTextSize),
                         ),
                         Transform.scale(
                           scale: 0.7,
@@ -1017,7 +1017,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         "Pilih Kursi",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Dimensions.extraSmallTextSize,
+                            fontSize: Dimensions.defaultTextSize,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -1040,7 +1040,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                             "Pilih Kursi Pergi",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: Dimensions.extraSmallTextSize,
+                                fontSize: Dimensions.defaultTextSize,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -1062,7 +1062,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                             "Pilih Kursi Pulang",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: Dimensions.extraSmallTextSize,
+                                fontSize: Dimensions.defaultTextSize,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -1096,7 +1096,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
               "Lanjutkan",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.extraSmallTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),

@@ -53,8 +53,6 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
               headerWidget(context),
@@ -71,142 +69,140 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
 
   headerWidget(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 170,
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.black.withOpacity(0.4)),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24)),
-          color: CustomColor.darkGrey,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(),
-          child: Column(
-            children: [
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 40,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30, top: 20, right: 30),
-                    child: Stack(
-                      children: [
-                        GestureDetector(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            width: 50,
-                            height: 50,
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: CustomColor.white,
-                              size: Dimensions.defaultTextSize,
-                            ),
+      height: 170,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24)),
+        color: CustomColor.darkGrey,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(),
+        child: Column(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          width: 50,
+                          height: 50,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: CustomColor.white,
+                            size: Dimensions.defaultTextSize,
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
                         ),
-                        Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Hasil Pencarian",
-                                  style: TextStyle(
-                                      color: CustomColor.white,
-                                      fontSize: Dimensions.defaultTextSize,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ))
-                      ],
-                    ),
-                  )),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 20,
-                  left: 30,
-                  right: 30,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "JKT",
-                          style: TextStyle(
-                              color: CustomColor.white,
-                              fontSize: Dimensions.largeTextSize,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          variable.selectedToCity.toString(),
-                          style: TextStyle(
-                              color: CustomColor.grey,
-                              fontSize: Dimensions.smallTextSize),
-                        ),
-                      ],
-                    ),
-                    DottedLine(
-                      direction: Axis.horizontal,
-                      lineLength: MediaQuery.of(context).size.width / 3,
-                      lineThickness: 1.0,
-                      dashLength: 5.0,
-                      dashColor: CustomColor.white,
-                      dashGapLength: 5.0,
-                      dashGapColor: Colors.transparent,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "SUB",
-                          style: TextStyle(
-                              color: CustomColor.white,
-                              fontSize: Dimensions.largeTextSize,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          variable.selectedFromCity.toString(),
-                          style: TextStyle(
-                              color: CustomColor.grey,
-                              fontSize: Dimensions.smallTextSize),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Hasil Pencarian",
+                                style: TextStyle(
+                                    color: CustomColor.white,
+                                    fontSize: Dimensions.defaultTextSize,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                )),
+            Container(
+              margin: EdgeInsets.only(
+                top: 20,
+                left: 30,
+                right: 30,
               ),
-              Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                    child: Text(
-                      variable.datePulang,
-                      style: TextStyle(
-                          fontSize: Dimensions.smallTextSize,
-                          color: CustomColor.white),
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "JKT",
+                        style: TextStyle(
+                            color: CustomColor.white,
+                            fontSize: Dimensions.largeTextSize,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        variable.selectedToCity.toString(),
+                        style: TextStyle(
+                            color: CustomColor.grey,
+                            fontSize: Dimensions.defaultTextSize),
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                    child: Text(
-                      "Tiket Pulang",
-                      style: TextStyle(
-                          fontSize: Dimensions.smallTextSize,
-                          color: CustomColor.white),
-                    ),
+                  DottedLine(
+                    direction: Axis.horizontal,
+                    lineLength: MediaQuery.of(context).size.width / 3,
+                    lineThickness: 1.0,
+                    dashLength: 5.0,
+                    dashColor: CustomColor.white,
+                    dashGapLength: 5.0,
+                    dashGapColor: Colors.transparent,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "SUB",
+                        style: TextStyle(
+                            color: CustomColor.white,
+                            fontSize: Dimensions.largeTextSize,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        variable.selectedFromCity.toString(),
+                        style: TextStyle(
+                            color: CustomColor.grey,
+                            fontSize: Dimensions.defaultTextSize),
+                      ),
+                    ],
                   )
                 ],
               ),
-            ],
-          ),
-        ));
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                  child: Text(
+                    variable.datePulang,
+                    style: TextStyle(
+                        fontSize: Dimensions.defaultTextSize,
+                        color: CustomColor.white),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                  child: Text(
+                    "Tiket Pulang",
+                    style: TextStyle(
+                        fontSize: Dimensions.defaultTextSize,
+                        color: CustomColor.white),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   filterWidget(BuildContext context) {

@@ -143,7 +143,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : variable.namePassengger1,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
                 Text(
                   (li.asMap()[0] == null)
@@ -151,7 +151,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : "Nomor Kursi:  " + li[0],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ],
             ),
@@ -181,7 +181,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : variable.namePassengger2,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
                 Text(
                   (li.asMap()[1] == null)
@@ -189,7 +189,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : "Nomor Kursi:  " + li[1],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ],
             ),
@@ -219,7 +219,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : variable.namePassengger3,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
                 Text(
                   (li.asMap()[2] == null)
@@ -227,7 +227,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : "Nomor Kursi:  " + li[2],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ],
             ),
@@ -257,7 +257,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : variable.namePassengger4,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
                 Text(
                   (li.asMap()[3] == null)
@@ -265,7 +265,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                       : "Nomor Kursi:  " + li[3],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ],
             ),
@@ -411,7 +411,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
             title,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: Dimensions.extraSmallTextSize),
+                fontSize: Dimensions.defaultTextSize),
           )
         ],
       ),

@@ -67,12 +67,10 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                 ),
                 child: Column(
                   children: [
-                    // Image.asset('assets/images/home_bg.png'),
                     SizedBox(
                       height: 30,
                     ),
                     Container(
-                      // height: 300,
                       margin: EdgeInsets.only(right: 20, left: 20),
                       child: Row(
                         children: [
@@ -81,9 +79,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
                                 Container(
                                   height: 40,
                                   child: TextFormField(
@@ -205,7 +200,7 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   height: 10,
                                 ),
                                 Container(
-                                  height: 80,
+                                  height: 60,
                                   child: TextFormField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: 4,
@@ -240,8 +235,7 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
-                          top: 20, bottom: 10, left: 20, right: 20),
+                      padding: EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: GestureDetector(
                         child: Container(
                           height: Dimensions.buttonHeight,
@@ -254,7 +248,7 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: Dimensions.extraSmallTextSize),
+                                  fontSize: Dimensions.defaultTextSize),
                             ),
                           ),
                         ),

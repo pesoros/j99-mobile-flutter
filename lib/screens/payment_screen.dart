@@ -454,7 +454,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         "No Kursi: ",
                                         style: TextStyle(
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                       Text(
                                         (variable.seatPergiPassengger1 == null)
@@ -463,7 +463,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -494,7 +494,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         "No Kursi: ",
                                         style: TextStyle(
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                       Text(
                                         (variable.seatPergiPassengger1 == null)
@@ -503,7 +503,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -526,7 +526,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         "No Kursi: ",
                                         style: TextStyle(
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                       Text(
                                         (variable.seatPulangPassengger1 == null)
@@ -535,7 +535,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize:
-                                                Dimensions.extraSmallTextSize),
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1271,12 +1271,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
           Text(
             '\Rp ${price.toString()}',
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
         ],
       ),
@@ -1390,12 +1390,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: (variable.selectedPayment == null)
                           ? Text("Pilih Metode Pembayaran",
-                              style:
-                                  TextStyle(fontSize: Dimensions.smallTextSize))
+                              style: TextStyle(
+                                  fontSize: Dimensions.defaultTextSize))
                           : Text(
                               variable.selectedPayment,
-                              style:
-                                  TextStyle(fontSize: Dimensions.smallTextSize),
+                              style: TextStyle(
+                                  fontSize: Dimensions.defaultTextSize),
                             )),
                 ),
                 Container(
@@ -1433,7 +1433,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               "Bayar",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.extraSmallTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),

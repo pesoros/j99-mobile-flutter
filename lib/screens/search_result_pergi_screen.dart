@@ -85,7 +85,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
             children: [
               Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 40,
+                  height: 50,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 30, top: 20, right: 30),
@@ -112,6 +112,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           },
                         ),
                         Container(
+                            alignment: Alignment.center,
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +121,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                                   "Hasil Pencarian",
                                   style: TextStyle(
                                       color: CustomColor.white,
-                                      fontSize: Dimensions.smallTextSize,
+                                      fontSize: Dimensions.defaultTextSize,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -151,7 +152,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           variable.selectedFromCity.toString(),
                           style: TextStyle(
                               color: CustomColor.grey,
-                              fontSize: Dimensions.smallTextSize),
+                              fontSize: Dimensions.defaultTextSize),
                         ),
                       ],
                     ),
@@ -178,7 +179,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           variable.selectedToCity.toString(),
                           style: TextStyle(
                               color: CustomColor.grey,
-                              fontSize: Dimensions.smallTextSize),
+                              fontSize: Dimensions.defaultTextSize),
                         ),
                       ],
                     )
@@ -193,7 +194,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                     child: Text(
                       variable.datePergi,
                       style: TextStyle(
-                          fontSize: Dimensions.smallTextSize,
+                          fontSize: Dimensions.defaultTextSize,
                           color: CustomColor.white),
                     ),
                   ),
@@ -203,7 +204,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           child: Text(
                             "Tiket Pergi",
                             style: TextStyle(
-                                fontSize: Dimensions.smallTextSize,
+                                fontSize: Dimensions.defaultTextSize,
                                 color: CustomColor.white),
                           ),
                         )

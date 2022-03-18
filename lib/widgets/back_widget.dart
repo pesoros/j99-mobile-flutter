@@ -19,7 +19,7 @@ class _BackWidgetState extends State<BackWidget> {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: 40,
+        height: 50,
         child: Padding(
           padding: const EdgeInsets.only(left: 30, top: 20, right: 30),
           child: Stack(
@@ -40,6 +40,7 @@ class _BackWidgetState extends State<BackWidget> {
                 },
               ),
               Container(
+                  alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +49,7 @@ class _BackWidgetState extends State<BackWidget> {
                         widget.title,
                         style: TextStyle(
                             color: widget.color,
-                            fontSize: Dimensions.smallTextSize,
+                            fontSize: Dimensions.defaultTextSize,
                             fontWeight: FontWeight.bold),
                       )
                     ],

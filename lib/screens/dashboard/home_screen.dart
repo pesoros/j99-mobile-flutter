@@ -179,8 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           "Pulang-Pergi?",
-                          style: TextStyle(
-                              fontSize: Dimensions.extraSmallTextSize),
+                          style:
+                              TextStyle(fontSize: Dimensions.defaultTextSize),
                         ),
                         Transform.scale(
                           scale: 0.7,
@@ -290,8 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: 20, bottom: 10, left: 40, right: 40),
+              padding: EdgeInsets.only(top: 20, left: 40, right: 40),
               child: GestureDetector(
                 child: Container(
                   height: Dimensions.buttonHeight,
@@ -304,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: Dimensions.extraSmallTextSize),
+                          fontSize: Dimensions.defaultTextSize),
                     ),
                   ),
                 ),
@@ -368,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 variable.datePergi,
                 style: TextStyle(
                     color: CustomColor.greyColor,
-                    fontSize: Dimensions.extraSmallTextSize),
+                    fontSize: Dimensions.defaultTextSize),
               ),
             ),
           ),
@@ -398,7 +397,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 variable.datePulang,
                 style: TextStyle(
                     color: CustomColor.greyColor,
-                    fontSize: Dimensions.extraSmallTextSize),
+                    fontSize: Dimensions.defaultTextSize),
               ),
             ),
           ),

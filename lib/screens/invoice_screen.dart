@@ -81,7 +81,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                     "Cek Tiket",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Dimensions.extraSmallTextSize,
+                        fontSize: Dimensions.defaultTextSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -107,7 +107,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                     "Download Tiket",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Dimensions.extraSmallTextSize,
+                        fontSize: Dimensions.defaultTextSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -142,13 +142,13 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                 Text("Invoice Pembayaran",
                     style: TextStyle(
                         color: CustomColor.white,
-                        fontSize: Dimensions.smallTextSize,
+                        fontSize: Dimensions.defaultTextSize,
                         fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
                 Text("#" + variable.payment_id,
                     style: TextStyle(
                         color: CustomColor.white,
-                        fontSize: Dimensions.extraSmallTextSize,
+                        fontSize: Dimensions.defaultTextSize,
                         fontWeight: FontWeight.bold))
               ],
             ),
@@ -201,12 +201,12 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
           Text(
             '\Rp ${price.toString()}',
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
         ],
       ),
@@ -222,14 +222,14 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
           SizedBox(width: 5),
           Text(
             value,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: Dimensions.extraSmallTextSize,
+                fontSize: Dimensions.defaultTextSize,
                 fontWeight: FontWeight.bold),
           ),
         ],

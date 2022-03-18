@@ -142,7 +142,7 @@ class _SearchPackageScreenState extends State<SearchPackageScreen> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: Dimensions.extraSmallTextSize),
+                                  fontSize: Dimensions.defaultTextSize),
                             ),
                           ),
                         ),

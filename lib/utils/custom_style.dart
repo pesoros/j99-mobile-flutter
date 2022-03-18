@@ -4,17 +4,17 @@ import 'dimensions.dart';
 
 class CustomStyle {
   static var textStyle = TextStyle(
-      color: CustomColor.greyColor, fontSize: Dimensions.extraSmallTextSize);
+      color: CustomColor.greyColor, fontSize: Dimensions.defaultTextSize);
 
   static var hintTextStyle = TextStyle(
       color: Colors.grey.withOpacity(0.5),
-      fontSize: Dimensions.extraSmallTextSize);
+      fontSize: Dimensions.defaultTextSize);
 
   static var listStyle =
-      TextStyle(color: Colors.black, fontSize: Dimensions.extraSmallTextSize);
+      TextStyle(color: Colors.black, fontSize: Dimensions.defaultTextSize);
 
   static var defaultStyle =
-      TextStyle(color: Colors.black, fontSize: Dimensions.extraSmallTextSize);
+      TextStyle(color: Colors.black, fontSize: Dimensions.defaultTextSize);
 
   static var focusBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(5.0)),
