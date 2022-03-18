@@ -48,7 +48,7 @@ class _BackWidgetState extends State<BackWidget> {
                         widget.title,
                         style: TextStyle(
                             color: widget.color,
-                            fontSize: 20,
+                            fontSize: Dimensions.smallTextSize,
                             fontWeight: FontWeight.bold),
                       )
                     ],

@@ -141,13 +141,17 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                   (variable.namePassengger1 == null)
                       ? ""
                       : variable.namePassengger1,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
                 Text(
                   (li.asMap()[0] == null)
                       ? "Nomor Kursi :  "
                       : "Nomor Kursi:  " + li[0],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
               ],
             ),
@@ -175,13 +179,17 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                   (variable.namePassengger2 == null)
                       ? ""
                       : variable.namePassengger2,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
                 Text(
                   (li.asMap()[1] == null)
                       ? "Nomor Kursi :  "
                       : "Nomor Kursi:  " + li[1],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
               ],
             ),
@@ -209,13 +217,17 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                   (variable.namePassengger3 == null)
                       ? ""
                       : variable.namePassengger3,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
                 Text(
                   (li.asMap()[2] == null)
                       ? "Nomor Kursi :  "
                       : "Nomor Kursi:  " + li[2],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
               ],
             ),
@@ -243,13 +255,17 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                   (variable.namePassengger4 == null)
                       ? ""
                       : variable.namePassengger4,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
                 Text(
                   (li.asMap()[3] == null)
                       ? "Nomor Kursi :  "
                       : "Nomor Kursi:  " + li[3],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
               ],
             ),
@@ -277,7 +293,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
               _allTicketWidget(context),
               SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -377,7 +393,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
 
   _seatHintWidget(Color hintColor, String title) {
     return Padding(
-      padding: const EdgeInsets.only(right: Dimensions.marginSize),
+      padding: const EdgeInsets.only(),
       child: Row(
         children: [
           Container(
@@ -393,7 +409,9 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
           ),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Dimensions.extraSmallTextSize),
           )
         ],
       ),

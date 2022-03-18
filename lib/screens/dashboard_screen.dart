@@ -99,8 +99,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   "Beli Tiket",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -115,8 +116,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   "Cari Tiket",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -131,8 +133,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   "Pariwisata",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -147,8 +150,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   "Cari Paket",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

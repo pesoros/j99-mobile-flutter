@@ -120,7 +120,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                                   "Hasil Pencarian",
                                   style: TextStyle(
                                       color: CustomColor.white,
-                                      fontSize: 20,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -144,13 +144,14 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           "JKT",
                           style: TextStyle(
                               color: CustomColor.white,
-                              fontSize: 36,
+                              fontSize: Dimensions.largeTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           variable.selectedFromCity.toString(),
-                          style:
-                              TextStyle(color: CustomColor.grey, fontSize: 16),
+                          style: TextStyle(
+                              color: CustomColor.grey,
+                              fontSize: Dimensions.smallTextSize),
                         ),
                       ],
                     ),
@@ -170,13 +171,14 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           "SUB",
                           style: TextStyle(
                               color: CustomColor.white,
-                              fontSize: 36,
+                              fontSize: Dimensions.largeTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           variable.selectedToCity.toString(),
-                          style:
-                              TextStyle(color: CustomColor.grey, fontSize: 16),
+                          style: TextStyle(
+                              color: CustomColor.grey,
+                              fontSize: Dimensions.smallTextSize),
                         ),
                       ],
                     )
@@ -190,7 +192,9 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                     margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                     child: Text(
                       variable.datePergi,
-                      style: TextStyle(fontSize: 16, color: CustomColor.white),
+                      style: TextStyle(
+                          fontSize: Dimensions.smallTextSize,
+                          color: CustomColor.white),
                     ),
                   ),
                   (variable.checkPulangPergi == true)

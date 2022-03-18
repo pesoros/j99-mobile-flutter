@@ -1239,13 +1239,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
         children: [
           Text(
             title,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.largeTextSize),
+                color: Colors.black, fontSize: Dimensions.smallTextSize),
           ),
           Text(
             '\Rp ${price.toString()}',
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.largeTextSize),
+                color: Colors.black, fontSize: Dimensions.smallTextSize),
           ),
         ],
       ),
@@ -1267,7 +1269,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Text(
                 "Kode Promo",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: Dimensions.defaultTextSize,
+                    fontWeight: FontWeight.bold),
               )
             ],
           ),
@@ -1354,8 +1358,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   child: Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: (variable.selectedPayment == null)
-                          ? Text("Pilih Metode Pembayaran")
-                          : Text(variable.selectedPayment)),
+                          ? Text("Pilih Metode Pembayaran",
+                              style:
+                                  TextStyle(fontSize: Dimensions.smallTextSize))
+                          : Text(
+                              variable.selectedPayment,
+                              style:
+                                  TextStyle(fontSize: Dimensions.smallTextSize),
+                            )),
                 ),
                 Container(
                   height: 50.0,

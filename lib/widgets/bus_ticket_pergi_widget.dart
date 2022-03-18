@@ -117,16 +117,11 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              // (_classList.length == 0)
-              //     ? ""
-              //     : (_classList[index].id == widget.bus.pergi_type)
-              //         ? _classList[index].kelas
-              //         : "",
               widget.bus.pergi_type,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16),
+                  fontSize: Dimensions.defaultTextSize),
             ),
           ],
         ),
@@ -137,22 +132,22 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
               children: [
                 Icon(
                   Icons.electrical_services,
-                  size: 18,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
                 Icon(
                   Icons.smoking_rooms,
-                  size: 18,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
                 Icon(
                   Icons.wc,
-                  size: 18,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
                 Icon(
                   Icons.coffee,
-                  size: 18,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
               ],
@@ -166,7 +161,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   style: TextStyle(
                       color: CustomColor.red,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: Dimensions.defaultTextSize),
                 ),
               ],
             )
@@ -180,20 +175,26 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.bus.pergi_start,
-                    style: TextStyle(color: CustomColor.grey, fontSize: 14)),
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.extraSmallTextSize)),
                 Text(widget.pickup_trip_location,
-                    style: TextStyle(color: CustomColor.grey, fontSize: 14)),
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.extraSmallTextSize)),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(widget.duration + "J",
-                    style: TextStyle(color: CustomColor.grey, fontSize: 10)),
+                Text(widget.duration,
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.extraSmallTextSize)),
                 SizedBox(height: 5),
                 DottedLine(
                   direction: Axis.horizontal,
-                  lineLength: 30,
+                  lineLength: 20,
                   lineThickness: 1,
                   dashColor: CustomColor.grey,
                 )
@@ -203,9 +204,13 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(widget.bus.pergi_end,
-                    style: TextStyle(color: CustomColor.grey, fontSize: 14)),
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.extraSmallTextSize)),
                 Text(widget.drop_trip_location,
-                    style: TextStyle(color: CustomColor.grey, fontSize: 14)),
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.extraSmallTextSize)),
               ],
             ),
             GestureDetector(
@@ -219,7 +224,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                 child: Icon(
                   Icons.event_seat,
                   color: CustomColor.white,
-                  size: 20,
+                  size: Dimensions.defaultTextSize,
                 ),
               ),
               onTap: () {
@@ -237,7 +242,9 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                     borderRadius: BorderRadius.circular(6)),
                 child: Text(
                   "Pesan",
-                  style: TextStyle(color: CustomColor.white, fontSize: 12),
+                  style: TextStyle(
+                      color: CustomColor.white,
+                      fontSize: Dimensions.smallTextSize),
                 ),
               ),
               onTap: () {

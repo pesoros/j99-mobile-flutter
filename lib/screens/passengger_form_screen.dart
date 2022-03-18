@@ -230,7 +230,11 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     height: 20,
                     child: Row(
                       children: [
-                        Text("Pembeli sebagai penumpang?"),
+                        Text(
+                          "Sama dengan pemesan",
+                          style: TextStyle(
+                              fontSize: Dimensions.extraSmallTextSize),
+                        ),
                         Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
