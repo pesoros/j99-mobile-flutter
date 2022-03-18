@@ -99,7 +99,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: CustomColor.white,
-                              size: 22,
+                              size: Dimensions.defaultTextSize,
                             ),
                           ),
                           onTap: () {
@@ -203,7 +203,8 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                           child: Text(
                             "Tiket Pergi",
                             style: TextStyle(
-                                fontSize: 16, color: CustomColor.white),
+                                fontSize: Dimensions.smallTextSize,
+                                color: CustomColor.white),
                           ),
                         )
                       : Container()
@@ -243,7 +244,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(
                   Icons.settings,
-                  size: 12,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
                 SizedBox(

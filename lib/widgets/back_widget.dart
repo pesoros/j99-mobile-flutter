@@ -32,7 +32,7 @@ class _BackWidgetState extends State<BackWidget> {
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: widget.color,
-                    size: 22,
+                    size: Dimensions.defaultTextSize,
                   ),
                 ),
                 onTap: () {

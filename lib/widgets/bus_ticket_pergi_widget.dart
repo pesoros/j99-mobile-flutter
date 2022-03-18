@@ -244,7 +244,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   "Pesan",
                   style: TextStyle(
                       color: CustomColor.white,
-                      fontSize: Dimensions.smallTextSize),
+                      fontSize: Dimensions.extraSmallTextSize),
                 ),
               ),
               onTap: () {
@@ -279,7 +279,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: 650,
+                height: 555,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -350,7 +350,106 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.bus.pergi_type.toString()),
+          Text(widget.bus.pergi_type,
+              style: TextStyle(fontSize: Dimensions.smallTextSize)),
+          Row(
+            children: [
+              Icon(
+                Icons.electrical_services,
+                size: Dimensions.defaultTextSize,
+                color: CustomColor.grey,
+              ),
+              Icon(
+                Icons.smoking_rooms,
+                size: Dimensions.defaultTextSize,
+                color: CustomColor.grey,
+              ),
+              Icon(
+                Icons.wc,
+                size: Dimensions.defaultTextSize,
+                color: CustomColor.grey,
+              ),
+              Icon(
+                Icons.coffee,
+                size: Dimensions.defaultTextSize,
+                color: CustomColor.grey,
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text("Harga",
+                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Rp. ' +
+                    currencyFormatter
+                        .format(double.parse(widget.bus.pergi_price)),
+                style: TextStyle(
+                    color: CustomColor.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Dimensions.smallTextSize),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text("Sisa Kursi",
+                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                widget.bus.pergi_seatAvail.toString() + " Kursi",
+                style: TextStyle(
+                    color: CustomColor.darkGrey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Dimensions.smallTextSize),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text(widget.bus.pergi_start,
+                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                widget.bus.pergi_pickup_trip_location,
+                style: TextStyle(
+                    color: CustomColor.darkGrey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Dimensions.smallTextSize),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text(widget.bus.pergi_end,
+                  style: TextStyle(fontSize: Dimensions.extraSmallTextSize))
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                widget.bus.pergi_drop_trip_location,
+                style: TextStyle(
+                    color: CustomColor.darkGrey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Dimensions.smallTextSize),
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -368,7 +467,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
             "Tutup",
             style: TextStyle(
                 color: Colors.white,
-                fontSize: Dimensions.largeTextSize,
+                fontSize: Dimensions.extraSmallTextSize,
                 fontWeight: FontWeight.bold),
           ),
         ),

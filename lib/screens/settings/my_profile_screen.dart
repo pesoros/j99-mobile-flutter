@@ -111,7 +111,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: CustomColor.darkGrey,
-                              size: 22,
+                              size: Dimensions.defaultTextSize,
                             ),
                           ),
                           onTap: () {
@@ -132,7 +132,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   "Profil",
                                   style: TextStyle(
                                       color: CustomColor.darkGrey,
-                                      fontSize: 20,
+                                      fontSize: Dimensions.defaultTextSize,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -240,7 +240,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 GestureDetector(
                   child: Icon(
                     Icons.camera_alt,
-                    size: 40.0,
+                    size: Dimensions.defaultTextSize,
                     color: Colors.blue,
                   ),
                   onTap: () {
@@ -251,7 +251,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 GestureDetector(
                   child: Icon(
                     Icons.photo,
-                    size: 40.0,
+                    size: Dimensions.defaultTextSize,
                     color: Colors.green,
                   ),
                   onTap: () {

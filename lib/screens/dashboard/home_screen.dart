@@ -73,104 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  headerWidget(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 60,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0,
-              blurRadius: 3,
-              offset: Offset(0, 0), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: Dimensions.marginSize,
-            right: Dimensions.marginSize,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                child: Image.asset('assets/images/menu.png'),
-                onTap: () {
-                  if (scaffoldKey.currentState.isDrawerOpen) {
-                    scaffoldKey.currentState.openEndDrawer();
-                  } else {
-                    scaffoldKey.currentState.openDrawer();
-                  }
-                },
-              ),
-              GestureDetector(
-                child: Icon(
-                  Icons.settings,
-                  size: 26,
-                  color: Colors.grey[800],
-                ),
-                onTap: () {
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => MyProfileScreen()));
-                },
-              ),
-            ],
-          ),
-        ));
-  }
-
-  profileWidget(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: Dimensions.heightSize * 3,
-      ),
-      child: ListTile(
-        leading: Image.asset(
-          'assets/images/user.png',
-        ),
-        title: Text(
-          Strings.demoName,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: Dimensions.largeTextSize,
-              fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          Strings.demoEmail,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: Dimensions.defaultTextSize,
-          ),
-        ),
-      ),
-    );
-  }
-
-  listData(String icon, String title, Widget goTo) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 2),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.withOpacity(0.1))),
-        child: ListTile(
-          leading: Image.asset(icon),
-          title: Text(
-            title,
-            style: CustomStyle.listStyle,
-          ),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => goTo));
-          },
-        ),
-      ),
-    );
-  }
-
   bodyWidget(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: [
       carouselWidget(context),
@@ -192,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   Container(
-                    height: 50,
+                    height: 40,
                     child: DropdownSearch<CityModel>(
                       mode: Mode.DIALOG,
                       showClearButton: false,
@@ -234,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   Container(
-                    height: 50,
+                    height: 40,
                     child: DropdownSearch<CityModel>(
                         mode: Mode.DIALOG,
                         showClearButton: false,
@@ -275,7 +177,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Pulang-Pergi?"),
+                        Text(
+                          "Pulang-Pergi?",
+                          style: TextStyle(
+                              fontSize: Dimensions.extraSmallTextSize),
+                        ),
                         Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
@@ -306,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   Container(
-                    height: 50,
+                    height: 40,
                     child: DropdownSearch(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
@@ -343,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   Container(
-                    height: 50,
+                    height: 40,
                     child: DropdownSearch<ClassModel>(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: true,
@@ -396,7 +302,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text(
                       "CARI BUS",
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Dimensions.extraSmallTextSize),
                     ),
                   ),
                 ),
@@ -442,32 +350,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _verticalBorder(BuildContext context) {
-    return Container(
-      height: 50,
-      width: 1,
-      child: ListView.builder(
-        itemCount: 20,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Container(
-              height: 5,
-              width: 1,
-              color: Colors.black,
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   selectDatePergi(BuildContext context) {
     return Expanded(
       child: GestureDetector(
         child: Container(
-          height: 50,
+          height: 40,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black.withOpacity(0.1)),
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.5)),
@@ -481,7 +368,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 variable.datePergi,
                 style: TextStyle(
                     color: CustomColor.greyColor,
-                    fontSize: Dimensions.defaultTextSize),
+                    fontSize: Dimensions.extraSmallTextSize),
               ),
             ),
           ),
@@ -497,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: GestureDetector(
         child: Container(
-          height: 50,
+          height: 40,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black.withOpacity(0.1)),
               borderRadius: BorderRadius.circular(Dimensions.radius * 0.5)),
@@ -511,7 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 variable.datePulang,
                 style: TextStyle(
                     color: CustomColor.greyColor,
-                    fontSize: Dimensions.defaultTextSize),
+                    fontSize: Dimensions.extraSmallTextSize),
               ),
             ),
           ),

@@ -144,7 +144,8 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                               "CARI PAKET",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.extraSmallTextSize),
                             ),
                           ),
                         ),

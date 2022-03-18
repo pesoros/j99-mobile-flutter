@@ -100,7 +100,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: CustomColor.white,
-                              size: 22,
+                              size: Dimensions.defaultTextSize,
                             ),
                           ),
                           onTap: () {
@@ -116,7 +116,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                                   "Hasil Pencarian",
                                   style: TextStyle(
                                       color: CustomColor.white,
-                                      fontSize: 20,
+                                      fontSize: Dimensions.defaultTextSize,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -140,13 +140,14 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                           "JKT",
                           style: TextStyle(
                               color: CustomColor.white,
-                              fontSize: 36,
+                              fontSize: Dimensions.largeTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "Jakarta",
-                          style:
-                              TextStyle(color: CustomColor.grey, fontSize: 16),
+                          variable.selectedToCity.toString(),
+                          style: TextStyle(
+                              color: CustomColor.grey,
+                              fontSize: Dimensions.smallTextSize),
                         ),
                       ],
                     ),
@@ -166,13 +167,14 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                           "SUB",
                           style: TextStyle(
                               color: CustomColor.white,
-                              fontSize: 36,
+                              fontSize: Dimensions.largeTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "Surabaya",
-                          style:
-                              TextStyle(color: CustomColor.grey, fontSize: 16),
+                          variable.selectedFromCity.toString(),
+                          style: TextStyle(
+                              color: CustomColor.grey,
+                              fontSize: Dimensions.smallTextSize),
                         ),
                       ],
                     )
@@ -186,14 +188,18 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                     margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                     child: Text(
                       variable.datePulang,
-                      style: TextStyle(fontSize: 16, color: CustomColor.white),
+                      style: TextStyle(
+                          fontSize: Dimensions.smallTextSize,
+                          color: CustomColor.white),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                     child: Text(
                       "Tiket Pulang",
-                      style: TextStyle(fontSize: 16, color: CustomColor.white),
+                      style: TextStyle(
+                          fontSize: Dimensions.smallTextSize,
+                          color: CustomColor.white),
                     ),
                   )
                 ],
@@ -246,7 +252,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(
                   Icons.settings,
-                  size: 12,
+                  size: Dimensions.defaultTextSize,
                   color: CustomColor.grey,
                 ),
                 SizedBox(

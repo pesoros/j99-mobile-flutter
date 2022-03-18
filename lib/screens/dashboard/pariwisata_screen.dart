@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/header_widget.dart';
@@ -84,9 +85,10 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   height: 10,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 40,
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: Dimensions.defaultTextSize),
                                     controller: nameController,
                                     validator: (String value) {
                                       if (value.isEmpty) {
@@ -113,9 +115,10 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   height: 10,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 40,
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: Dimensions.defaultTextSize),
                                     controller: phoneController,
                                     validator: (String value) {
                                       if (value.isEmpty) {
@@ -142,9 +145,10 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   height: 10,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 40,
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: Dimensions.defaultTextSize),
                                     controller: emailController,
                                     validator: (String value) {
                                       if (value.isEmpty) {
@@ -171,9 +175,10 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   height: 10,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 40,
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: Dimensions.defaultTextSize),
                                     controller: typeBusController,
                                     validator: (String value) {
                                       if (value.isEmpty) {
@@ -204,7 +209,8 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                   child: TextFormField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: 4,
-                                    style: TextStyle(fontSize: 16),
+                                    style: TextStyle(
+                                        fontSize: Dimensions.defaultTextSize),
                                     controller: keteranganController,
                                     validator: (String value) {
                                       if (value.isEmpty) {
@@ -247,7 +253,8 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                               "KIRIM",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.extraSmallTextSize),
                             ),
                           ),
                         ),
@@ -268,8 +275,9 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
         autoplay: true,
         itemCount: imageList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Image.network(
-            imageList[index],
+          return CachedNetworkImage(
+            imageUrl: imageList[index],
+            errorWidget: (context, url, error) => Icon(Icons.error),
             fit: BoxFit.cover,
           );
         },

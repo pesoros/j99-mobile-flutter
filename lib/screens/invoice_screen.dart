@@ -81,7 +81,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                     "Cek Tiket",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Dimensions.largeTextSize,
+                        fontSize: Dimensions.extraSmallTextSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -107,7 +107,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                     "Download Tiket",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Dimensions.largeTextSize,
+                        fontSize: Dimensions.extraSmallTextSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -120,7 +120,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
 
   _invoiceWidget(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+      margin: EdgeInsets.only(top: 30, left: 20, right: 20),
       // height: 400,
       decoration: BoxDecoration(
           color: CustomColor.white,
@@ -142,13 +142,13 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                 Text("Invoice Pembayaran",
                     style: TextStyle(
                         color: CustomColor.white,
-                        fontSize: Dimensions.extraLargeTextSize,
+                        fontSize: Dimensions.smallTextSize,
                         fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
                 Text("#" + variable.payment_id,
                     style: TextStyle(
                         color: CustomColor.white,
-                        fontSize: Dimensions.defaultTextSize,
+                        fontSize: Dimensions.extraSmallTextSize,
                         fontWeight: FontWeight.bold))
               ],
             ),
@@ -161,7 +161,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
 
   _invoiceDetail(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
+        margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -201,12 +201,12 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.largeTextSize),
+                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
           ),
           Text(
             '\Rp ${price.toString()}',
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.largeTextSize),
+                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
           ),
         ],
       ),
@@ -222,14 +222,14 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.largeTextSize),
+                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
           ),
           SizedBox(width: 5),
           Text(
             value,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: Dimensions.largeTextSize,
+                fontSize: Dimensions.extraSmallTextSize,
                 fontWeight: FontWeight.bold),
           ),
         ],

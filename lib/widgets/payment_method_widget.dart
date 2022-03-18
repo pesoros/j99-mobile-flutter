@@ -164,7 +164,7 @@ class _PaymentMethodWidgetScreen extends State<PaymentMethodWidget> {
                       ),
                       Icon(
                         Icons.arrow_forward_ios,
-                        size: 15,
+                        size: Dimensions.defaultTextSize,
                       )
                     ]),
               ),

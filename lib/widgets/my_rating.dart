@@ -1,3 +1,4 @@
+import 'package:juragan99/utils/dimensions.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';
@@ -19,7 +20,7 @@ class _MyRatingState extends State<MyRating> {
         onRated: (v) {},
         starCount: 5,
         rating: widget.rating,
-        size: 20.0,
+        size: Dimensions.defaultTextSize,
         isReadOnly: true,
         filledIconData: Icons.star,
         halfFilledIconData: Icons.star,

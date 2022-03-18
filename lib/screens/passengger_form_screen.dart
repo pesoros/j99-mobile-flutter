@@ -132,7 +132,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Pemesan",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -150,13 +152,6 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     child: TextFormField(
                       style: CustomStyle.textStyle,
                       controller: nameBuyerController,
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return Strings.pleaseFillOutTheField;
-                        } else {
-                          return null;
-                        }
-                      },
                       decoration: InputDecoration(
                         labelText: "Nama Lengkap",
                         contentPadding: EdgeInsets.symmetric(
@@ -166,7 +161,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        fillColor: Colors.white,
+                        fillColor: Colors.black,
                         hintStyle: CustomStyle.textStyle,
                       ),
                     ),
@@ -282,7 +277,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -462,7 +459,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -642,7 +641,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -822,7 +823,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -1014,7 +1017,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         "Pilih Kursi",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Dimensions.largeTextSize,
+                            fontSize: Dimensions.extraSmallTextSize,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -1037,7 +1040,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                             "Pilih Kursi Pergi",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: Dimensions.largeTextSize,
+                                fontSize: Dimensions.extraSmallTextSize,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -1059,7 +1062,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                             "Pilih Kursi Pulang",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: Dimensions.largeTextSize,
+                                fontSize: Dimensions.extraSmallTextSize,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -1093,7 +1096,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
               "Lanjutkan",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.extraSmallTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),

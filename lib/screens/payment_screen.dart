@@ -198,7 +198,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Pemesan",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -312,7 +314,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -441,18 +445,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger1 == null)
                                             ? ""
                                             : variable.seatPergiPassengger1,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
                                       ),
                                     ],
                                   )
@@ -474,18 +485,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger1 == null)
                                             ? ""
                                             : variable.seatPergiPassengger1,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
                                       ),
                                     ],
                                   )
@@ -499,18 +517,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPulangPassengger1 == null)
                                             ? ""
                                             : variable.seatPulangPassengger1,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.extraSmallTextSize),
                                       ),
                                     ],
                                   )
@@ -537,7 +562,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -666,7 +693,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -699,7 +726,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -724,7 +751,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -762,7 +789,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -891,7 +920,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -924,7 +953,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -949,7 +978,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -987,7 +1016,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
               "Data Penumpang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -1116,7 +1147,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -1149,7 +1180,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -1174,7 +1205,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     style: TextStyle(
                                         color: CustomColor.red,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                        fontSize: Dimensions.defaultTextSize),
                                   ),
                                   SizedBox(height: 5),
                                   Row(
@@ -1239,15 +1270,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
         children: [
           Text(
             title,
-            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.smallTextSize),
+                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
           ),
           Text(
             '\Rp ${price.toString()}',
-            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.smallTextSize),
+                color: Colors.black, fontSize: Dimensions.extraSmallTextSize),
           ),
         ],
       ),
@@ -1332,7 +1361,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Text(
                 "Pilih Pembayaran",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: Dimensions.defaultTextSize,
+                    fontWeight: FontWeight.bold),
               )
             ],
           ),
@@ -1372,10 +1403,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   alignment: Alignment.centerRight,
                   child: Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      )),
+                      child: Icon(Icons.arrow_forward_ios,
+                          size: Dimensions.defaultTextSize)),
                 ),
               ],
             ),
@@ -1404,7 +1433,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               "Bayar",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.extraSmallTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),

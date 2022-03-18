@@ -341,7 +341,7 @@ class _OtpConfirmationState extends State<OtpConfirmation>
       child: new Text(
         digit != null ? digit.toString() : "",
         style: new TextStyle(
-          fontSize: 30.0,
+          fontSize: Dimensions.defaultTextSize,
           color: widget.titleColor,
         ),
       ),
@@ -371,7 +371,7 @@ class _OtpConfirmationState extends State<OtpConfirmation>
             child: new Text(
               label,
               style: new TextStyle(
-                fontSize: 30.0,
+                fontSize: Dimensions.defaultTextSize,
                 color: widget.themeColor,
               ),
             ),
@@ -442,6 +442,6 @@ class _OtpConfirmationState extends State<OtpConfirmation>
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.grey,
         textColor: Colors.black,
-        fontSize: 16.0);
+        fontSize: Dimensions.defaultTextSize);
   }
 }

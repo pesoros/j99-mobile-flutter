@@ -132,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: CustomColor.darkGrey,
-                              size: 22,
+                              size: Dimensions.defaultTextSize,
                             ),
                           ),
                           onTap: () {
@@ -153,7 +153,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   "Profil",
                                   style: TextStyle(
                                       color: CustomColor.darkGrey,
-                                      fontSize: 20,
+                                      fontSize: Dimensions.defaultTextSize,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],

@@ -141,7 +141,8 @@ class _SearchPackageScreenState extends State<SearchPackageScreen> {
                               "CARI PAKET",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.extraSmallTextSize),
                             ),
                           ),
                         ),

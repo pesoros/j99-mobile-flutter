@@ -1,5 +1,6 @@
 import 'package:juragan99/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:juragan99/utils/dimensions.dart';
 
 class FilterChipWidget extends StatefulWidget {
   final String chipName;
@@ -19,7 +20,7 @@ class _FilterChipWidgetState extends State<FilterChipWidget> {
       label: Text(widget.chipName),
       labelStyle: TextStyle(
         color: CustomColor.primaryColor,
-        fontSize: 16.0,
+        fontSize: Dimensions.defaultTextSize,
       ),
       selected: _isSelected,
       shape: RoundedRectangleBorder(
