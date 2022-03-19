@@ -4,7 +4,8 @@ import 'dart:convert';
 
 import 'package:juragan99/data/bus_pulang.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
-import 'package:juragan99/screens/filter_screen.dart';
+import 'package:juragan99/screens/filter_pergi_screen.dart';
+import 'package:juragan99/screens/filter_pulang_screen.dart';
 import 'package:juragan99/screens/sort_by_screen.dart';
 
 import 'package:juragan99/utils/colors.dart';
@@ -208,44 +209,25 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
   filterWidget(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.bottomCenter,
-      child: Container(
-        height: 40,
-        width: 100,
-        margin: EdgeInsets.only(bottom: 20),
-        decoration: BoxDecoration(
-            color: CustomColor.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                spreadRadius: 1,
-                blurRadius: 10,
-              )
-            ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // GestureDetector(
-            //   onTap: () {
-            //     Navigator.of(context).push(
-            //         MaterialPageRoute(builder: (context) => SortByScreen()));
-            //   },
-            //   child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [Text("Urut Berdasarkan")]),
-            // ),
-            // VerticalDivider(
-            //   width: 1,
-            //   color: Colors.black26,
-            //   thickness: 1,
-            // ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FilterScreen()));
-              },
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      child: GestureDetector(
+        child: Container(
+          height: 40,
+          width: 100,
+          margin: EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+              color: CustomColor.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                )
+              ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(
                   Icons.settings,
                   size: Dimensions.defaultTextSize,
@@ -259,9 +241,36 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                   style: TextStyle(color: CustomColor.grey),
                 ),
               ]),
-            ),
-          ],
+            ],
+          ),
         ),
+        onTap: () {
+          Navigator.of(context).push(
+            PageRouteBuilder(
+                barrierDismissible: true,
+                barrierColor: Colors.black.withOpacity(0.5),
+                transitionDuration: Duration(milliseconds: 300),
+                opaque: false,
+                pageBuilder: (_, __, ___) => FilterPulangScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                }),
+          );
+        },
       ),
     );
   }

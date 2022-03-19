@@ -344,7 +344,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                                       ? CustomColor.darkGrey
                                       : CustomColor.white
                                   : CustomColor.white,
-                              fontSize: Dimensions.extraLargeTextSize,
+                              fontSize: Dimensions.defaultTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ),

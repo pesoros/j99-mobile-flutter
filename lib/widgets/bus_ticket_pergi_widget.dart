@@ -13,7 +13,7 @@ import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 import 'package:juragan99/screens/passengger_form_screen.dart';
-import 'package:juragan99/widgets/bus_detail_modal_widget.dart';
+import 'package:juragan99/widgets/bus_detail_modal_pergi_widget.dart';
 
 class BusTicketPergiWidget extends StatefulWidget {
   final BusPergi bus;
@@ -217,9 +217,17 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                       barrierColor: Colors.black.withOpacity(0.5),
                       transitionDuration: Duration(milliseconds: 300),
                       opaque: false,
-                      pageBuilder: (_, __, ___) => BusDetailModalWidget(
+                      pageBuilder: (_, __, ___) => BusDetailModalPergiWidget(
                             bus: widget.bus,
                             type: widget.bus.pergi_type,
+                            price: widget.bus.pergi_price,
+                            start: widget.bus.pergi_start,
+                            end: widget.bus.pergi_end,
+                            pickup_trip_location:
+                                widget.bus.pergi_pickup_trip_location,
+                            drop_trip_location:
+                                widget.bus.pergi_drop_trip_location,
+                            seatAvail: widget.bus.pergi_seatAvail,
                           ),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {

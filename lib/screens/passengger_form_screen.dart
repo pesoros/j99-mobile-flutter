@@ -1023,7 +1023,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     ),
                   ),
                   onTap: () {
-                    _navigatePickSeat(context);
+                    _navigatePickSeatPergi(context);
                   },
                 )
               : Column(
@@ -1046,7 +1046,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         ),
                       ),
                       onTap: () {
-                        _navigatePickSeat(context);
+                        _navigatePickSeatPergi(context);
                       },
                     ),
                     SizedBox(height: 10),
@@ -1068,7 +1068,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         ),
                       ),
                       onTap: () {
-                        _navigatePickSeat(context);
+                        _navigatePickSeatPulang(context);
                       },
                     )
                   ],
@@ -1265,7 +1265,96 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
     );
   }
 
-  void _navigatePickSeat(BuildContext context) async {
+  void _navigatePickSeatPergi(BuildContext context) async {
+    if (variable.selectedJumlahPenumpang == "1") {
+      if (namePassenggerController1.text == null ||
+          namePassenggerController1.text == "") {
+        Fluttertoast.showToast(
+          msg: "Isi nama terlebih dahulu",
+          backgroundColor: CustomColor.red,
+          textColor: CustomColor.white,
+          gravity: ToastGravity.CENTER,
+        );
+      } else {
+        setState(() {
+          variable.namePassengger1 = namePassenggerController1.text;
+        });
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+      }
+    }
+    if (variable.selectedJumlahPenumpang == "2") {
+      if (namePassenggerController1.text == null ||
+          namePassenggerController1.text == "" ||
+          namePassenggerController2.text == null ||
+          namePassenggerController2.text == "") {
+        Fluttertoast.showToast(
+          msg: "Isi nama terlebih dahulu",
+          backgroundColor: CustomColor.red,
+          textColor: CustomColor.white,
+          gravity: ToastGravity.CENTER,
+        );
+      } else {
+        setState(() {
+          variable.namePassengger1 = namePassenggerController1.text;
+          variable.namePassengger2 = namePassenggerController2.text;
+        });
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+      }
+    }
+    if (variable.selectedJumlahPenumpang == "3") {
+      if (namePassenggerController1.text == null ||
+          namePassenggerController1.text == "" ||
+          namePassenggerController2.text == null ||
+          namePassenggerController2.text == "" ||
+          namePassenggerController3.text == null ||
+          namePassenggerController3.text == "") {
+        Fluttertoast.showToast(
+          msg: "Isi nama terlebih dahulu",
+          backgroundColor: CustomColor.red,
+          textColor: CustomColor.white,
+          gravity: ToastGravity.CENTER,
+        );
+      } else {
+        setState(() {
+          variable.namePassengger1 = namePassenggerController1.text;
+          variable.namePassengger2 = namePassenggerController2.text;
+          variable.namePassengger3 = namePassenggerController3.text;
+        });
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+      }
+    }
+    if (variable.selectedJumlahPenumpang == "4") {
+      if (namePassenggerController1.text == null ||
+          namePassenggerController1.text == "" ||
+          namePassenggerController2.text == null ||
+          namePassenggerController2.text == "" ||
+          namePassenggerController3.text == null ||
+          namePassenggerController3.text == "" ||
+          namePassenggerController4.text == null ||
+          namePassenggerController4.text == "") {
+        Fluttertoast.showToast(
+          msg: "Isi nama terlebih dahulu",
+          backgroundColor: CustomColor.red,
+          textColor: CustomColor.white,
+          gravity: ToastGravity.CENTER,
+        );
+      } else {
+        setState(() {
+          variable.namePassengger1 = namePassenggerController1.text;
+          variable.namePassengger2 = namePassenggerController2.text;
+          variable.namePassengger3 = namePassenggerController3.text;
+          variable.namePassengger4 = namePassenggerController4.text;
+        });
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+      }
+    }
+  }
+
+  void _navigatePickSeatPulang(BuildContext context) async {
     if (variable.selectedJumlahPenumpang == "1") {
       if (namePassenggerController1.text == null ||
           namePassenggerController1.text == "") {

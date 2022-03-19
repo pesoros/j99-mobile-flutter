@@ -15,12 +15,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
-class SeatPlanPergiWidget extends StatefulWidget {
+class SeatPlanPulangWidget extends StatefulWidget {
   @override
-  _SeatPlanPergiWidgetScreen createState() => _SeatPlanPergiWidgetScreen();
+  _SeatPlanPulangWidgetScreen createState() => _SeatPlanPulangWidgetScreen();
 }
 
-class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
+class _SeatPlanPulangWidgetScreen extends State<SeatPlanPulangWidget> {
   List list = [];
   List li = [];
   bool index = false;
@@ -328,7 +328,7 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
                                       ? CustomColor.darkGrey
                                       : CustomColor.white
                                   : CustomColor.white,
-                              fontSize: Dimensions.extraLargeTextSize,
+                              fontSize: Dimensions.defaultTextSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -433,25 +433,25 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
             );
           } else {
             if (selectedJumlahPenumpang == 1) {
-              variable.seatPergiPassengger1 = li[0].toString();
+              variable.seatPulangPassengger1 = li[0].toString();
               Navigator.pop(context);
             }
             if (selectedJumlahPenumpang == 2) {
-              variable.seatPergiPassengger1 = li[0].toString();
-              variable.seatPergiPassengger2 = li[1].toString();
+              variable.seatPulangPassengger1 = li[0].toString();
+              variable.seatPulangPassengger2 = li[1].toString();
               Navigator.pop(context);
             }
             if (selectedJumlahPenumpang == 3) {
-              variable.seatPergiPassengger1 = li[0].toString();
-              variable.seatPergiPassengger2 = li[1].toString();
-              variable.seatPergiPassengger3 = li[2].toString();
+              variable.seatPulangPassengger1 = li[0].toString();
+              variable.seatPulangPassengger2 = li[1].toString();
+              variable.seatPulangPassengger3 = li[2].toString();
               Navigator.pop(context);
             }
             if (selectedJumlahPenumpang == 4) {
-              variable.seatPergiPassengger1 = li[0].toString();
-              variable.seatPergiPassengger2 = li[1].toString();
-              variable.seatPergiPassengger3 = li[2].toString();
-              variable.seatPergiPassengger4 = li[3].toString();
+              variable.seatPulangPassengger1 = li[0].toString();
+              variable.seatPulangPassengger2 = li[1].toString();
+              variable.seatPulangPassengger3 = li[2].toString();
+              variable.seatPulangPassengger4 = li[3].toString();
               Navigator.pop(context);
             }
           }

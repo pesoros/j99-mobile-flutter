@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/formater.dart';
 
-import 'package:juragan99/data/slot_pulang.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 import 'package:juragan99/screens/passengger_form_screen.dart';
+import 'package:juragan99/widgets/bus_detail_modal_pulang_widget.dart';
 
 class BusTicketPulangWidget extends StatefulWidget {
   final BusPulang bus;
@@ -59,23 +59,10 @@ class BusTicketPulangWidget extends StatefulWidget {
 
 class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
   BusPulang bus;
-  List list = [];
-  List li = [];
-  int index = 0;
-  List<SlotPulang> _slotList = [];
 
   @override
   void initState() {
     super.initState();
-    getSlot();
-  }
-
-  getSlot() async {
-    await SlotPulangList.list().then((value) {
-      setState(() {
-        _slotList = value;
-      });
-    });
   }
 
   @override
@@ -214,8 +201,42 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
                     color: CustomColor.white, size: Dimensions.defaultTextSize),
               ),
               onTap: () {
-                getSlot();
-                _busDetailModal(context);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                      barrierDismissible: true,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      transitionDuration: Duration(milliseconds: 300),
+                      opaque: false,
+                      pageBuilder: (_, __, ___) => BusDetailModalPulangWidget(
+                            bus: widget.bus,
+                            type: widget.bus.pulang_type,
+                            price: widget.bus.pulang_price,
+                            start: widget.bus.pulang_start,
+                            end: widget.bus.pulang_end,
+                            pickup_trip_location:
+                                widget.bus.pulang_pickup_trip_location,
+                            drop_trip_location:
+                                widget.bus.pulang_drop_trip_location,
+                            seatAvail: widget.bus.pulang_seatAvail,
+                          ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0);
+                        const end = Offset.zero;
+                        const curve = Curves.ease;
+
+                        final tween = Tween(begin: begin, end: end);
+                        final curvedAnimation = CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        );
+
+                        return SlideTransition(
+                          position: tween.animate(curvedAnimation),
+                          child: child,
+                        );
+                      }),
+                );
               },
             ),
             GestureDetector(
@@ -245,170 +266,6 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
           ],
         ),
       ],
-    );
-  }
-
-  _busDetailModal(BuildContext context) {
-    showGeneralDialog(
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierDismissible: true,
-        barrierColor: Colors.black.withOpacity(0.5),
-        transitionDuration: Duration(milliseconds: 300),
-        context: context,
-        pageBuilder: (_, __, ___) {
-          return Material(
-            type: MaterialType.transparency,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 650,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [_detailModalBody(context)],
-                ),
-              ),
-            ),
-          );
-        },
-        transitionBuilder: (_, anim, __, child) {
-          return SlideTransition(
-            position:
-                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
-            child: child,
-          );
-        });
-  }
-
-  _detailModalBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 20,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      ),
-      child: Column(
-        children: <Widget>[
-          _busInfoWidget(context),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _detailsWidget(context),
-                _availableSeatWidget(context),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
-          _buttonWidget(context),
-        ],
-      ),
-    );
-  }
-
-  _busInfoWidget(BuildContext context) {
-    return Container(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
-          fit: BoxFit.cover,
-          height: 200,
-          width: MediaQuery.of(context).size.width,
-        ),
-      ),
-    );
-  }
-
-  _detailsWidget(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.bus.pulang_type.toString()),
-        ],
-      ),
-    );
-  }
-
-  _buttonWidget(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        height: Dimensions.buttonHeight,
-        decoration: BoxDecoration(
-            color: CustomColor.red,
-            borderRadius: BorderRadius.circular(Dimensions.radius)),
-        child: Center(
-          child: Text(
-            "Tutup",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: Dimensions.largeTextSize,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-      onTap: () {},
-    );
-  }
-
-  _availableSeatWidget(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(Dimensions.radius)),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          // top: Dimensions.heightSize,
-          bottom: Dimensions.heightSize,
-        ),
-        child: _allTicketWidget(context),
-      ),
-    );
-  }
-
-  _allTicketWidget(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: GridView.count(
-        crossAxisCount: 5,
-        shrinkWrap: true,
-        mainAxisSpacing: 10,
-        physics: NeverScrollableScrollPhysics(),
-        children: List.generate(
-          _slotList.length,
-          (index) {
-            SlotPulang slot = _slotList[index];
-            return slot.pulang_isSeat
-                ? Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: slot.pulang_isAvailable
-                              ? CustomColor.white
-                              : Colors.grey,
-                          border: Border.all(color: CustomColor.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(6))),
-                    ),
-                  );
-          },
-        ),
-      ),
     );
   }
 
