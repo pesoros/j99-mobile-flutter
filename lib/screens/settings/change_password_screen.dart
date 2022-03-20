@@ -1,3 +1,4 @@
+import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
@@ -34,7 +35,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: Stack(
             children: [
               BackWidget(
-                title: Strings.changePassword,
+                title: "Ubah Sandi",
               ),
               bodyWidget(context),
               buttonWidget(context)
@@ -60,15 +61,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         key: formKey,
         child: Padding(
           padding: const EdgeInsets.only(
-              top: Dimensions.heightSize * 2,
-              left: Dimensions.marginSize,
-              right: Dimensions.marginSize),
+              top: Dimensions.heightSize * 2, left: 30, right: 30),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Strings.oldPassword,
+                  "Sandi lama",
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -85,7 +84,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     }
                   },
                   decoration: InputDecoration(
-                    hintText: Strings.typePassword,
+                    hintText: "Sandi lama",
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelStyle: CustomStyle.textStyle,
@@ -118,7 +117,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 SizedBox(height: Dimensions.heightSize),
                 Text(
-                  Strings.password,
+                  "Sandi baru",
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -135,7 +134,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     }
                   },
                   decoration: InputDecoration(
-                    hintText: Strings.typePassword,
+                    hintText: "Sandi baru",
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelStyle: CustomStyle.textStyle,
@@ -168,7 +167,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 SizedBox(height: Dimensions.heightSize),
                 Text(
-                  Strings.confirmPassword,
+                  "Konfirmasi sandi baru",
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(
@@ -185,7 +184,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     }
                   },
                   decoration: InputDecoration(
-                    hintText: Strings.typePassword,
+                    hintText: "Konfirmasi sandi baru",
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelStyle: CustomStyle.textStyle,
@@ -225,26 +224,28 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   buttonWidget(BuildContext context) {
     return Positioned(
-      bottom: Dimensions.heightSize,
-      left: Dimensions.marginSize,
-      right: Dimensions.marginSize,
+      bottom: 30,
+      left: 30,
+      right: 30,
       child: GestureDetector(
         child: Container(
           height: Dimensions.buttonHeight,
           decoration: BoxDecoration(
-              gradient: CustomStyle.bgColor,
+              color: CustomColor.red,
               borderRadius: BorderRadius.circular(Dimensions.radius)),
           child: Center(
             child: Text(
-              Strings.changePassword,
+              "Ubah sandi",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

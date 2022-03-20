@@ -307,6 +307,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                 drop_trip_location: bus.pulang_drop_trip_location,
                 type: bus.pulang_type,
                 fleet_seats: bus.pulang_fleet_seats,
+                fleet_registration_id: bus.pulang_fleet_registration_id,
                 price: bus.pulang_price,
                 duration: bus.pulang_duration,
                 start: bus.pulang_start,

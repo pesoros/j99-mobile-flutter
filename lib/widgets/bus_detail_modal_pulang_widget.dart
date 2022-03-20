@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:juragan99/data/bus_pulang.dart';
+import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/slot_pulang.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/formater.dart';
-
-import 'package:juragan99/data/class.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BusDetailModalPulangWidget extends StatefulWidget {
   final BusPulang bus;
@@ -19,6 +19,7 @@ class BusDetailModalPulangWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String fleet_seats;
+  final String fleet_registration_id;
   final String price;
   final String duration;
   final String start;
@@ -36,6 +37,7 @@ class BusDetailModalPulangWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.fleet_seats,
+    this.fleet_registration_id,
     this.price,
     this.duration,
     this.start,
@@ -62,13 +64,27 @@ class _BusDetailModalPulangWidgetState
   void initState() {
     super.initState();
     getSlot();
+    getClass();
   }
 
   getSlot() async {
-    await SlotPulangList.list().then((value) {
+    await SlotPulangList.list(
+      widget.bus.pulang_trip_id_no,
+      widget.bus.pulang_trip_route_id,
+      widget.bus.pulang_fleet_registration_id,
+      widget.bus.pulang_type,
+    ).then((value) {
       setState(() {
         _slotList = value;
         isLoading = true;
+      });
+    });
+  }
+
+  getClass() async {
+    await GetClassList.list(widget.type).then((value) {
+      setState(() {
+        _classList = value;
       });
     });
   }
@@ -122,6 +138,7 @@ class _BusDetailModalPulangWidgetState
       child: Column(
         children: <Widget>[
           _busInfoWidget(context),
+          SizedBox(height: 20),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,9 +159,9 @@ class _BusDetailModalPulangWidgetState
     return Container(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
-          fit: BoxFit.cover,
+        child: CachedNetworkImage(
+          imageUrl: "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
+          errorWidget: (context, url, error) => Icon(Icons.error),
           height: 200,
           width: MediaQuery.of(context).size.width,
         ),
@@ -157,7 +174,7 @@ class _BusDetailModalPulangWidgetState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.type,
+          Text((_classList.length == 0) ? "" : _classList[0].kelas,
               style: TextStyle(fontSize: Dimensions.defaultTextSize)),
           Row(
             children: [

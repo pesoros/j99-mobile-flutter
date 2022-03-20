@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 
 import 'package:juragan99/utils/colors.dart';
@@ -7,6 +9,9 @@ import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/screens/auth/otp/email_verification_screen.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+
+import 'package:juragan99/utils/variables.dart' as variable;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -16,12 +21,17 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
   bool _toggleVisibility = true;
   bool checkedValue = false;
+
+  List _listIdentitityType = ["KTP", "Paspor", "SIM"];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BackWidget(
-                  title: Strings.createAnAccount,
+                  title: "Daftar",
                 ),
                 bodyWidget(context)
               ],
@@ -51,260 +61,230 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         inputFieldWidget(context),
-        termsConditionWidget(context),
         SizedBox(height: Dimensions.heightSize * 2),
         buttonWidget(context),
-        SizedBox(height: Dimensions.heightSize * 2),
-        orSignUpWithWidget(context),
         SizedBox(height: Dimensions.heightSize * 2),
         alreadyHaveAccountWidget(context)
       ],
     );
   }
 
-  Future<bool> _showTermsConditions() async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: CustomColor.primaryColor,
-            child: Stack(
-              children: [
-                Positioned(
-                    top: -35.0,
-                    left: -50.0,
-                    child: Image.asset('assets/images/splash_logo.png')),
-                Positioned(
-                    right: -35.0,
-                    bottom: -20.0,
-                    child: Image.asset('assets/images/splash_logo.png')),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: Dimensions.defaultPaddingSize * 2,
-                      bottom: Dimensions.defaultPaddingSize * 2),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: AlertDialog(
-                        content: Stack(
-                      children: [
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 45,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: Dimensions.heightSize * 2,
-                                ),
-                                Text(
-                                  Strings.ourPolicyTerms,
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.7),
-                                      fontSize: Dimensions.largeTextSize,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Text(
-                                  'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                                  style: CustomStyle.textStyle,
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '•',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: CustomColor.accentColor,
-                                          fontSize:
-                                              Dimensions.extraLargeTextSize),
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'simply random text. It has roots in a piece of classical Latin literature ',
-                                        style: CustomStyle.textStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '•',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: CustomColor.accentColor,
-                                          fontSize:
-                                              Dimensions.extraLargeTextSize),
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'Distracted by the readable content of a page when looking at its layout.',
-                                        style: CustomStyle.textStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '•',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: CustomColor.accentColor,
-                                          fontSize:
-                                              Dimensions.extraLargeTextSize),
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'Available, but the majority have suffered alteration',
-                                        style: CustomStyle.textStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: Dimensions.heightSize * 2,
-                                ),
-                                Text(
-                                  'When do we contact information ?',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.7),
-                                      fontSize: Dimensions.largeTextSize,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Text(
-                                  'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                                  style: CustomStyle.textStyle,
-                                ),
-                                SizedBox(
-                                  height: Dimensions.heightSize * 2,
-                                ),
-                                Text(
-                                  'Do we use cookies ?',
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.7),
-                                      fontSize: Dimensions.largeTextSize,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: Dimensions.heightSize),
-                                Text(
-                                  'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old',
-                                  style: CustomStyle.textStyle,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  GestureDetector(
-                                    child: Container(
-                                      height: 35.0,
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                          color: CustomColor.secondaryColor,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0))),
-                                      child: Center(
-                                        child: Text(
-                                          Strings.decline,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize:
-                                                  Dimensions.defaultTextSize,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 10.0,
-                                  ),
-                                  GestureDetector(
-                                    child: Container(
-                                      height: 35.0,
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                          color: CustomColor.primaryColor,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0))),
-                                      child: Center(
-                                        child: Text(
-                                          Strings.agree,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize:
-                                                  Dimensions.defaultTextSize,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )) ??
-        false;
-  }
-
   inputFieldWidget(BuildContext context) {
     return Form(
         key: formKey,
         child: Padding(
-          padding: const EdgeInsets.only(
-              top: Dimensions.heightSize * 2,
-              left: Dimensions.marginSize,
-              right: Dimensions.marginSize),
+          padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nama Depan",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: Dimensions.heightSize * 0.5,
+                      ),
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        child: TextFormField(
+                          style: CustomStyle.textStyle,
+                          controller: firstNameController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: "Nama Depan",
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            labelStyle: CustomStyle.textStyle,
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintStyle: CustomStyle.textStyle,
+                            focusedBorder: CustomStyle.focusBorder,
+                            enabledBorder: CustomStyle.focusErrorBorder,
+                            focusedErrorBorder: CustomStyle.focusErrorBorder,
+                            errorBorder: CustomStyle.focusErrorBorder,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nama Belakang",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: Dimensions.heightSize * 0.5,
+                      ),
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        child: TextFormField(
+                          style: CustomStyle.textStyle,
+                          controller: lastNameController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: "Nama Belakang",
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            labelStyle: CustomStyle.textStyle,
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintStyle: CustomStyle.textStyle,
+                            focusedBorder: CustomStyle.focusBorder,
+                            enabledBorder: CustomStyle.focusErrorBorder,
+                            focusedErrorBorder: CustomStyle.focusErrorBorder,
+                            errorBorder: CustomStyle.focusErrorBorder,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: Dimensions.heightSize * 0.5,
+              ),
+              Text(
+                "Alamat",
+                style: TextStyle(color: Colors.black),
+              ),
+              SizedBox(
+                height: Dimensions.heightSize * 0.5,
+              ),
+              TextFormField(
+                style: CustomStyle.textStyle,
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    hintText: "Alamat",
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    labelStyle: CustomStyle.textStyle,
+                    filled: true,
+                    fillColor: Colors.transparent,
+                    hintStyle: CustomStyle.textStyle,
+                    focusedBorder: CustomStyle.focusBorder,
+                    enabledBorder: CustomStyle.focusErrorBorder,
+                    focusedErrorBorder: CustomStyle.focusErrorBorder,
+                    errorBorder: CustomStyle.focusErrorBorder,
+                    prefixIcon: Icon(Icons.location_on)),
+              ),
+              SizedBox(
+                height: Dimensions.heightSize * 0.5,
+              ),
+              Text(
+                "No. Handphone",
+                style: TextStyle(color: Colors.black),
+              ),
+              SizedBox(
+                height: Dimensions.heightSize * 0.5,
+              ),
+              TextFormField(
+                style: CustomStyle.textStyle,
+                controller: phoneController,
+                decoration: InputDecoration(
+                  hintText: "No. Handphone",
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                  labelStyle: CustomStyle.textStyle,
+                  focusedBorder: CustomStyle.focusBorder,
+                  enabledBorder: CustomStyle.focusErrorBorder,
+                  focusedErrorBorder: CustomStyle.focusErrorBorder,
+                  errorBorder: CustomStyle.focusErrorBorder,
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  prefixIcon: Icon(Icons.phone),
+                  hintStyle: CustomStyle.textStyle,
+                ),
+              ),
+              SizedBox(height: Dimensions.heightSize * 0.5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Tipe Identitas",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: Dimensions.heightSize * 0.5,
+                      ),
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width / 3.5,
+                        child: DropdownSearch(
+                          mode: Mode.BOTTOM_SHEET,
+                          showClearButton: false,
+                          maxHeight: 250,
+                          items: _listIdentitityType,
+                          selectedItem: _listIdentitityType[0],
+                          showSearchBox: false,
+                          dropdownSearchDecoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 10),
+                            labelStyle: CustomStyle.textStyle,
+                            focusedBorder: CustomStyle.focusBorder,
+                            enabledBorder: CustomStyle.focusErrorBorder,
+                            focusedErrorBorder: CustomStyle.focusErrorBorder,
+                            errorBorder: CustomStyle.focusErrorBorder,
+                            hintStyle: CustomStyle.textStyle,
+                          ),
+                          onChanged: (value) {
+                            // variable.nikTypePassengger1 = value;
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nomor Identitas",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: Dimensions.heightSize * 0.5,
+                      ),
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: TextFormField(
+                          style: CustomStyle.textStyle,
+                          controller: lastNameController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: "No. Identitas",
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 10.0),
+                            labelStyle: CustomStyle.textStyle,
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintStyle: CustomStyle.textStyle,
+                            focusedBorder: CustomStyle.focusBorder,
+                            enabledBorder: CustomStyle.focusErrorBorder,
+                            focusedErrorBorder: CustomStyle.focusErrorBorder,
+                            errorBorder: CustomStyle.focusErrorBorder,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: Dimensions.heightSize * 0.5,
+              ),
               Text(
                 Strings.email,
                 style: TextStyle(color: Colors.black),
@@ -316,15 +296,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: CustomStyle.textStyle,
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return Strings.pleaseFillOutTheField;
-                  } else {
-                    return null;
-                  }
-                },
                 decoration: InputDecoration(
-                    hintText: Strings.demoEmail,
+                    hintText: "Example@email.com",
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelStyle: CustomStyle.textStyle,
@@ -338,10 +311,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     prefixIcon: Icon(Icons.mail)),
               ),
               SizedBox(
-                height: Dimensions.heightSize,
+                height: Dimensions.heightSize * 0.5,
               ),
               Text(
-                Strings.password,
+                "Sandi",
                 style: TextStyle(color: Colors.black),
               ),
               SizedBox(
@@ -350,15 +323,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               TextFormField(
                 style: CustomStyle.textStyle,
                 controller: passwordController,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return Strings.pleaseFillOutTheField;
-                  } else {
-                    return null;
-                  }
-                },
                 decoration: InputDecoration(
-                  hintText: Strings.typePassword,
+                  hintText: "Sandi",
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   labelStyle: CustomStyle.textStyle,
@@ -389,9 +355,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 obscureText: _toggleVisibility,
               ),
-              SizedBox(height: Dimensions.heightSize),
+              SizedBox(height: Dimensions.heightSize * 0.5),
               Text(
-                Strings.confirmPassword,
+                "Konfirmasi sandi",
                 style: TextStyle(color: Colors.black),
               ),
               SizedBox(
@@ -400,15 +366,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               TextFormField(
                 style: CustomStyle.textStyle,
                 controller: confirmPasswordController,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return Strings.pleaseFillOutTheField;
-                  } else {
-                    return null;
-                  }
-                },
                 decoration: InputDecoration(
-                  hintText: Strings.typePassword,
+                  hintText: "Konfirmasi sandi",
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   labelStyle: CustomStyle.textStyle,
@@ -439,75 +398,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 obscureText: _toggleVisibility,
               ),
-              SizedBox(height: Dimensions.heightSize),
+              SizedBox(height: Dimensions.heightSize * 0.5),
             ],
           ),
         ));
   }
 
-  termsConditionWidget(BuildContext context) {
-    return CheckboxListTile(
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "By clicking sign up you agree to the following ",
-            style: CustomStyle.textStyle,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                child: Text(
-                  "Terms and Conditions",
-                  style: TextStyle(
-                      fontSize: Dimensions.defaultTextSize,
-                      fontWeight: FontWeight.bold,
-                      color: CustomColor.blueColor,
-                      decoration: TextDecoration.underline),
-                ),
-                onTap: () {
-                  _showTermsConditions();
-                },
-              ),
-              Text(
-                " with out reservation",
-                style: CustomStyle.textStyle,
-              ),
-            ],
-          )
-        ],
-      ),
-      value: checkedValue,
-      onChanged: (newValue) {
-        setState(() {
-          checkedValue = newValue;
-        });
-      },
-      controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
-    );
-  }
-
   buttonWidget(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          left: Dimensions.marginSize, right: Dimensions.marginSize),
+      padding: const EdgeInsets.only(left: 30, right: 30),
       child: GestureDetector(
         child: Container(
           height: 50.0,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              gradient: CustomStyle.bgColor,
+              color: CustomColor.red,
               borderRadius:
                   BorderRadius.all(Radius.circular(Dimensions.radius))),
           child: Center(
             child: Text(
-              Strings.createAnAccount.toUpperCase(),
+              "Daftar",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -522,79 +435,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  orSignUpWithWidget(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          Strings.orSignUpWith,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: Dimensions.largeTextSize,
-          ),
-        ),
-        SizedBox(height: Dimensions.heightSize * 2),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/google.png'),
-              ),
-            ),
-            SizedBox(
-              width: Dimensions.widthSize,
-            ),
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/facebook.png'),
-              ),
-            ),
-            SizedBox(
-              width: Dimensions.widthSize,
-            ),
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/twitter.png'),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   alreadyHaveAccountWidget(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          Strings.alreadyHaveAnAccount,
+          "Sudah punya akun? ",
           style: CustomStyle.textStyle,
         ),
         GestureDetector(
           child: Text(
-            Strings.signIn.toUpperCase(),
+            "Masuk",
             style: TextStyle(
                 color: CustomColor.primaryColor, fontWeight: FontWeight.bold),
           ),

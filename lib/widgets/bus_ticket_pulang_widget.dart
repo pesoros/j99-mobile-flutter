@@ -1,12 +1,14 @@
 // ignore_for_file: unused_element, non_constant_identifier_names
 
 import 'package:dotted_line/dotted_line.dart';
+import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/bus_pulang.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/formater.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -23,6 +25,7 @@ class BusTicketPulangWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String fleet_seats;
+  final String fleet_registration_id;
   final String price;
   final String duration;
   final String start;
@@ -43,6 +46,7 @@ class BusTicketPulangWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.fleet_seats,
+    this.fleet_registration_id,
     this.price,
     this.duration,
     this.start,
@@ -59,10 +63,22 @@ class BusTicketPulangWidget extends StatefulWidget {
 
 class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
   BusPulang bus;
+  List<ClassList> _classList = [];
 
   @override
   void initState() {
     super.initState();
+    getClass();
+  }
+
+  getClass() async {
+    await GetClassList.list(
+      widget.type,
+    ).then((value) {
+      setState(() {
+        _classList = value;
+      });
+    });
   }
 
   @override
@@ -92,13 +108,18 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              widget.bus.pulang_type,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Dimensions.defaultTextSize),
-            ),
+            (_classList.length == 0)
+                ? Shimmer.fromColors(
+                    child: Text("Shimmer"),
+                    baseColor: CustomColor.white,
+                    highlightColor: CustomColor.red)
+                : Text(
+                    _classList[0].kelas,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Dimensions.defaultTextSize),
+                  ),
           ],
         ),
         Row(
@@ -218,6 +239,10 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
                             drop_trip_location:
                                 widget.bus.pulang_drop_trip_location,
                             seatAvail: widget.bus.pulang_seatAvail,
+                            fleet_registration_id:
+                                widget.bus.pulang_fleet_registration_id,
+                            trip_id_no: widget.bus.pulang_trip_id_no,
+                            trip_route_id: widget.bus.pulang_trip_route_id,
                           ),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
@@ -251,7 +276,7 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
                   "Pesan",
                   style: TextStyle(
                       color: CustomColor.white,
-                      fontSize: Dimensions.extraSmallTextSize),
+                      fontSize: Dimensions.smallTextSize),
                 ),
               ),
               onTap: () {
@@ -279,6 +304,8 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
       variable.pulang_drop_trip_location = widget.bus.pulang_drop_trip_location;
       variable.pulang_type = widget.bus.pulang_type;
       variable.pulang_fleet_seats = widget.bus.pulang_fleet_seats;
+      variable.pulang_fleet_registration_id =
+          widget.bus.pulang_fleet_registration_id;
       variable.pulang_price = widget.bus.pulang_price;
       variable.pulang_duration = widget.bus.pulang_duration;
       variable.pulang_start = widget.bus.pulang_start;

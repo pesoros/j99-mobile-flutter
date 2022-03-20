@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable, unused_import, unused_element
 
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/settings/change_password_screen.dart';
+import 'package:juragan99/screens/settings/update_profile_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -10,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io';
 
-import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -20,9 +21,6 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  File _image, file;
-  final ImagePicker _picker = ImagePicker();
-
   @override
   void initState() {
     super.initState();
@@ -74,22 +72,25 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //backgroundColor: Colors.white,
-        body: Stack(
+          body: Container(
+        child: Column(
           children: [
             headerWidget(context),
             bodyWidget(context),
-            buttonWidget(context)
+            updateProfileButtonWidget(context),
+            changePasswordButtonWidget(context),
+            historyButtonWidget(context),
+            logoutButtonWidget(context)
           ],
         ),
-      ),
+      )),
     );
   }
 
   headerWidget(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: 40,
+        height: 50,
         color: CustomColor.white,
         child: Padding(
           padding: const EdgeInsets.only(),
@@ -97,11 +98,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             children: [
               Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 40,
+                  height: 50,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30, top: 20, right: 30),
+                    padding: const EdgeInsets.only(left: 30, right: 30),
                     child: Stack(
+                      alignment: Alignment.centerLeft,
                       children: [
                         GestureDetector(
                           child: Container(
@@ -148,10 +149,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget bodyWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 70,
-        bottom: 70,
-        left: Dimensions.marginSize,
-        right: Dimensions.marginSize,
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
       ),
       child: Container(
         decoration: BoxDecoration(
@@ -170,12 +171,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                addImageWidget(context),
-                _typeData(Strings.userName, firstName),
-                _typeData(Strings.emailAddress, email),
-                _typeData(Strings.phoneNumber, phone),
-                _typeData(Strings.address, address),
-                _typeData(Strings.lifetimeInsurance, 'Yes'),
+                // addImageWidget(context),
+                _typeData("Nama Lengkap", firstName),
+                _typeData("Email", email),
+                _typeData("No. Handphone", phone),
+                _typeData("Alamat", address),
               ],
             ),
           ),
@@ -184,122 +184,91 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  addImageWidget(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Stack(children: <Widget>[
-        Container(
-          height: 150,
-          width: 150,
-          padding: EdgeInsets.all(1),
+  updateProfileButtonWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+      child: GestureDetector(
+        child: Container(
+          height: Dimensions.buttonHeight,
           decoration: BoxDecoration(
-            color: CustomColor.secondaryColor,
-            borderRadius: BorderRadius.circular(75.0),
-          ),
-          child: _image == null
-              ? Image.asset('assets/images/user.png', fit: BoxFit.cover)
-              : Image.file(
-                  _image,
-                  fit: BoxFit.cover,
-                ),
-        ),
-        Positioned(
-          right: 0,
-          bottom: 20,
-          child: Container(
-            height: 40.0,
-            width: 40.0,
-            decoration: BoxDecoration(
-                color: CustomColor.primaryColor,
-                borderRadius: BorderRadius.circular(20.0)),
-            child: IconButton(
-              onPressed: () {
-                _openImageSourceOptions(context);
-              },
-              padding: EdgeInsets.only(left: 5, right: 5),
-              iconSize: 24,
-              icon: Icon(
-                Icons.camera_enhance,
-                color: Colors.white,
-              ),
+              color: CustomColor.red,
+              borderRadius: BorderRadius.circular(Dimensions.radius)),
+          child: Center(
+            child: Text(
+              "Perbarui Profil",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-      ]),
+        onTap: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
+          );
+        },
+      ),
     );
   }
 
-  Future<void> _openImageSourceOptions(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  child: Icon(
-                    Icons.camera_alt,
-                    size: Dimensions.defaultTextSize,
-                    color: Colors.blue,
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    _chooseFromCamera();
-                  },
-                ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.photo,
-                    size: Dimensions.defaultTextSize,
-                    color: Colors.green,
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    _chooseFromGallery();
-                  },
-                ),
-              ],
+  changePasswordButtonWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+      child: GestureDetector(
+        child: Container(
+          height: Dimensions.buttonHeight,
+          decoration: BoxDecoration(
+              color: CustomColor.red,
+              borderRadius: BorderRadius.circular(Dimensions.radius)),
+          child: Center(
+            child: Text(
+              "Ubah Sandi",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
             ),
+          ),
+        ),
+        onTap: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
           );
-        });
+        },
+      ),
+    );
   }
 
-  void _chooseFromGallery() async {
-    // ignore: deprecated_member_use
-    final XFile file =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 40);
-
-    if (file == null) {
-      Fluttertoast.showToast(msg: 'No File Selected');
-    } else {
-      setState(() {
-        _image = file as File;
-      });
-      //_upload();
-    }
+  historyButtonWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+      child: GestureDetector(
+        child: Container(
+          height: Dimensions.buttonHeight,
+          decoration: BoxDecoration(
+              color: CustomColor.red,
+              borderRadius: BorderRadius.circular(Dimensions.radius)),
+          child: Center(
+            child: Text(
+              "Riwayat Transaksi",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        onTap: () async {},
+      ),
+    );
   }
 
-  _chooseFromCamera() async {
-    //ignore: deprecated_member_use
-    final XFile file =
-        await _picker.pickImage(source: ImageSource.camera, imageQuality: 40);
-
-    if (file == null) {
-      Fluttertoast.showToast(msg: 'No Capture Image');
-    } else {
-      setState(() {
-        _image = file as File;
-      });
-      //_upload();
-    }
-  }
-
-  buttonWidget(BuildContext context) {
-    return Positioned(
-      bottom: Dimensions.heightSize,
-      left: Dimensions.marginSize,
-      right: Dimensions.marginSize,
+  logoutButtonWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
       child: GestureDetector(
         child: Container(
           height: Dimensions.buttonHeight,
@@ -311,7 +280,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               "Logout",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -351,13 +320,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               Text(
                 title,
                 style: TextStyle(
-                    color: Colors.black, fontSize: Dimensions.largeTextSize),
+                    color: Colors.black, fontSize: Dimensions.defaultTextSize),
               ),
               Text(
                 (value == null) ? "" : value,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: Dimensions.largeTextSize,
+                    fontSize: Dimensions.defaultTextSize,
                     fontWeight: FontWeight.bold),
               ),
             ],

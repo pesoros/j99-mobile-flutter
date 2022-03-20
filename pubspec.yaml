@@ -30,6 +30,7 @@ dependencies:
   shared_preferences: ^2.0.13
   flutter_launcher_icons: ^0.8.1
   cached_network_image: ^2.5.1
+  shimmer: ^2.0.0
   flutter_datetime_picker: 
     git: https://github.com/Realank/flutter_datetime_picker.git
 

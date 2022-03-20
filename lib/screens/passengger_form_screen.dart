@@ -16,6 +16,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:juragan99/widgets/seat_plan_pergi_widget.dart';
+import 'package:juragan99/widgets/seat_plan_pulang_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -1369,7 +1370,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           variable.namePassengger1 = namePassenggerController1.text;
         });
         await Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+            MaterialPageRoute(builder: (context) => SeatPlanPulangWidget()));
       }
     }
     if (variable.selectedJumlahPenumpang == "2") {
@@ -1389,7 +1390,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           variable.namePassengger2 = namePassenggerController2.text;
         });
         await Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+            MaterialPageRoute(builder: (context) => SeatPlanPulangWidget()));
       }
     }
     if (variable.selectedJumlahPenumpang == "3") {
@@ -1412,7 +1413,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           variable.namePassengger3 = namePassenggerController3.text;
         });
         await Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+            MaterialPageRoute(builder: (context) => SeatPlanPulangWidget()));
       }
     }
     if (variable.selectedJumlahPenumpang == "4") {
@@ -1438,7 +1439,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           variable.namePassengger4 = namePassenggerController4.text;
         });
         await Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SeatPlanPergiWidget()));
+            MaterialPageRoute(builder: (context) => SeatPlanPulangWidget()));
       }
     }
   }

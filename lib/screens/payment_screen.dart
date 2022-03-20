@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/utils/formater.dart';
 
 import 'package:juragan99/screens/invoice_screen.dart';
 import 'package:juragan99/widgets/payment_method_widget.dart';
@@ -1244,19 +1245,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             children: [
               _data(
-                  variable.pergi_pickup_trip_location +
-                      " - " +
-                      variable.pergi_drop_trip_location +
-                      " x " +
-                      variable.selectedJumlahPenumpang,
-                  double.parse(variable.pergi_price)),
+                variable.pergi_pickup_trip_location +
+                    " - " +
+                    variable.pergi_drop_trip_location +
+                    " x " +
+                    variable.selectedJumlahPenumpang,
+                double.parse(currencyFormatter
+                    .format(double.parse(variable.pergi_price))),
+              ),
               _data("Promo", promoValue),
               Divider(
                 color: Colors.grey,
               ),
               SizedBox(height: 10),
-              _data(Strings.total.toUpperCase(),
-                  double.parse(variable.pergi_price) - promoValue),
+              _data(
+                Strings.total.toUpperCase(),
+                double.parse(currencyFormatter
+                    .format(double.parse(variable.pergi_price) - promoValue)),
+              ),
             ],
           ),
         ));
@@ -1453,13 +1459,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
               variable.account_number = payment['account_number'];
               variable.expiration_date = payment['expiration_date'];
               variable.payment_id = payment['id'];
-              // print(value);
+              Navigator.pop(context);
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => InvoiceScreen()));
               setState(() {
                 isLoading = false;
               });
             } else {
+              Navigator.pop(context);
+              setState(() {
+                isLoading = false;
+              });
               Fluttertoast.showToast(
                 msg: "Pesanan Gagal",
                 backgroundColor: CustomColor.red,
@@ -1487,8 +1497,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Center(
+            child: Container(
+          width: MediaQuery.of(context).size.width / 2,
+          height: MediaQuery.of(context).size.width / 2,
+          decoration: BoxDecoration(
+              color: CustomColor.white,
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          padding: EdgeInsets.all(50),
           child: new CircularProgressIndicator(),
-        );
+        ));
       },
     );
   }

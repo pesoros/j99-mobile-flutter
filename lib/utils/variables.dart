@@ -17,6 +17,8 @@ String phone;
 String email_user;
 String password;
 
+//Registration
+
 //HomeScreen
 var selectedFromCity;
 var selectedToCity;
@@ -34,6 +36,7 @@ String pergi_pickup_trip_location;
 String pergi_drop_trip_location;
 String pergi_type;
 String pergi_fleet_seats;
+String pergi_fleet_registration_id;
 String pergi_price;
 String pergi_duration;
 String pergi_start;
@@ -48,6 +51,7 @@ String pulang_pickup_trip_location;
 String pulang_drop_trip_location;
 String pulang_type;
 String pulang_fleet_seats;
+String pulang_fleet_registration_id;
 String pulang_price;
 String pulang_duration;
 String pulang_start;

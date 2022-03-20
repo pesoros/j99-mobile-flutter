@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:async';
 
 import 'package:juragan99/widgets/back_widget.dart';
@@ -7,14 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/custom_style.dart';
-import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/utils/colors.dart';
 
 // ignore: must_be_immutable
 class OtpConfirmation extends StatefulWidget {
   final String title;
   final String subTitle;
-  final String image;
   final String emailAddress;
   final Future<String> Function(String) validateOtp;
   final void Function(BuildContext) routeCallback;
@@ -40,7 +40,6 @@ class OtpConfirmation extends StatefulWidget {
     this.titleColor = Colors.black,
     this.icon,
     this.keyboardBackgroundColor,
-    this.image,
     this.emailAddress,
   }) : super(key: key) {
     this._isGradientApplied = false;
@@ -59,7 +58,6 @@ class OtpConfirmation extends StatefulWidget {
       @required this.bottomColor,
       this.keyboardBackgroundColor,
       this.icon,
-      this.image,
       this.emailAddress})
       : super(key: key) {
     this._isGradientApplied = true;
@@ -163,53 +161,36 @@ class _OtpConfirmationState extends State<OtpConfirmation>
           child: Align(
             alignment: Alignment.topLeft,
             child: BackWidget(
-              title: Strings.enterVerificationCode,
+              title: "Kode Verifikasi",
             ),
           ),
-        ),
-        widget.icon != null
-            ? IconButton(
-                icon: widget.icon,
-                iconSize: 60,
-                onPressed: () {},
-              )
-            : Container(
-                width: 0,
-                height: 0,
-              ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: _getTitleText,
-        ),
-        Image.asset(
-          widget.image,
         ),
         SizedBox(
           height: Dimensions.heightSize,
         ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 20),
+        //   child: _getSubtitleText,
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: _getSubtitleText,
+          child: _getInputField,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              Strings.didntGetOtpCode,
+              "Kode tidak terkirim? ",
               style: CustomStyle.textStyle,
             ),
             Text(
-              Strings.resend.toUpperCase(),
+              "Kirim ulang",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   color: CustomColor.primaryColor,
                   fontWeight: FontWeight.bold),
             ),
           ],
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: _getInputField,
         ),
         showLoadingButton
             ? Center(child: CircularProgressIndicator())

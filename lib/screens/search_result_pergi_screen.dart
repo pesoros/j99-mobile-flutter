@@ -302,7 +302,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
             } else {
               bottomPadding = Dimensions.heightSize * 1;
             }
-            _listBus.sort((a, b) => b.pergi_price.compareTo(a.pergi_price));
+            // _listBus.sort((a, b) => b.pergi_price.compareTo(a.pergi_price));
             return Padding(
               padding: EdgeInsets.only(
                 bottom: bottomPadding,
@@ -318,6 +318,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                 drop_trip_location: bus.pergi_drop_trip_location,
                 type: bus.pergi_type,
                 fleet_seats: bus.pergi_fleet_seats,
+                fleet_registration_id: bus.pergi_fleet_seats,
                 price: bus.pergi_price,
                 duration: bus.pergi_duration,
                 start: bus.pergi_start,

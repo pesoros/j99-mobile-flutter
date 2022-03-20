@@ -17,215 +17,385 @@ class BookingList {
       body: (variable.checkPulangPergi == false &&
               int.parse(variable.selectedJumlahPenumpang) == 1)
           ? {
-              "trip_id_no": variable.pergi_trip_id_no,
-              "trip_route_id": variable.pergi_trip_route_id,
-              "pickup_location": variable.pergi_pickup_trip_location,
-              "drop_location": variable.pergi_drop_trip_location,
-              "pricePerSeat": variable.totalPrice,
-              "booking_date": variable.datePergi,
-              "fleet_type_id": variable.pergi_type,
-              "offer_code": variable.kodePromo,
+              "offer_code": "",
+              "booker_id": "",
+              "booker_name": variable.firstName + " " + variable.lastName,
+              "booker_email": variable.email,
+              "booker_phone": variable.phone,
               "payment_method": variable.selectedPaymentCategories,
               "payment_channel_code": variable.selectedPayment,
-              "seatPicked[0][name]": variable.namePassengger1,
-              "seatPicked[0][seat]": variable.seatPergiPassengger1,
-              "seatPicked[0][food]": variable.foodIdPassengger1,
-              "seatPicked[0][baggage]": variable.baggagePassengger1,
-              "seatPicked[0][identity]": variable.nikTypePassengger1,
-              "seatPicked[0][identity_number]": variable.nikPassengger1,
-              "seatPicked[0][phone]": variable.phonePassengger1,
+              "pergi[trip_id_no]": variable.pergi_trip_id_no,
+              "pergi[trip_route_id]": variable.pergi_trip_route_id,
+              "pergi[pickup_location]": variable.pergi_pickup_trip_location,
+              "pergi[drop_location]": variable.pergi_drop_trip_location,
+              "pergi[pricePerSeat]": variable.pergi_price,
+              "pergi[booking_date]": variable.datePergi,
+              "pergi[fleet_type_id]": variable.pergi_type,
+              "pergi[seatPicked][0][name]": variable.namePassengger1,
+              "pergi[seatPicked][0][seat]": variable.seatPergiPassengger1,
+              "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
+              "pergi[seatPicked][0][baggage]": variable.baggagePassengger1,
+              "pergi[seatPicked][0][identity]": variable.nikTypePassengger1,
+              "pergi[seatPicked][0][identity_number]": variable.nikPassengger1,
+              "pergi[seatPicked][0][phone]": variable.phonePassengger1,
             }
           : (variable.checkPulangPergi == true &&
                   int.parse(variable.selectedJumlahPenumpang) == 1)
               ? {
-                  "trip_id_no": variable.pergi_trip_id_no,
-                  "trip_route_id": variable.pergi_trip_route_id,
-                  "pickup_location": variable.pergi_pickup_trip_location,
-                  "drop_location": variable.pergi_drop_trip_location,
-                  "pricePerSeat": variable.totalPrice,
-                  "booking_date": variable.datePergi,
-                  "fleet_type_id": variable.pergi_type,
-                  "offer_code": variable.kodePromo,
+                  "offer_code": "",
+                  "booker_id": "",
+                  "booker_name": variable.firstName + " " + variable.lastName,
+                  "booker_email": variable.email,
+                  "booker_phone": variable.phone,
                   "payment_method": variable.selectedPaymentCategories,
                   "payment_channel_code": variable.selectedPayment,
-                  "seatPicked[0][name]": variable.namePassengger1,
-                  "seatPicked[0][seat]": variable.seatPergiPassengger1,
-                  "seatPicked[0][food]": variable.foodIdPassengger1,
-                  "seatPicked[0][baggage]": variable.baggagePassengger1,
-                  "seatPicked[0][identity]": variable.nikTypePassengger1,
-                  "seatPicked[0][identity_number]": variable.nikPassengger1,
-                  "seatPicked[0][phone]": variable.phonePassengger1,
+                  "pergi[trip_id_no]": variable.pergi_trip_id_no,
+                  "pergi[trip_route_id]": variable.pergi_trip_route_id,
+                  "pergi[pickup_location]": variable.pergi_pickup_trip_location,
+                  "pergi[drop_location]": variable.pergi_drop_trip_location,
+                  "pergi[pricePerSeat]": variable.pergi_price,
+                  "pergi[booking_date]": variable.datePergi,
+                  "pergi[fleet_type_id]": variable.pergi_type,
+                  "pergi[seatPicked][0][name]": variable.namePassengger1,
+                  "pergi[seatPicked][0][seat]": variable.seatPergiPassengger1,
+                  "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
+                  "pergi[seatPicked][0][baggage]": variable.baggagePassengger1,
+                  "pergi[seatPicked][0][identity]": variable.nikTypePassengger1,
+                  "pergi[seatPicked][0][identity_number]":
+                      variable.nikPassengger1,
+                  "pergi[seatPicked][0][phone]": variable.phonePassengger1,
+                  "pulang[trip_id_no]": variable.pulang_trip_id_no,
+                  "pulang[trip_route_id]": variable.pulang_trip_route_id,
+                  "pulang[pickup_location]":
+                      variable.pulang_pickup_trip_location,
+                  "pulang[drop_location]": variable.pulang_drop_trip_location,
+                  "pulang[pricePerSeat]": variable.pulang_price,
+                  "pulang[booking_date]": variable.datePulang,
+                  "pulang[fleet_type_id]": variable.pulang_type,
+                  "pulang[seatPicked][0][name]": variable.namePassengger1,
+                  "pulang[seatPicked][0][seat]": variable.seatPulangPassengger1,
+                  "pulang[seatPicked][0][food]": variable.foodIdPassengger1,
+                  "pulang[seatPicked][0][baggage]": variable.baggagePassengger1,
+                  "pulang[seatPicked][0][identity]":
+                      variable.nikTypePassengger1,
+                  "pulang[seatPicked][0][identity_number]":
+                      variable.nikPassengger1,
+                  "pulang[seatPicked][0][phone]": variable.phonePassengger1,
                 }
               : (variable.checkPulangPergi == false &&
                       int.parse(variable.selectedJumlahPenumpang) == 2)
                   ? {
-                      "trip_id_no": variable.pergi_trip_id_no,
-                      "trip_route_id": variable.pergi_trip_route_id,
-                      "pickup_location": variable.pergi_pickup_trip_location,
-                      "drop_location": variable.pergi_drop_trip_location,
-                      "pricePerSeat": variable.totalPrice,
-                      "booking_date": variable.datePergi,
-                      "fleet_type_id": variable.pergi_type,
-                      "offer_code": variable.kodePromo,
+                      "offer_code": "",
+                      "booker_id": "",
+                      "booker_name":
+                          variable.firstName + " " + variable.lastName,
+                      "booker_email": variable.email,
+                      "booker_phone": variable.phone,
                       "payment_method": variable.selectedPaymentCategories,
                       "payment_channel_code": variable.selectedPayment,
-                      "seatPicked[0][name]": variable.namePassengger1,
-                      "seatPicked[0][seat]": variable.seatPergiPassengger1,
-                      "seatPicked[0][food]": variable.foodIdPassengger1,
-                      "seatPicked[0][baggage]": variable.baggagePassengger1,
-                      "seatPicked[0][identity]": variable.nikTypePassengger1,
-                      "seatPicked[0][identity_number]": variable.nikPassengger1,
-                      "seatPicked[0][phone]": variable.phonePassengger1,
-                      "seatPicked[1][name]": variable.namePassengger2,
-                      "seatPicked[1][seat]": variable.seatPergiPassengger2,
-                      "seatPicked[1][food]": variable.foodIdPassengger2,
-                      "seatPicked[1][baggage]": variable.baggagePassengger2,
-                      "seatPicked[1][identity]": variable.nikTypePassengger2,
-                      "seatPicked[1][identity_number]": variable.nikPassengger2,
-                      "seatPicked[1][phone]": variable.phonePassengger2,
+                      "pergi[trip_id_no]": variable.pergi_trip_id_no,
+                      "pergi[trip_route_id]": variable.pergi_trip_route_id,
+                      "pergi[pickup_location]":
+                          variable.pergi_pickup_trip_location,
+                      "pergi[drop_location]": variable.pergi_drop_trip_location,
+                      "pergi[pricePerSeat]": variable.pergi_price,
+                      "pergi[booking_date]": variable.datePergi,
+                      "pergi[fleet_type_id]": variable.pergi_type,
+                      "pergi[seatPicked][0][name]": variable.namePassengger1,
+                      "pergi[seatPicked][0][seat]":
+                          variable.seatPergiPassengger1,
+                      "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
+                      "pergi[seatPicked][0][baggage]":
+                          variable.baggagePassengger1,
+                      "pergi[seatPicked][0][identity]":
+                          variable.nikTypePassengger1,
+                      "pergi[seatPicked][0][identity_number]":
+                          variable.nikPassengger1,
+                      "pergi[seatPicked][0][phone]": variable.phonePassengger1,
+                      "pergi[seatPicked][1][name]": variable.namePassengger2,
+                      "pergi[seatPicked][1][seat]":
+                          variable.seatPergiPassengger2,
+                      "pergi[seatPicked][1][food]": variable.foodIdPassengger2,
+                      "pergi[seatPicked][1][baggage]":
+                          variable.baggagePassengger2,
+                      "pergi[seatPicked][1][identity]":
+                          variable.nikTypePassengger2,
+                      "pergi[seatPicked][1][identity_number]":
+                          variable.nikPassengger2,
+                      "pergi[seatPicked][1][phone]": variable.phonePassengger2,
                     }
                   : (variable.checkPulangPergi == true &&
                           int.parse(variable.selectedJumlahPenumpang) == 2)
                       ? {
-                          "trip_id_no": variable.pergi_trip_id_no,
-                          "trip_route_id": variable.pergi_trip_route_id,
-                          "pickup_location":
-                              variable.pergi_pickup_trip_location,
-                          "drop_location": variable.pergi_drop_trip_location,
-                          "pricePerSeat": variable.totalPrice,
-                          "booking_date": variable.datePergi,
-                          "fleet_type_id": variable.pergi_type,
-                          "offer_code": variable.kodePromo,
+                          "offer_code": "",
+                          "booker_id": "",
+                          "booker_name":
+                              variable.firstName + " " + variable.lastName,
+                          "booker_email": variable.email,
+                          "booker_phone": variable.phone,
                           "payment_method": variable.selectedPaymentCategories,
                           "payment_channel_code": variable.selectedPayment,
-                          "seatPicked[0][name]": variable.namePassengger1,
-                          "seatPicked[0][seat]": variable.seatPergiPassengger1,
-                          "seatPicked[0][food]": variable.foodIdPassengger1,
-                          "seatPicked[0][baggage]": variable.baggagePassengger1,
-                          "seatPicked[0][identity]":
+                          "pergi[trip_id_no]": variable.pergi_trip_id_no,
+                          "pergi[trip_route_id]": variable.pergi_trip_route_id,
+                          "pergi[pickup_location]":
+                              variable.pergi_pickup_trip_location,
+                          "pergi[drop_location]":
+                              variable.pergi_drop_trip_location,
+                          "pergi[pricePerSeat]": variable.pergi_price,
+                          "pergi[booking_date]": variable.datePergi,
+                          "pergi[fleet_type_id]": variable.pergi_type,
+                          "pergi[seatPicked][0][name]":
+                              variable.namePassengger1,
+                          "pergi[seatPicked][0][seat]":
+                              variable.seatPergiPassengger1,
+                          "pergi[seatPicked][0][food]":
+                              variable.foodIdPassengger1,
+                          "pergi[seatPicked][0][baggage]":
+                              variable.baggagePassengger1,
+                          "pergi[seatPicked][0][identity]":
                               variable.nikTypePassengger1,
-                          "seatPicked[0][identity_number]":
+                          "pergi[seatPicked][0][identity_number]":
                               variable.nikPassengger1,
-                          "seatPicked[0][phone]": variable.phonePassengger1,
-                          "seatPicked[1][name]": variable.namePassengger2,
-                          "seatPicked[1][seat]": variable.seatPergiPassengger2,
-                          "seatPicked[1][food]": variable.foodIdPassengger2,
-                          "seatPicked[1][baggage]": variable.baggagePassengger2,
-                          "seatPicked[1][identity]":
+                          "pergi[seatPicked][0][phone]":
+                              variable.phonePassengger1,
+                          "pergi[seatPicked][1][name]":
+                              variable.namePassengger2,
+                          "pergi[seatPicked][1][seat]":
+                              variable.seatPergiPassengger2,
+                          "pergi[seatPicked][1][food]":
+                              variable.foodIdPassengger2,
+                          "pergi[seatPicked][1][baggage]":
+                              variable.baggagePassengger2,
+                          "pergi[seatPicked][1][identity]":
                               variable.nikTypePassengger2,
-                          "seatPicked[1][identity_number]":
+                          "pergi[seatPicked][1][identity_number]":
                               variable.nikPassengger2,
-                          "seatPicked[1][phone]": variable.phonePassengger2,
+                          "pergi[seatPicked][1][phone]":
+                              variable.phonePassengger2,
+                          "pulang[trip_id_no]": variable.pulang_trip_id_no,
+                          "pulang[trip_route_id]":
+                              variable.pulang_trip_route_id,
+                          "pulang[pickup_location]":
+                              variable.pulang_pickup_trip_location,
+                          "pulang[drop_location]":
+                              variable.pulang_drop_trip_location,
+                          "pulang[pricePerSeat]": variable.pulang_price,
+                          "pulang[booking_date]": variable.datePulang,
+                          "pulang[fleet_type_id]": variable.pulang_type,
+                          "pulang[seatPicked][0][name]":
+                              variable.namePassengger1,
+                          "pulang[seatPicked][0][seat]":
+                              variable.seatPulangPassengger1,
+                          "pulang[seatPicked][0][food]":
+                              variable.foodIdPassengger1,
+                          "pulang[seatPicked][0][baggage]":
+                              variable.baggagePassengger1,
+                          "pulang[seatPicked][0][identity]":
+                              variable.nikTypePassengger1,
+                          "pulang[seatPicked][0][identity_number]":
+                              variable.nikPassengger1,
+                          "pulang[seatPicked][0][phone]":
+                              variable.phonePassengger1,
+                          "pulang[seatPicked][1][name]":
+                              variable.namePassengger2,
+                          "pulang[seatPicked][1][seat]":
+                              variable.seatPulangPassengger2,
+                          "pulang[seatPicked][1][food]":
+                              variable.foodIdPassengger2,
+                          "pulang[seatPicked][1][baggage]":
+                              variable.baggagePassengger2,
+                          "pulang[seatPicked][1][identity]":
+                              variable.nikTypePassengger2,
+                          "pulang[seatPicked][1][identity_number]":
+                              variable.nikPassengger2,
+                          "pulang[seatPicked][1][phone]":
+                              variable.phonePassengger2,
                         }
                       : (variable.checkPulangPergi == false &&
                               int.parse(variable.selectedJumlahPenumpang) == 3)
                           ? {
-                              "trip_id_no": variable.pergi_trip_id_no,
-                              "trip_route_id": variable.pergi_trip_route_id,
-                              "pickup_location":
-                                  variable.pergi_pickup_trip_location,
-                              "drop_location":
-                                  variable.pergi_drop_trip_location,
-                              "pricePerSeat": variable.totalPrice,
-                              "booking_date": variable.datePergi,
-                              "fleet_type_id": variable.pergi_type,
-                              "offer_code": variable.kodePromo,
+                              "offer_code": "",
+                              "booker_id": "",
+                              "booker_name":
+                                  variable.firstName + " " + variable.lastName,
+                              "booker_email": variable.email,
+                              "booker_phone": variable.phone,
                               "payment_method":
                                   variable.selectedPaymentCategories,
                               "payment_channel_code": variable.selectedPayment,
-                              "seatPicked[0][name]": variable.namePassengger1,
-                              "seatPicked[0][seat]":
+                              "pergi[trip_id_no]": variable.pergi_trip_id_no,
+                              "pergi[trip_route_id]":
+                                  variable.pergi_trip_route_id,
+                              "pergi[pickup_location]":
+                                  variable.pergi_pickup_trip_location,
+                              "pergi[drop_location]":
+                                  variable.pergi_drop_trip_location,
+                              "pergi[pricePerSeat]": variable.pergi_price,
+                              "pergi[booking_date]": variable.datePergi,
+                              "pergi[fleet_type_id]": variable.pergi_type,
+                              "pergi[seatPicked][0][name]":
+                                  variable.namePassengger1,
+                              "pergi[seatPicked][0][seat]":
                                   variable.seatPergiPassengger1,
-                              "seatPicked[0][food]": variable.foodIdPassengger1,
-                              "seatPicked[0][baggage]":
+                              "pergi[seatPicked][0][food]":
+                                  variable.foodIdPassengger1,
+                              "pergi[seatPicked][0][baggage]":
                                   variable.baggagePassengger1,
-                              "seatPicked[0][identity]":
+                              "pergi[seatPicked][0][identity]":
                                   variable.nikTypePassengger1,
-                              "seatPicked[0][identity_number]":
+                              "pergi[seatPicked][0][identity_number]":
                                   variable.nikPassengger1,
-                              "seatPicked[0][phone]": variable.phonePassengger1,
-                              "seatPicked[1][name]": variable.namePassengger2,
-                              "seatPicked[1][seat]":
+                              "pergi[seatPicked][0][phone]":
+                                  variable.phonePassengger1,
+                              "pergi[seatPicked][1][name]":
+                                  variable.namePassengger2,
+                              "pergi[seatPicked][1][seat]":
                                   variable.seatPergiPassengger2,
-                              "seatPicked[1][food]": variable.foodIdPassengger2,
-                              "seatPicked[1][baggage]":
+                              "pergi[seatPicked][1][food]":
+                                  variable.foodIdPassengger2,
+                              "pergi[seatPicked][1][baggage]":
                                   variable.baggagePassengger2,
-                              "seatPicked[1][identity]":
+                              "pergi[seatPicked][1][identity]":
                                   variable.nikTypePassengger2,
-                              "seatPicked[1][identity_number]":
+                              "pergi[seatPicked][1][identity_number]":
                                   variable.nikPassengger2,
-                              "seatPicked[1][phone]": variable.phonePassengger2,
-                              "seatPicked[2][name]": variable.namePassengger3,
-                              "seatPicked[2][seat]":
+                              "pergi[seatPicked][1][phone]":
+                                  variable.phonePassengger2,
+                              "pergi[seatPicked][2][name]":
+                                  variable.namePassengger3,
+                              "pergi[seatPicked][2][seat]":
                                   variable.seatPergiPassengger3,
-                              "seatPicked[2][food]": variable.foodIdPassengger3,
-                              "seatPicked[2][baggage]":
+                              "pergi[seatPicked][2][food]":
+                                  variable.foodIdPassengger3,
+                              "pergi[seatPicked][2][baggage]":
                                   variable.baggagePassengger3,
-                              "seatPicked[2][identity]":
+                              "pergi[seatPicked][2][identity]":
                                   variable.nikTypePassengger3,
-                              "seatPicked[2][identity_number]":
+                              "pergi[seatPicked][2][identity_number]":
                                   variable.nikPassengger3,
-                              "seatPicked[2][phone]": variable.phonePassengger3,
+                              "pergi[seatPicked][2][phone]":
+                                  variable.phonePassengger3,
                             }
                           : (variable.checkPulangPergi == true &&
                                   int.parse(variable.selectedJumlahPenumpang) ==
                                       3)
                               ? {
-                                  "trip_id_no": variable.pergi_trip_id_no,
-                                  "trip_route_id": variable.pergi_trip_route_id,
-                                  "pickup_location":
-                                      variable.pergi_pickup_trip_location,
-                                  "drop_location":
-                                      variable.pergi_drop_trip_location,
-                                  "pricePerSeat": variable.totalPrice,
-                                  "booking_date": variable.datePergi,
-                                  "fleet_type_id": variable.pergi_type,
-                                  "offer_code": variable.kodePromo,
+                                  "offer_code": "",
+                                  "booker_id": "",
+                                  "booker_name": variable.firstName +
+                                      " " +
+                                      variable.lastName,
+                                  "booker_email": variable.email,
+                                  "booker_phone": variable.phone,
                                   "payment_method":
                                       variable.selectedPaymentCategories,
                                   "payment_channel_code":
                                       variable.selectedPayment,
-                                  "seatPicked[0][name]":
+                                  "pergi[trip_id_no]":
+                                      variable.pergi_trip_id_no,
+                                  "pergi[trip_route_id]":
+                                      variable.pergi_trip_route_id,
+                                  "pergi[pickup_location]":
+                                      variable.pergi_pickup_trip_location,
+                                  "pergi[drop_location]":
+                                      variable.pergi_drop_trip_location,
+                                  "pergi[pricePerSeat]": variable.pergi_price,
+                                  "pergi[booking_date]": variable.datePergi,
+                                  "pergi[fleet_type_id]": variable.pergi_type,
+                                  "pergi[seatPicked][0][name]":
                                       variable.namePassengger1,
-                                  "seatPicked[0][seat]":
+                                  "pergi[seatPicked][0][seat]":
                                       variable.seatPergiPassengger1,
-                                  "seatPicked[0][food]":
+                                  "pergi[seatPicked][0][food]":
                                       variable.foodIdPassengger1,
-                                  "seatPicked[0][baggage]":
+                                  "pergi[seatPicked][0][baggage]":
                                       variable.baggagePassengger1,
-                                  "seatPicked[0][identity]":
+                                  "pergi[seatPicked][0][identity]":
                                       variable.nikTypePassengger1,
-                                  "seatPicked[0][identity_number]":
+                                  "pergi[seatPicked][0][identity_number]":
                                       variable.nikPassengger1,
-                                  "seatPicked[0][phone]":
+                                  "pergi[seatPicked][0][phone]":
                                       variable.phonePassengger1,
-                                  "seatPicked[1][name]":
+                                  "pergi[seatPicked][1][name]":
                                       variable.namePassengger2,
-                                  "seatPicked[1][seat]":
+                                  "pergi[seatPicked][1][seat]":
                                       variable.seatPergiPassengger2,
-                                  "seatPicked[1][food]":
+                                  "pergi[seatPicked][1][food]":
                                       variable.foodIdPassengger2,
-                                  "seatPicked[1][baggage]":
+                                  "pergi[seatPicked][1][baggage]":
                                       variable.baggagePassengger2,
-                                  "seatPicked[1][identity]":
+                                  "pergi[seatPicked][1][identity]":
                                       variable.nikTypePassengger2,
-                                  "seatPicked[1][identity_number]":
+                                  "pergi[seatPicked][1][identity_number]":
                                       variable.nikPassengger2,
-                                  "seatPicked[1][phone]":
+                                  "pergi[seatPicked][1][phone]":
                                       variable.phonePassengger2,
-                                  "seatPicked[2][name]":
+                                  "pergi[seatPicked][2][name]":
                                       variable.namePassengger3,
-                                  "seatPicked[2][seat]":
+                                  "pergi[seatPicked][2][seat]":
                                       variable.seatPergiPassengger3,
-                                  "seatPicked[2][food]":
+                                  "pergi[seatPicked][2][food]":
                                       variable.foodIdPassengger3,
-                                  "seatPicked[2][baggage]":
+                                  "pergi[seatPicked][2][baggage]":
                                       variable.baggagePassengger3,
-                                  "seatPicked[2][identity]":
+                                  "pergi[seatPicked][2][identity]":
                                       variable.nikTypePassengger3,
-                                  "seatPicked[2][identity_number]":
+                                  "pergi[seatPicked][2][identity_number]":
                                       variable.nikPassengger3,
-                                  "seatPicked[2][phone]":
+                                  "pergi[seatPicked][2][phone]":
+                                      variable.phonePassengger3,
+                                  "pulang[trip_id_no]":
+                                      variable.pulang_trip_id_no,
+                                  "pulang[trip_route_id]":
+                                      variable.pulang_trip_route_id,
+                                  "pulang[pickup_location]":
+                                      variable.pulang_pickup_trip_location,
+                                  "pulang[drop_location]":
+                                      variable.pulang_drop_trip_location,
+                                  "pulang[pricePerSeat]": variable.pulang_price,
+                                  "pulang[booking_date]": variable.datePulang,
+                                  "pulang[fleet_type_id]": variable.pulang_type,
+                                  "pulang[seatPicked][0][name]":
+                                      variable.namePassengger1,
+                                  "pulang[seatPicked][0][seat]":
+                                      variable.seatPulangPassengger1,
+                                  "pulang[seatPicked][0][food]":
+                                      variable.foodIdPassengger1,
+                                  "pulang[seatPicked][0][baggage]":
+                                      variable.baggagePassengger1,
+                                  "pulang[seatPicked][0][identity]":
+                                      variable.nikTypePassengger1,
+                                  "pulang[seatPicked][0][identity_number]":
+                                      variable.nikPassengger1,
+                                  "pulang[seatPicked][0][phone]":
+                                      variable.phonePassengger1,
+                                  "pulang[seatPicked][1][name]":
+                                      variable.namePassengger2,
+                                  "pulang[seatPicked][1][seat]":
+                                      variable.seatPulangPassengger2,
+                                  "pulang[seatPicked][1][food]":
+                                      variable.foodIdPassengger2,
+                                  "pulang[seatPicked][1][baggage]":
+                                      variable.baggagePassengger2,
+                                  "pulang[seatPicked][1][identity]":
+                                      variable.nikTypePassengger2,
+                                  "pulang[seatPicked][1][identity_number]":
+                                      variable.nikPassengger2,
+                                  "pulang[seatPicked][1][phone]":
+                                      variable.phonePassengger2,
+                                  "pulang[seatPicked][2][name]":
+                                      variable.namePassengger3,
+                                  "pulang[seatPicked][2][seat]":
+                                      variable.seatPulangPassengger3,
+                                  "pulang[seatPicked][2][food]":
+                                      variable.foodIdPassengger3,
+                                  "pulang[seatPicked][2][baggage]":
+                                      variable.baggagePassengger3,
+                                  "pulang[seatPicked][2][identity]":
+                                      variable.nikTypePassengger3,
+                                  "pulang[seatPicked][2][identity_number]":
+                                      variable.nikPassengger3,
+                                  "pulang[seatPicked][2][phone]":
                                       variable.phonePassengger3,
                                 }
                               : (variable.checkPulangPergi == false &&
@@ -233,76 +403,85 @@ class BookingList {
                                               .selectedJumlahPenumpang) ==
                                           4)
                                   ? {
-                                      "trip_id_no": variable.pergi_trip_id_no,
-                                      "trip_route_id":
-                                          variable.pergi_trip_route_id,
-                                      "pickup_location":
-                                          variable.pergi_pickup_trip_location,
-                                      "drop_location":
-                                          variable.pergi_drop_trip_location,
-                                      "pricePerSeat": variable.totalPrice,
-                                      "booking_date": variable.datePergi,
-                                      "fleet_type_id": variable.pergi_type,
-                                      "offer_code": variable.kodePromo,
+                                      "offer_code": "",
+                                      "booker_id": "",
+                                      "booker_name": variable.firstName +
+                                          " " +
+                                          variable.lastName,
+                                      "booker_email": variable.email,
+                                      "booker_phone": variable.phone,
                                       "payment_method":
                                           variable.selectedPaymentCategories,
                                       "payment_channel_code":
                                           variable.selectedPayment,
-                                      "seatPicked[0][name]":
+                                      "pergi[trip_id_no]":
+                                          variable.pergi_trip_id_no,
+                                      "pergi[trip_route_id]":
+                                          variable.pergi_trip_route_id,
+                                      "pergi[pickup_location]":
+                                          variable.pergi_pickup_trip_location,
+                                      "pergi[drop_location]":
+                                          variable.pergi_drop_trip_location,
+                                      "pergi[pricePerSeat]":
+                                          variable.pergi_price,
+                                      "pergi[booking_date]": variable.datePergi,
+                                      "pergi[fleet_type_id]":
+                                          variable.pergi_type,
+                                      "pergi[seatPicked][0][name]":
                                           variable.namePassengger1,
-                                      "seatPicked[0][seat]":
+                                      "pergi[seatPicked][0][seat]":
                                           variable.seatPergiPassengger1,
-                                      "seatPicked[0][food]":
+                                      "pergi[seatPicked][0][food]":
                                           variable.foodIdPassengger1,
-                                      "seatPicked[0][baggage]":
+                                      "pergi[seatPicked][0][baggage]":
                                           variable.baggagePassengger1,
-                                      "seatPicked[0][identity]":
+                                      "pergi[seatPicked][0][identity]":
                                           variable.nikTypePassengger1,
-                                      "seatPicked[0][identity_number]":
+                                      "pergi[seatPicked][0][identity_number]":
                                           variable.nikPassengger1,
-                                      "seatPicked[0][phone]":
+                                      "pergi[seatPicked][0][phone]":
                                           variable.phonePassengger1,
-                                      "seatPicked[1][name]":
+                                      "pergi[seatPicked][1][name]":
                                           variable.namePassengger2,
-                                      "seatPicked[1][seat]":
+                                      "pergi[seatPicked][1][seat]":
                                           variable.seatPergiPassengger2,
-                                      "seatPicked[1][food]":
+                                      "pergi[seatPicked][1][food]":
                                           variable.foodIdPassengger2,
-                                      "seatPicked[1][baggage]":
+                                      "pergi[seatPicked][1][baggage]":
                                           variable.baggagePassengger2,
-                                      "seatPicked[1][identity]":
+                                      "pergi[seatPicked][1][identity]":
                                           variable.nikTypePassengger2,
-                                      "seatPicked[1][identity_number]":
+                                      "pergi[seatPicked][1][identity_number]":
                                           variable.nikPassengger2,
-                                      "seatPicked[1][phone]":
+                                      "pergi[seatPicked][1][phone]":
                                           variable.phonePassengger2,
-                                      "seatPicked[2][name]":
+                                      "pergi[seatPicked][2][name]":
                                           variable.namePassengger3,
-                                      "seatPicked[2][seat]":
+                                      "pergi[seatPicked][2][seat]":
                                           variable.seatPergiPassengger3,
-                                      "seatPicked[2][food]":
+                                      "pergi[seatPicked][2][food]":
                                           variable.foodIdPassengger3,
-                                      "seatPicked[2][baggage]":
+                                      "pergi[seatPicked][2][baggage]":
                                           variable.baggagePassengger3,
-                                      "seatPicked[2][identity]":
+                                      "pergi[seatPicked][2][identity]":
                                           variable.nikTypePassengger3,
-                                      "seatPicked[2][identity_number]":
+                                      "pergi[seatPicked][2][identity_number]":
                                           variable.nikPassengger3,
-                                      "seatPicked[2][phone]":
+                                      "pergi[seatPicked][2][phone]":
                                           variable.phonePassengger3,
-                                      "seatPicked[3][name]":
+                                      "pergi[seatPicked][3][name]":
                                           variable.namePassengger4,
-                                      "seatPicked[3][seat]":
+                                      "pergi[seatPicked][3][seat]":
                                           variable.seatPergiPassengger4,
-                                      "seatPicked[3][food]":
+                                      "pergi[seatPicked][3][food]":
                                           variable.foodIdPassengger4,
-                                      "seatPicked[3][baggage]":
+                                      "pergi[seatPicked][3][baggage]":
                                           variable.baggagePassengger4,
-                                      "seatPicked[3][identity]":
+                                      "pergi[seatPicked][3][identity]":
                                           variable.nikTypePassengger4,
-                                      "seatPicked[3][identity_number]":
+                                      "pergi[seatPicked][3][identity_number]":
                                           variable.nikPassengger4,
-                                      "seatPicked[3][phone]":
+                                      "pergi[seatPicked][3][phone]":
                                           variable.phonePassengger4,
                                     }
                                   : (variable.checkPulangPergi == true &&
@@ -310,82 +489,160 @@ class BookingList {
                                                   .selectedJumlahPenumpang) ==
                                               4)
                                       ? {
-                                          "trip_id_no":
-                                              variable.pergi_trip_id_no,
-                                          "trip_route_id":
-                                              variable.pergi_trip_route_id,
-                                          "pickup_location": variable
-                                              .pergi_pickup_trip_location,
-                                          "drop_location":
-                                              variable.pergi_drop_trip_location,
-                                          "pricePerSeat": variable.totalPrice,
-                                          "booking_date": variable.datePergi,
-                                          "fleet_type_id": variable.pergi_type,
-                                          "offer_code": variable.kodePromo,
+                                          "offer_code": "",
+                                          "booker_id": "",
+                                          "booker_name": variable.firstName +
+                                              " " +
+                                              variable.lastName,
+                                          "booker_email": variable.email,
+                                          "booker_phone": variable.phone,
                                           "payment_method": variable
                                               .selectedPaymentCategories,
                                           "payment_channel_code":
                                               variable.selectedPayment,
-                                          "seatPicked[0][name]":
+                                          "pergi[trip_id_no]":
+                                              variable.pergi_trip_id_no,
+                                          "pergi[trip_route_id]":
+                                              variable.pergi_trip_route_id,
+                                          "pergi[pickup_location]": variable
+                                              .pergi_pickup_trip_location,
+                                          "pergi[drop_location]":
+                                              variable.pergi_drop_trip_location,
+                                          "pergi[pricePerSeat]":
+                                              variable.pergi_price,
+                                          "pergi[booking_date]":
+                                              variable.datePergi,
+                                          "pergi[fleet_type_id]":
+                                              variable.pergi_type,
+                                          "pergi[seatPicked][0][name]":
                                               variable.namePassengger1,
-                                          "seatPicked[0][seat]":
+                                          "pergi[seatPicked][0][seat]":
                                               variable.seatPergiPassengger1,
-                                          "seatPicked[0][food]":
+                                          "pergi[seatPicked][0][food]":
                                               variable.foodIdPassengger1,
-                                          "seatPicked[0][baggage]":
+                                          "pergi[seatPicked][0][baggage]":
                                               variable.baggagePassengger1,
-                                          "seatPicked[0][identity]":
+                                          "pergi[seatPicked][0][identity]":
                                               variable.nikTypePassengger1,
-                                          "seatPicked[0][identity_number]":
+                                          "pergi[seatPicked][0][identity_number]":
                                               variable.nikPassengger1,
-                                          "seatPicked[0][phone]":
+                                          "pergi[seatPicked][0][phone]":
                                               variable.phonePassengger1,
-                                          "seatPicked[1][name]":
+                                          "pergi[seatPicked][1][name]":
                                               variable.namePassengger2,
-                                          "seatPicked[1][seat]":
+                                          "pergi[seatPicked][1][seat]":
                                               variable.seatPergiPassengger2,
-                                          "seatPicked[1][food]":
+                                          "pergi[seatPicked][1][food]":
                                               variable.foodIdPassengger2,
-                                          "seatPicked[1][baggage]":
+                                          "pergi[seatPicked][1][baggage]":
                                               variable.baggagePassengger2,
-                                          "seatPicked[1][identity]":
+                                          "pergi[seatPicked][1][identity]":
                                               variable.nikTypePassengger2,
-                                          "seatPicked[1][identity_number]":
+                                          "pergi[seatPicked][1][identity_number]":
                                               variable.nikPassengger2,
-                                          "seatPicked[1][phone]":
+                                          "pergi[seatPicked][1][phone]":
                                               variable.phonePassengger2,
-                                          "seatPicked[2][name]":
+                                          "pergi[seatPicked][2][name]":
                                               variable.namePassengger3,
-                                          "seatPicked[2][seat]":
+                                          "pergi[seatPicked][2][seat]":
                                               variable.seatPergiPassengger3,
-                                          "seatPicked[2][food]":
+                                          "pergi[seatPicked][2][food]":
                                               variable.foodIdPassengger3,
-                                          "seatPicked[2][baggage]":
+                                          "pergi[seatPicked][2][baggage]":
                                               variable.baggagePassengger3,
-                                          "seatPicked[2][identity]":
+                                          "pergi[seatPicked][2][identity]":
                                               variable.nikTypePassengger3,
-                                          "seatPicked[2][identity_number]":
+                                          "pergi[seatPicked][2][identity_number]":
                                               variable.nikPassengger3,
-                                          "seatPicked[2][phone]":
+                                          "pergi[seatPicked][2][phone]":
                                               variable.phonePassengger3,
-                                          "seatPicked[3][name]":
+                                          "pergi[seatPicked][3][name]":
                                               variable.namePassengger4,
-                                          "seatPicked[3][seat]":
+                                          "pergi[seatPicked][3][seat]":
                                               variable.seatPergiPassengger4,
-                                          "seatPicked[3][food]":
+                                          "pergi[seatPicked][3][food]":
                                               variable.foodIdPassengger4,
-                                          "seatPicked[3][baggage]":
+                                          "pergi[seatPicked][3][baggage]":
                                               variable.baggagePassengger4,
-                                          "seatPicked[3][identity]":
+                                          "pergi[seatPicked][3][identity]":
                                               variable.nikTypePassengger4,
-                                          "seatPicked[3][identity_number]":
+                                          "pergi[seatPicked][3][identity_number]":
                                               variable.nikPassengger4,
-                                          "seatPicked[3][phone]":
+                                          "pergi[seatPicked][3][phone]":
+                                              variable.phonePassengger4,
+                                          "pulang[trip_id_no]":
+                                              variable.pulang_trip_id_no,
+                                          "pulang[trip_route_id]":
+                                              variable.pulang_trip_route_id,
+                                          "pulang[pickup_location]": variable
+                                              .pulang_pickup_trip_location,
+                                          "pulang[drop_location]": variable
+                                              .pulang_drop_trip_location,
+                                          "pulang[pricePerSeat]":
+                                              variable.pulang_price,
+                                          "pulang[booking_date]":
+                                              variable.datePulang,
+                                          "pulang[fleet_type_id]":
+                                              variable.pulang_type,
+                                          "pulang[seatPicked][0][name]":
+                                              variable.namePassengger1,
+                                          "pulang[seatPicked][0][seat]":
+                                              variable.seatPulangPassengger1,
+                                          "pulang[seatPicked][0][food]":
+                                              variable.foodIdPassengger1,
+                                          "pulang[seatPicked][0][baggage]":
+                                              variable.baggagePassengger1,
+                                          "pulang[seatPicked][0][identity]":
+                                              variable.nikTypePassengger1,
+                                          "pulang[seatPicked][0][identity_number]":
+                                              variable.nikPassengger1,
+                                          "pulang[seatPicked][0][phone]":
+                                              variable.phonePassengger1,
+                                          "pulang[seatPicked][1][name]":
+                                              variable.namePassengger2,
+                                          "pulang[seatPicked][1][seat]":
+                                              variable.seatPulangPassengger2,
+                                          "pulang[seatPicked][1][food]":
+                                              variable.foodIdPassengger2,
+                                          "pulang[seatPicked][1][baggage]":
+                                              variable.baggagePassengger2,
+                                          "pulang[seatPicked][1][identity]":
+                                              variable.nikTypePassengger2,
+                                          "pulang[seatPicked][1][identity_number]":
+                                              variable.nikPassengger2,
+                                          "pulang[seatPicked][1][phone]":
+                                              variable.phonePassengger2,
+                                          "pulang[seatPicked][2][name]":
+                                              variable.namePassengger3,
+                                          "pulang[seatPicked][2][seat]":
+                                              variable.seatPulangPassengger3,
+                                          "pulang[seatPicked][2][food]":
+                                              variable.foodIdPassengger3,
+                                          "pulang[seatPicked][2][baggage]":
+                                              variable.baggagePassengger3,
+                                          "pulang[seatPicked][2][identity]":
+                                              variable.nikTypePassengger3,
+                                          "pulang[seatPicked][2][identity_number]":
+                                              variable.nikPassengger3,
+                                          "pulang[seatPicked][2][phone]":
+                                              variable.phonePassengger3,
+                                          "pulang[seatPicked][3][name]":
+                                              variable.namePassengger4,
+                                          "pulang[seatPicked][3][seat]":
+                                              variable.seatPulangPassengger4,
+                                          "pulang[seatPicked][3][food]":
+                                              variable.foodIdPassengger4,
+                                          "pulang[seatPicked][3][baggage]":
+                                              variable.baggagePassengger4,
+                                          "pulang[seatPicked][3][identity]":
+                                              variable.nikTypePassengger4,
+                                          "pulang[seatPicked][3][identity_number]":
+                                              variable.nikPassengger4,
+                                          "pulang[seatPicked][3][phone]":
                                               variable.phonePassengger4,
                                         }
                                       : '',
     );
-
     return response.body;
   }
 }

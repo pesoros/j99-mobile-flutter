@@ -33,7 +33,12 @@ class _SeatPlanPulangWidgetScreen extends State<SeatPlanPulangWidget> {
   }
 
   initializeData() async {
-    await SlotPulangList.list().then((value) {
+    await SlotPulangList.list(
+      variable.pulang_trip_id_no,
+      variable.pulang_trip_route_id,
+      variable.pulang_fleet_registration_id,
+      variable.pulang_type,
+    ).then((value) {
       setState(() {
         _slotList = value;
       });

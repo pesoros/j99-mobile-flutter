@@ -3,8 +3,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:juragan99/utils/variables.dart' as variable;
+
 class SlotPergiList {
-  static list() async {
+  static list(String trip_id_no, String trip_route_id,
+      String fleet_registration_id, String type) async {
     String url = "https://api-j99.pesoros.com/seatlist";
 
     Uri parseUrl = Uri.parse(
@@ -13,11 +16,11 @@ class SlotPergiList {
     final response = await http.post(parseUrl, headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
-      "trip_id_no": "2",
-      "trip_route_id": "11",
-      "fleet_registration_id": "1011",
-      "fleet_type_id": "1",
-      "booking_date": "2022-03-11"
+      "trip_id_no": trip_id_no,
+      "trip_route_id": trip_route_id,
+      "fleet_registration_id": fleet_registration_id,
+      "fleet_type_id": type,
+      "booking_date": variable.datePergi,
     });
     List<SlotPergi> list = [];
 

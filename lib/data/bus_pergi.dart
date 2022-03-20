@@ -35,6 +35,7 @@ class BusPergi {
   String pergi_drop_trip_location;
   String pergi_type;
   String pergi_fleet_seats;
+  String pergi_fleet_registration_id;
   String pergi_price;
   String pergi_duration;
   String pergi_start;
@@ -50,6 +51,7 @@ class BusPergi {
       this.pergi_drop_trip_location,
       this.pergi_type,
       this.pergi_fleet_seats,
+      this.pergi_fleet_registration_id,
       this.pergi_price,
       this.pergi_duration,
       this.pergi_start,
@@ -65,6 +67,7 @@ class BusPergi {
     pergi_drop_trip_location = json['drop_trip_location'];
     pergi_type = json['type'];
     pergi_fleet_seats = json['fleet_seats'];
+    pergi_fleet_registration_id = json['fleet_registration_id'];
     pergi_price = json['price'];
     pergi_duration = json['duration'];
     pergi_start = json['start'];
@@ -82,6 +85,7 @@ class BusPergi {
     data['drop_trip_location'] = this.pergi_drop_trip_location;
     data['type'] = this.pergi_type;
     data['fleet_seats'] = this.pergi_fleet_seats;
+    data['fleet_registration_id'] = this.pergi_fleet_registration_id;
     data['price'] = this.pergi_price;
     data['duration'] = this.pergi_duration;
     data['start'] = this.pergi_start;

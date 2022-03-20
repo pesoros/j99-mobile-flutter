@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:juragan99/screens/auth/otp/otp_confirmation.dart';
-import 'package:juragan99/utils/strings.dart';
 
 import '../../dashboard_screen.dart';
 
@@ -42,8 +41,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           SizedBox(
             height: MediaQuery.of(context).size.height,
             child: OtpConfirmation(
-              title: Strings.otpVerification,
-              image: 'assets/images/success.png',
+              title: "Kode Verifikasi",
               subTitle: 'Demo Code: 1234',
               emailAddress: _emailAddress,
               otpLength: 4,
@@ -62,9 +60,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     await Future.delayed(Duration(milliseconds: 2000));
     if (otp == "1234") {
       moveToNextScreen(context);
-      return "OTP is Successfully Verified";
+      return "Sukses! Kode verifikasi benar";
     } else {
-      return "The entered Otp is wrong";
+      return "Kode verifikasi salah";
     }
   }
 

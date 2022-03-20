@@ -170,10 +170,9 @@ class _SignInScreenState extends State<SignInScreen> {
     return Column(
       children: [
         inputFieldWidget(context),
-        rememberForgotWidget(context),
-        SizedBox(height: Dimensions.heightSize * 2),
+        SizedBox(height: 20),
         buttonWidget(context),
-        SizedBox(height: Dimensions.heightSize * 2),
+        SizedBox(height: 30),
         newHereWidget(context)
       ],
     );
@@ -184,9 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
         key: formKey,
         child: Padding(
           padding: const EdgeInsets.only(
-              top: Dimensions.heightSize * 2,
-              left: Dimensions.marginSize,
-              right: Dimensions.marginSize),
+              top: Dimensions.heightSize * 2, left: 30, right: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -214,7 +211,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: Strings.demoEmail,
+                  hintText: "Example@email.com",
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   labelStyle: CustomStyle.textStyle,
@@ -232,7 +229,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: Dimensions.heightSize,
               ),
               Text(
-                Strings.password,
+                "Sandi",
                 style: TextStyle(color: Colors.black),
               ),
               SizedBox(
@@ -254,7 +251,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: Strings.typePassword,
+                  hintText: "Sandi",
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   labelStyle: CustomStyle.textStyle,
@@ -291,40 +288,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ));
   }
 
-  rememberForgotWidget(BuildContext context) {
-    return CheckboxListTile(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Ingat Saya",
-            style: CustomStyle.textStyle,
-          ),
-          GestureDetector(
-            child: Text(
-              Strings.forgotPassword,
-              style: CustomStyle.textStyle,
-            ),
-            onTap: () {
-              MyDialog.forgotPassword(context);
-            },
-          ),
-        ],
-      ),
-      value: checkedValue,
-      onChanged: (newValue) {
-        setState(() {
-          checkedValue = newValue;
-        });
-      },
-      controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
-    );
-  }
-
   buttonWidget(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          left: Dimensions.marginSize, right: Dimensions.marginSize),
+      padding: const EdgeInsets.only(left: 30, right: 30),
       child: GestureDetector(
         child: Container(
           height: 50.0,
@@ -335,10 +301,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   BorderRadius.all(Radius.circular(Dimensions.radius))),
           child: Center(
             child: Text(
-              Strings.signInAccount.toUpperCase(),
+              "Masuk",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
+                  fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -350,79 +316,17 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  orSignInWithWidget(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          Strings.orSignInWith,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: Dimensions.largeTextSize,
-          ),
-        ),
-        SizedBox(height: Dimensions.heightSize * 2),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/google.png'),
-              ),
-            ),
-            SizedBox(
-              width: Dimensions.widthSize,
-            ),
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/facebook.png'),
-              ),
-            ),
-            SizedBox(
-              width: Dimensions.widthSize,
-            ),
-            Material(
-              elevation: 2,
-              borderRadius: BorderRadius.circular(Dimensions.radius * 3),
-              child: Container(
-                height: Dimensions.buttonHeight,
-                width: Dimensions.buttonHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.radius * 3)),
-                child: Image.asset('assets/images/twitter.png'),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   newHereWidget(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          Strings.ifYouHaveNoAccount,
+          "Belum punya akun? ",
           style: CustomStyle.textStyle,
         ),
         GestureDetector(
           child: Text(
-            Strings.signUp.toUpperCase(),
+            "Daftar",
             style: TextStyle(
                 color: CustomColor.primaryColor, fontWeight: FontWeight.bold),
           ),

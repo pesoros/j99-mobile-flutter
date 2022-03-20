@@ -38,7 +38,9 @@ class ClassModel {
 }
 
 class GetClassList {
-  static list() async {
+  static list(
+    String type,
+  ) async {
     String url = "https://api-j99.pesoros.com/datakelas";
 
     Uri parseUrl = Uri.parse(
@@ -50,6 +52,8 @@ class GetClassList {
     for (var data in jsonDecode(response.body) as List) {
       list.add(ClassList.fromJson(data));
     }
+
+    list.removeWhere((item) => item.id != type);
     return list;
   }
 }

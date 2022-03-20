@@ -8,6 +8,7 @@ import 'package:juragan99/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/formater.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
@@ -25,6 +26,7 @@ class BusTicketPergiWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String fleet_seats;
+  final String fleet_registration_id;
   final String price;
   final String duration;
   final String start;
@@ -42,6 +44,7 @@ class BusTicketPergiWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.fleet_seats,
+    this.fleet_registration_id,
     this.price,
     this.duration,
     this.start,
@@ -65,7 +68,9 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
   }
 
   getClass() async {
-    await GetClassList.list().then((value) {
+    await GetClassList.list(
+      widget.bus.pergi_type,
+    ).then((value) {
       setState(() {
         _classList = value;
       });
@@ -99,13 +104,18 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              widget.bus.pergi_type,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Dimensions.defaultTextSize),
-            ),
+            (_classList.length == 0)
+                ? Shimmer.fromColors(
+                    child: Text("Shimmer"),
+                    baseColor: CustomColor.white,
+                    highlightColor: CustomColor.red)
+                : Text(
+                    _classList[0].kelas,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Dimensions.defaultTextSize),
+                  ),
           ],
         ),
         Row(
@@ -228,6 +238,10 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                             drop_trip_location:
                                 widget.bus.pergi_drop_trip_location,
                             seatAvail: widget.bus.pergi_seatAvail,
+                            fleet_registration_id:
+                                widget.bus.pergi_fleet_registration_id,
+                            trip_id_no: widget.bus.pergi_trip_id_no,
+                            trip_route_id: widget.bus.pergi_trip_route_id,
                           ),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
@@ -261,7 +275,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   "Pesan",
                   style: TextStyle(
                       color: CustomColor.white,
-                      fontSize: Dimensions.defaultTextSize),
+                      fontSize: Dimensions.smallTextSize),
                 ),
               ),
               onTap: () {
@@ -292,6 +306,8 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
       variable.pergi_drop_trip_location = widget.bus.pergi_drop_trip_location;
       variable.pergi_type = widget.bus.pergi_type;
       variable.pergi_fleet_seats = widget.bus.pergi_fleet_seats;
+      variable.pergi_fleet_registration_id =
+          widget.bus.pergi_fleet_registration_id;
       variable.pergi_price = widget.bus.pergi_price;
       variable.pergi_duration = widget.bus.pergi_duration;
       variable.pergi_start = widget.bus.pergi_start;

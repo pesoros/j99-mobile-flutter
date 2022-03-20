@@ -33,7 +33,12 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
   }
 
   initializeData() async {
-    await SlotPergiList.list().then((value) {
+    await SlotPergiList.list(
+            variable.pergi_trip_id_no,
+            variable.pergi_trip_route_id,
+            variable.pergi_fleet_registration_id,
+            variable.pergi_type)
+        .then((value) {
       setState(() {
         _slotList = value;
       });
