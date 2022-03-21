@@ -1,4 +1,4 @@
-#Mon Mar 21 04:09:45 WIB 2022
+#Mon Mar 21 13:19:09 WIB 2022
 base.1=/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex
 base.0=/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex

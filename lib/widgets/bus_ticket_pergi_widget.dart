@@ -106,7 +106,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
           children: [
             (_classList.length == 0)
                 ? Shimmer.fromColors(
-                    child: Text("Shimmer"),
+                    child: Text("Kelas Bus"),
                     baseColor: CustomColor.white,
                     highlightColor: CustomColor.red)
                 : Text(
