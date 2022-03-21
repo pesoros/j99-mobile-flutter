@@ -101,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Beli Tiket",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: Dimensions.defaultTextSize,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -118,7 +118,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Cari Tiket",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: Dimensions.defaultTextSize,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -135,7 +135,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Pariwisata",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: Dimensions.defaultTextSize,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -152,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Cari Paket",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      fontSize: Dimensions.defaultTextSize,
+                                      fontSize: Dimensions.smallTextSize,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

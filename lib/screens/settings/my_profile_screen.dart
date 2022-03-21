@@ -172,7 +172,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // addImageWidget(context),
-                _typeData("Nama Lengkap", firstName),
+                _typeData("Nama Lengkap", firstName + " " + lastName),
                 _typeData("Email", email),
                 _typeData("No. Handphone", phone),
                 _typeData("Alamat", address),

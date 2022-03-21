@@ -137,7 +137,6 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
       child: Column(
         children: <Widget>[
           _busInfoWidget(context),
-          SizedBox(height: 20),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

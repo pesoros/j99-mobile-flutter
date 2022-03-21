@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/registration.dart';
 
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -24,7 +26,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController identityNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -32,6 +36,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool checkedValue = false;
 
   List _listIdentitityType = ["KTP", "Paspor", "SIM"];
+  String identityType = "KTP";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  sendRegistration() async {
+    await Registration.list(
+      emailController.text,
+      passwordController.text,
+      confirmPasswordController.text,
+      firstNameController.text,
+      lastNameController.text,
+      addressController.text,
+      phoneController.text,
+      identityType,
+      identityNumberController.text,
+    ).then((value) {
+      if (value == "registration succeed") {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EmailVerificationScreen(
+                  emailAddress: emailController.text,
+                )));
+      } else {
+        Fluttertoast.showToast(
+          msg: "Data telah terpakai",
+          backgroundColor: CustomColor.red,
+          textColor: CustomColor.white,
+          gravity: ToastGravity.CENTER,
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               TextFormField(
                 style: CustomStyle.textStyle,
-                controller: emailController,
+                controller: addressController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     hintText: "Alamat",
@@ -240,7 +278,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             hintStyle: CustomStyle.textStyle,
                           ),
                           onChanged: (value) {
-                            // variable.nikTypePassengger1 = value;
+                            setState(() {
+                              identityType = value;
+                            });
                           },
                         ),
                       )
@@ -261,7 +301,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: MediaQuery.of(context).size.width / 2,
                         child: TextFormField(
                           style: CustomStyle.textStyle,
-                          controller: lastNameController,
+                          controller: identityNumberController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             hintText: "No. Identitas",
@@ -297,7 +337,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    hintText: "Example@email.com",
+                    hintText: "example@email.com",
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelStyle: CustomStyle.textStyle,
@@ -426,10 +466,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => EmailVerificationScreen(
-                    emailAddress: emailController.text,
-                  )));
+          if (passwordController.text != confirmPasswordController.text) {
+            Fluttertoast.showToast(
+              msg: "Konfirmasi sandi tidak cocok",
+              backgroundColor: CustomColor.red,
+              textColor: CustomColor.white,
+              gravity: ToastGravity.CENTER,
+            );
+          } else {
+            sendRegistration();
+          }
         },
       ),
     );

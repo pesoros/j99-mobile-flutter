@@ -150,7 +150,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Profil",
+                                  "Masuk",
                                   style: TextStyle(
                                       color: CustomColor.darkGrey,
                                       fontSize: Dimensions.defaultTextSize,
