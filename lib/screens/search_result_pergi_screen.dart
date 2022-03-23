@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:juragan99/screens/dashboard_screen.dart';
@@ -30,14 +31,16 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
   double bottomPadding = 0;
   List<BusPergi> _listBus = [];
   bool isLoading = false;
+  bool priceAsc = false;
+  bool priceDsc = false;
 
   @override
   void initState() {
     super.initState();
-    initializeData();
+    getBusList();
   }
 
-  initializeData() async {
+  getBusList() async {
     await BusPergiList.list().then((value) {
       setState(() {
         _listBus = value;
@@ -73,7 +76,6 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
         width: MediaQuery.of(context).size.width,
         height: 170,
         decoration: BoxDecoration(
-          // border: Border.all(color: Colors.black.withOpacity(0.4)),
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
               bottomRight: Radius.circular(24)),
@@ -255,37 +257,31 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-                barrierDismissible: true,
-                barrierColor: Colors.black.withOpacity(0.5),
-                transitionDuration: Duration(milliseconds: 300),
-                opaque: false,
-                pageBuilder: (_, __, ___) => FilterPergiScreen(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(0.0, 1.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
-
-                  final tween = Tween(begin: begin, end: end);
-                  final curvedAnimation = CurvedAnimation(
-                    parent: animation,
-                    curve: curve,
-                  );
-
-                  return SlideTransition(
-                    position: tween.animate(curvedAnimation),
-                    child: child,
-                  );
-                }),
-          );
+          _navigateFilterScreen(context);
         },
       ),
     );
   }
 
   bodyWidget(BuildContext context) {
+    if (variable.pergi_sort_by == "Harga Terendah") {
+      _listBus.sort((min, max) => min.pergi_price.compareTo(max.pergi_price));
+    }
+    if (variable.pergi_sort_by == "Harga Tertinggi") {
+      _listBus.sort((min, max) => max.pergi_price.compareTo(min.pergi_price));
+    }
+    if (variable.pergi_sort_by == "Keberangkatan Awal") {
+      _listBus.sort((min, max) => min.pergi_start.compareTo(max.pergi_start));
+    }
+    if (variable.pergi_sort_by == "Keberangkatan Akhir") {
+      _listBus.sort((min, max) => max.pergi_start.compareTo(min.pergi_start));
+    }
+    if (variable.pergi_sort_by == "Kedatangan Awal") {
+      _listBus.sort((min, max) => min.pergi_end.compareTo(max.pergi_end));
+    }
+    if (variable.pergi_sort_by == "Kedatangan Akhir") {
+      _listBus.sort((min, max) => max.pergi_end.compareTo(min.pergi_end));
+    }
     return Padding(
       padding: const EdgeInsets.only(
         top: 180,
@@ -302,7 +298,6 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
             } else {
               bottomPadding = Dimensions.heightSize * 1;
             }
-            // _listBus.sort((a, b) => b.pergi_price.compareTo(a.pergi_price));
             return Padding(
               padding: EdgeInsets.only(
                 bottom: bottomPadding,
@@ -331,5 +326,33 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
         ),
       ),
     );
+  }
+
+  void _navigateFilterScreen(BuildContext context) async {
+    await Navigator.of(context).push(
+      PageRouteBuilder(
+          barrierDismissible: true,
+          barrierColor: Colors.black.withOpacity(0.5),
+          transitionDuration: Duration(milliseconds: 300),
+          opaque: false,
+          pageBuilder: (_, __, ___) => FilterPergiScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            final tween = Tween(begin: begin, end: end);
+            final curvedAnimation = CurvedAnimation(
+              parent: animation,
+              curve: curve,
+            );
+
+            return SlideTransition(
+              position: tween.animate(curvedAnimation),
+              child: child,
+            );
+          }),
+    );
+    setState(() {});
   }
 }

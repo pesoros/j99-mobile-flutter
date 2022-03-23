@@ -245,37 +245,31 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-                barrierDismissible: true,
-                barrierColor: Colors.black.withOpacity(0.5),
-                transitionDuration: Duration(milliseconds: 300),
-                opaque: false,
-                pageBuilder: (_, __, ___) => FilterPulangScreen(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(0.0, 1.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
-
-                  final tween = Tween(begin: begin, end: end);
-                  final curvedAnimation = CurvedAnimation(
-                    parent: animation,
-                    curve: curve,
-                  );
-
-                  return SlideTransition(
-                    position: tween.animate(curvedAnimation),
-                    child: child,
-                  );
-                }),
-          );
+          _navigateFilterScreen(context);
         },
       ),
     );
   }
 
   bodyWidget(BuildContext context) {
+    if (variable.pulang_sort_by == "Harga Terendah") {
+      _listBus.sort((min, max) => min.pulang_price.compareTo(max.pulang_price));
+    }
+    if (variable.pulang_sort_by == "Harga Tertinggi") {
+      _listBus.sort((min, max) => max.pulang_price.compareTo(min.pulang_price));
+    }
+    if (variable.pulang_sort_by == "Keberangkatan Awal") {
+      _listBus.sort((min, max) => min.pulang_start.compareTo(max.pulang_start));
+    }
+    if (variable.pulang_sort_by == "Keberangkatan Akhir") {
+      _listBus.sort((min, max) => max.pulang_start.compareTo(min.pulang_start));
+    }
+    if (variable.pulang_sort_by == "Kedatangan Awal") {
+      _listBus.sort((min, max) => min.pulang_end.compareTo(max.pulang_end));
+    }
+    if (variable.pulang_sort_by == "Kedatangan Akhir") {
+      _listBus.sort((min, max) => max.pulang_end.compareTo(min.pulang_end));
+    }
     return Padding(
       padding: const EdgeInsets.only(
         top: 180,
@@ -320,5 +314,33 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
         ),
       ),
     );
+  }
+
+  void _navigateFilterScreen(BuildContext context) async {
+    await Navigator.of(context).push(
+      PageRouteBuilder(
+          barrierDismissible: true,
+          barrierColor: Colors.black.withOpacity(0.5),
+          transitionDuration: Duration(milliseconds: 300),
+          opaque: false,
+          pageBuilder: (_, __, ___) => FilterPulangScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            final tween = Tween(begin: begin, end: end);
+            final curvedAnimation = CurvedAnimation(
+              parent: animation,
+              curve: curve,
+            );
+
+            return SlideTransition(
+              position: tween.animate(curvedAnimation),
+              child: child,
+            );
+          }),
+    );
+    setState(() {});
   }
 }

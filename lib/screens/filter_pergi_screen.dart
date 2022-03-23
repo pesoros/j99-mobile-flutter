@@ -1,8 +1,9 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, must_be_immutable, unused_element
 
 import 'dart:async';
 
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/filter_pulang_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -11,12 +12,23 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/widgets/filter_chip_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:juragan99/utils/variables.dart' as variable;
+
 class FilterPergiScreen extends StatefulWidget {
   @override
   _FilterPergiScreenState createState() => _FilterPergiScreenState();
 }
 
 class _FilterPergiScreenState extends State<FilterPergiScreen> {
+  String _valSortBy;
+  List sortBy = [
+    "Harga Terendah",
+    "Harga Tertinggi",
+    "Keberangkatan Awal",
+    "Keberangkatan Akhir",
+    "Kedatangan Awal",
+    "Kedatangan Akhir",
+  ];
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -53,9 +65,9 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
       ),
       child: Column(
         children: <Widget>[
-          _chooseClassWidget(context),
+          // _chooseClassWidget(context),
           SizedBox(height: 30),
-          _chooseBusServicesWidget(context),
+          _sortBy(context),
         ],
       ),
     );
@@ -88,7 +100,7 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
     );
   }
 
-  _chooseBusServicesWidget(BuildContext context) {
+  _sortBy(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,16 +111,26 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 0),
           child: Align(
-            alignment: Alignment.centerLeft,
             child: Container(
-                child: Wrap(
-              spacing: 5.0,
-              runSpacing: 3.0,
-              children: <Widget>[
-                FilterChipWidget(chipName: 'Price'),
-                FilterChipWidget(chipName: 'Top Selling'),
-              ],
-            )),
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Urut Berdasarkan"),
+                value: _valSortBy,
+                items: sortBy.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valSortBy = value;
+                    variable.pergi_sort_by = value;
+                  });
+                },
+              ),
+            ),
           ),
         ),
       ],
@@ -149,81 +171,5 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
         },
       ),
     );
-  }
-
-  openProgressingDialog(BuildContext context) {
-    showGeneralDialog(
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierDismissible: true,
-        barrierColor: Colors.white.withOpacity(0.6),
-        transitionDuration: Duration(milliseconds: 700),
-        context: context,
-        pageBuilder: (_, __, ___) {
-          return Material(
-            type: MaterialType.transparency,
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: Dimensions.marginSize,
-                  right: Dimensions.marginSize,
-                ),
-                child: Container(
-                  height: 300,
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(bottom: 12, left: 15, right: 15),
-                  decoration: BoxDecoration(
-                    color: CustomColor.primaryColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
-                      SizedBox(
-                        height: Dimensions.heightSize * 2,
-                      ),
-                      GestureDetector(
-                        child: Container(
-                          height: Dimensions.buttonHeight,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius)),
-                          child: Center(
-                            child: Text(
-                              Strings.cancel.toUpperCase(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Dimensions.largeTextSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => DashboardScreen(0)));
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        transitionBuilder: (_, anim, __, child) {
-          return SlideTransition(
-            position:
-                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
-            child: child,
-          );
-        });
   }
 }

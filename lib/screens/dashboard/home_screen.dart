@@ -161,7 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
       variable.name = null;
       variable.account_number = null;
       variable.expiration_date = null;
-      variable.payment_id = null;
+      variable.external_id = null;
+      variable.total_price = null;
     });
   }
 
@@ -171,7 +172,6 @@ class _HomeScreenState extends State<HomeScreen> {
         MediaQuery.of(context).size.height - 150;
     return Scaffold(
         backgroundColor: CustomColor.white,
-        resizeToAvoidBottomInset: false,
         key: scaffoldKey,
         body: Container(
           child: SingleChildScrollView(

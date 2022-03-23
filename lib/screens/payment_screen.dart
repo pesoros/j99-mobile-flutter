@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:juragan99/data/booking.dart';
 import 'package:juragan99/data/bus_pergi.dart';
+import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/food.dart';
 import 'package:juragan99/screens/dashboard/search_ticket_screen.dart';
 import 'package:juragan99/utils/custom_style.dart';
@@ -82,14 +83,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   TextEditingController promoCodeController = TextEditingController();
 
-  double totalPrice;
+  double totalPrice = 0;
   double promoValue = 0;
+  double grandTotalPrice = 0;
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+
     getBaggageStatus();
+    getPromoKodeValue();
+    getTotalPrice();
+    getGrandTotalPrice();
   }
 
   getBaggageStatus() {
@@ -119,6 +125,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
     if (promoValue == null) {
       setState(() {});
     }
+  }
+
+  getTotalPrice() {
+    if (variable.checkPulangPergi == true) {
+      setState(() {
+        totalPrice = double.parse(variable.pergi_price) +
+            double.parse(variable.pulang_price);
+      });
+    } else {
+      setState(() {
+        totalPrice = double.parse(variable.pergi_price);
+      });
+    }
+  }
+
+  getGrandTotalPrice() {
+    setState(() {
+      grandTotalPrice = totalPrice + promoValue;
+    });
   }
 
   @override
@@ -1250,25 +1275,34 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     variable.pergi_drop_trip_location +
                     " x " +
                     variable.selectedJumlahPenumpang,
-                double.parse(currencyFormatter
-                    .format(double.parse(variable.pergi_price))),
+                currencyFormatterD.format(double.parse(variable.pergi_price)),
               ),
-              _data("Promo", promoValue),
+              (variable.checkPulangPergi == true)
+                  ? _data(
+                      variable.pulang_pickup_trip_location +
+                          " - " +
+                          variable.pulang_drop_trip_location +
+                          " x " +
+                          variable.selectedJumlahPenumpang,
+                      currencyFormatter
+                          .format(double.parse(variable.pulang_price)),
+                    )
+                  : Padding(padding: EdgeInsets.all(0)),
+              _data("Promo", promoValue.toString()),
               Divider(
                 color: Colors.grey,
               ),
               SizedBox(height: 10),
               _data(
-                Strings.total.toUpperCase(),
-                double.parse(currencyFormatter
-                    .format(double.parse(variable.pergi_price) - promoValue)),
+                "Total",
+                currencyFormatter.format(grandTotalPrice),
               ),
             ],
           ),
         ));
   }
 
-  _data(String title, double price) {
+  _data(String title, String price) {
     return Padding(
       padding: const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
       child: Row(
@@ -1450,15 +1484,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
           });
           isLoading ? _onLoading() : Container();
           await BookingList.list().then((value) {
-            if (jsonDecode(value)['status'] == true) {
+            if (variable.checkPulangPergi == false &&
+                jsonDecode(value)['pergi']['status'] == true) {
               var payment = jsonDecode(value)['payment'];
               variable.status = payment['status'];
               variable.bank_code = payment['bank_code'];
               variable.merchant_code = payment['merchant_code'];
               variable.name = payment['name'];
               variable.account_number = payment['account_number'];
-              variable.expiration_date = payment['expiration_date'];
-              variable.payment_id = payment['id'];
+              variable.external_id = payment['external_id'];
+              variable.total_price = payment['total_price'].toString();
               Navigator.pop(context);
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => InvoiceScreen()));
@@ -1466,16 +1501,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 isLoading = false;
               });
             } else {
-              Navigator.pop(context);
-              setState(() {
-                isLoading = false;
-              });
-              Fluttertoast.showToast(
-                msg: "Pesanan Gagal",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
+              if (variable.checkPulangPergi == true &&
+                  jsonDecode(value)['pergi']['status'] == true &&
+                  jsonDecode(value)['pulang']['status'] == true) {
+                var payment = jsonDecode(value)['payment'];
+                variable.status = payment['status'];
+
+                variable.bank_code = payment['bank_code'];
+                variable.merchant_code = payment['merchant_code'];
+                variable.name = payment['name'];
+                variable.account_number = payment['account_number'];
+                variable.external_id = payment['external_id'];
+                variable.total_price = payment['total_price'].toString();
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => InvoiceScreen()));
+                setState(() {
+                  isLoading = false;
+                });
+              } else {
+                Navigator.pop(context);
+                setState(() {
+                  isLoading = false;
+                });
+                Fluttertoast.showToast(
+                  msg: "Kursi sudah di pesan",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              }
             }
           });
         },

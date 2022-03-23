@@ -11,12 +11,23 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/widgets/filter_chip_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:juragan99/utils/variables.dart' as variable;
+
 class FilterPulangScreen extends StatefulWidget {
   @override
   _FilterPulangScreenState createState() => _FilterPulangScreenState();
 }
 
 class _FilterPulangScreenState extends State<FilterPulangScreen> {
+  String _valSortBy;
+  List sortBy = [
+    "Harga Terendah",
+    "Harga Tertinggi",
+    "Keberangkatan Awal",
+    "Keberangkatan Akhir",
+    "Kedatangan Awal",
+    "Kedatangan Akhir",
+  ];
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -101,14 +112,25 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Container(
-                child: Wrap(
-              spacing: 5.0,
-              runSpacing: 3.0,
-              children: <Widget>[
-                FilterChipWidget(chipName: 'Price'),
-                FilterChipWidget(chipName: 'Top Selling'),
-              ],
-            )),
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Urut Berdasarkan"),
+                value: _valSortBy,
+                items: sortBy.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valSortBy = value;
+                    variable.pulang_sort_by = value;
+                  });
+                },
+              ),
+            ),
           ),
         ),
       ],

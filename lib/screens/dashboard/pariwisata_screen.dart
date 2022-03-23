@@ -35,15 +35,14 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
     double screenHeightMinusAppBarMinusStatusBar =
         MediaQuery.of(context).size.height - 150;
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Container(
-          child: SingleChildScrollView(
-              child: ConstrainedBox(
-            constraints: BoxConstraints(
-                maxHeight: screenHeightMinusAppBarMinusStatusBar),
-            child: bodyWidget(context),
-          )),
-        ));
+      child: SingleChildScrollView(
+          child: ConstrainedBox(
+        constraints:
+            BoxConstraints(maxHeight: screenHeightMinusAppBarMinusStatusBar),
+        child: bodyWidget(context),
+      )),
+    ));
   }
 
   bodyWidget(BuildContext context) {

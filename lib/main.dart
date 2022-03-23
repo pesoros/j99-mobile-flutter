@@ -11,7 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: CustomColor.red, fontFamily: 'Lato'),
+      theme: ThemeData(
+        primaryColor: CustomColor.red,
+        fontFamily: 'Lato',
+      ),
       home: SplashScreen(),
     );
   }

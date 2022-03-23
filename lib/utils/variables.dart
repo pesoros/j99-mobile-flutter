@@ -28,6 +28,10 @@ String datePergi = 'Pergi';
 String datePulang = 'Pulang';
 bool checkPulangPergi = false;
 
+//FilterSearch
+String pergi_sort_by = "Harga Terendah";
+String pulang_sort_by = "Harga Terendah";
+
 //Bus
 String pergi_trip_id_no;
 String pergi_trip_route_id;
@@ -121,4 +125,5 @@ String merchant_code;
 String name;
 String account_number;
 String expiration_date;
-String payment_id;
+String external_id;
+String total_price;
