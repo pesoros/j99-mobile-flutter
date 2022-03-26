@@ -33,10 +33,8 @@ class BookingList {
               "pergi[fleet_type_id]": variable.pergi_type,
               "pergi[seatPicked][0][name]": variable.namePassengger1,
               "pergi[seatPicked][0][seat]": variable.seatPergiPassengger1,
-              "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
-              "pergi[seatPicked][0][baggage]": variable.baggagePassengger1,
-              "pergi[seatPicked][0][identity]": variable.nikTypePassengger1,
-              "pergi[seatPicked][0][identity_number]": variable.nikPassengger1,
+              "pergi[seatPicked][0][food]": variable.foodIdPergiPassengger1,
+              "pergi[seatPicked][0][baggage]": variable.baggagePergiPassengger1,
               "pergi[seatPicked][0][phone]": variable.phonePassengger1,
             }
           : (variable.checkPulangPergi == true &&
@@ -58,11 +56,9 @@ class BookingList {
                   "pergi[fleet_type_id]": variable.pergi_type,
                   "pergi[seatPicked][0][name]": variable.namePassengger1,
                   "pergi[seatPicked][0][seat]": variable.seatPergiPassengger1,
-                  "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
-                  "pergi[seatPicked][0][baggage]": variable.baggagePassengger1,
-                  "pergi[seatPicked][0][identity]": variable.nikTypePassengger1,
-                  "pergi[seatPicked][0][identity_number]":
-                      variable.nikPassengger1,
+                  "pergi[seatPicked][0][food]": variable.foodIdPergiPassengger1,
+                  "pergi[seatPicked][0][baggage]":
+                      variable.baggagePergiPassengger1,
                   "pergi[seatPicked][0][phone]": variable.phonePassengger1,
                   "pulang[trip_id_no]": variable.pulang_trip_id_no,
                   "pulang[trip_route_id]": variable.pulang_trip_route_id,
@@ -74,12 +70,10 @@ class BookingList {
                   "pulang[fleet_type_id]": variable.pulang_type,
                   "pulang[seatPicked][0][name]": variable.namePassengger1,
                   "pulang[seatPicked][0][seat]": variable.seatPulangPassengger1,
-                  "pulang[seatPicked][0][food]": variable.foodIdPassengger1,
-                  "pulang[seatPicked][0][baggage]": variable.baggagePassengger1,
-                  "pulang[seatPicked][0][identity]":
-                      variable.nikTypePassengger1,
-                  "pulang[seatPicked][0][identity_number]":
-                      variable.nikPassengger1,
+                  "pulang[seatPicked][0][food]":
+                      variable.foodIdPulangPassengger1,
+                  "pulang[seatPicked][0][baggage]":
+                      variable.baggagePulangPassengger1,
                   "pulang[seatPicked][0][phone]": variable.phonePassengger1,
                 }
               : (variable.checkPulangPergi == false &&
@@ -104,24 +98,18 @@ class BookingList {
                       "pergi[seatPicked][0][name]": variable.namePassengger1,
                       "pergi[seatPicked][0][seat]":
                           variable.seatPergiPassengger1,
-                      "pergi[seatPicked][0][food]": variable.foodIdPassengger1,
+                      "pergi[seatPicked][0][food]":
+                          variable.foodIdPergiPassengger1,
                       "pergi[seatPicked][0][baggage]":
-                          variable.baggagePassengger1,
-                      "pergi[seatPicked][0][identity]":
-                          variable.nikTypePassengger1,
-                      "pergi[seatPicked][0][identity_number]":
-                          variable.nikPassengger1,
+                          variable.baggagePergiPassengger1,
                       "pergi[seatPicked][0][phone]": variable.phonePassengger1,
                       "pergi[seatPicked][1][name]": variable.namePassengger2,
                       "pergi[seatPicked][1][seat]":
                           variable.seatPergiPassengger2,
-                      "pergi[seatPicked][1][food]": variable.foodIdPassengger2,
+                      "pergi[seatPicked][1][food]":
+                          variable.foodIdPergiPassengger2,
                       "pergi[seatPicked][1][baggage]":
-                          variable.baggagePassengger2,
-                      "pergi[seatPicked][1][identity]":
-                          variable.nikTypePassengger2,
-                      "pergi[seatPicked][1][identity_number]":
-                          variable.nikPassengger2,
+                          variable.baggagePergiPassengger2,
                       "pergi[seatPicked][1][phone]": variable.phonePassengger2,
                     }
                   : (variable.checkPulangPergi == true &&
@@ -149,13 +137,9 @@ class BookingList {
                           "pergi[seatPicked][0][seat]":
                               variable.seatPergiPassengger1,
                           "pergi[seatPicked][0][food]":
-                              variable.foodIdPassengger1,
+                              variable.foodIdPergiPassengger1,
                           "pergi[seatPicked][0][baggage]":
-                              variable.baggagePassengger1,
-                          "pergi[seatPicked][0][identity]":
-                              variable.nikTypePassengger1,
-                          "pergi[seatPicked][0][identity_number]":
-                              variable.nikPassengger1,
+                              variable.baggagePergiPassengger1,
                           "pergi[seatPicked][0][phone]":
                               variable.phonePassengger1,
                           "pergi[seatPicked][1][name]":
@@ -163,13 +147,9 @@ class BookingList {
                           "pergi[seatPicked][1][seat]":
                               variable.seatPergiPassengger2,
                           "pergi[seatPicked][1][food]":
-                              variable.foodIdPassengger2,
+                              variable.foodIdPergiPassengger2,
                           "pergi[seatPicked][1][baggage]":
-                              variable.baggagePassengger2,
-                          "pergi[seatPicked][1][identity]":
-                              variable.nikTypePassengger2,
-                          "pergi[seatPicked][1][identity_number]":
-                              variable.nikPassengger2,
+                              variable.baggagePergiPassengger2,
                           "pergi[seatPicked][1][phone]":
                               variable.phonePassengger2,
                           "pulang[trip_id_no]": variable.pulang_trip_id_no,
@@ -187,13 +167,9 @@ class BookingList {
                           "pulang[seatPicked][0][seat]":
                               variable.seatPulangPassengger1,
                           "pulang[seatPicked][0][food]":
-                              variable.foodIdPassengger1,
+                              variable.foodIdPulangPassengger1,
                           "pulang[seatPicked][0][baggage]":
-                              variable.baggagePassengger1,
-                          "pulang[seatPicked][0][identity]":
-                              variable.nikTypePassengger1,
-                          "pulang[seatPicked][0][identity_number]":
-                              variable.nikPassengger1,
+                              variable.baggagePulangPassengger1,
                           "pulang[seatPicked][0][phone]":
                               variable.phonePassengger1,
                           "pulang[seatPicked][1][name]":
@@ -201,13 +177,9 @@ class BookingList {
                           "pulang[seatPicked][1][seat]":
                               variable.seatPulangPassengger2,
                           "pulang[seatPicked][1][food]":
-                              variable.foodIdPassengger2,
+                              variable.foodIdPulangPassengger2,
                           "pulang[seatPicked][1][baggage]":
-                              variable.baggagePassengger2,
-                          "pulang[seatPicked][1][identity]":
-                              variable.nikTypePassengger2,
-                          "pulang[seatPicked][1][identity_number]":
-                              variable.nikPassengger2,
+                              variable.baggagePulangPassengger2,
                           "pulang[seatPicked][1][phone]":
                               variable.phonePassengger2,
                         }
@@ -238,13 +210,9 @@ class BookingList {
                               "pergi[seatPicked][0][seat]":
                                   variable.seatPergiPassengger1,
                               "pergi[seatPicked][0][food]":
-                                  variable.foodIdPassengger1,
+                                  variable.foodIdPergiPassengger1,
                               "pergi[seatPicked][0][baggage]":
-                                  variable.baggagePassengger1,
-                              "pergi[seatPicked][0][identity]":
-                                  variable.nikTypePassengger1,
-                              "pergi[seatPicked][0][identity_number]":
-                                  variable.nikPassengger1,
+                                  variable.baggagePergiPassengger1,
                               "pergi[seatPicked][0][phone]":
                                   variable.phonePassengger1,
                               "pergi[seatPicked][1][name]":
@@ -252,13 +220,9 @@ class BookingList {
                               "pergi[seatPicked][1][seat]":
                                   variable.seatPergiPassengger2,
                               "pergi[seatPicked][1][food]":
-                                  variable.foodIdPassengger2,
+                                  variable.foodIdPergiPassengger2,
                               "pergi[seatPicked][1][baggage]":
-                                  variable.baggagePassengger2,
-                              "pergi[seatPicked][1][identity]":
-                                  variable.nikTypePassengger2,
-                              "pergi[seatPicked][1][identity_number]":
-                                  variable.nikPassengger2,
+                                  variable.baggagePergiPassengger2,
                               "pergi[seatPicked][1][phone]":
                                   variable.phonePassengger2,
                               "pergi[seatPicked][2][name]":
@@ -266,13 +230,9 @@ class BookingList {
                               "pergi[seatPicked][2][seat]":
                                   variable.seatPergiPassengger3,
                               "pergi[seatPicked][2][food]":
-                                  variable.foodIdPassengger3,
+                                  variable.foodIdPergiPassengger3,
                               "pergi[seatPicked][2][baggage]":
-                                  variable.baggagePassengger3,
-                              "pergi[seatPicked][2][identity]":
-                                  variable.nikTypePassengger3,
-                              "pergi[seatPicked][2][identity_number]":
-                                  variable.nikPassengger3,
+                                  variable.baggagePergiPassengger3,
                               "pergi[seatPicked][2][phone]":
                                   variable.phonePassengger3,
                             }
@@ -307,13 +267,9 @@ class BookingList {
                                   "pergi[seatPicked][0][seat]":
                                       variable.seatPergiPassengger1,
                                   "pergi[seatPicked][0][food]":
-                                      variable.foodIdPassengger1,
+                                      variable.foodIdPergiPassengger1,
                                   "pergi[seatPicked][0][baggage]":
-                                      variable.baggagePassengger1,
-                                  "pergi[seatPicked][0][identity]":
-                                      variable.nikTypePassengger1,
-                                  "pergi[seatPicked][0][identity_number]":
-                                      variable.nikPassengger1,
+                                      variable.baggagePergiPassengger1,
                                   "pergi[seatPicked][0][phone]":
                                       variable.phonePassengger1,
                                   "pergi[seatPicked][1][name]":
@@ -321,13 +277,9 @@ class BookingList {
                                   "pergi[seatPicked][1][seat]":
                                       variable.seatPergiPassengger2,
                                   "pergi[seatPicked][1][food]":
-                                      variable.foodIdPassengger2,
+                                      variable.foodIdPergiPassengger2,
                                   "pergi[seatPicked][1][baggage]":
-                                      variable.baggagePassengger2,
-                                  "pergi[seatPicked][1][identity]":
-                                      variable.nikTypePassengger2,
-                                  "pergi[seatPicked][1][identity_number]":
-                                      variable.nikPassengger2,
+                                      variable.baggagePergiPassengger2,
                                   "pergi[seatPicked][1][phone]":
                                       variable.phonePassengger2,
                                   "pergi[seatPicked][2][name]":
@@ -335,13 +287,9 @@ class BookingList {
                                   "pergi[seatPicked][2][seat]":
                                       variable.seatPergiPassengger3,
                                   "pergi[seatPicked][2][food]":
-                                      variable.foodIdPassengger3,
+                                      variable.foodIdPergiPassengger3,
                                   "pergi[seatPicked][2][baggage]":
-                                      variable.baggagePassengger3,
-                                  "pergi[seatPicked][2][identity]":
-                                      variable.nikTypePassengger3,
-                                  "pergi[seatPicked][2][identity_number]":
-                                      variable.nikPassengger3,
+                                      variable.baggagePergiPassengger3,
                                   "pergi[seatPicked][2][phone]":
                                       variable.phonePassengger3,
                                   "pulang[trip_id_no]":
@@ -360,13 +308,9 @@ class BookingList {
                                   "pulang[seatPicked][0][seat]":
                                       variable.seatPulangPassengger1,
                                   "pulang[seatPicked][0][food]":
-                                      variable.foodIdPassengger1,
+                                      variable.foodIdPulangPassengger1,
                                   "pulang[seatPicked][0][baggage]":
-                                      variable.baggagePassengger1,
-                                  "pulang[seatPicked][0][identity]":
-                                      variable.nikTypePassengger1,
-                                  "pulang[seatPicked][0][identity_number]":
-                                      variable.nikPassengger1,
+                                      variable.baggagePulangPassengger1,
                                   "pulang[seatPicked][0][phone]":
                                       variable.phonePassengger1,
                                   "pulang[seatPicked][1][name]":
@@ -374,13 +318,9 @@ class BookingList {
                                   "pulang[seatPicked][1][seat]":
                                       variable.seatPulangPassengger2,
                                   "pulang[seatPicked][1][food]":
-                                      variable.foodIdPassengger2,
+                                      variable.foodIdPulangPassengger2,
                                   "pulang[seatPicked][1][baggage]":
-                                      variable.baggagePassengger2,
-                                  "pulang[seatPicked][1][identity]":
-                                      variable.nikTypePassengger2,
-                                  "pulang[seatPicked][1][identity_number]":
-                                      variable.nikPassengger2,
+                                      variable.baggagePulangPassengger2,
                                   "pulang[seatPicked][1][phone]":
                                       variable.phonePassengger2,
                                   "pulang[seatPicked][2][name]":
@@ -388,13 +328,9 @@ class BookingList {
                                   "pulang[seatPicked][2][seat]":
                                       variable.seatPulangPassengger3,
                                   "pulang[seatPicked][2][food]":
-                                      variable.foodIdPassengger3,
+                                      variable.foodIdPulangPassengger3,
                                   "pulang[seatPicked][2][baggage]":
-                                      variable.baggagePassengger3,
-                                  "pulang[seatPicked][2][identity]":
-                                      variable.nikTypePassengger3,
-                                  "pulang[seatPicked][2][identity_number]":
-                                      variable.nikPassengger3,
+                                      variable.baggagePulangPassengger3,
                                   "pulang[seatPicked][2][phone]":
                                       variable.phonePassengger3,
                                 }
@@ -432,13 +368,9 @@ class BookingList {
                                       "pergi[seatPicked][0][seat]":
                                           variable.seatPergiPassengger1,
                                       "pergi[seatPicked][0][food]":
-                                          variable.foodIdPassengger1,
+                                          variable.foodIdPergiPassengger1,
                                       "pergi[seatPicked][0][baggage]":
-                                          variable.baggagePassengger1,
-                                      "pergi[seatPicked][0][identity]":
-                                          variable.nikTypePassengger1,
-                                      "pergi[seatPicked][0][identity_number]":
-                                          variable.nikPassengger1,
+                                          variable.baggagePergiPassengger1,
                                       "pergi[seatPicked][0][phone]":
                                           variable.phonePassengger1,
                                       "pergi[seatPicked][1][name]":
@@ -446,13 +378,9 @@ class BookingList {
                                       "pergi[seatPicked][1][seat]":
                                           variable.seatPergiPassengger2,
                                       "pergi[seatPicked][1][food]":
-                                          variable.foodIdPassengger2,
+                                          variable.foodIdPergiPassengger2,
                                       "pergi[seatPicked][1][baggage]":
-                                          variable.baggagePassengger2,
-                                      "pergi[seatPicked][1][identity]":
-                                          variable.nikTypePassengger2,
-                                      "pergi[seatPicked][1][identity_number]":
-                                          variable.nikPassengger2,
+                                          variable.baggagePergiPassengger2,
                                       "pergi[seatPicked][1][phone]":
                                           variable.phonePassengger2,
                                       "pergi[seatPicked][2][name]":
@@ -460,13 +388,9 @@ class BookingList {
                                       "pergi[seatPicked][2][seat]":
                                           variable.seatPergiPassengger3,
                                       "pergi[seatPicked][2][food]":
-                                          variable.foodIdPassengger3,
+                                          variable.foodIdPergiPassengger3,
                                       "pergi[seatPicked][2][baggage]":
-                                          variable.baggagePassengger3,
-                                      "pergi[seatPicked][2][identity]":
-                                          variable.nikTypePassengger3,
-                                      "pergi[seatPicked][2][identity_number]":
-                                          variable.nikPassengger3,
+                                          variable.baggagePergiPassengger3,
                                       "pergi[seatPicked][2][phone]":
                                           variable.phonePassengger3,
                                       "pergi[seatPicked][3][name]":
@@ -474,13 +398,9 @@ class BookingList {
                                       "pergi[seatPicked][3][seat]":
                                           variable.seatPergiPassengger4,
                                       "pergi[seatPicked][3][food]":
-                                          variable.foodIdPassengger4,
+                                          variable.foodIdPergiPassengger4,
                                       "pergi[seatPicked][3][baggage]":
-                                          variable.baggagePassengger4,
-                                      "pergi[seatPicked][3][identity]":
-                                          variable.nikTypePassengger4,
-                                      "pergi[seatPicked][3][identity_number]":
-                                          variable.nikPassengger4,
+                                          variable.baggagePergiPassengger4,
                                       "pergi[seatPicked][3][phone]":
                                           variable.phonePassengger4,
                                     }
@@ -519,13 +439,9 @@ class BookingList {
                                           "pergi[seatPicked][0][seat]":
                                               variable.seatPergiPassengger1,
                                           "pergi[seatPicked][0][food]":
-                                              variable.foodIdPassengger1,
+                                              variable.foodIdPergiPassengger1,
                                           "pergi[seatPicked][0][baggage]":
-                                              variable.baggagePassengger1,
-                                          "pergi[seatPicked][0][identity]":
-                                              variable.nikTypePassengger1,
-                                          "pergi[seatPicked][0][identity_number]":
-                                              variable.nikPassengger1,
+                                              variable.baggagePergiPassengger1,
                                           "pergi[seatPicked][0][phone]":
                                               variable.phonePassengger1,
                                           "pergi[seatPicked][1][name]":
@@ -533,13 +449,9 @@ class BookingList {
                                           "pergi[seatPicked][1][seat]":
                                               variable.seatPergiPassengger2,
                                           "pergi[seatPicked][1][food]":
-                                              variable.foodIdPassengger2,
+                                              variable.foodIdPergiPassengger2,
                                           "pergi[seatPicked][1][baggage]":
-                                              variable.baggagePassengger2,
-                                          "pergi[seatPicked][1][identity]":
-                                              variable.nikTypePassengger2,
-                                          "pergi[seatPicked][1][identity_number]":
-                                              variable.nikPassengger2,
+                                              variable.baggagePergiPassengger2,
                                           "pergi[seatPicked][1][phone]":
                                               variable.phonePassengger2,
                                           "pergi[seatPicked][2][name]":
@@ -547,13 +459,9 @@ class BookingList {
                                           "pergi[seatPicked][2][seat]":
                                               variable.seatPergiPassengger3,
                                           "pergi[seatPicked][2][food]":
-                                              variable.foodIdPassengger3,
+                                              variable.foodIdPergiPassengger3,
                                           "pergi[seatPicked][2][baggage]":
-                                              variable.baggagePassengger3,
-                                          "pergi[seatPicked][2][identity]":
-                                              variable.nikTypePassengger3,
-                                          "pergi[seatPicked][2][identity_number]":
-                                              variable.nikPassengger3,
+                                              variable.baggagePergiPassengger3,
                                           "pergi[seatPicked][2][phone]":
                                               variable.phonePassengger3,
                                           "pergi[seatPicked][3][name]":
@@ -561,13 +469,9 @@ class BookingList {
                                           "pergi[seatPicked][3][seat]":
                                               variable.seatPergiPassengger4,
                                           "pergi[seatPicked][3][food]":
-                                              variable.foodIdPassengger4,
+                                              variable.foodIdPergiPassengger4,
                                           "pergi[seatPicked][3][baggage]":
-                                              variable.baggagePassengger4,
-                                          "pergi[seatPicked][3][identity]":
-                                              variable.nikTypePassengger4,
-                                          "pergi[seatPicked][3][identity_number]":
-                                              variable.nikPassengger4,
+                                              variable.baggagePergiPassengger4,
                                           "pergi[seatPicked][3][phone]":
                                               variable.phonePassengger4,
                                           "pulang[trip_id_no]":
@@ -589,13 +493,9 @@ class BookingList {
                                           "pulang[seatPicked][0][seat]":
                                               variable.seatPulangPassengger1,
                                           "pulang[seatPicked][0][food]":
-                                              variable.foodIdPassengger1,
+                                              variable.foodIdPulangPassengger1,
                                           "pulang[seatPicked][0][baggage]":
-                                              variable.baggagePassengger1,
-                                          "pulang[seatPicked][0][identity]":
-                                              variable.nikTypePassengger1,
-                                          "pulang[seatPicked][0][identity_number]":
-                                              variable.nikPassengger1,
+                                              variable.baggagePulangPassengger1,
                                           "pulang[seatPicked][0][phone]":
                                               variable.phonePassengger1,
                                           "pulang[seatPicked][1][name]":
@@ -603,13 +503,9 @@ class BookingList {
                                           "pulang[seatPicked][1][seat]":
                                               variable.seatPulangPassengger2,
                                           "pulang[seatPicked][1][food]":
-                                              variable.foodIdPassengger2,
+                                              variable.foodIdPulangPassengger2,
                                           "pulang[seatPicked][1][baggage]":
-                                              variable.baggagePassengger2,
-                                          "pulang[seatPicked][1][identity]":
-                                              variable.nikTypePassengger2,
-                                          "pulang[seatPicked][1][identity_number]":
-                                              variable.nikPassengger2,
+                                              variable.baggagePulangPassengger2,
                                           "pulang[seatPicked][1][phone]":
                                               variable.phonePassengger2,
                                           "pulang[seatPicked][2][name]":
@@ -617,13 +513,9 @@ class BookingList {
                                           "pulang[seatPicked][2][seat]":
                                               variable.seatPulangPassengger3,
                                           "pulang[seatPicked][2][food]":
-                                              variable.foodIdPassengger3,
+                                              variable.foodIdPulangPassengger3,
                                           "pulang[seatPicked][2][baggage]":
-                                              variable.baggagePassengger3,
-                                          "pulang[seatPicked][2][identity]":
-                                              variable.nikTypePassengger3,
-                                          "pulang[seatPicked][2][identity_number]":
-                                              variable.nikPassengger3,
+                                              variable.baggagePulangPassengger3,
                                           "pulang[seatPicked][2][phone]":
                                               variable.phonePassengger3,
                                           "pulang[seatPicked][3][name]":
@@ -631,18 +523,15 @@ class BookingList {
                                           "pulang[seatPicked][3][seat]":
                                               variable.seatPulangPassengger4,
                                           "pulang[seatPicked][3][food]":
-                                              variable.foodIdPassengger4,
+                                              variable.foodIdPulangPassengger4,
                                           "pulang[seatPicked][3][baggage]":
-                                              variable.baggagePassengger4,
-                                          "pulang[seatPicked][3][identity]":
-                                              variable.nikTypePassengger4,
-                                          "pulang[seatPicked][3][identity_number]":
-                                              variable.nikPassengger4,
+                                              variable.baggagePulangPassengger4,
                                           "pulang[seatPicked][3][phone]":
                                               variable.phonePassengger4,
                                         }
                                       : '',
     );
+    print(response.body);
     return response.body;
   }
 }

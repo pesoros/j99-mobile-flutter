@@ -1,14 +1,16 @@
-// ignore_for_file: unused_import, missing_return, unused_field, unused_element
+// ignore_for_file: unused_import, missing_return, unused_field, unused_element, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:indonesia/indonesia.dart';
 import 'package:juragan99/data/booking.dart';
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/food.dart';
 import 'package:juragan99/screens/dashboard/search_ticket_screen.dart';
+import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
@@ -18,7 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:juragan99/utils/formater.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:juragan99/screens/invoice_screen.dart';
 import 'package:juragan99/widgets/payment_method_widget.dart';
@@ -44,42 +46,53 @@ class _PaymentScreenState extends State<PaymentScreen> {
       TextEditingController(text: variable.namePassengger1);
   TextEditingController phonePassenggerController1 =
       TextEditingController(text: variable.phonePassengger1);
-  TextEditingController nikPassenggerController1 =
-      TextEditingController(text: variable.nikPassengger1);
-  TextEditingController foodPassenggerController1 =
-      TextEditingController(text: variable.foodPassengger1);
-  TextEditingController baggagePassenggerController1 = TextEditingController();
+  TextEditingController foodPergiPassenggerController1 =
+      TextEditingController(text: variable.foodPergiPassengger1);
+  TextEditingController foodPulangPassenggerController1 =
+      TextEditingController(text: variable.foodPulangPassengger1);
+  TextEditingController baggagePergiPassenggerController1 =
+      TextEditingController();
+  TextEditingController baggagePulangPassenggerController1 =
+      TextEditingController();
 
   TextEditingController namePassenggerController2 =
       TextEditingController(text: variable.namePassengger2);
   TextEditingController phonePassenggerController2 =
       TextEditingController(text: variable.phonePassengger2);
-  TextEditingController nikPassenggerController2 =
-      TextEditingController(text: variable.nikPassengger2);
-  TextEditingController foodPassenggerController2 =
-      TextEditingController(text: variable.foodPassengger2);
-  TextEditingController baggagePassenggerController2 = TextEditingController();
+  TextEditingController foodPergiPassenggerController2 =
+      TextEditingController(text: variable.foodPergiPassengger2);
+  TextEditingController foodPulangPassenggerController2 =
+      TextEditingController(text: variable.foodPulangPassengger2);
+  TextEditingController baggagePergiPassenggerController2 =
+      TextEditingController();
+  TextEditingController baggagePulangPassenggerController2 =
+      TextEditingController();
 
   TextEditingController namePassenggerController3 =
       TextEditingController(text: variable.namePassengger3);
   TextEditingController phonePassenggerController3 =
       TextEditingController(text: variable.phonePassengger3);
-  TextEditingController nikPassenggerController3 =
-      TextEditingController(text: variable.nikPassengger3);
-  TextEditingController foodPassenggerController3 =
-      TextEditingController(text: variable.foodPassengger3);
-  TextEditingController baggagePassenggerController3 = TextEditingController();
+  TextEditingController foodPergiPassenggerController3 =
+      TextEditingController(text: variable.foodPergiPassengger3);
+  TextEditingController foodPulangPassenggerController3 =
+      TextEditingController(text: variable.foodPulangPassengger3);
+  TextEditingController baggagePergiPassenggerController3 =
+      TextEditingController();
+  TextEditingController baggagePulangPassenggerController3 =
+      TextEditingController();
 
   TextEditingController namePassenggerController4 =
       TextEditingController(text: variable.namePassengger4);
   TextEditingController phonePassenggerController4 =
       TextEditingController(text: variable.phonePassengger4);
-  TextEditingController nikPassenggerController4 =
-      TextEditingController(text: variable.nikPassengger4);
-  TextEditingController foodPassenggerController4 =
-      TextEditingController(text: variable.foodPassengger4);
-  TextEditingController baggagePassenggerController4 =
-      TextEditingController(text: variable.baggagePassengger4);
+  TextEditingController foodPergiPassenggerController4 =
+      TextEditingController(text: variable.foodPergiPassengger4);
+  TextEditingController foodPulangPassenggerController4 =
+      TextEditingController(text: variable.foodPulangPassengger4);
+  TextEditingController baggagePergiPassenggerController4 =
+      TextEditingController();
+  TextEditingController baggagePulangPassenggerController4 =
+      TextEditingController();
 
   TextEditingController promoCodeController = TextEditingController();
 
@@ -99,25 +112,45 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   getBaggageStatus() {
-    if (variable.baggagePassengger1 == '0') {
-      baggagePassenggerController1.text = 'Tidak Bawa Bagasi';
+    if (variable.baggagePergiPassengger1 == '0') {
+      baggagePergiPassenggerController1.text = 'Tidak Bawa Bagasi';
     } else {
-      baggagePassenggerController1.text = 'Bawa Bagasi';
+      baggagePergiPassenggerController1.text = 'Bawa Bagasi';
     }
-    if (variable.baggagePassengger2 == '0') {
-      baggagePassenggerController2.text = 'Tidak Bawa Bagasi';
+    if (variable.baggagePergiPassengger2 == '0') {
+      baggagePergiPassenggerController2.text = 'Tidak Bawa Bagasi';
     } else {
-      baggagePassenggerController2.text = 'Bawa Bagasi';
+      baggagePergiPassenggerController2.text = 'Bawa Bagasi';
     }
-    if (variable.baggagePassengger3 == '0') {
-      baggagePassenggerController3.text = 'Tidak Bawa Bagasi';
+    if (variable.baggagePergiPassengger3 == '0') {
+      baggagePergiPassenggerController3.text = 'Tidak Bawa Bagasi';
     } else {
-      baggagePassenggerController3.text = 'Bawa Bagasi';
+      baggagePergiPassenggerController3.text = 'Bawa Bagasi';
     }
-    if (variable.baggagePassengger4 == '0') {
-      baggagePassenggerController4.text = 'Tidak Bawa Bagasi';
+    if (variable.baggagePergiPassengger4 == '0') {
+      baggagePergiPassenggerController4.text = 'Tidak Bawa Bagasi';
     } else {
-      baggagePassenggerController4.text = 'Bawa Bagasi';
+      baggagePergiPassenggerController4.text = 'Bawa Bagasi';
+    }
+    if (variable.baggagePulangPassengger1 == '0') {
+      baggagePulangPassenggerController1.text = 'Tidak Bawa Bagasi';
+    } else {
+      baggagePulangPassenggerController1.text = 'Bawa Bagasi';
+    }
+    if (variable.baggagePulangPassengger2 == '0') {
+      baggagePulangPassenggerController2.text = 'Tidak Bawa Bagasi';
+    } else {
+      baggagePulangPassenggerController2.text = 'Bawa Bagasi';
+    }
+    if (variable.baggagePulangPassengger3 == '0') {
+      baggagePulangPassenggerController3.text = 'Tidak Bawa Bagasi';
+    } else {
+      baggagePulangPassenggerController3.text = 'Bawa Bagasi';
+    }
+    if (variable.baggagePulangPassengger4 == '0') {
+      baggagePulangPassenggerController4.text = 'Tidak Bawa Bagasi';
+    } else {
+      baggagePulangPassenggerController4.text = 'Bawa Bagasi';
     }
   }
 
@@ -397,20 +430,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
+                  //Makanan, Bagasi, Seat
                   Container(
                     height: 50,
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: nikPassenggerController1,
+                      controller: foodPergiPassenggerController1,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "NIK",
-                        hintText: "NIK",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
@@ -422,40 +460,76 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: foodPassenggerController1,
+                      controller: baggagePergiPassenggerController1,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Menu Makanan",
-                        hintText: "Menu Makanan",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      readOnly: true,
-                      style: CustomStyle.textStyle,
-                      controller: baggagePassenggerController1,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Bagasi",
-                        hintText: "Bagasi",
-                        labelStyle: CustomStyle.textStyle,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: foodPulangPassenggerController1,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: baggagePulangPassenggerController1,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
                   SizedBox(height: 20),
                   (variable.checkPulangPergi == false)
                       ? Container(
@@ -645,20 +719,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
+                  //Makanan, Bagasi, Seat
                   Container(
                     height: 50,
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: nikPassenggerController2,
+                      controller: foodPergiPassenggerController2,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "NIK",
-                        hintText: "NIK",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
@@ -670,40 +749,76 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: foodPassenggerController2,
+                      controller: baggagePergiPassenggerController2,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Menu Makanan",
-                        hintText: "Menu Makanan",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      readOnly: true,
-                      style: CustomStyle.textStyle,
-                      controller: baggagePassenggerController2,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Bagasi",
-                        hintText: "Bagasi",
-                        labelStyle: CustomStyle.textStyle,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: foodPulangPassenggerController2,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: baggagePulangPassenggerController2,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
                   SizedBox(height: 20),
                   (variable.checkPulangPergi == false)
                       ? Container(
@@ -724,13 +839,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger2 == null)
                                             ? ""
                                             : variable.seatPergiPassengger2,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -757,13 +879,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger2 == null)
                                             ? ""
                                             : variable.seatPergiPassengger2,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -782,13 +911,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPulangPassengger2 == null)
                                             ? ""
                                             : variable.seatPulangPassengger2,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -872,20 +1008,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
+                  //Makanan, Bagasi, Seat
                   Container(
                     height: 50,
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: nikPassenggerController3,
+                      controller: foodPergiPassenggerController3,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "NIK",
-                        hintText: "NIK",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
@@ -897,40 +1038,76 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: foodPassenggerController3,
+                      controller: baggagePergiPassenggerController3,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Menu Makanan",
-                        hintText: "Menu Makanan",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      readOnly: true,
-                      style: CustomStyle.textStyle,
-                      controller: baggagePassenggerController3,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Bagasi",
-                        hintText: "Bagasi",
-                        labelStyle: CustomStyle.textStyle,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: foodPulangPassenggerController3,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: baggagePulangPassenggerController3,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
                   SizedBox(height: 20),
                   (variable.checkPulangPergi == false)
                       ? Container(
@@ -951,13 +1128,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger3 == null)
                                             ? ""
                                             : variable.seatPergiPassengger3,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -984,13 +1168,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger3 == null)
                                             ? ""
                                             : variable.seatPergiPassengger3,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1009,13 +1200,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPulangPassengger3 == null)
                                             ? ""
                                             : variable.seatPulangPassengger3,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1099,20 +1297,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
+                  //Makanan, Bagasi, Seat
                   Container(
                     height: 50,
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: nikPassenggerController4,
+                      controller: foodPergiPassenggerController4,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "NIK",
-                        hintText: "NIK",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Menu Makanan Pergi"
+                            : "Menu Makanan",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
@@ -1124,40 +1327,76 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: TextFormField(
                       readOnly: true,
                       style: CustomStyle.textStyle,
-                      controller: foodPassenggerController4,
+                      controller: baggagePergiPassenggerController4,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                         focusedBorder: CustomStyle.focusBorder,
                         enabledBorder: CustomStyle.focusErrorBorder,
                         focusedErrorBorder: CustomStyle.focusErrorBorder,
                         errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Menu Makanan",
-                        hintText: "Menu Makanan",
+                        labelText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
+                        hintText: (variable.checkPulangPergi == true)
+                            ? "Bagasi Pergi"
+                            : "Bagasi",
                         labelStyle: CustomStyle.textStyle,
                         hintStyle: CustomStyle.textStyle,
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      readOnly: true,
-                      style: CustomStyle.textStyle,
-                      controller: baggagePassenggerController4,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        labelText: "Bagasi",
-                        hintText: "Bagasi",
-                        labelStyle: CustomStyle.textStyle,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: foodPulangPassenggerController4,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Menu Makanan Pulang"
+                                  : "Menu Makanan",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: TextFormField(
+                            readOnly: true,
+                            style: CustomStyle.textStyle,
+                            controller: baggagePulangPassenggerController4,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              labelText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              hintText: (variable.checkPulangPergi == true)
+                                  ? "Bagasi Pulang"
+                                  : "Bagasi",
+                              labelStyle: CustomStyle.textStyle,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                          ),
+                        )
+                      : Container(),
                   SizedBox(height: 20),
                   (variable.checkPulangPergi == false)
                       ? Container(
@@ -1178,13 +1417,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger4 == null)
                                             ? ""
                                             : variable.seatPergiPassengger4,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1211,13 +1457,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPergiPassengger4 == null)
                                             ? ""
                                             : variable.seatPergiPassengger4,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1236,13 +1489,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text("No Kursi: "),
+                                      Text(
+                                        "No Kursi: ",
+                                        style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
                                       Text(
                                         (variable.seatPulangPassengger4 == null)
                                             ? ""
                                             : variable.seatPulangPassengger4,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
                                     ],
                                   )
@@ -1270,32 +1530,31 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             children: [
               _data(
-                variable.pergi_pickup_trip_location +
+                variable.selectedFromCity.toString() +
                     " - " +
-                    variable.pergi_drop_trip_location +
+                    variable.selectedToCity.toString() +
                     " x " +
                     variable.selectedJumlahPenumpang,
-                currencyFormatterD.format(double.parse(variable.pergi_price)),
+                rupiah(variable.pergi_price),
               ),
               (variable.checkPulangPergi == true)
                   ? _data(
-                      variable.pulang_pickup_trip_location +
+                      variable.selectedToCity.toString() +
                           " - " +
-                          variable.pulang_drop_trip_location +
+                          variable.selectedFromCity.toString() +
                           " x " +
                           variable.selectedJumlahPenumpang,
-                      currencyFormatter
-                          .format(double.parse(variable.pulang_price)),
+                      rupiah(variable.pulang_price),
                     )
                   : Padding(padding: EdgeInsets.all(0)),
-              _data("Promo", promoValue.toString()),
+              _data("Promo", rupiah(promoValue)),
               Divider(
                 color: Colors.grey,
               ),
               SizedBox(height: 10),
               _data(
                 "Total",
-                currencyFormatter.format(grandTotalPrice),
+                rupiah(grandTotalPrice),
               ),
             ],
           ),
@@ -1314,7 +1573,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
           Text(
-            '\Rp ${price.toString()}',
+            '${price.toString()}',
             style: TextStyle(
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
@@ -1433,7 +1692,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               style: TextStyle(
                                   fontSize: Dimensions.defaultTextSize))
                           : Text(
-                              variable.selectedPayment,
+                              (variable.selectedPaymentCategories == 'EWALLET')
+                                  ? variable.selectedPayment
+                                      .replaceAll('ID_', '')
+                                  : variable.selectedPayment,
                               style: TextStyle(
                                   fontSize: Dimensions.defaultTextSize),
                             )),
@@ -1479,63 +1741,99 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
         ),
         onTap: () async {
-          setState(() {
-            isLoading = true;
-          });
-          isLoading ? _onLoading() : Container();
-          await BookingList.list().then((value) {
-            if (variable.checkPulangPergi == false &&
-                jsonDecode(value)['pergi']['status'] == true) {
-              var payment = jsonDecode(value)['payment'];
-              variable.status = payment['status'];
-              variable.bank_code = payment['bank_code'];
-              variable.merchant_code = payment['merchant_code'];
-              variable.name = payment['name'];
-              variable.account_number = payment['account_number'];
-              variable.external_id = payment['external_id'];
-              variable.total_price = payment['total_price'].toString();
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => InvoiceScreen()));
-              setState(() {
-                isLoading = false;
-              });
-            } else {
-              if (variable.checkPulangPergi == true &&
-                  jsonDecode(value)['pergi']['status'] == true &&
-                  jsonDecode(value)['pulang']['status'] == true) {
+          if (variable.selectedPayment == null ||
+              variable.selectedPayment == "") {
+            Fluttertoast.showToast(
+              msg: "Pilih Metode Pembayaran terlebih dahulu",
+              backgroundColor: CustomColor.red,
+              textColor: CustomColor.white,
+              gravity: ToastGravity.CENTER,
+            );
+          } else {
+            setState(() {
+              isLoading = true;
+            });
+            isLoading ? _onLoading() : Container();
+            await BookingList.list().then((value) {
+              if (variable.checkPulangPergi == false &&
+                  jsonDecode(value)['pergi']['status'] == true) {
                 var payment = jsonDecode(value)['payment'];
                 variable.status = payment['status'];
-
                 variable.bank_code = payment['bank_code'];
                 variable.merchant_code = payment['merchant_code'];
                 variable.name = payment['name'];
                 variable.account_number = payment['account_number'];
                 variable.external_id = payment['external_id'];
                 variable.total_price = payment['total_price'].toString();
-                Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => InvoiceScreen()));
-                setState(() {
-                  isLoading = false;
-                });
+                if (variable.selectedPaymentCategories == 'EWALLET') {
+                  String payment_link =
+                      payment['actions']['mobile_web_checkout_url'];
+                  _ewalletUrl(context, payment_link);
+                  setState(() {
+                    isLoading = false;
+                  });
+                } else {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => InvoiceScreen()));
+                  setState(() {
+                    isLoading = false;
+                  });
+                }
               } else {
-                Navigator.pop(context);
-                setState(() {
-                  isLoading = false;
-                });
-                Fluttertoast.showToast(
-                  msg: "Kursi sudah di pesan",
-                  backgroundColor: CustomColor.red,
-                  textColor: CustomColor.white,
-                  gravity: ToastGravity.CENTER,
-                );
+                if (variable.checkPulangPergi == true &&
+                    jsonDecode(value)['pergi']['status'] == true &&
+                    jsonDecode(value)['pulang']['status'] == true) {
+                  var payment = jsonDecode(value)['payment'];
+                  variable.status = payment['status'];
+                  variable.bank_code = payment['bank_code'];
+                  variable.merchant_code = payment['merchant_code'];
+                  variable.name = payment['name'];
+                  variable.account_number = payment['account_number'];
+                  variable.external_id = payment['external_id'];
+                  variable.total_price = payment['total_price'].toString();
+                  if (variable.selectedPaymentCategories == 'EWALLET') {
+                    String payment_link =
+                        payment['actions']['mobile_web_checkout_url'];
+                    _ewalletUrl(context, payment_link);
+                    setState(() {
+                      isLoading = false;
+                    });
+                  } else {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => InvoiceScreen()));
+                    setState(() {
+                      isLoading = false;
+                    });
+                  }
+                } else {
+                  Navigator.pop(context);
+                  setState(() {
+                    isLoading = false;
+                  });
+                  Fluttertoast.showToast(
+                    msg: "Kursi sudah di pesan",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                }
               }
-            }
-          });
+            });
+          }
         },
       ),
     );
+  }
+
+  _ewalletUrl(BuildContext context, String payment_url) async {
+    if (await launch(payment_url)) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => DashboardScreen(1)));
+    } else {
+      throw 'Could not launch $payment_url';
+    }
   }
 
   void _navigatePickPayment(BuildContext context) async {

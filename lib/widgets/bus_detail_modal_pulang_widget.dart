@@ -1,12 +1,11 @@
 // ignore_for_file: unused_element, non_constant_identifier_names, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:indonesia/indonesia.dart';
 import 'package:juragan99/data/bus_pulang.dart';
-import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/slot_pulang.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/colors.dart';
-import 'package:juragan99/utils/formater.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class BusDetailModalPulangWidget extends StatefulWidget {
@@ -18,6 +17,7 @@ class BusDetailModalPulangWidget extends StatefulWidget {
   final String pickup_trip_location;
   final String drop_trip_location;
   final String type;
+  final String type_class;
   final String fleet_seats;
   final String fleet_registration_id;
   final String price;
@@ -36,6 +36,7 @@ class BusDetailModalPulangWidget extends StatefulWidget {
     this.pickup_trip_location,
     this.drop_trip_location,
     this.type,
+    this.type_class,
     this.fleet_seats,
     this.fleet_registration_id,
     this.price,
@@ -57,14 +58,12 @@ class _BusDetailModalPulangWidgetState
   List list = [];
   int index = 0;
   List<SlotPulang> _slotList = [];
-  List<ClassList> _classList = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     getSlot();
-    getClass();
   }
 
   getSlot() async {
@@ -77,14 +76,6 @@ class _BusDetailModalPulangWidgetState
       setState(() {
         _slotList = value;
         isLoading = true;
-      });
-    });
-  }
-
-  getClass() async {
-    await GetClassList.list(widget.type).then((value) {
-      setState(() {
-        _classList = value;
       });
     });
   }
@@ -173,7 +164,7 @@ class _BusDetailModalPulangWidgetState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text((_classList.length == 0) ? "" : _classList[0].kelas,
+          Text(widget.type_class,
               style: TextStyle(fontSize: Dimensions.defaultTextSize)),
           Row(
             children: [
@@ -209,7 +200,7 @@ class _BusDetailModalPulangWidgetState
           Row(
             children: [
               Text(
-                'Rp. ' + currencyFormatter.format(double.parse(widget.price)),
+                rupiah(widget.price),
                 style: TextStyle(
                     color: CustomColor.red,
                     fontWeight: FontWeight.bold,

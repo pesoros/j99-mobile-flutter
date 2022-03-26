@@ -40,22 +40,3 @@ class Payment {
     return data;
   }
 }
-
-// class Payment {
-//   final int id;
-//   final String name;
-//   final bool isAvailable;
-
-//   const Payment({this.id, this.name, this.isAvailable});
-// }
-
-// class PaymentList {
-//   static List<Payment> list() {
-//     const data = <Payment>[
-//       Payment(id: 1, name: 'BCA', isAvailable: true),
-//       Payment(id: 2, name: 'BRI', isAvailable: true),
-//       Payment(id: 3, name: 'Mandiri', isAvailable: true),
-//     ];
-//     return data;
-//   }
-// }

@@ -1,14 +1,12 @@
 // ignore_for_file: unused_element, non_constant_identifier_names
 
 import 'package:dotted_line/dotted_line.dart';
-import 'package:juragan99/data/class.dart';
+import 'package:indonesia/indonesia.dart';
 import 'package:juragan99/data/bus_pulang.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:juragan99/utils/dimensions.dart';
-import 'package:juragan99/utils/formater.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -24,6 +22,7 @@ class BusTicketPulangWidget extends StatefulWidget {
   final String pickup_trip_location;
   final String drop_trip_location;
   final String type;
+  final String type_class;
   final String fleet_seats;
   final String fleet_registration_id;
   final String price;
@@ -45,6 +44,7 @@ class BusTicketPulangWidget extends StatefulWidget {
     this.pickup_trip_location,
     this.drop_trip_location,
     this.type,
+    this.type_class,
     this.fleet_seats,
     this.fleet_registration_id,
     this.price,
@@ -63,22 +63,10 @@ class BusTicketPulangWidget extends StatefulWidget {
 
 class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
   BusPulang bus;
-  List<ClassList> _classList = [];
 
   @override
   void initState() {
     super.initState();
-    getClass();
-  }
-
-  getClass() async {
-    await GetClassList.list(
-      widget.type,
-    ).then((value) {
-      setState(() {
-        _classList = value;
-      });
-    });
   }
 
   @override
@@ -108,188 +96,180 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            (_classList.length == 0)
-                ? Shimmer.fromColors(
-                    child: Text("Kelas Bus"),
-                    baseColor: CustomColor.white,
-                    highlightColor: CustomColor.red)
-                : Text(
-                    _classList[0].kelas,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: Dimensions.defaultTextSize),
-                  ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.electrical_services,
-                  size: Dimensions.defaultTextSize,
-                  color: CustomColor.grey,
-                ),
-                Icon(
-                  Icons.smoking_rooms,
-                  size: Dimensions.defaultTextSize,
-                  color: CustomColor.grey,
-                ),
-                Icon(
-                  Icons.wc,
-                  size: Dimensions.defaultTextSize,
-                  color: CustomColor.grey,
-                ),
-                Icon(
-                  Icons.coffee,
-                  size: Dimensions.defaultTextSize,
-                  color: CustomColor.grey,
-                ),
-              ],
+            Text(
+              widget.bus.pulang_type_class,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Dimensions.defaultTextSize),
             ),
             Row(
               children: [
                 Text(
-                  'Rp. ' +
-                      currencyFormatter
-                          .format(double.parse(widget.bus.pulang_price)),
+                  "Sisa Kursi: ",
+                  style: TextStyle(
+                      color: CustomColor.darkGrey,
+                      fontSize: Dimensions.smallTextSize),
+                ),
+                Text(
+                  widget.bus.pulang_seatAvail.toString(),
                   style: TextStyle(
                       color: CustomColor.red,
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimensions.defaultTextSize),
+                      fontSize: Dimensions.smallTextSize),
                 ),
               ],
+            ),
+          ],
+        ),
+        SizedBox(height: 10),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(widget.bus.pulang_start + ": ",
+                style: TextStyle(
+                    color: CustomColor.grey,
+                    fontSize: Dimensions.defaultTextSize)),
+            Text(widget.pickup_trip_location,
+                style: TextStyle(
+                    color: CustomColor.grey,
+                    fontSize: Dimensions.defaultTextSize)),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(widget.duration,
+                style: TextStyle(
+                    color: CustomColor.grey,
+                    fontSize: Dimensions.smallTextSize)),
+            SizedBox(width: 10),
+            DottedLine(
+              direction: Axis.vertical,
+              lineLength: 20,
+              lineThickness: 1,
+              dashColor: CustomColor.grey,
             )
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(widget.bus.pulang_end + ": ",
+                style: TextStyle(
+                    color: CustomColor.grey,
+                    fontSize: Dimensions.defaultTextSize)),
+            Text(widget.drop_trip_location,
+                style: TextStyle(
+                    color: CustomColor.grey,
+                    fontSize: Dimensions.defaultTextSize)),
           ],
         ),
         SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(widget.bus.pulang_start,
-                    style: TextStyle(
-                        color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
-                Text(widget.pickup_trip_location,
-                    style: TextStyle(
-                        color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
+                Text(
+                  rupiah(widget.bus.pulang_price),
+                  style: TextStyle(
+                      color: CustomColor.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimensions.defaultTextSize),
+                ),
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Row(
               children: [
-                Text(widget.duration,
-                    style: TextStyle(
-                        color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
-                SizedBox(height: 5),
-                DottedLine(
-                  direction: Axis.horizontal,
-                  lineLength: 20,
-                  lineThickness: 1,
-                  dashColor: CustomColor.grey,
+                GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: CustomColor.darkGrey,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Icon(
+                      Icons.event_seat,
+                      color: CustomColor.white,
+                      size: Dimensions.defaultTextSize,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                          barrierDismissible: true,
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          transitionDuration: Duration(milliseconds: 300),
+                          opaque: false,
+                          pageBuilder: (_, __, ___) =>
+                              BusDetailModalPulangWidget(
+                                bus: widget.bus,
+                                type: widget.bus.pulang_type,
+                                type_class: widget.bus.pulang_type_class,
+                                price: widget.bus.pulang_price,
+                                start: widget.bus.pulang_start,
+                                end: widget.bus.pulang_end,
+                                pickup_trip_location:
+                                    widget.bus.pulang_pickup_trip_location,
+                                drop_trip_location:
+                                    widget.bus.pulang_drop_trip_location,
+                                seatAvail: widget.bus.pulang_seatAvail,
+                                fleet_registration_id:
+                                    widget.bus.pulang_fleet_registration_id,
+                                trip_id_no: widget.bus.pulang_trip_id_no,
+                                trip_route_id: widget.bus.pulang_trip_route_id,
+                              ),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(0.0, 1.0);
+                            const end = Offset.zero;
+                            const curve = Curves.ease;
+
+                            final tween = Tween(begin: begin, end: end);
+                            final curvedAnimation = CurvedAnimation(
+                              parent: animation,
+                              curve: curve,
+                            );
+
+                            return SlideTransition(
+                              position: tween.animate(curvedAnimation),
+                              child: child,
+                            );
+                          }),
+                    );
+                  },
+                ),
+                SizedBox(width: 10),
+                GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 60,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: CustomColor.red,
+                        borderRadius: BorderRadius.circular(6)),
+                    child: Text(
+                      "Pesan",
+                      style: TextStyle(
+                          color: CustomColor.white,
+                          fontSize: Dimensions.smallTextSize),
+                    ),
+                  ),
+                  onTap: () {
+                    _saveBus(context);
+                    (variable.token == null)
+                        ? Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignInScreen()))
+                        : Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PassenggerFormScreen()));
+                  },
                 )
               ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(widget.bus.pulang_end,
-                    style: TextStyle(
-                        color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
-                Text(widget.drop_trip_location,
-                    style: TextStyle(
-                        color: CustomColor.grey,
-                        fontSize: Dimensions.extraSmallTextSize)),
-              ],
-            ),
-            GestureDetector(
-              child: Container(
-                alignment: Alignment.center,
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                    color: CustomColor.darkGrey,
-                    borderRadius: BorderRadius.circular(6)),
-                child: Icon(Icons.event_seat,
-                    color: CustomColor.white, size: Dimensions.defaultTextSize),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                      barrierDismissible: true,
-                      barrierColor: Colors.black.withOpacity(0.5),
-                      transitionDuration: Duration(milliseconds: 300),
-                      opaque: false,
-                      pageBuilder: (_, __, ___) => BusDetailModalPulangWidget(
-                            bus: widget.bus,
-                            type: widget.bus.pulang_type,
-                            price: widget.bus.pulang_price,
-                            start: widget.bus.pulang_start,
-                            end: widget.bus.pulang_end,
-                            pickup_trip_location:
-                                widget.bus.pulang_pickup_trip_location,
-                            drop_trip_location:
-                                widget.bus.pulang_drop_trip_location,
-                            seatAvail: widget.bus.pulang_seatAvail,
-                            fleet_registration_id:
-                                widget.bus.pulang_fleet_registration_id,
-                            trip_id_no: widget.bus.pulang_trip_id_no,
-                            trip_route_id: widget.bus.pulang_trip_route_id,
-                          ),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        const begin = Offset(0.0, 1.0);
-                        const end = Offset.zero;
-                        const curve = Curves.ease;
-
-                        final tween = Tween(begin: begin, end: end);
-                        final curvedAnimation = CurvedAnimation(
-                          parent: animation,
-                          curve: curve,
-                        );
-
-                        return SlideTransition(
-                          position: tween.animate(curvedAnimation),
-                          child: child,
-                        );
-                      }),
-                );
-              },
-            ),
-            GestureDetector(
-              child: Container(
-                alignment: Alignment.center,
-                width: 60,
-                height: 30,
-                decoration: BoxDecoration(
-                    color: CustomColor.red,
-                    borderRadius: BorderRadius.circular(6)),
-                child: Text(
-                  "Pesan",
-                  style: TextStyle(
-                      color: CustomColor.white,
-                      fontSize: Dimensions.smallTextSize),
-                ),
-              ),
-              onTap: () {
-                _saveBus(context);
-                (variable.token == null)
-                    ? Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SignInScreen()))
-                    : Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PassenggerFormScreen()));
-              },
             )
           ],
-        ),
+        )
       ],
     );
   }
@@ -303,6 +283,7 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
           widget.bus.pulang_pickup_trip_location;
       variable.pulang_drop_trip_location = widget.bus.pulang_drop_trip_location;
       variable.pulang_type = widget.bus.pulang_type;
+      variable.pulang_type_class = widget.bus.pulang_type_class;
       variable.pulang_fleet_seats = widget.bus.pulang_fleet_seats;
       variable.pulang_fleet_registration_id =
           widget.bus.pulang_fleet_registration_id;

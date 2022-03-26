@@ -1,8 +1,15 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, must_be_immutable, unused_element, unused_field, non_constant_identifier_names, missing_required_param
 
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:juragan99/data/city.dart';
+import 'package:juragan99/data/class.dart';
+import 'package:juragan99/data/unit_type.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/search_result_pulang_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -11,6 +18,7 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/widgets/filter_chip_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:http/http.dart' as http;
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class FilterPulangScreen extends StatefulWidget {
@@ -28,6 +36,54 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
     "Kedatangan Awal",
     "Kedatangan Akhir",
   ];
+
+  String _valUnitType;
+  List unitType = [];
+
+  String _valFromCity;
+  String _valToCity;
+  List city = [];
+
+  DateTime selectedDatePulang = DateTime.now();
+
+  String _valJumlahPenumpang;
+  List<String> jumlahPenumpang = ["1", "2", "3", "4"];
+
+  String _valClassList;
+  List classList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getUnitType();
+    getCity();
+    getClassList();
+  }
+
+  getUnitType() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/dataunit");
+    var data = UnitTypeModel.fromJsonList(response.data);
+    setState(() {
+      unitType = data;
+    });
+  }
+
+  getCity() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/datakota");
+    var data = CityModel.fromJsonList(response.data);
+    setState(() {
+      city = data;
+    });
+  }
+
+  getClassList() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/datakelas");
+    var data = ClassModel.fromJsonList(response.data);
+    setState(() {
+      classList = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -64,53 +120,135 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
       ),
       child: Column(
         children: <Widget>[
-          _chooseClassWidget(context),
-          SizedBox(height: 30),
-          _chooseBusServicesWidget(context),
+          Center(
+              child: Text(
+            "Filter",
+            style: TextStyle(fontSize: Dimensions.defaultTextSize),
+          )),
+          SizedBox(height: 10),
+          _unitType(context),
+          SizedBox(height: 10),
+          _datePulang(context),
+          // SizedBox(height: 10),
+          // _jumlahPenumpang(context),
+          SizedBox(height: 10),
+          _cityFrom(context),
+          SizedBox(height: 10),
+          _cityTo(context),
+          SizedBox(height: 10),
+          _classList(context),
+          SizedBox(height: 10),
+          _sortBy(context),
         ],
       ),
     );
   }
 
-  _chooseClassWidget(BuildContext context) {
+  _unitType(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleContainer("Kelas"),
-        SizedBox(
-          height: Dimensions.heightSize,
-        ),
         Padding(
           padding: const EdgeInsets.only(left: 0),
           child: Align(
-            alignment: Alignment.centerLeft,
             child: Container(
-                child: Wrap(
-              spacing: 5.0,
-              runSpacing: 3.0,
-              children: <Widget>[
-                FilterChipWidget(chipName: 'Executive'),
-                FilterChipWidget(chipName: 'Superior'),
-              ],
-            )),
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Tipe Unit"),
+                value: _valUnitType,
+                items: unitType.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valUnitType = value.toString();
+                  });
+                },
+              ),
+            ),
           ),
         ),
       ],
     );
   }
 
-  _chooseBusServicesWidget(BuildContext context) {
+  _cityFrom(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleContainer("Urutkan berdasarkan"),
-        SizedBox(
-          height: Dimensions.heightSize,
-        ),
         Padding(
           padding: const EdgeInsets.only(left: 0),
           child: Align(
-            alignment: Alignment.centerLeft,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kota Keberangkatan"),
+                value: _valFromCity,
+                items: city.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valFromCity = value.toString();
+                    variable.selectedFromCity = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _cityTo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kota Tujuan"),
+                value: _valToCity,
+                items: city.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valToCity = value.toString();
+                    variable.selectedToCity = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _sortBy(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: DropdownButton(
@@ -137,13 +275,116 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
     );
   }
 
-  Widget _titleContainer(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-          color: Colors.black,
-          fontSize: Dimensions.largeTextSize,
-          fontWeight: FontWeight.bold),
+  _datePulang(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                        color: Colors.black.withOpacity(0.1), width: 1))),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(),
+                child: Text(
+                  variable.datePulang,
+                  style: TextStyle(
+                      color: CustomColor.greyColor,
+                      fontSize: Dimensions.defaultTextSize),
+                ),
+              ),
+            ),
+          ),
+          onTap: () {
+            __datePulang(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  __datePulang(BuildContext context) async {
+    final DateTime pickedPulang = await DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        minTime: selectedDatePulang,
+        maxTime: selectedDatePulang.add(Duration(days: 90)),
+        currentTime: selectedDatePulang,
+        locale: LocaleType.id);
+    setState(() {
+      selectedDatePulang = pickedPulang;
+      variable.datePulang = "${selectedDatePulang.toLocal()}".split(' ')[0];
+    });
+  }
+
+  _jumlahPenumpang(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Jumlah Penumpang"),
+                value: _valJumlahPenumpang,
+                items: jumlahPenumpang.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valJumlahPenumpang = value;
+                    variable.selectedJumlahPenumpang = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _classList(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kelas"),
+                value: _valClassList,
+                items: classList.map((value) {
+                  var id = value.id;
+                  var kelas = value.kelas;
+                  return DropdownMenuItem(
+                    child: Text(kelas.toString()),
+                    value: id.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valClassList = value.toString();
+                    variable.selectedKelasArmada = value.toString();
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -167,85 +408,12 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).pop();
+          if (_valClassList == null) {
+            variable.selectedKelasArmada = "";
+          }
+          Navigator.pop(context);
         },
       ),
     );
-  }
-
-  openProgressingDialog(BuildContext context) {
-    showGeneralDialog(
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierDismissible: true,
-        barrierColor: Colors.white.withOpacity(0.6),
-        transitionDuration: Duration(milliseconds: 700),
-        context: context,
-        pageBuilder: (_, __, ___) {
-          return Material(
-            type: MaterialType.transparency,
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: Dimensions.marginSize,
-                  right: Dimensions.marginSize,
-                ),
-                child: Container(
-                  height: 300,
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(bottom: 12, left: 15, right: 15),
-                  decoration: BoxDecoration(
-                    color: CustomColor.primaryColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
-                      SizedBox(
-                        height: Dimensions.heightSize * 2,
-                      ),
-                      GestureDetector(
-                        child: Container(
-                          height: Dimensions.buttonHeight,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius)),
-                          child: Center(
-                            child: Text(
-                              Strings.cancel.toUpperCase(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Dimensions.largeTextSize,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => DashboardScreen(0)));
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-        transitionBuilder: (_, anim, __, child) {
-          return SlideTransition(
-            position:
-                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
-            child: child,
-          );
-        });
   }
 }

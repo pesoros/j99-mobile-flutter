@@ -1,5 +1,7 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, non_constant_identifier_names
 
+import 'package:juragan99/data/package.dart';
+import 'package:juragan99/screens/package_result.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/bus_ticket_pergi_widget.dart';
@@ -14,7 +16,7 @@ class SearchPackageScreen extends StatefulWidget {
 }
 
 class _SearchPackageScreenState extends State<SearchPackageScreen> {
-  TextEditingController numberController = TextEditingController();
+  TextEditingController codeController = TextEditingController();
 
   @override
   void initState() {
@@ -99,14 +101,7 @@ class _SearchPackageScreenState extends State<SearchPackageScreen> {
                                   height: 50,
                                   child: TextFormField(
                                     style: CustomStyle.textStyle,
-                                    controller: numberController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
+                                    controller: codeController,
                                     decoration: InputDecoration(
                                       labelText: "Nomor Resi",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -147,8 +142,10 @@ class _SearchPackageScreenState extends State<SearchPackageScreen> {
                           ),
                         ),
                         onTap: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => SearchResultScreen()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PackageResultScreen(
+                                    code: codeController.text,
+                                  )));
                         },
                       ),
                     ),

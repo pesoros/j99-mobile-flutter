@@ -1,9 +1,16 @@
-// ignore_for_file: unused_import, must_be_immutable, unused_element
+// ignore_for_file: unused_import, must_be_immutable, unused_element, unused_field, non_constant_identifier_names, missing_required_param
 
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:juragan99/data/city.dart';
+import 'package:juragan99/data/class.dart';
+import 'package:juragan99/data/unit_type.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/filter_pulang_screen.dart';
+import 'package:juragan99/screens/search_result_pergi_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -12,6 +19,7 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/widgets/filter_chip_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:http/http.dart' as http;
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class FilterPergiScreen extends StatefulWidget {
@@ -29,6 +37,54 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
     "Kedatangan Awal",
     "Kedatangan Akhir",
   ];
+
+  String _valUnitType;
+  List unitType = [];
+
+  String _valFromCity;
+  String _valToCity;
+  List city = [];
+
+  DateTime selectedDatePergi = DateTime.now();
+
+  String _valJumlahPenumpang;
+  List<String> jumlahPenumpang = ["1", "2", "3", "4"];
+
+  String _valClassList;
+  List classList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getUnitType();
+    getCity();
+    getClassList();
+  }
+
+  getUnitType() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/dataunit");
+    var data = UnitTypeModel.fromJsonList(response.data);
+    setState(() {
+      unitType = data;
+    });
+  }
+
+  getCity() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/datakota");
+    var data = CityModel.fromJsonList(response.data);
+    setState(() {
+      city = data;
+    });
+  }
+
+  getClassList() async {
+    var response = await Dio().post("https://api-j99.pesoros.com/datakelas");
+    var data = ClassModel.fromJsonList(response.data);
+    setState(() {
+      classList = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -65,35 +121,122 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
       ),
       child: Column(
         children: <Widget>[
-          // _chooseClassWidget(context),
-          SizedBox(height: 30),
+          Center(
+              child: Text(
+            "Filter",
+            style: TextStyle(fontSize: Dimensions.defaultTextSize),
+          )),
+          SizedBox(height: 10),
+          _unitType(context),
+          SizedBox(height: 10),
+          _datePergi(context),
+          SizedBox(height: 10),
+          _jumlahPenumpang(context),
+          SizedBox(height: 10),
+          _cityFrom(context),
+          SizedBox(height: 10),
+          _cityTo(context),
+          SizedBox(height: 10),
+          _classList(context),
+          SizedBox(height: 10),
           _sortBy(context),
         ],
       ),
     );
   }
 
-  _chooseClassWidget(BuildContext context) {
+  _unitType(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleContainer("Kelas"),
-        SizedBox(
-          height: Dimensions.heightSize,
-        ),
         Padding(
           padding: const EdgeInsets.only(left: 0),
           child: Align(
-            alignment: Alignment.centerLeft,
             child: Container(
-                child: Wrap(
-              spacing: 5.0,
-              runSpacing: 3.0,
-              children: <Widget>[
-                FilterChipWidget(chipName: 'Executive'),
-                FilterChipWidget(chipName: 'Superior'),
-              ],
-            )),
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Tipe Unit"),
+                value: _valUnitType,
+                items: unitType.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valUnitType = value.toString();
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _cityFrom(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kota Keberangkatan"),
+                value: _valFromCity,
+                items: city.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valFromCity = value.toString();
+                    variable.selectedFromCity = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _cityTo(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kota Tujuan"),
+                value: _valToCity,
+                items: city.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value.toString()),
+                    value: value.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valToCity = value.toString();
+                    variable.selectedToCity = value;
+                  });
+                },
+              ),
+            ),
           ),
         ),
       ],
@@ -104,10 +247,6 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleContainer("Urutkan berdasarkan"),
-        SizedBox(
-          height: Dimensions.heightSize,
-        ),
         Padding(
           padding: const EdgeInsets.only(left: 0),
           child: Align(
@@ -137,13 +276,116 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
     );
   }
 
-  Widget _titleContainer(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-          color: Colors.black,
-          fontSize: Dimensions.largeTextSize,
-          fontWeight: FontWeight.bold),
+  _datePergi(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                        color: Colors.black.withOpacity(0.1), width: 1))),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(),
+                child: Text(
+                  variable.datePergi,
+                  style: TextStyle(
+                      color: CustomColor.greyColor,
+                      fontSize: Dimensions.defaultTextSize),
+                ),
+              ),
+            ),
+          ),
+          onTap: () {
+            __datePergi(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  __datePergi(BuildContext context) async {
+    final DateTime pickedPergi = await DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        minTime: selectedDatePergi,
+        maxTime: selectedDatePergi.add(Duration(days: 90)),
+        currentTime: selectedDatePergi,
+        locale: LocaleType.id);
+    setState(() {
+      selectedDatePergi = pickedPergi;
+      variable.datePergi = "${selectedDatePergi.toLocal()}".split(' ')[0];
+    });
+  }
+
+  _jumlahPenumpang(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Jumlah Penumpang"),
+                value: _valJumlahPenumpang,
+                items: jumlahPenumpang.map((value) {
+                  return DropdownMenuItem(
+                    child: Text(value),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valJumlahPenumpang = value;
+                    variable.selectedJumlahPenumpang = value;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _classList(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 0),
+          child: Align(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton(
+                isExpanded: true,
+                hint: Text("Kelas"),
+                value: _valClassList,
+                items: classList.map((value) {
+                  var id = value.id;
+                  var kelas = value.kelas;
+                  return DropdownMenuItem(
+                    child: Text(kelas.toString()),
+                    value: id.toString(),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _valClassList = value.toString();
+                    variable.selectedKelasArmada = value.toString();
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -167,7 +409,10 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
           ),
         ),
         onTap: () {
-          Navigator.of(context).pop();
+          if (_valClassList == null) {
+            variable.selectedKelasArmada = "";
+          }
+          Navigator.pop(context);
         },
       ),
     );

@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  indonesia: ^1.0.1
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.20
   smooth_star_rating: ^1.1.1

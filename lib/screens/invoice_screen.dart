@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:indonesia/indonesia.dart';
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/slot_pergi.dart';
@@ -8,7 +9,6 @@ import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
-import 'package:juragan99/utils/formater.dart';
 import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/back_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,34 +23,9 @@ class InvoiceScreen extends StatefulWidget {
 }
 
 class _InvoiceWidgetScreen extends State<InvoiceScreen> {
-  List<ClassList> _classListPergi = [];
-  List<ClassList> _classListPulang = [];
-
   @override
   void initState() {
     super.initState();
-    getClassPergi();
-    getClassPulang();
-  }
-
-  getClassPergi() async {
-    await GetClassList.list(
-      variable.pergi_type,
-    ).then((value) {
-      setState(() {
-        _classListPergi = value;
-      });
-    });
-  }
-
-  getClassPulang() async {
-    await GetClassList.list(
-      variable.pergi_type,
-    ).then((value) {
-      setState(() {
-        _classListPulang = value;
-      });
-    });
   }
 
   @override
@@ -193,41 +168,25 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           child: Column(
             children: [
               _data(
-                  (_classListPergi.length == 0)
-                      ? variable.pergi_type +
-                          ": " +
-                          variable.pergi_pickup_trip_location +
-                          " - " +
-                          variable.pergi_drop_trip_location
-                      : _classListPergi[0].kelas +
-                          ": " +
-                          variable.pergi_pickup_trip_location +
-                          " - " +
-                          variable.pergi_drop_trip_location,
+                  variable.pergi_type_class +
+                      ": " +
+                      variable.selectedToCity.toString() +
+                      " - " +
+                      variable.selectedFromCity.toString(),
                   "x " + variable.selectedJumlahPenumpang + " Tiket"),
               (variable.checkPulangPergi == true)
                   ? _data(
-                      (_classListPulang.length == 0)
-                          ? variable.pergi_type +
-                              ": " +
-                              variable.pulang_pickup_trip_location +
-                              " - " +
-                              variable.pulang_drop_trip_location
-                          : _classListPulang[0].kelas +
-                              ": " +
-                              variable.pulang_pickup_trip_location +
-                              " - " +
-                              variable.pulang_drop_trip_location,
+                      variable.pulang_type_class +
+                          ": " +
+                          variable.selectedToCity.toString() +
+                          " - " +
+                          variable.selectedFromCity.toString(),
                       "x " + variable.selectedJumlahPenumpang + " Tiket")
                   : Padding(padding: EdgeInsets.only()),
               Divider(
                 color: Colors.grey,
               ),
-              _data(
-                  "Total Pembayaran",
-                  "Rp. " +
-                      currencyFormatter
-                          .format(double.parse(variable.total_price))),
+              _data("Total Pembayaran", rupiah(variable.total_price)),
               SizedBox(height: 20),
               Divider(
                 color: Colors.black,

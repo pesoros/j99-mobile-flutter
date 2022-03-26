@@ -22,8 +22,9 @@ String password;
 //HomeScreen
 var selectedFromCity;
 var selectedToCity;
+String selectedKelasArmada = "";
+String selectedUnitType = "1";
 String selectedJumlahPenumpang;
-var selectedKelasArmada = "";
 String datePergi = 'Pergi';
 String datePulang = 'Pulang';
 bool checkPulangPergi = false;
@@ -39,6 +40,7 @@ String pergi_shedule_id;
 String pergi_pickup_trip_location;
 String pergi_drop_trip_location;
 String pergi_type;
+String pergi_type_class;
 String pergi_fleet_seats;
 String pergi_fleet_registration_id;
 String pergi_price;
@@ -54,6 +56,7 @@ String pulang_shedule_id;
 String pulang_pickup_trip_location;
 String pulang_drop_trip_location;
 String pulang_type;
+String pulang_type_class;
 String pulang_fleet_seats;
 String pulang_fleet_registration_id;
 String pulang_price;
@@ -71,44 +74,48 @@ String checkBuyerPassenggerPhone = "";
 //Passangger1
 String namePassengger1;
 String phonePassengger1;
-String nikPassengger1;
-String nikTypePassengger1 = "KTP";
-String foodPassengger1;
-String foodIdPassengger1;
-String baggagePassengger1 = "0";
+String foodPergiPassengger1;
+String foodIdPergiPassengger1;
+String baggagePergiPassengger1 = "0";
+String foodPulangPassengger1;
+String foodIdPulangPassengger1;
+String baggagePulangPassengger1 = "0";
 String seatPergiPassengger1;
 String seatPulangPassengger1;
 
 //Passangger2
 String namePassengger2;
 String phonePassengger2;
-String nikPassengger2;
-String nikTypePassengger2 = "KTP";
-String foodPassengger2;
-String foodIdPassengger2;
-String baggagePassengger2 = "0";
+String foodPergiPassengger2;
+String foodIdPergiPassengger2;
+String baggagePergiPassengger2 = "0";
+String foodPulangPassengger2;
+String foodIdPulangPassengger2;
+String baggagePulangPassengger2 = "0";
 String seatPergiPassengger2;
 String seatPulangPassengger2;
 
 //Passangger3
 String namePassengger3;
 String phonePassengger3;
-String nikPassengger3;
-String nikTypePassengger3 = "KTP";
-String foodPassengger3;
-String foodIdPassengger3;
-String baggagePassengger3 = "0";
+String foodPergiPassengger3;
+String foodIdPergiPassengger3;
+String baggagePergiPassengger3 = "0";
+String foodPulangPassengger3;
+String foodIdPulangPassengger3;
+String baggagePulangPassengger3 = "0";
 String seatPergiPassengger3;
 String seatPulangPassengger3;
 
 //Passangger4
 String namePassengger4;
 String phonePassengger4;
-String nikPassengger4;
-String nikTypePassengger4 = "KTP";
-String foodPassengger4;
-String foodIdPassengger4;
-String baggagePassengger4 = "0";
+String foodPergiPassengger4;
+String foodIdPergiPassengger4;
+String baggagePergiPassengger4 = "0";
+String foodPulangPassengger4;
+String foodIdPulangPassengger4;
+String baggagePulangPassengger4 = "0";
 String seatPergiPassengger4;
 String seatPulangPassengger4;
 

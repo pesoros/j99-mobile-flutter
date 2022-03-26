@@ -169,10 +169,20 @@ class _PaymentMethodWidgetScreen extends State<PaymentMethodWidget> {
                     ]),
               ),
               onTap: () async {
-                setState(() {
-                  variable.selectedPayment = payment.channel_code;
-                  variable.selectedPaymentCategories = payment.channel_category;
-                });
+                if (payment.channel_category == 'EWALLET') {
+                  setState(() {
+                    variable.selectedPayment = 'ID_' + payment.channel_code;
+                    variable.selectedPaymentCategories =
+                        payment.channel_category;
+                  });
+                } else {
+                  setState(() {
+                    variable.selectedPayment = payment.channel_code;
+                    variable.selectedPaymentCategories =
+                        payment.channel_category;
+                  });
+                }
+
                 Navigator.of(context).pop();
               },
             ),

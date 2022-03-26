@@ -53,117 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    resetVariable();
-  }
-
-  resetVariable() {
-    setState(() {
-      //Login
-      variable.email_user = null;
-      variable.password = null;
-
-//HomeScreen
-      variable.selectedFromCity = null;
-      variable.selectedToCity = null;
-      variable.selectedJumlahPenumpang = null;
-      variable.selectedKelasArmada = "";
-      variable.datePergi = 'Pergi';
-      variable.datePulang = 'Pulang';
-      variable.checkPulangPergi = false;
-
-//Bus
-      variable.pergi_trip_id_no = null;
-      variable.pergi_trip_route_id = null;
-      variable.pergi_shedule_id = null;
-      variable.pergi_pickup_trip_location = null;
-      variable.pergi_drop_trip_location = null;
-      variable.pergi_type = null;
-      variable.pergi_fleet_seats = null;
-      variable.pergi_price = null;
-      variable.pergi_duration = null;
-      variable.pergi_start = null;
-      variable.pergi_end = null;
-      variable.pergi_seatPicked = null;
-      variable.pergi_seatAvail = null;
-      variable.pulang_trip_id_no = null;
-      variable.pulang_trip_route_id = null;
-      variable.pulang_shedule_id = null;
-      variable.pulang_pickup_trip_location = null;
-      variable.pulang_drop_trip_location = null;
-      variable.pulang_type = null;
-      variable.pulang_fleet_seats = null;
-      variable.pulang_price = null;
-      variable.pulang_duration = null;
-      variable.pulang_start = null;
-      variable.pulang_end = null;
-      variable.pulang_seatPicked = null;
-      variable.pulang_seatAvail = null;
-
-//PassanggerForm
-      variable.checkBuyerPassengger = false;
-      variable.checkBuyerPassenggerName = "";
-      variable.checkBuyerPassenggerPhone = "";
-
-//Passangger1
-      variable.namePassengger1 = null;
-      variable.phonePassengger1 = null;
-      variable.nikPassengger1 = null;
-      variable.nikTypePassengger1 = "KTP";
-      variable.foodPassengger1 = null;
-      variable.foodIdPassengger1 = null;
-      variable.baggagePassengger1 = "0";
-      variable.seatPergiPassengger1 = null;
-      variable.seatPulangPassengger1 = null;
-
-//Passangger2
-      variable.namePassengger2 = null;
-      variable.phonePassengger2 = null;
-      variable.nikPassengger2 = null;
-      variable.nikTypePassengger2 = "KTP";
-      variable.foodPassengger2 = null;
-      variable.foodIdPassengger2 = null;
-      variable.baggagePassengger2 = "0";
-      variable.seatPergiPassengger2 = null;
-      variable.seatPulangPassengger2 = null;
-
-//Passangger3
-      variable.namePassengger3 = null;
-      variable.phonePassengger3 = null;
-      variable.nikPassengger3 = null;
-      variable.nikTypePassengger3 = "KTP";
-      variable.foodPassengger3 = null;
-      variable.foodIdPassengger3 = null;
-      variable.baggagePassengger3 = "0";
-      variable.seatPergiPassengger3 = null;
-      variable.seatPulangPassengger3 = null;
-
-//Passangger4
-      variable.namePassengger4 = null;
-      variable.phonePassengger4 = null;
-      variable.nikPassengger4 = null;
-      variable.nikTypePassengger4 = "KTP";
-      variable.foodPassengger4 = null;
-      variable.foodIdPassengger4 = null;
-      variable.baggagePassengger4 = "0";
-      variable.seatPergiPassengger4 = null;
-      variable.seatPulangPassengger4 = null;
-
-//Payment
-      variable.selectedPayment = null;
-      variable.selectedPaymentCategories = null;
-      variable.kodePromo = "";
-      variable.totalPrice = "";
-
-//Response Payment
-      variable.status = null;
-      variable.bank_code = null;
-      variable.merchant_code = null;
-      variable.name = null;
-      variable.account_number = null;
-      variable.expiration_date = null;
-      variable.external_id = null;
-      variable.total_price = null;
-    });
+    // resetVariable();
   }
 
   @override
@@ -236,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             variable.selectedToCity.toString());
                         return dataFromCity;
                       },
-                      onChanged: (CityModel data) {
+                      onChanged: (data) {
                         setState(() {
                           variable.selectedFromCity = data;
                         });
@@ -279,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               variable.selectedFromCity.toString());
                           return dataToCity;
                         },
-                        onChanged: (CityModel data) {
+                        onChanged: (data) {
                           setState(() {
                             variable.selectedToCity = data;
                           });
@@ -347,14 +237,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       showSearchBox: false,
                       selectedItem: variable.selectedJumlahPenumpang,
-                      validator: (String item) {
-                        if (item == null)
-                          return "Required field";
-                        else if (item == variable.selectedJumlahPenumpang)
-                          return "Invalid item";
-                        else
-                          return null;
-                      },
                     ),
                   ),
                   SizedBox(
@@ -560,6 +442,6 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       MaterialPageRoute(builder: (context) => SearchResultPergiScreen()),
     );
-    resetVariable();
+    // resetVariable();
   }
 }

@@ -37,22 +37,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
       TextEditingController(text: variable.namePassengger1);
   TextEditingController phonePassenggerController1 =
       TextEditingController(text: variable.phonePassengger1);
-  TextEditingController nikPassenggerController1 = TextEditingController();
 
   TextEditingController namePassenggerController2 = TextEditingController();
   TextEditingController phonePassenggerController2 = TextEditingController();
-  TextEditingController nikPassenggerController2 = TextEditingController();
 
   TextEditingController namePassenggerController3 = TextEditingController();
   TextEditingController phonePassenggerController3 = TextEditingController();
-  TextEditingController nikPassenggerController3 = TextEditingController();
 
   TextEditingController namePassenggerController4 = TextEditingController();
   TextEditingController phonePassenggerController4 = TextEditingController();
-  TextEditingController nikPassenggerController4 = TextEditingController();
 
   int index = 0;
-  List _listIdentitityType = ["KTP", "Paspor", "SIM"];
 
   @override
   void initState() {
@@ -173,13 +168,6 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     child: TextFormField(
                       style: CustomStyle.textStyle,
                       controller: phoneBuyerController,
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return Strings.pleaseFillOutTheField;
-                        } else {
-                          return null;
-                        }
-                      },
                       decoration: InputDecoration(
                         labelText: "No. Handphone",
                         contentPadding: EdgeInsets.symmetric(
@@ -200,13 +188,6 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     child: TextFormField(
                       style: CustomStyle.textStyle,
                       controller: emailBuyerController,
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return Strings.pleaseFillOutTheField;
-                        } else {
-                          return null;
-                        }
-                      },
                       decoration: InputDecoration(
                         labelText: "E-mail",
                         contentPadding: EdgeInsets.symmetric(
@@ -333,57 +314,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: DropdownSearch(
-                      mode: Mode.BOTTOM_SHEET,
-                      showClearButton: false,
-                      maxHeight: 250,
-                      items: _listIdentitityType,
-                      selectedItem: _listIdentitityType[0],
-                      showSearchBox: false,
-                      dropdownSearchDecoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                      onChanged: (value) {
-                        variable.nikTypePassengger1 = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      style: CustomStyle.textStyle,
-                      controller: nikPassenggerController1,
-                      decoration: InputDecoration(
-                        labelText: "NIK",
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        fillColor: Colors.white,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
+                  //Makanan & Bagasi
                   Container(
                     height: 50,
                     child: DropdownSearch<FoodModel>(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 250,
-                      label: "Menu Makanan",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Menu Makanan Pergi"
+                          : "Menu Makanan",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -406,8 +346,8 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       },
                       onChanged: (FoodModel value) {
                         setState(() {
-                          variable.foodPassengger1 = value.food_name;
-                          variable.foodIdPassengger1 = value.id;
+                          variable.foodPergiPassengger1 = value.food_name;
+                          variable.foodIdPergiPassengger1 = value.id;
                         });
                       },
                     ),
@@ -420,7 +360,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 150,
-                      label: "Pilih Bagasi",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Pilih Bagasi Pergi"
+                          : "Pilih Bagasi",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -434,14 +376,87 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value == 'Tidak Bawa Bagasi') {
-                            variable.baggagePassengger1 = '0';
+                            variable.baggagePergiPassengger1 = '0';
                           } else {
-                            variable.baggagePassengger1 = '1';
+                            variable.baggagePergiPassengger1 = '1';
                           }
                         });
                       },
                     ),
                   ),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch<FoodModel>(
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 250,
+                            label: "Menu Makanan Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              labelStyle: CustomStyle.textStyle,
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onFind: (String) async {
+                              var response = await Dio().post(
+                                "https://api-j99.pesoros.com/datarestomenu",
+                                options: Options(
+                                    contentType:
+                                        Headers.formUrlEncodedContentType),
+                                data: {'idResto': "2"},
+                              );
+                              var foodList =
+                                  FoodModel.fromJsonList(response.data);
+                              return foodList;
+                            },
+                            onChanged: (FoodModel value) {
+                              setState(() {
+                                variable.foodPulangPassengger1 =
+                                    value.food_name;
+                                variable.foodIdPulangPassengger1 = value.id;
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch(
+                            items: ['Tidak Bawa Bagasi', 'Bawa Bagasi'],
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 150,
+                            label: "Pilih Bagasi Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              labelStyle: CustomStyle.textStyle,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value == 'Tidak Bawa Bagasi') {
+                                  variable.baggagePulangPassengger1 = '0';
+                                } else {
+                                  variable.baggagePulangPassengger1 = '1';
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -515,57 +530,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: DropdownSearch(
-                      mode: Mode.BOTTOM_SHEET,
-                      showClearButton: false,
-                      maxHeight: 250,
-                      items: _listIdentitityType,
-                      selectedItem: _listIdentitityType[0],
-                      showSearchBox: false,
-                      dropdownSearchDecoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                      onChanged: (value) {
-                        variable.nikTypePassengger2 = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      style: CustomStyle.textStyle,
-                      controller: nikPassenggerController2,
-                      decoration: InputDecoration(
-                        labelText: "NIK",
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        fillColor: Colors.white,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
+                  //Makanan & Bagasi
                   Container(
                     height: 50,
                     child: DropdownSearch<FoodModel>(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 250,
-                      label: "Menu Makanan",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Menu Makanan Pergi"
+                          : "Menu Makanan",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -588,8 +562,8 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       },
                       onChanged: (FoodModel value) {
                         setState(() {
-                          variable.foodPassengger2 = value.food_name;
-                          variable.foodIdPassengger2 = value.id;
+                          variable.foodPergiPassengger2 = value.food_name;
+                          variable.foodIdPergiPassengger2 = value.id;
                         });
                       },
                     ),
@@ -602,7 +576,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 150,
-                      label: "Pilih Bagasi",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Pilih Bagasi Pergi"
+                          : "Pilih Bagasi",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -616,14 +592,87 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value == 'Tidak Bawa Bagasi') {
-                            variable.baggagePassengger2 = '0';
+                            variable.baggagePergiPassengger2 = '0';
                           } else {
-                            variable.baggagePassengger2 = '1';
+                            variable.baggagePergiPassengger2 = '1';
                           }
                         });
                       },
                     ),
                   ),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch<FoodModel>(
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 250,
+                            label: "Menu Makanan Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              labelStyle: CustomStyle.textStyle,
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onFind: (String) async {
+                              var response = await Dio().post(
+                                "https://api-j99.pesoros.com/datarestomenu",
+                                options: Options(
+                                    contentType:
+                                        Headers.formUrlEncodedContentType),
+                                data: {'idResto': "2"},
+                              );
+                              var foodList =
+                                  FoodModel.fromJsonList(response.data);
+                              return foodList;
+                            },
+                            onChanged: (FoodModel value) {
+                              setState(() {
+                                variable.foodPulangPassengger2 =
+                                    value.food_name;
+                                variable.foodIdPulangPassengger2 = value.id;
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch(
+                            items: ['Tidak Bawa Bagasi', 'Bawa Bagasi'],
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 150,
+                            label: "Pilih Bagasi Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              labelStyle: CustomStyle.textStyle,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value == 'Tidak Bawa Bagasi') {
+                                  variable.baggagePulangPassengger2 = '0';
+                                } else {
+                                  variable.baggagePulangPassengger2 = '1';
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -697,57 +746,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: DropdownSearch(
-                      mode: Mode.BOTTOM_SHEET,
-                      showClearButton: false,
-                      maxHeight: 250,
-                      items: _listIdentitityType,
-                      selectedItem: _listIdentitityType[0],
-                      showSearchBox: false,
-                      dropdownSearchDecoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                      onChanged: (value) {
-                        variable.nikTypePassengger3 = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      style: CustomStyle.textStyle,
-                      controller: nikPassenggerController3,
-                      decoration: InputDecoration(
-                        labelText: "NIK",
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        fillColor: Colors.white,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
+                  //Makanan & Bagasi
                   Container(
                     height: 50,
                     child: DropdownSearch<FoodModel>(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 250,
-                      label: "Menu Makanan",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Menu Makanan Pergi"
+                          : "Menu Makanan",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -770,8 +778,8 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       },
                       onChanged: (FoodModel value) {
                         setState(() {
-                          variable.foodPassengger3 = value.food_name;
-                          variable.foodIdPassengger3 = value.id;
+                          variable.foodPergiPassengger3 = value.food_name;
+                          variable.foodIdPergiPassengger3 = value.id;
                         });
                       },
                     ),
@@ -784,7 +792,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 150,
-                      label: "Pilih Bagasi",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Pilih Bagasi Pergi"
+                          : "Pilih Bagasi",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -798,14 +808,87 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value == 'Tidak Bawa Bagasi') {
-                            variable.baggagePassengger3 = '0';
+                            variable.baggagePergiPassengger3 = '0';
                           } else {
-                            variable.baggagePassengger3 = '1';
+                            variable.baggagePergiPassengger3 = '1';
                           }
                         });
                       },
                     ),
                   ),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch<FoodModel>(
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 250,
+                            label: "Menu Makanan Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              labelStyle: CustomStyle.textStyle,
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onFind: (String) async {
+                              var response = await Dio().post(
+                                "https://api-j99.pesoros.com/datarestomenu",
+                                options: Options(
+                                    contentType:
+                                        Headers.formUrlEncodedContentType),
+                                data: {'idResto': "2"},
+                              );
+                              var foodList =
+                                  FoodModel.fromJsonList(response.data);
+                              return foodList;
+                            },
+                            onChanged: (FoodModel value) {
+                              setState(() {
+                                variable.foodPulangPassengger3 =
+                                    value.food_name;
+                                variable.foodIdPulangPassengger3 = value.id;
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch(
+                            items: ['Tidak Bawa Bagasi', 'Bawa Bagasi'],
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 150,
+                            label: "Pilih Bagasi Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              labelStyle: CustomStyle.textStyle,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value == 'Tidak Bawa Bagasi') {
+                                  variable.baggagePulangPassengger3 = '0';
+                                } else {
+                                  variable.baggagePulangPassengger3 = '1';
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -879,57 +962,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: DropdownSearch(
-                      mode: Mode.BOTTOM_SHEET,
-                      showClearButton: false,
-                      maxHeight: 250,
-                      items: _listIdentitityType,
-                      selectedItem: _listIdentitityType[0],
-                      showSearchBox: false,
-                      dropdownSearchDecoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                      onChanged: (value) {
-                        variable.nikTypePassengger4 = value;
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 50,
-                    child: TextFormField(
-                      style: CustomStyle.textStyle,
-                      controller: nikPassenggerController4,
-                      decoration: InputDecoration(
-                        labelText: "NIK",
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        labelStyle: CustomStyle.textStyle,
-                        focusedBorder: CustomStyle.focusBorder,
-                        enabledBorder: CustomStyle.focusErrorBorder,
-                        focusedErrorBorder: CustomStyle.focusErrorBorder,
-                        errorBorder: CustomStyle.focusErrorBorder,
-                        fillColor: Colors.white,
-                        hintStyle: CustomStyle.textStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
+                  //Makanan & Bagasi
                   Container(
                     height: 50,
                     child: DropdownSearch<FoodModel>(
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 250,
-                      label: "Menu Makanan",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Menu Makanan Pergi"
+                          : "Menu Makanan",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -952,8 +994,8 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       },
                       onChanged: (FoodModel value) {
                         setState(() {
-                          variable.foodPassengger4 = value.food_name;
-                          variable.foodIdPassengger4 = value.id;
+                          variable.foodPergiPassengger4 = value.food_name;
+                          variable.foodIdPergiPassengger4 = value.id;
                         });
                       },
                     ),
@@ -966,7 +1008,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       mode: Mode.BOTTOM_SHEET,
                       showClearButton: false,
                       maxHeight: 150,
-                      label: "Pilih Bagasi",
+                      label: (variable.checkPulangPergi == true)
+                          ? "Pilih Bagasi Pergi"
+                          : "Pilih Bagasi",
                       showSearchBox: false,
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
@@ -980,14 +1024,87 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                       onChanged: (value) {
                         setState(() {
                           if (value == 'Tidak Bawa Bagasi') {
-                            variable.baggagePassengger4 = '0';
+                            variable.baggagePergiPassengger4 = '0';
                           } else {
-                            variable.baggagePassengger4 = '1';
+                            variable.baggagePergiPassengger4 = '1';
                           }
                         });
                       },
                     ),
                   ),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch<FoodModel>(
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 250,
+                            label: "Menu Makanan Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              labelStyle: CustomStyle.textStyle,
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onFind: (String) async {
+                              var response = await Dio().post(
+                                "https://api-j99.pesoros.com/datarestomenu",
+                                options: Options(
+                                    contentType:
+                                        Headers.formUrlEncodedContentType),
+                                data: {'idResto': "2"},
+                              );
+                              var foodList =
+                                  FoodModel.fromJsonList(response.data);
+                              return foodList;
+                            },
+                            onChanged: (FoodModel value) {
+                              setState(() {
+                                variable.foodPulangPassengger4 =
+                                    value.food_name;
+                                variable.foodIdPulangPassengger4 = value.id;
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(height: 10),
+                  (variable.checkPulangPergi == true)
+                      ? Container(
+                          height: 50,
+                          child: DropdownSearch(
+                            items: ['Tidak Bawa Bagasi', 'Bawa Bagasi'],
+                            mode: Mode.BOTTOM_SHEET,
+                            showClearButton: false,
+                            maxHeight: 150,
+                            label: "Pilih Bagasi Pulang",
+                            showSearchBox: false,
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              focusedBorder: CustomStyle.focusBorder,
+                              enabledBorder: CustomStyle.focusErrorBorder,
+                              focusedErrorBorder: CustomStyle.focusErrorBorder,
+                              labelStyle: CustomStyle.textStyle,
+                              errorBorder: CustomStyle.focusErrorBorder,
+                              hintStyle: CustomStyle.textStyle,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value == 'Tidak Bawa Bagasi') {
+                                  variable.baggagePulangPassengger4 = '0';
+                                } else {
+                                  variable.baggagePulangPassengger4 = '1';
+                                }
+                              });
+                            },
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -1103,15 +1220,15 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           ),
         ),
         onTap: () {
+          //1
           if (variable.selectedJumlahPenumpang == "1") {
             if (namePassenggerController1.text == null ||
                 phonePassenggerController1.text == null ||
-                nikPassenggerController1.text == null ||
                 namePassenggerController1.text == "" ||
                 phonePassenggerController1.text == "" ||
-                nikPassenggerController1.text == "" ||
-                variable.foodPassengger1 == null ||
-                variable.baggagePassengger1 == null) {
+                variable.foodPergiPassengger1 == null ||
+                variable.baggagePergiPassengger1 == null ||
+                variable.seatPergiPassengger1 == null) {
               Fluttertoast.showToast(
                 msg: "Lengkapi data terlebih dahulu",
                 backgroundColor: CustomColor.red,
@@ -1119,30 +1236,44 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 gravity: ToastGravity.CENTER,
               );
             } else {
-              variable.namePassengger1 = namePassenggerController1.text;
-              variable.phonePassengger1 = phonePassenggerController1.text;
-              variable.nikPassengger1 = nikPassenggerController1.text;
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PaymentScreen()));
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger1 == null ||
+                    variable.baggagePulangPassengger1 == null ||
+                    variable.seatPulangPassengger1 == null) {
+                  Fluttertoast.showToast(
+                    msg: "Lengkapi data terlebih dahulu",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                } else {
+                  variable.namePassengger1 = namePassenggerController1.text;
+                  variable.phonePassengger1 = phonePassenggerController1.text;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PaymentScreen()));
+                }
+              } else {
+                variable.namePassengger1 = namePassenggerController1.text;
+                variable.phonePassengger1 = phonePassenggerController1.text;
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PaymentScreen()));
+              }
             }
           }
+          //2
           if (variable.selectedJumlahPenumpang == "2") {
             if (namePassenggerController1.text == null ||
                 phonePassenggerController1.text == null ||
-                nikPassenggerController1.text == null ||
                 namePassenggerController1.text == "" ||
                 phonePassenggerController1.text == "" ||
-                nikPassenggerController1.text == "" ||
-                variable.foodPassengger1 == null ||
-                variable.baggagePassengger1 == null ||
+                variable.foodPergiPassengger1 == null ||
+                variable.baggagePergiPassengger1 == null ||
                 namePassenggerController2.text == null ||
                 phonePassenggerController2.text == null ||
-                nikPassenggerController2.text == null ||
                 namePassenggerController2.text == "" ||
                 phonePassenggerController2.text == "" ||
-                nikPassenggerController2.text == "" ||
-                variable.foodPassengger2 == null ||
-                variable.baggagePassengger2 == null) {
+                variable.foodPulangPassengger2 == null ||
+                variable.baggagePulangPassengger2 == null) {
               Fluttertoast.showToast(
                 msg: "Lengkapi data terlebih dahulu",
                 backgroundColor: CustomColor.red,
@@ -1150,41 +1281,57 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 gravity: ToastGravity.CENTER,
               );
             } else {
-              variable.namePassengger1 = namePassenggerController1.text;
-              variable.phonePassengger1 = phonePassenggerController1.text;
-              variable.nikPassengger1 = nikPassenggerController1.text;
-              variable.namePassengger2 = namePassenggerController2.text;
-              variable.phonePassengger2 = phonePassenggerController2.text;
-              variable.nikPassengger2 = nikPassenggerController2.text;
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PaymentScreen()));
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger1 == null ||
+                    variable.baggagePulangPassengger1 == null ||
+                    variable.seatPulangPassengger1 == null ||
+                    variable.foodPulangPassengger2 == null ||
+                    variable.baggagePulangPassengger2 == null ||
+                    variable.seatPulangPassengger2 == null) {
+                  Fluttertoast.showToast(
+                    msg: "Lengkapi data terlebih dahulu",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                } else {
+                  variable.namePassengger1 = namePassenggerController1.text;
+                  variable.phonePassengger1 = phonePassenggerController1.text;
+                  variable.namePassengger2 = namePassenggerController2.text;
+                  variable.phonePassengger2 = phonePassenggerController2.text;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PaymentScreen()));
+                }
+              } else {
+                variable.namePassengger1 = namePassenggerController1.text;
+                variable.phonePassengger1 = phonePassenggerController1.text;
+                variable.namePassengger2 = namePassenggerController2.text;
+                variable.phonePassengger2 = phonePassenggerController2.text;
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PaymentScreen()));
+              }
             }
           }
+          //3
           if (variable.selectedJumlahPenumpang == "3") {
             if (namePassenggerController1.text == null ||
                 phonePassenggerController1.text == null ||
-                nikPassenggerController1.text == null ||
                 namePassenggerController1.text == "" ||
                 phonePassenggerController1.text == "" ||
-                nikPassenggerController1.text == "" ||
-                variable.foodPassengger1 == null ||
-                variable.baggagePassengger1 == null ||
+                variable.foodPergiPassengger1 == null ||
+                variable.baggagePergiPassengger1 == null ||
                 namePassenggerController2.text == null ||
                 phonePassenggerController2.text == null ||
-                nikPassenggerController2.text == null ||
                 namePassenggerController2.text == "" ||
                 phonePassenggerController2.text == "" ||
-                nikPassenggerController2.text == "" ||
-                variable.foodPassengger2 == null ||
-                variable.baggagePassengger2 == null ||
+                variable.foodPergiPassengger2 == null ||
+                variable.baggagePergiPassengger2 == null ||
                 namePassenggerController3.text == null ||
                 phonePassenggerController3.text == null ||
-                nikPassenggerController3.text == null ||
                 namePassenggerController3.text == "" ||
                 phonePassenggerController3.text == "" ||
-                nikPassenggerController3.text == "" ||
-                variable.foodPassengger3 == null ||
-                variable.baggagePassengger3 == null) {
+                variable.foodPergiPassengger3 == null ||
+                variable.baggagePergiPassengger3 == null) {
               Fluttertoast.showToast(
                 msg: "Lengkapi data terlebih dahulu",
                 backgroundColor: CustomColor.red,
@@ -1192,52 +1339,70 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 gravity: ToastGravity.CENTER,
               );
             } else {
-              variable.namePassengger1 = namePassenggerController1.text;
-              variable.phonePassengger1 = phonePassenggerController1.text;
-              variable.nikPassengger1 = nikPassenggerController1.text;
-              variable.namePassengger2 = namePassenggerController2.text;
-              variable.phonePassengger2 = phonePassenggerController2.text;
-              variable.nikPassengger2 = nikPassenggerController2.text;
-              variable.namePassengger3 = namePassenggerController3.text;
-              variable.phonePassengger3 = phonePassenggerController3.text;
-              variable.nikPassengger3 = nikPassenggerController3.text;
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PaymentScreen()));
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger1 == null ||
+                    variable.baggagePulangPassengger1 == null ||
+                    variable.seatPulangPassengger1 == null ||
+                    variable.foodPulangPassengger2 == null ||
+                    variable.baggagePulangPassengger2 == null ||
+                    variable.seatPulangPassengger2 == null ||
+                    variable.foodPulangPassengger3 == null ||
+                    variable.baggagePulangPassengger3 == null ||
+                    variable.seatPulangPassengger3 == null) {
+                  Fluttertoast.showToast(
+                    msg: "Lengkapi data terlebih dahulu",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                } else {
+                  variable.namePassengger1 = namePassenggerController1.text;
+                  variable.phonePassengger1 = phonePassenggerController1.text;
+                  variable.namePassengger2 = namePassenggerController2.text;
+                  variable.phonePassengger2 = phonePassenggerController2.text;
+                  variable.namePassengger3 = namePassenggerController3.text;
+                  variable.phonePassengger3 = phonePassenggerController3.text;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PaymentScreen()));
+                }
+              } else {
+                variable.namePassengger1 = namePassenggerController1.text;
+                variable.phonePassengger1 = phonePassenggerController1.text;
+                variable.namePassengger2 = namePassenggerController2.text;
+                variable.phonePassengger2 = phonePassenggerController2.text;
+                variable.namePassengger3 = namePassenggerController3.text;
+                variable.phonePassengger3 = phonePassenggerController3.text;
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PaymentScreen()));
+              }
             }
           }
+          //4
           if (variable.selectedJumlahPenumpang == "4") {
             if (namePassenggerController1.text == null ||
                 phonePassenggerController1.text == null ||
-                nikPassenggerController1.text == null ||
                 namePassenggerController1.text == "" ||
                 phonePassenggerController1.text == "" ||
-                nikPassenggerController1.text == "" ||
-                variable.foodPassengger1 == null ||
-                variable.baggagePassengger1 == null ||
+                variable.foodPergiPassengger1 == null ||
+                variable.baggagePergiPassengger1 == null ||
                 namePassenggerController2.text == null ||
                 phonePassenggerController2.text == null ||
-                nikPassenggerController2.text == null ||
                 namePassenggerController2.text == "" ||
                 phonePassenggerController2.text == "" ||
-                nikPassenggerController2.text == "" ||
-                variable.foodPassengger2 == null ||
-                variable.baggagePassengger2 == null ||
+                variable.foodPergiPassengger2 == null ||
+                variable.baggagePergiPassengger2 == null ||
                 namePassenggerController3.text == null ||
                 phonePassenggerController3.text == null ||
-                nikPassenggerController3.text == null ||
                 namePassenggerController3.text == "" ||
                 phonePassenggerController3.text == "" ||
-                nikPassenggerController3.text == "" ||
-                variable.foodPassengger3 == null ||
-                variable.baggagePassengger3 == null ||
+                variable.foodPergiPassengger3 == null ||
+                variable.baggagePergiPassengger3 == null ||
                 namePassenggerController4.text == null ||
                 phonePassenggerController4.text == null ||
-                nikPassenggerController4.text == null ||
                 namePassenggerController4.text == "" ||
                 phonePassenggerController4.text == "" ||
-                nikPassenggerController4.text == "" ||
-                variable.foodPassengger4 == null ||
-                variable.baggagePassengger4 == null) {
+                variable.foodPergiPassengger4 == null ||
+                variable.baggagePergiPassengger4 == null) {
               Fluttertoast.showToast(
                 msg: "Lengkapi data terlebih dahulu",
                 backgroundColor: CustomColor.red,
@@ -1245,20 +1410,35 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 gravity: ToastGravity.CENTER,
               );
             } else {
-              variable.namePassengger1 = namePassenggerController1.text;
-              variable.phonePassengger1 = phonePassenggerController1.text;
-              variable.nikPassengger1 = nikPassenggerController1.text;
-              variable.namePassengger2 = namePassenggerController2.text;
-              variable.phonePassengger2 = phonePassenggerController2.text;
-              variable.nikPassengger2 = nikPassenggerController2.text;
-              variable.namePassengger3 = namePassenggerController3.text;
-              variable.phonePassengger3 = phonePassenggerController3.text;
-              variable.nikPassengger3 = nikPassenggerController3.text;
-              variable.namePassengger4 = namePassenggerController4.text;
-              variable.phonePassengger4 = phonePassenggerController4.text;
-              variable.nikPassengger4 = nikPassenggerController4.text;
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PaymentScreen()));
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger1 == null ||
+                    variable.baggagePulangPassengger1 == null ||
+                    variable.seatPulangPassengger1 == null ||
+                    variable.foodPulangPassengger2 == null ||
+                    variable.baggagePulangPassengger2 == null ||
+                    variable.seatPulangPassengger2 == null ||
+                    variable.foodPulangPassengger3 == null ||
+                    variable.baggagePulangPassengger3 == null ||
+                    variable.seatPulangPassengger3 == null) {
+                  Fluttertoast.showToast(
+                    msg: "Lengkapi data terlebih dahulu",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                } else {
+                  variable.namePassengger1 = namePassenggerController1.text;
+                  variable.phonePassengger1 = phonePassenggerController1.text;
+                  variable.namePassengger2 = namePassenggerController2.text;
+                  variable.phonePassengger2 = phonePassenggerController2.text;
+                  variable.namePassengger3 = namePassenggerController3.text;
+                  variable.phonePassengger3 = phonePassenggerController3.text;
+                  variable.namePassengger4 = namePassenggerController4.text;
+                  variable.phonePassengger4 = phonePassenggerController4.text;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PaymentScreen()));
+                }
+              }
             }
           }
         },

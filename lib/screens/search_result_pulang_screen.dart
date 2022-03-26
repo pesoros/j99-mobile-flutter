@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
 import 'package:juragan99/data/bus_pulang.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/filter_pergi_screen.dart';
@@ -17,6 +18,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:juragan99/widgets/back_widget.dart';
 import 'package:http/http.dart' as http;
+import 'package:indonesia/indonesia.dart';
 
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
@@ -31,6 +33,8 @@ class SearchResultPulangScreen extends StatefulWidget {
 class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
   double bottomPadding = 0;
   List<BusPulang> _listBus = [];
+  DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePulang);
+
   bool isLoading = false;
 
   @override
@@ -132,18 +136,18 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "JKT",
-                        style: TextStyle(
-                            color: CustomColor.white,
-                            fontSize: Dimensions.largeTextSize,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      // Text(
+                      //   "JKT",
+                      //   style: TextStyle(
+                      //       color: CustomColor.white,
+                      //       fontSize: Dimensions.largeTextSize,
+                      //       fontWeight: FontWeight.bold),
+                      // ),
                       Text(
                         variable.selectedToCity.toString(),
                         style: TextStyle(
                             color: CustomColor.grey,
-                            fontSize: Dimensions.defaultTextSize),
+                            fontSize: Dimensions.largeTextSize),
                       ),
                     ],
                   ),
@@ -159,18 +163,18 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        "SUB",
-                        style: TextStyle(
-                            color: CustomColor.white,
-                            fontSize: Dimensions.largeTextSize,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      // Text(
+                      //   "SUB",
+                      //   style: TextStyle(
+                      //       color: CustomColor.white,
+                      //       fontSize: Dimensions.largeTextSize,
+                      //       fontWeight: FontWeight.bold),
+                      // ),
                       Text(
                         variable.selectedFromCity.toString(),
                         style: TextStyle(
                             color: CustomColor.grey,
-                            fontSize: Dimensions.defaultTextSize),
+                            fontSize: Dimensions.largeTextSize),
                       ),
                     ],
                   )
@@ -183,7 +187,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                 Container(
                   margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                   child: Text(
-                    variable.datePulang,
+                    tanggal(tempDate),
                     style: TextStyle(
                         fontSize: Dimensions.defaultTextSize,
                         color: CustomColor.white),
@@ -300,6 +304,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                 pickup_trip_location: bus.pulang_pickup_trip_location,
                 drop_trip_location: bus.pulang_drop_trip_location,
                 type: bus.pulang_type,
+                type_class: bus.pulang_type_class,
                 fleet_seats: bus.pulang_fleet_seats,
                 fleet_registration_id: bus.pulang_fleet_registration_id,
                 price: bus.pulang_price,

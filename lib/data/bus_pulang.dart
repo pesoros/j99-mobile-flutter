@@ -34,6 +34,7 @@ class BusPulang {
   String pulang_pickup_trip_location;
   String pulang_drop_trip_location;
   String pulang_type;
+  String pulang_type_class;
   String pulang_fleet_seats;
   String pulang_fleet_registration_id;
   String pulang_price;
@@ -50,6 +51,7 @@ class BusPulang {
       this.pulang_pickup_trip_location,
       this.pulang_drop_trip_location,
       this.pulang_type,
+      this.pulang_type_class,
       this.pulang_fleet_seats,
       this.pulang_fleet_registration_id,
       this.pulang_price,
@@ -66,6 +68,7 @@ class BusPulang {
     pulang_pickup_trip_location = json['pickup_trip_location'];
     pulang_drop_trip_location = json['drop_trip_location'];
     pulang_type = json['type'];
+    pulang_type_class = json['class'];
     pulang_fleet_seats = json['fleet_seats'];
     pulang_fleet_registration_id = json['fleet_registration_id'];
     pulang_price = json['price'];
@@ -84,6 +87,7 @@ class BusPulang {
     data['pickup_trip_location'] = this.pulang_pickup_trip_location;
     data['drop_trip_location'] = this.pulang_drop_trip_location;
     data['type'] = this.pulang_type;
+    data['class'] = this.pulang_type_class;
     data['fleet_seats'] = this.pulang_fleet_seats;
     data['fleet_registration_id'] = this.pulang_fleet_registration_id;
     data['price'] = this.pulang_price;
