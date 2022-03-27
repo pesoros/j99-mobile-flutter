@@ -43,23 +43,26 @@ class BusPulang {
   String pulang_end;
   String pulang_seatPicked;
   int pulang_seatAvail;
+  String pulang_resto_id;
 
-  BusPulang(
-      {this.pulang_trip_id_no,
-      this.pulang_trip_route_id,
-      this.pulang_shedule_id,
-      this.pulang_pickup_trip_location,
-      this.pulang_drop_trip_location,
-      this.pulang_type,
-      this.pulang_type_class,
-      this.pulang_fleet_seats,
-      this.pulang_fleet_registration_id,
-      this.pulang_price,
-      this.pulang_duration,
-      this.pulang_start,
-      this.pulang_end,
-      this.pulang_seatPicked,
-      this.pulang_seatAvail});
+  BusPulang({
+    this.pulang_trip_id_no,
+    this.pulang_trip_route_id,
+    this.pulang_shedule_id,
+    this.pulang_pickup_trip_location,
+    this.pulang_drop_trip_location,
+    this.pulang_type,
+    this.pulang_type_class,
+    this.pulang_fleet_seats,
+    this.pulang_fleet_registration_id,
+    this.pulang_price,
+    this.pulang_duration,
+    this.pulang_start,
+    this.pulang_end,
+    this.pulang_seatPicked,
+    this.pulang_seatAvail,
+    this.pulang_resto_id,
+  });
 
   BusPulang.fromJson(Map<String, dynamic> json) {
     pulang_trip_id_no = json['trip_id_no'];
@@ -77,6 +80,7 @@ class BusPulang {
     pulang_end = json['end'];
     pulang_seatPicked = json['seatPicked'];
     pulang_seatAvail = json['seatAvail'];
+    pulang_resto_id = json['resto_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +101,7 @@ class BusPulang {
     data['seatPicked'] = this.pulang_seatPicked;
     data['seatAvail'] = this.pulang_seatAvail;
     data['seatAvail'] = this.pulang_seatAvail;
+    data['resto_id'] = this.pulang_resto_id;
     return data;
   }
 }

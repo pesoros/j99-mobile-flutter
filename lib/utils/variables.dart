@@ -49,6 +49,7 @@ String pergi_start;
 String pergi_end;
 String pergi_seatPicked;
 String pergi_seatAvail;
+String pergi_resto_id;
 
 String pulang_trip_id_no;
 String pulang_trip_route_id;
@@ -65,6 +66,7 @@ String pulang_start;
 String pulang_end;
 String pulang_seatPicked;
 String pulang_seatAvail;
+String pulang_resto_id;
 
 //PassanggerForm
 bool checkBuyerPassengger = false;

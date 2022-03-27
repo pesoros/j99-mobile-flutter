@@ -6,7 +6,6 @@ import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
-import 'package:juragan99/screens/payment_status_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -18,12 +17,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
-class InvoiceScreen extends StatefulWidget {
+class PaymentStatusScreen extends StatefulWidget {
   @override
-  _InvoiceWidgetScreen createState() => _InvoiceWidgetScreen();
+  _PaymentStatusWidgetScreen createState() => _PaymentStatusWidgetScreen();
 }
 
-class _InvoiceWidgetScreen extends State<InvoiceScreen> {
+class _PaymentStatusWidgetScreen extends State<PaymentStatusScreen> {
   @override
   void initState() {
     super.initState();
@@ -35,32 +34,17 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
       child: Scaffold(
         backgroundColor: CustomColor.darkGrey,
         body: Stack(
-          children: [
-            // BackWidget(
-            //   title: "Invoice Pembayaran",
-            //   color: CustomColor.white,
-            // ),
-            bodyWidget(context),
-            buttonWidget(context)
-          ],
+          children: [bodyWidget(context), buttonWidget(context)],
         ),
       ),
     );
   }
 
   Widget bodyWidget(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 0,
-        bottom: 70,
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _invoiceWidget(context),
-          ],
-        ),
+    return Container(
+      child: Center(
+        heightFactor: 1.5,
+        child: _invoiceWidget(context),
       ),
     );
   }
@@ -81,7 +65,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                     borderRadius: BorderRadius.circular(Dimensions.radius)),
                 child: Center(
                   child: Text(
-                    "Cek Status Pembayaran",
+                    "Kembali ke awal",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: Dimensions.defaultTextSize,
@@ -92,8 +76,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => PaymentStatusScreen()),
+                  MaterialPageRoute(builder: (context) => DashboardScreen(0)),
                   (Route<dynamic> route) => false,
                 );
               },
@@ -109,6 +92,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           color: CustomColor.white,
           borderRadius: BorderRadius.all(Radius.circular(30))),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: 70,
@@ -122,13 +106,13 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Invoice Pembayaran",
+                Text("Status Pembayaran",
                     style: TextStyle(
                         color: CustomColor.white,
                         fontSize: Dimensions.defaultTextSize,
                         fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
-                Text("#" + variable.external_id,
+                Text("PENDING",
                     style: TextStyle(
                         color: CustomColor.white,
                         fontSize: Dimensions.defaultTextSize,
@@ -165,19 +149,12 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                           variable.selectedFromCity.toString(),
                       "x " + variable.selectedJumlahPenumpang + " Tiket")
                   : Padding(padding: EdgeInsets.only()),
-              Divider(
-                color: Colors.grey,
-              ),
+              SizedBox(height: 10),
               _data("Total Pembayaran", rupiah(variable.total_price)),
-              SizedBox(height: 20),
-              Divider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               _dataPembayaran("Bank:", variable.bank_code),
-              _dataPembayaran("Kode Bank:", variable.merchant_code),
-              _dataPembayaran("Nomor Rekening:", variable.account_number),
+              // _dataPembayaran("Kode Bank:", variable.merchant_code),
+              // _dataPembayaran("Nomor Rekening:", variable.account_number),
             ],
           ),
         ));

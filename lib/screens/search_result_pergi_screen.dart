@@ -325,6 +325,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                 end: bus.pergi_end,
                 seatPicked: bus.pergi_seatPicked,
                 seatAvail: bus.pergi_seatAvail,
+                resto_id: bus.pergi_resto_id,
               ),
             );
           },

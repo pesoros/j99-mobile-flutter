@@ -11,6 +11,7 @@ import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/food.dart';
 import 'package:juragan99/screens/dashboard/search_ticket_screen.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/payment_status_screen.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
@@ -1829,8 +1830,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   _ewalletUrl(BuildContext context, String payment_url) async {
     if (await launch(payment_url)) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => DashboardScreen(1)));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => PaymentStatusScreen()));
     } else {
       throw 'Could not launch $payment_url';
     }

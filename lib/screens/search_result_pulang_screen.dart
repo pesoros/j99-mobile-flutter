@@ -313,6 +313,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                 end: bus.pulang_end,
                 seatPicked: bus.pulang_seatPicked,
                 seatAvail: bus.pulang_seatAvail,
+                resto_id: bus.pulang_resto_id,
               ),
             );
           },

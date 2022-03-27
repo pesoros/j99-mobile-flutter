@@ -31,6 +31,7 @@ class BusTicketPulangWidget extends StatefulWidget {
   final String end;
   final String seatPicked;
   final int seatAvail;
+  final String resto_id;
 
   final String selectedJumlahPenumpang;
   final bool checkPulangPergi;
@@ -53,6 +54,7 @@ class BusTicketPulangWidget extends StatefulWidget {
     this.end,
     this.seatPicked,
     this.seatAvail,
+    this.resto_id,
     this.selectedJumlahPenumpang,
     this.checkPulangPergi,
   });
@@ -293,6 +295,7 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
       variable.pulang_end = widget.bus.pulang_end;
       variable.pulang_seatPicked = widget.bus.pulang_seatPicked;
       variable.pulang_seatAvail = widget.bus.pulang_seatAvail.toString();
+      variable.pulang_resto_id = widget.bus.pulang_resto_id;
     });
   }
 }

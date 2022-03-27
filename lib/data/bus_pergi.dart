@@ -43,22 +43,25 @@ class BusPergi {
   String pergi_end;
   String pergi_seatPicked;
   int pergi_seatAvail;
+  String pergi_resto_id;
 
-  BusPergi(
-      {this.pergi_trip_id_no,
-      this.pergi_trip_route_id,
-      this.pergi_shedule_id,
-      this.pergi_pickup_trip_location,
-      this.pergi_drop_trip_location,
-      this.pergi_type,
-      this.pergi_fleet_seats,
-      this.pergi_fleet_registration_id,
-      this.pergi_price,
-      this.pergi_duration,
-      this.pergi_start,
-      this.pergi_end,
-      this.pergi_seatPicked,
-      this.pergi_seatAvail});
+  BusPergi({
+    this.pergi_trip_id_no,
+    this.pergi_trip_route_id,
+    this.pergi_shedule_id,
+    this.pergi_pickup_trip_location,
+    this.pergi_drop_trip_location,
+    this.pergi_type,
+    this.pergi_fleet_seats,
+    this.pergi_fleet_registration_id,
+    this.pergi_price,
+    this.pergi_duration,
+    this.pergi_start,
+    this.pergi_end,
+    this.pergi_seatPicked,
+    this.pergi_seatAvail,
+    this.pergi_resto_id,
+  });
 
   BusPergi.fromJson(Map<String, dynamic> json) {
     pergi_trip_id_no = json['trip_id_no'];
@@ -76,6 +79,7 @@ class BusPergi {
     pergi_end = json['end'];
     pergi_seatPicked = json['seatPicked'];
     pergi_seatAvail = json['seatAvail'];
+    pergi_resto_id = json['resto_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -96,6 +100,7 @@ class BusPergi {
     data['seatPicked'] = this.pergi_seatPicked;
     data['seatAvail'] = this.pergi_seatAvail;
     data['seatAvail'] = this.pergi_seatAvail;
+    data['resto_id'] = this.pergi_resto_id;
     return data;
   }
 }

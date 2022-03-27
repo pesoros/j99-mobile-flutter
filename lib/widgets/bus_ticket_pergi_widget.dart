@@ -33,6 +33,7 @@ class BusTicketPergiWidget extends StatefulWidget {
   final String end;
   final String seatPicked;
   final int seatAvail;
+  final String resto_id;
 
   BusTicketPergiWidget({
     this.bus,
@@ -52,6 +53,7 @@ class BusTicketPergiWidget extends StatefulWidget {
     this.end,
     this.seatPicked,
     this.seatAvail,
+    this.resto_id,
   });
 
   @override
@@ -295,6 +297,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
       variable.pergi_end = widget.bus.pergi_end;
       variable.pergi_seatPicked = widget.bus.pergi_seatPicked;
       variable.pergi_seatAvail = widget.bus.pergi_seatAvail.toString();
+      variable.pergi_resto_id = widget.bus.pergi_resto_id;
     });
   }
 }

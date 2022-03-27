@@ -48,7 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            elevation: 0.0,
+            centerTitle: false,
             backgroundColor: CustomColor.darkGrey,
             title: Image.asset(
               'assets/images/j99-logo.png',
