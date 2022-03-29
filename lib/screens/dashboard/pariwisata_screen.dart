@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/pariwisata.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/header_widget.dart';
@@ -29,6 +31,46 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController typeBusController = TextEditingController();
   TextEditingController keteranganController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  sendForm() async {
+    await Pariwisata.list(
+      nameController.text,
+      phoneController.text,
+      emailController.text,
+      typeBusController.text,
+      keteranganController.text,
+    ).then(
+      (value) {
+        if (value['status'] == 200) {
+          Fluttertoast.showToast(
+            msg: "Data terkirim",
+            backgroundColor: CustomColor.red,
+            textColor: CustomColor.white,
+            gravity: ToastGravity.CENTER,
+          );
+          setState(() {
+            nameController.text = "";
+            phoneController.text = "";
+            emailController.text = "";
+            typeBusController.text = "";
+            keteranganController.text = "";
+          });
+        } else {
+          Fluttertoast.showToast(
+            msg: "Data tidak terkirim",
+            backgroundColor: CustomColor.red,
+            textColor: CustomColor.white,
+            gravity: ToastGravity.CENTER,
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +126,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     style: TextStyle(
                                         fontSize: Dimensions.defaultTextSize),
                                     controller: nameController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                     decoration: InputDecoration(
                                       labelText: "Nama",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -114,13 +149,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     style: TextStyle(
                                         fontSize: Dimensions.defaultTextSize),
                                     controller: phoneController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                     decoration: InputDecoration(
                                       labelText: "No. Handphone",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -144,13 +172,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     style: TextStyle(
                                         fontSize: Dimensions.defaultTextSize),
                                     controller: emailController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                     decoration: InputDecoration(
                                       labelText: "E-mail",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -174,13 +195,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     style: TextStyle(
                                         fontSize: Dimensions.defaultTextSize),
                                     controller: typeBusController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                     decoration: InputDecoration(
                                       labelText: "Tipe Bus",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -206,13 +220,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     style: TextStyle(
                                         fontSize: Dimensions.defaultTextSize),
                                     controller: keteranganController,
-                                    validator: (String value) {
-                                      if (value.isEmpty) {
-                                        return Strings.pleaseFillOutTheField;
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                     decoration: InputDecoration(
                                       labelText: "Keterangan",
                                       contentPadding: EdgeInsets.only(left: 10),
@@ -251,7 +258,22 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          if (nameController.text == "" ||
+                              emailController.text == "" ||
+                              phoneController.text == "" ||
+                              typeBusController.text == "" ||
+                              keteranganController.text == "") {
+                            Fluttertoast.showToast(
+                              msg: "Lengkapi formulir",
+                              backgroundColor: CustomColor.red,
+                              textColor: CustomColor.white,
+                              gravity: ToastGravity.CENTER,
+                            );
+                          } else {
+                            sendForm();
+                          }
+                        },
                       ),
                     )
                   ],

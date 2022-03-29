@@ -61,12 +61,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     variable.phone = null;
   }
 
-  String token;
-  String email;
-  String firstName;
-  String lastName;
-  String address;
-  String phone;
+  String token = "";
+  String email = "";
+  String firstName = "";
+  String lastName = "";
+  String address = "";
+  String phone = "";
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +171,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // addImageWidget(context),
                 _typeData("Nama Lengkap", firstName + " " + lastName),
                 _typeData("Email", email),
                 _typeData("No. Handphone", phone),
