@@ -1,9 +1,12 @@
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/change_password.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/utils/dimensions.dart';
-import 'package:juragan99/utils/strings.dart';
 import 'package:juragan99/widgets/back_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'package:juragan99/utils/variables.dart' as variable;
 
 class ChangePasswordScreen extends StatefulWidget {
   @override
@@ -13,7 +16,6 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
 
@@ -25,11 +27,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     super.initState();
   }
 
+  changePassword() async {
+    await ChangePassword.list(
+      variable.email,
+      newPasswordController.text,
+      confirmNewPasswordController.text,
+    ).then((value) {
+      if (value == true) {
+        Navigator.pop(context);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //backgroundColor: Colors.white,
         body: Container(
           height: MediaQuery.of(context).size.height,
           child: Stack(
@@ -67,56 +80,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Sandi lama",
-                  style: TextStyle(color: Colors.black),
-                ),
-                SizedBox(
-                  height: Dimensions.heightSize * 0.5,
-                ),
-                TextFormField(
-                  style: CustomStyle.textStyle,
-                  controller: oldPasswordController,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return Strings.pleaseFillOutTheField;
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Sandi lama",
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                    labelStyle: CustomStyle.textStyle,
-                    focusedBorder: CustomStyle.focusBorder,
-                    enabledBorder: CustomStyle.focusErrorBorder,
-                    focusedErrorBorder: CustomStyle.focusErrorBorder,
-                    errorBorder: CustomStyle.focusErrorBorder,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintStyle: CustomStyle.textStyle,
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _toggleVisibility = !_toggleVisibility;
-                        });
-                      },
-                      icon: _toggleVisibility
-                          ? Icon(
-                              Icons.visibility_off,
-                              color: Colors.black,
-                            )
-                          : Icon(
-                              Icons.visibility,
-                              color: Colors.black,
-                            ),
-                    ),
-                  ),
-                  obscureText: _toggleVisibility,
-                ),
-                SizedBox(height: Dimensions.heightSize),
-                Text(
                   "Sandi baru",
                   style: TextStyle(color: Colors.black),
                 ),
@@ -126,13 +89,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 TextFormField(
                   style: CustomStyle.textStyle,
                   controller: newPasswordController,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return Strings.pleaseFillOutTheField;
-                    } else {
-                      return null;
-                    }
-                  },
                   decoration: InputDecoration(
                     hintText: "Sandi baru",
                     contentPadding:
@@ -176,13 +132,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 TextFormField(
                   style: CustomStyle.textStyle,
                   controller: confirmNewPasswordController,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return Strings.pleaseFillOutTheField;
-                    } else {
-                      return null;
-                    }
-                  },
                   decoration: InputDecoration(
                     hintText: "Konfirmasi sandi baru",
                     contentPadding:
@@ -244,7 +193,27 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
         ),
         onTap: () {
-          Navigator.pop(context);
+          if (newPasswordController.text == "" ||
+              confirmNewPasswordController.text == "") {
+            Fluttertoast.showToast(
+              msg: "Lengkapi data",
+              backgroundColor: CustomColor.red,
+              textColor: CustomColor.white,
+              gravity: ToastGravity.CENTER,
+            );
+          } else {
+            if (newPasswordController.text ==
+                confirmNewPasswordController.text) {
+              changePassword();
+            } else {
+              Fluttertoast.showToast(
+                msg: "Konfirmasi password tidak sama",
+                backgroundColor: CustomColor.red,
+                textColor: CustomColor.white,
+                gravity: ToastGravity.CENTER,
+              );
+            }
+          }
         },
       ),
     );

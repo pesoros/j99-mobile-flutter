@@ -12,45 +12,45 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:4:5-66
-14-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:4:22-64
+14-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:4:5-66
+14-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:4:22-64
 15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-15-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:5:5-79
-15-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:5:22-77
+15-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:5:5-79
+15-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:5:22-77
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-16-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:6:5-80
-16-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:6:22-78
+16-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:6:5-80
+16-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:6:22-78
 17
 18    <application
-18-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:8:4-34:19
+18-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:8:4-34:19
 19        android:name="androidx.multidex.MultiDexApplication"
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.6.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/5f663b08eec19eef9a9d1af662d9025e/core-1.6.0/AndroidManifest.xml:24:18-86
+20-->[androidx.core:core:1.6.0] C:\Users\PARATONSP\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:24:18-86
 21        android:debuggable="true"
 22        android:icon="@mipmap/launcher_icon"
-22-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:10:9-45
+22-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:10:9-45
 23        android:label="Juragan99 Trans" >
-23-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:9:9-40
+23-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:9:9-40
 24        <activity
-24-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:11:9-30:20
+24-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:11:9-30:20
 25            android:name="com.juragan99trans.MainActivity"
-25-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:12:13-41
+25-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:12:13-41
 26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-26-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:15:13-163
+26-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:15:13-163
 27            android:hardwareAccelerated="true"
-27-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:16:13-47
+27-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:16:13-47
 28            android:launchMode="singleTop"
-28-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:13:13-43
+28-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:13:13-43
 29            android:theme="@style/LaunchTheme"
-29-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:14:13-47
+29-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:14:13-47
 30            android:windowSoftInputMode="adjustResize" >
-30-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:17:13-55
+30-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:17:13-55
 31            <meta-data
-31-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:18:13-21:17
+31-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:18:13-21:17
 32                android:name="io.flutter.embedding.android.NormalTheme"
-32-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:19:15-70
+32-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:19:15-70
 33                android:resource="@style/NormalTheme" />
-33-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:20:15-52
+33-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:20:15-52
 34            <!--
 35              <meta-data
 36              android:name="io.flutter.embedding.android.SplashScreenDrawable"
@@ -58,50 +58,50 @@
 38              />
 39            -->
 40            <intent-filter>
-40-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:26:13-29:29
+40-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:26:13-29:29
 41                <action android:name="android.intent.action.MAIN" />
-41-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:27:17-68
-41-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:27:25-66
+41-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:27:17-68
+41-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:27:25-66
 42
 43                <category android:name="android.intent.category.LAUNCHER" />
-43-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:28:17-76
-43-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:28:27-74
+43-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:28:17-76
+43-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:28:27-74
 44            </intent-filter>
 45        </activity>
 46
 47        <meta-data
-47-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:31:9-33:33
+47-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:31:9-33:33
 48            android:name="flutterEmbedding"
-48-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:32:13-44
+48-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:32:13-44
 49            android:value="2" />
-49-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:33:13-30
+49-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:33:13-30
 50
 51        <provider
-51-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-16:20
+51-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
 52            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-52-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-82
+52-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-82
 53            android:authorities="com.juragan99trans.flutter.image_provider"
-53-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-74
+53-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
 54            android:exported="false"
-54-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-37
+54-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
 55            android:grantUriPermissions="true" >
-55-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-47
+55-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
 56            <meta-data
-56-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-15:75
+56-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:75
 57                android:name="android.support.FILE_PROVIDER_PATHS"
-57-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:14:17-67
+57-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-67
 58                android:resource="@xml/flutter_image_picker_file_paths" />
-58-->[:image_picker] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:15:17-72
+58-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-72
 59        </provider>
 60
 61        <activity
-61-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
+61-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
 62            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-62-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
+62-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
 63            android:exported="false"
-63-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
+63-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
 64            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-64-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
+64-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
 65    </application>
 66
 67</manifest>

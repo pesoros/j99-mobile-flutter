@@ -47,7 +47,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
   void initState() {
     super.initState();
     getTicket();
-    // getTicketList();
+    getTicketList();
   }
 
   getTicket() async {
@@ -64,14 +64,14 @@ class _TicketResultScreen extends State<TicketResultScreen> {
     });
   }
 
-  // getTicketList() async {
-  //   await TicketPassanggerList.list(widget.booking_code).then((value) {
-  //     setState(() {
-  //       _ticketList = value;
-  //       isLoadingTrace = false;
-  //     });
-  //   });
-  // }
+  getTicketList() async {
+    await TicketPassanggerList.list(widget.booking_code).then((value) {
+      setState(() {
+        _ticketList = value;
+        isLoadingTrace = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "#" + booking_code,
+                  booking_code,
                   style: TextStyle(
                       color: CustomColor.white,
                       fontSize: Dimensions.defaultTextSize,
@@ -198,8 +198,8 @@ class _TicketResultScreen extends State<TicketResultScreen> {
             children: [
               // _dataBooking("Kode Booking: ", booking_code),
               // _dataBooking("Status Pembayaran: ", payment_status),
-              _dataBooking("Perjalanan: ", round_trip),
-              _dataBooking("Total Penumpang: ", total_seat),
+              // _dataBooking("Perjalanan: ", round_trip),
+              // _dataBooking("Total Penumpang: ", total_seat),
               _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Tanggal: ", tanggal(tempDate)),
               SizedBox(height: 10),
@@ -213,23 +213,52 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                       fontSize: Dimensions.defaultTextSize,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
-              // Container(
-              //   height: MediaQuery.of(context).size.height / 5,
-              //   width: MediaQuery.of(context).size.width,
-              //   child: ListView.builder(
-              //     itemCount: _ticketList.length,
-              //     itemBuilder: (context, index) {
-              //       TicketPassanggerListModal ticket = _ticketList[index];
-              //       return _dataTicketPassangger(ticket.created_at, "");
-              //     },
-              //   ),
-              // )
+              Container(
+                height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  itemCount: _ticketList.length,
+                  itemBuilder: (context, index) {
+                    TicketPassanggerListModal ticket = _ticketList[index];
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _dataTicketPassangger(
+                                  "No. Tiket: ", ticket.ticket_number),
+                              _dataTicketPassanggerFlat(
+                                  ticket.type + ": ", ticket.name),
+                              _dataTicketPassanggerFlat(
+                                  ticket.pickup_trip_location + " - ",
+                                  ticket.drop_trip_location),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              _dataTicketPassangger(
+                                  "No. Kursi: ", ticket.seat_number),
+                              _dataTicketPassangger("Bagasi: ", ticket.baggage),
+                              _dataTicketPassangger(
+                                  "Makanan: ", ticket.food_name),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ));
   }
 
-  _dataBooking(String title, String price) {
+  _dataBooking(String title, String subTitle) {
     return Padding(
       padding: const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
       child: Row(
@@ -241,9 +270,11 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
           Text(
-            price,
+            subTitle,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.defaultTextSize),
+                color: Colors.black,
+                fontSize: Dimensions.defaultTextSize,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -252,20 +283,14 @@ class _TicketResultScreen extends State<TicketResultScreen> {
 
   _dataTicketPassangger(String title, String value) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.all(0),
+      child: Row(
         children: [
-          Row(
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                    color: Colors.black, fontSize: Dimensions.defaultTextSize),
-              ),
-            ],
+          Text(
+            title,
+            style: TextStyle(
+                color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
-          SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -278,7 +303,35 @@ class _TicketResultScreen extends State<TicketResultScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
+  _dataTicketPassanggerFlat(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.all(0),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: Dimensions.defaultTextSize,
+                fontWeight: FontWeight.bold),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                value,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: Dimensions.defaultTextSize,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ],
       ),
     );

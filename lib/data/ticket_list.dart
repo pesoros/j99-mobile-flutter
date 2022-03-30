@@ -18,11 +18,14 @@ class TicketList {
 
     List<TicketListModal> list = [];
 
-    for (var data in jsonDecode(response.body) as List) {
-      list.add(TicketListModal.fromJson(data));
-    }
+    var resBody = jsonDecode(response.body);
 
-    return list;
+    if (resBody['status'] == 200) {
+      for (var data in jsonDecode(response.body)['data'] as List) {
+        list.add(TicketListModal.fromJson(data));
+      }
+      return list;
+    } else {}
   }
 }
 

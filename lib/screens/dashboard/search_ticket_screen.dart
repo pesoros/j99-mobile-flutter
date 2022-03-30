@@ -23,10 +23,9 @@ class SearchTicketScreen extends StatefulWidget {
 }
 
 class _SearchTicketScreenState extends State<SearchTicketScreen> {
-  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
-
   List<TicketListModal> _ticketList = [];
   String keteranganText = "Login terlebih dahulu";
+  bool emptyList = false;
 
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -43,10 +42,16 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
   getTicketList() async {
     TicketList.list().then(
       (value) {
-        setState(() {
-          _ticketList = value;
-          print(_ticketList.length);
-        });
+        if (value == null) {
+          setState(() {
+            emptyList = true;
+          });
+        } else {
+          setState(() {
+            _ticketList = value;
+            emptyList = false;
+          });
+        }
       },
     );
   }
@@ -54,13 +59,6 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    items.add((items.length + 1).toString());
-    if (mounted) setState(() {});
-    _refreshController.loadComplete();
   }
 
   @override
@@ -92,12 +90,11 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
         ),
         controller: _refreshController,
         onRefresh: _onRefresh,
-        onLoading: _onLoading,
         child: (variable.email == "" || variable.email == null)
             ? Center(
                 child: Text("Login terlebih dahulu"),
               )
-            : (_ticketList.length == 0 || _ticketList.length == null)
+            : (emptyList)
                 ? Center(
                     child: Text("Buat pesanan terlebih dahulu"),
                   )

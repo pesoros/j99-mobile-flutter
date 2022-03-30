@@ -20,6 +20,7 @@ class Ticket {
 
 class TicketPassanggerList {
   static list(String code) async {
+    print(code);
     String url = "https://api-j99.pesoros.com/ticket/cek";
 
     Uri parseUrl = Uri.parse(
@@ -28,6 +29,7 @@ class TicketPassanggerList {
     final response = await http.post(parseUrl, body: {
       "code": code,
     });
+
     List<TicketPassanggerListModal> list = [];
     for (var data in jsonDecode(response.body)['ticket'] as List) {
       list.add(TicketPassanggerListModal.fromJson(data));
@@ -37,23 +39,48 @@ class TicketPassanggerList {
 }
 
 class TicketPassanggerListModal {
-  String description;
-  String created_at;
+  String name;
+  String ticket_number;
+  String type;
+  String seat_number;
+  String pickup_trip_location;
+  String drop_trip_location;
+  String baggage;
+  String food_name;
 
   TicketPassanggerListModal({
-    this.description,
-    this.created_at,
+    this.name,
+    this.ticket_number,
+    this.type,
+    this.seat_number,
+    this.pickup_trip_location,
+    this.drop_trip_location,
+    this.baggage,
+    this.food_name,
   });
 
   TicketPassanggerListModal.fromJson(Map<String, dynamic> json) {
-    description = json['description'];
-    created_at = json['created_at'];
+    name = json['name'];
+    ticket_number = json['ticket_number'];
+    type = json['type'];
+    seat_number = json['seat_number'];
+    pickup_trip_location = json['pickup_trip_location'];
+    drop_trip_location = json['drop_trip_location'];
+    baggage = json['baggage'];
+    food_name = json['food_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['description'] = this.description;
-    data['description'] = this.description;
+    data['name'] = this.name;
+    data['ticket_number'] = this.ticket_number;
+    data['type'] = this.type;
+    data['seat_number'] = this.seat_number;
+    data['pickup_trip_location'] = this.pickup_trip_location;
+    data['drop_trip_location'] = this.drop_trip_location;
+    data['baggage'] = this.baggage;
+    data['food_name'] = this.food_name;
+
     return data;
   }
 }

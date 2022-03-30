@@ -72,18 +72,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Container(
-        child: Column(
-          children: [
-            headerWidget(context),
-            bodyWidget(context),
-            updateProfileButtonWidget(context),
-            changePasswordButtonWidget(context),
-            historyButtonWidget(context),
-            logoutButtonWidget(context)
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              headerWidget(context),
+              bodyWidget(context),
+              updateProfileButtonWidget(context),
+              changePasswordButtonWidget(context),
+              // historyButtonWidget(context),
+              logoutButtonWidget(context)
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 
