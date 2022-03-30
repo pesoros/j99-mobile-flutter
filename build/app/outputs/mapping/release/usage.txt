@@ -1928,9 +1928,9 @@ kotlin.sequences.GeneratorSequence
 kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1
 androidx.customview.widget.ExploreByTouchHelper
 androidx.annotation.CheckResult
-io.flutter.embedding.engine.systemchannels.PlatformViewsChannel:
-    private static final java.lang.String TAG
 io.flutter.embedding.engine.systemchannels.PlatformChannel:
+    private static final java.lang.String TAG
+io.flutter.embedding.engine.systemchannels.PlatformViewsChannel:
     private static final java.lang.String TAG
 kotlin.Suppress
 com.google.common.collect.Multisets$FilteredMultiset$1
@@ -3753,8 +3753,8 @@ kotlin.jvm.internal.markers.KMutableMap$Entry
 com.google.common.escape.Platform
 androidx.collection.CircularArray
 com.google.common.collect.ArrayTable$ArrayMap
-androidx.loader.R$color
 com.juragan99trans.R$styleable
+androidx.loader.R$color
 com.google.errorprone.annotations.NoAllocation
 kotlin.sequences.SequencesKt___SequencesKt$onEach$1
 kotlin.collections.Grouping
@@ -6050,6 +6050,6 @@ androidx.core.content.res.ResourcesCompat:
     private static final java.lang.ThreadLocal sTempTypedValue
     private static final java.util.WeakHashMap sColorStateCaches
     private static final java.lang.Object sColorStateCacheLock
+androidx.lifecycle.DefaultLifecycleObserver$-CC
 io.flutter.plugin.platform.PlatformView$-CC
 io.flutter.plugin.common.BinaryMessenger$-CC
-androidx.lifecycle.DefaultLifecycleObserver$-CC
