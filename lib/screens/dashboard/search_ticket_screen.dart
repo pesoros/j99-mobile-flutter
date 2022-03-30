@@ -1,7 +1,6 @@
 // ignore_for_file: unused_import, non_constant_identifier_names
 
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:indonesia/indonesia.dart';
 import 'package:intl/intl.dart';
 import 'package:juragan99/data/ticket_list.dart';
@@ -40,7 +39,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
   }
 
   getTicketList() async {
-    TicketList.list().then(
+    await TicketList.list().then(
       (value) {
         if (value == null) {
           setState(() {
@@ -57,37 +56,18 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
   }
 
   void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    await getTicketList();
     _refreshController.refreshCompleted();
   }
 
   @override
   Widget build(BuildContext context) {
+    _ticketList.sort((min, max) => max.created_at.compareTo(min.created_at));
     return Scaffold(
       body: SmartRefresher(
         enablePullDown: true,
-        enablePullUp: true,
-        header: WaterDropHeader(),
-        footer: CustomFooter(
-          builder: (BuildContext context, LoadStatus mode) {
-            Widget body;
-            if (mode == LoadStatus.idle) {
-              body = Text("pull up load");
-            } else if (mode == LoadStatus.loading) {
-              body = CupertinoActivityIndicator();
-            } else if (mode == LoadStatus.failed) {
-              body = Text("Load Failed!Click retry!");
-            } else if (mode == LoadStatus.canLoading) {
-              body = Text("release to load more");
-            } else {
-              body = Text("No more Data");
-            }
-            return Container(
-              height: 55.0,
-              child: Center(child: body),
-            );
-          },
-        ),
+        enablePullUp: false,
+        header: ClassicHeader(),
         controller: _refreshController,
         onRefresh: _onRefresh,
         child: (variable.email == "" || variable.email == null)
@@ -103,6 +83,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                     itemCount: _ticketList.length,
                     itemBuilder: (context, index) {
                       TicketListModal ticket = _ticketList[index];
+
                       return Container(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Center(
@@ -164,7 +145,6 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
     String created_at,
   ) {
     DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(created_at);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -172,7 +152,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              round_trip,
+              booking_code,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -199,19 +179,6 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
         ),
         SizedBox(height: 10),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Kode: ",
-                style: TextStyle(
-                    color: CustomColor.grey,
-                    fontSize: Dimensions.smallTextSize)),
-            Text(booking_code,
-                style: TextStyle(
-                    color: CustomColor.darkGrey,
-                    fontSize: Dimensions.smallTextSize)),
-          ],
-        ),
-        Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("Total Kursi: ",
@@ -224,6 +191,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                     fontSize: Dimensions.smallTextSize)),
           ],
         ),
+        SizedBox(height: 3),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [

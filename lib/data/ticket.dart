@@ -20,7 +20,6 @@ class Ticket {
 
 class TicketPassanggerList {
   static list(String code) async {
-    print(code);
     String url = "https://api-j99.pesoros.com/ticket/cek";
 
     Uri parseUrl = Uri.parse(

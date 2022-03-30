@@ -1,3 +1,4 @@
+import 'package:juragan99/data/profile.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
 import 'package:flutter/material.dart';
@@ -34,17 +35,25 @@ class _SplashScreenState extends State<SplashScreen> {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString('token');
     String email = pref.getString('email');
-    String firstName = pref.getString('firstName');
-    String lastName = pref.getString('lastName');
-    String address = pref.getString('address');
-    String phone = pref.getString('phone');
-    setState(() {
-      variable.token = token;
-      variable.email = email;
-      variable.firstName = firstName;
-      variable.lastName = lastName;
-      variable.address = address;
-      variable.phone = phone;
+    if (token != null) {
+      setState(() {
+        variable.token = token;
+        variable.email = email;
+      });
+      getProfile(email);
+    }
+  }
+
+  getProfile(String email) async {
+    await Profile.list(email).then((value) {
+      setState(() {
+        variable.first_name = value['first_name'];
+        variable.last_name = value['last_name'];
+        variable.address = value['address'];
+        variable.phone = value['phone'];
+        variable.identity = value[''];
+        variable.identity_number = value['identity'];
+      });
     });
   }
 

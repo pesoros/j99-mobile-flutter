@@ -8,14 +8,18 @@ String test;
 //User
 String token;
 String email;
-String firstName;
-String lastName;
+
+//Profile
+String first_name;
+String last_name;
 String address;
 String phone;
+String identity;
+String identity_number;
 
 //Login
-String email_user;
-String password;
+String email_login;
+String password_login;
 
 //Registration
 

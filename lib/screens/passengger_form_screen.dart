@@ -26,8 +26,8 @@ class PassenggerFormScreen extends StatefulWidget {
 }
 
 class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
-  TextEditingController nameBuyerController =
-      TextEditingController(text: variable.firstName + " " + variable.lastName);
+  TextEditingController nameBuyerController = TextEditingController(
+      text: variable.first_name + " " + variable.last_name);
   TextEditingController phoneBuyerController =
       TextEditingController(text: variable.phone);
   TextEditingController emailBuyerController =
@@ -221,9 +221,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                               if (value == true) {
                                 setState(() {
                                   namePassenggerController1.text =
-                                      variable.firstName +
+                                      variable.first_name +
                                           " " +
-                                          variable.lastName;
+                                          variable.last_name;
                                   phonePassenggerController1.text =
                                       variable.phone;
                                   variable.checkBuyerPassengger = true;

@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/profile.dart';
 import 'package:juragan99/data/user.dart';
 import 'package:juragan99/screens/settings/my_profile_screen.dart';
 
@@ -42,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
   String phone;
 
   getUser() async {
-    await UserList.list(variable.email_user, variable.password).then(
+    await UserList.list(variable.email_login, variable.password_login).then(
       (value) {
         if (value.token == null) {
           Fluttertoast.showToast(
@@ -53,39 +54,39 @@ class _SignInScreenState extends State<SignInScreen> {
           );
         } else {
           setState(() {
-            token = value.token;
-            email = value.email;
-            firstName = value.firstName;
-            lastName = value.lastName;
-            address = value.address;
-            phone = value.phone;
             variable.token = value.token;
             variable.email = value.email;
-            variable.firstName = value.firstName;
-            variable.lastName = value.lastName;
-            variable.address = value.address;
-            variable.phone = value.phone;
           });
-          storeUser();
-          Timer(Duration(seconds: 1), nextPage);
+          getProfile(value.email);
+          storeUser(value.token, value.email);
         }
       },
     );
   }
 
-  nextPage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => MyProfileScreen()));
+  getProfile(String email) async {
+    await Profile.list(email).then((value) {
+      setState(() {
+        variable.first_name = value['first_name'];
+        variable.last_name = value['last_name'];
+        variable.address = value['address'];
+        variable.phone = value['phone'];
+        variable.identity = value['identity'];
+        variable.identity_number = value['identity_number'];
+      });
+    });
+    nextPage();
   }
 
-  storeUser() async {
+  storeUser(String token, String email) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setString('token', token);
     await pref.setString('email', email);
-    await pref.setString('lastName', lastName);
-    await pref.setString('firstName', firstName);
-    await pref.setString('address', address);
-    await pref.setString('phone', phone);
+  }
+
+  nextPage() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MyProfileScreen()));
   }
 
   @override
@@ -198,16 +199,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 style: CustomStyle.textStyle,
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return Strings.pleaseFillOutTheField;
-                  } else {
-                    return null;
-                  }
-                },
                 onChanged: (value) {
                   setState(() {
-                    variable.email_user = value;
+                    variable.email_login = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -238,16 +232,9 @@ class _SignInScreenState extends State<SignInScreen> {
               TextFormField(
                 style: CustomStyle.textStyle,
                 controller: passwordController,
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return Strings.pleaseFillOutTheField;
-                  } else {
-                    return null;
-                  }
-                },
                 onChanged: (value) {
                   setState(() {
-                    variable.password = value;
+                    variable.password_login = value;
                   });
                 },
                 decoration: InputDecoration(

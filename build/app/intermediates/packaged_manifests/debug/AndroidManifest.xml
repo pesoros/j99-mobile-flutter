@@ -5,7 +5,7 @@
     android:versionName="1.0.0" >
 
     <uses-sdk
-        android:minSdkVersion="18"
+        android:minSdkVersion="21"
         android:targetSdkVersion="30" />
     <!--
          Flutter needs it to communicate with the running application
@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="androidx.multidex.MultiDexApplication"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/launcher_icon"
@@ -47,16 +46,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
-        <provider
-            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.juragan99trans.flutter.image_provider"
-            android:exported="false"
-            android:grantUriPermissions="true" >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/flutter_image_picker_file_paths" />
-        </provider>
 
         <activity
             android:name="io.flutter.plugins.urllauncher.WebViewActivity"

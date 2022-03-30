@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, non_constant_identifier_names, must_be_immutable
 
 import 'package:indonesia/indonesia.dart';
 import 'package:juragan99/data/bus_pergi.dart';
@@ -19,6 +19,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 
 class InvoiceScreen extends StatefulWidget {
+  String booking_code;
+
+  InvoiceScreen({
+    this.booking_code,
+  });
   @override
   _InvoiceWidgetScreen createState() => _InvoiceWidgetScreen();
 }
@@ -35,14 +40,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
       child: Scaffold(
         backgroundColor: CustomColor.darkGrey,
         body: Stack(
-          children: [
-            // BackWidget(
-            //   title: "Invoice Pembayaran",
-            //   color: CustomColor.white,
-            // ),
-            bodyWidget(context),
-            buttonWidget(context)
-          ],
+          children: [bodyWidget(context), buttonWidget(context)],
         ),
       ),
     );
@@ -93,7 +91,8 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PaymentStatusScreen()),
+                      builder: (context) => PaymentStatusScreen(
+                          booking_code: widget.booking_code)),
                   (Route<dynamic> route) => false,
                 );
               },

@@ -19,7 +19,7 @@ class BookingList {
           ? {
               "offer_code": "",
               "booker_id": "",
-              "booker_name": variable.firstName + " " + variable.lastName,
+              "booker_name": variable.first_name + " " + variable.last_name,
               "booker_email": variable.email,
               "booker_phone": variable.phone,
               "payment_method": variable.selectedPaymentCategories,
@@ -42,7 +42,7 @@ class BookingList {
               ? {
                   "offer_code": "",
                   "booker_id": "",
-                  "booker_name": variable.firstName + " " + variable.lastName,
+                  "booker_name": variable.first_name + " " + variable.last_name,
                   "booker_email": variable.email,
                   "booker_phone": variable.phone,
                   "payment_method": variable.selectedPaymentCategories,
@@ -82,7 +82,7 @@ class BookingList {
                       "offer_code": "",
                       "booker_id": "",
                       "booker_name":
-                          variable.firstName + " " + variable.lastName,
+                          variable.first_name + " " + variable.last_name,
                       "booker_email": variable.email,
                       "booker_phone": variable.phone,
                       "payment_method": variable.selectedPaymentCategories,
@@ -118,7 +118,7 @@ class BookingList {
                           "offer_code": "",
                           "booker_id": "",
                           "booker_name":
-                              variable.firstName + " " + variable.lastName,
+                              variable.first_name + " " + variable.last_name,
                           "booker_email": variable.email,
                           "booker_phone": variable.phone,
                           "payment_method": variable.selectedPaymentCategories,
@@ -188,8 +188,9 @@ class BookingList {
                           ? {
                               "offer_code": "",
                               "booker_id": "",
-                              "booker_name":
-                                  variable.firstName + " " + variable.lastName,
+                              "booker_name": variable.first_name +
+                                  " " +
+                                  variable.last_name,
                               "booker_email": variable.email,
                               "booker_phone": variable.phone,
                               "payment_method":
@@ -242,9 +243,9 @@ class BookingList {
                               ? {
                                   "offer_code": "",
                                   "booker_id": "",
-                                  "booker_name": variable.firstName +
+                                  "booker_name": variable.first_name +
                                       " " +
-                                      variable.lastName,
+                                      variable.last_name,
                                   "booker_email": variable.email,
                                   "booker_phone": variable.phone,
                                   "payment_method":
@@ -341,9 +342,9 @@ class BookingList {
                                   ? {
                                       "offer_code": "",
                                       "booker_id": "",
-                                      "booker_name": variable.firstName +
+                                      "booker_name": variable.first_name +
                                           " " +
-                                          variable.lastName,
+                                          variable.last_name,
                                       "booker_email": variable.email,
                                       "booker_phone": variable.phone,
                                       "payment_method":
@@ -411,9 +412,9 @@ class BookingList {
                                       ? {
                                           "offer_code": "",
                                           "booker_id": "",
-                                          "booker_name": variable.firstName +
+                                          "booker_name": variable.first_name +
                                               " " +
-                                              variable.lastName,
+                                              variable.last_name,
                                           "booker_email": variable.email,
                                           "booker_phone": variable.phone,
                                           "payment_method": variable
@@ -531,7 +532,6 @@ class BookingList {
                                         }
                                       : '',
     );
-    print(response.body);
     return response.body;
   }
 }

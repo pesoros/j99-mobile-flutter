@@ -5,103 +5,84 @@
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="18"
+8        android:minSdkVersion="21"
 9        android:targetSdkVersion="30" />
 10    <!--
 11         Flutter needs it to communicate with the running application
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:4:5-66
-14-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:4:22-64
+14-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:4:5-66
+14-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:4:22-64
 15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-15-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:5:5-79
-15-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:5:22-77
+15-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:5:5-79
+15-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:5:22-77
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-16-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:6:5-80
-16-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:6:22-78
+16-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:6:5-80
+16-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:6:22-78
 17
 18    <application
-18-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:8:4-34:19
-19        android:name="androidx.multidex.MultiDexApplication"
-20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.6.0] C:\Users\PARATONSP\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:24:18-86
-21        android:debuggable="true"
-22        android:icon="@mipmap/launcher_icon"
-22-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:10:9-45
-23        android:label="Juragan99 Trans" >
-23-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:9:9-40
-24        <activity
-24-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:11:9-30:20
-25            android:name="com.juragan99trans.MainActivity"
-25-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:12:13-41
-26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-26-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:15:13-163
-27            android:hardwareAccelerated="true"
-27-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:16:13-47
-28            android:launchMode="singleTop"
-28-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:13:13-43
-29            android:theme="@style/LaunchTheme"
-29-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:14:13-47
-30            android:windowSoftInputMode="adjustResize" >
-30-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:17:13-55
-31            <meta-data
-31-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:18:13-21:17
-32                android:name="io.flutter.embedding.android.NormalTheme"
-32-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:19:15-70
-33                android:resource="@style/NormalTheme" />
-33-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:20:15-52
-34            <!--
-35              <meta-data
-36              android:name="io.flutter.embedding.android.SplashScreenDrawable"
-37              android:resource="@drawable/launch_background"
-38              />
-39            -->
-40            <intent-filter>
-40-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:26:13-29:29
-41                <action android:name="android.intent.action.MAIN" />
-41-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:27:17-68
-41-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:27:25-66
-42
-43                <category android:name="android.intent.category.LAUNCHER" />
-43-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:28:17-76
-43-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:28:27-74
-44            </intent-filter>
-45        </activity>
-46
-47        <meta-data
-47-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:31:9-33:33
-48            android:name="flutterEmbedding"
-48-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:32:13-44
-49            android:value="2" />
-49-->D:\FlutterProject\j99-mobile-flutter\android\app\src\main\AndroidManifest.xml:33:13-30
-50
-51        <provider
-51-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
-52            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-52-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-82
-53            android:authorities="com.juragan99trans.flutter.image_provider"
-53-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
-54            android:exported="false"
-54-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
-55            android:grantUriPermissions="true" >
-55-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
-56            <meta-data
-56-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:75
-57                android:name="android.support.FILE_PROVIDER_PATHS"
-57-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-67
-58                android:resource="@xml/flutter_image_picker_file_paths" />
-58-->[:image_picker] D:\FlutterProject\j99-mobile-flutter\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-72
-59        </provider>
-60
-61        <activity
-61-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
-62            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-62-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
-63            android:exported="false"
-63-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
-64            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-64-->[:url_launcher_android] D:\FlutterProject\j99-mobile-flutter\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
-65    </application>
-66
-67</manifest>
+18-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:8:4-34:19
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.6.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/3db6d125c6afcb0a6fe221b28e1b5f57/core-1.6.0/AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:icon="@mipmap/launcher_icon"
+21-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:10:9-45
+22        android:label="Juragan99 Trans" >
+22-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:9:9-40
+23        <activity
+23-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:11:9-30:20
+24            android:name="com.juragan99trans.MainActivity"
+24-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:12:13-41
+25            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+25-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:15:13-163
+26            android:hardwareAccelerated="true"
+26-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:16:13-47
+27            android:launchMode="singleTop"
+27-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:13:13-43
+28            android:theme="@style/LaunchTheme"
+28-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:14:13-47
+29            android:windowSoftInputMode="adjustResize" >
+29-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:17:13-55
+30            <meta-data
+30-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:18:13-21:17
+31                android:name="io.flutter.embedding.android.NormalTheme"
+31-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:19:15-70
+32                android:resource="@style/NormalTheme" />
+32-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:20:15-52
+33            <!--
+34              <meta-data
+35              android:name="io.flutter.embedding.android.SplashScreenDrawable"
+36              android:resource="@drawable/launch_background"
+37              />
+38            -->
+39            <intent-filter>
+39-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:26:13-29:29
+40                <action android:name="android.intent.action.MAIN" />
+40-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:27:17-68
+40-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:27:25-66
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+42-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:28:17-76
+42-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:28:27-74
+43            </intent-filter>
+44        </activity>
+45
+46        <meta-data
+46-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:31:9-33:33
+47            android:name="flutterEmbedding"
+47-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:32:13-44
+48            android:value="2" />
+48-->/Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:33:13-30
+49
+50        <activity
+50-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
+51            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+51-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
+52            android:exported="false"
+52-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
+53            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+53-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
+54    </application>
+55
+56</manifest>

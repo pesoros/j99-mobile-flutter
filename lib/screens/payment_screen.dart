@@ -36,8 +36,8 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController nameBuyerController =
-      TextEditingController(text: variable.firstName + " " + variable.lastName);
+  TextEditingController nameBuyerController = TextEditingController(
+      text: variable.first_name + " " + variable.last_name);
   TextEditingController phoneBuyerController =
       TextEditingController(text: variable.phone);
   TextEditingController emailBuyerController =
@@ -239,7 +239,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             (variable.selectedJumlahPenumpang == "4")
                 ? _dataPassenggerWidget4(context)
                 : Container(),
-            _promoCode(context),
+            // _promoCode(context),
             _paymentMethod(context),
             SizedBox(height: 20),
             _detailCost(context),
@@ -1548,7 +1548,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       rupiah(variable.pulang_price),
                     )
                   : Padding(padding: EdgeInsets.all(0)),
-              _data("Promo", rupiah(promoValue)),
+              // _data("Promo", rupiah(promoValue)),
               Divider(
                 color: Colors.grey,
               ),
@@ -1769,14 +1769,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 if (variable.selectedPaymentCategories == 'EWALLET') {
                   String payment_link =
                       payment['actions']['mobile_web_checkout_url'];
-                  _ewalletUrl(context, payment_link);
+                  String booking_code = payment['reference_id'];
+                  _ewalletUrl(context, payment_link, booking_code);
                   setState(() {
                     isLoading = false;
                   });
                 } else {
+                  String booking_code = payment['external_id'];
                   Navigator.pop(context);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => InvoiceScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          InvoiceScreen(booking_code: booking_code)));
                   setState(() {
                     isLoading = false;
                   });
@@ -1796,14 +1799,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   if (variable.selectedPaymentCategories == 'EWALLET') {
                     String payment_link =
                         payment['actions']['mobile_web_checkout_url'];
-                    _ewalletUrl(context, payment_link);
+                    String booking_code = payment['reference_id'];
+
+                    _ewalletUrl(context, payment_link, booking_code);
                     setState(() {
                       isLoading = false;
                     });
                   } else {
+                    String booking_code = payment['external_id'];
+
                     Navigator.pop(context);
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => InvoiceScreen()));
+                        builder: (context) =>
+                            InvoiceScreen(booking_code: booking_code)));
                     setState(() {
                       isLoading = false;
                     });
@@ -1828,10 +1836,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  _ewalletUrl(BuildContext context, String payment_url) async {
+  _ewalletUrl(
+      BuildContext context, String payment_url, String booking_code) async {
     if (await launch(payment_url)) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => PaymentStatusScreen()));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PaymentStatusScreen(booking_code: booking_code)));
     } else {
       throw 'Could not launch $payment_url';
     }

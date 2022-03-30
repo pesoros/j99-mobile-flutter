@@ -80,11 +80,11 @@ class _TicketResultScreen extends State<TicketResultScreen> {
         backgroundColor: CustomColor.darkGrey,
         body: Stack(
           children: [
-            (isLoadingPackage == true && isLoadingTrace == true)
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : bodyWidget(context),
+            (isLoadingPackage == true)
+                ? Center(child: CircularProgressIndicator())
+                : (isLoadingTrace == true)
+                    ? Center(child: CircularProgressIndicator())
+                    : bodyWidget(context),
             buttonWidget(context),
           ],
         ),
@@ -228,23 +228,25 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _dataTicketPassangger(
+                              _dataTicketPassanggerLeft(
                                   "No. Tiket: ", ticket.ticket_number),
-                              _dataTicketPassanggerFlat(
-                                  ticket.type + ": ", ticket.name),
-                              _dataTicketPassanggerFlat(
-                                  ticket.pickup_trip_location + " - ",
-                                  ticket.drop_trip_location),
+                              _dataTicketPassanggerLeft("Nama: ", ticket.name),
+                              _dataTicketPassanggerLeft("Kelas: ", ticket.type),
+                              _dataTicketPassanggerLeft(
+                                  "Keberangkatan: ", ticket.drop_trip_location),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              _dataTicketPassangger(
+                              _dataTicketPassanggerRight(
                                   "No. Kursi: ", ticket.seat_number),
-                              _dataTicketPassangger("Bagasi: ", ticket.baggage),
-                              _dataTicketPassangger(
+                              _dataTicketPassanggerRight(
+                                  "Bagasi: ", ticket.baggage),
+                              _dataTicketPassanggerRight(
                                   "Makanan: ", ticket.food_name),
+                              _dataTicketPassanggerRight(
+                                  "Tujuan", ticket.drop_trip_location),
                             ],
                           )
                         ],
@@ -281,10 +283,11 @@ class _TicketResultScreen extends State<TicketResultScreen> {
     );
   }
 
-  _dataTicketPassangger(String title, String value) {
+  _dataTicketPassanggerLeft(String title, String value) {
     return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Row(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
@@ -308,17 +311,18 @@ class _TicketResultScreen extends State<TicketResultScreen> {
     );
   }
 
-  _dataTicketPassanggerFlat(String title, String value) {
+  _dataTicketPassanggerRight(String title, String value) {
     return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Row(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             title,
             style: TextStyle(
-                color: Colors.black,
-                fontSize: Dimensions.defaultTextSize,
-                fontWeight: FontWeight.bold),
+              color: Colors.black,
+              fontSize: Dimensions.defaultTextSize,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

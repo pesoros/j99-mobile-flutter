@@ -64,8 +64,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       identityController.text,
     ).then((value) {
       if (value == true) {
-        Navigator.pop(context);
+        variable.first_name = first_nameController.text;
+        variable.last_name = last_nameController.text;
+        variable.address = addressController.text;
+        variable.phone = phoneController.text;
+        variable.identity = identityController.text;
+        variable.identity_number = identity_numberController.text;
       }
+      Navigator.pop(context);
     });
   }
 

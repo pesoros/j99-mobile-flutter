@@ -24,49 +24,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   void initState() {
     super.initState();
-    getUser();
-  }
-
-  getUser() async {
-    final pref = await SharedPreferences.getInstance();
-    String token = pref.getString('token');
-    String email = pref.getString('email');
-    String firstName = pref.getString('firstName');
-    String lastName = pref.getString('lastName');
-    String address = pref.getString('address');
-    String phone = pref.getString('phone');
-    setState(() {
-      this.token = token;
-      this.email = email;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.address = address;
-      this.phone = phone;
-    });
   }
 
   removeUser() async {
     final pref = await SharedPreferences.getInstance();
     pref.remove('token');
     pref.remove('email');
-    pref.remove('firstName');
-    pref.remove('lastName');
-    pref.remove('address');
-    pref.remove('phone');
     variable.token = null;
     variable.email = null;
-    variable.firstName = null;
-    variable.lastName = null;
+    variable.first_name = null;
+    variable.last_name = null;
     variable.address = null;
     variable.phone = null;
   }
-
-  String token = "";
-  String email = "";
-  String firstName = "";
-  String lastName = "";
-  String address = "";
-  String phone = "";
 
   @override
   Widget build(BuildContext context) {
@@ -172,10 +142,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _typeData("Nama Lengkap", firstName + " " + lastName),
-                _typeData("Email", email),
-                _typeData("No. Handphone", phone),
-                _typeData("Alamat", address),
+                _typeData("Nama Lengkap",
+                    variable.first_name + " " + variable.last_name),
+                _typeData("Email", variable.email),
+                _typeData("No. Handphone", variable.phone),
+                _typeData("Alamat", variable.address),
+                _typeData("Identitas", variable.identity),
+                _typeData("Nomor Identitas", variable.identity_number),
               ],
             ),
           ),
@@ -204,10 +177,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           ),
         ),
         onTap: () async {
-          Navigator.push(
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
           );
+          setState(() {});
         },
       ),
     );
