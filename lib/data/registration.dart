@@ -33,7 +33,7 @@ class Registration {
         "lastName": lastName,
         "address": address,
         "phone": phone,
-        "identitiy": identity,
+        "identity": identity,
         "identityNumber": identityNumber,
       },
     );

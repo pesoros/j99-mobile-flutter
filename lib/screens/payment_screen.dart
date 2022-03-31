@@ -176,7 +176,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   getGrandTotalPrice() {
     setState(() {
-      grandTotalPrice = totalPrice + promoValue;
+      grandTotalPrice = totalPrice - promoValue;
     });
   }
 
@@ -1522,6 +1522,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   _detailCost(BuildContext context) {
+    String prettify(double d) =>
+        d.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '');
+    String strGrandTotal = prettify(grandTotalPrice);
     return Container(
         margin: const EdgeInsets.only(left: 30, right: 30, bottom: 10, top: 10),
         decoration: BoxDecoration(
@@ -1555,7 +1558,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               SizedBox(height: 10),
               _data(
                 "Total",
-                rupiah(grandTotalPrice),
+                rupiah(strGrandTotal),
               ),
             ],
           ),

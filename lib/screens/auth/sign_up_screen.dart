@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/check_registration.dart';
+import 'package:juragan99/data/otp.dart';
 import 'package:juragan99/data/registration.dart';
+import 'package:juragan99/screens/auth/otp_registration/email_verification_registration_screen.dart';
 
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -43,32 +46,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
   }
 
-  sendRegistration() async {
-    await Registration.list(
-      emailController.text,
-      passwordController.text,
-      confirmPasswordController.text,
-      firstNameController.text,
-      lastNameController.text,
-      addressController.text,
-      phoneController.text,
-      identityType,
-      identityNumberController.text,
-    ).then((value) {
-      if (value == "registration succeed") {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => EmailVerificationScreen(
-                  emailAddress: emailController.text,
-                )));
-      } else {
-        Fluttertoast.showToast(
-          msg: "Data telah terpakai",
-          backgroundColor: CustomColor.red,
-          textColor: CustomColor.white,
-          gravity: ToastGravity.CENTER,
-        );
-      }
-    });
+  _setOtp() async {
+    await SetOtp.list(emailController.text, phoneController.text).then(
+      (value) {
+        if (value['status'] == 200) {
+          Navigator.pop(context);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => EmailVerificationRegistrationScreen(
+                email: emailController.text,
+                password: passwordController.text,
+                confpassword: confirmPasswordController.text,
+                firstName: firstNameController.text,
+                lastName: lastNameController.text,
+                address: addressController.text,
+                phone: phoneController.text,
+                identity: identityType,
+                identityNumber: identityNumberController.text,
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -465,19 +465,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-        onTap: () {
-          if (passwordController.text != confirmPasswordController.text) {
-            Fluttertoast.showToast(
-              msg: "Konfirmasi sandi tidak cocok",
-              backgroundColor: CustomColor.red,
-              textColor: CustomColor.white,
-              gravity: ToastGravity.CENTER,
-            );
-          } else {
-            sendRegistration();
-          }
+        onTap: () async {
+          await CheckRegistration.list(emailController.text).then((value) {
+            if (value['status'] == 200) {
+              if (passwordController.text != confirmPasswordController.text) {
+                Fluttertoast.showToast(
+                  msg: "Konfirmasi sandi tidak cocok",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              } else {
+                modalPickOTP(context);
+              }
+            } else {
+              Fluttertoast.showToast(
+                msg: "Email telah terdaftar",
+                backgroundColor: CustomColor.red,
+                textColor: CustomColor.white,
+                gravity: ToastGravity.CENTER,
+              );
+            }
+          });
         },
       ),
+    );
+  }
+
+  modalPickOTP(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          title: const Text('Pilih Metode OTP'),
+          content: SingleChildScrollView(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      variable.isEmail = true;
+                    });
+                    _setOtp();
+                  },
+                  child: Text(
+                    "Email",
+                    style: TextStyle(color: CustomColor.red),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      variable.isEmail = false;
+                    });
+                    _setOtp();
+                  },
+                  child: Text(
+                    "Whatsapp",
+                    style: TextStyle(color: CustomColor.red),
+                  ))
+            ],
+          )),
+        );
+      },
     );
   }
 

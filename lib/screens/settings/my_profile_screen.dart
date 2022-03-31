@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable, unused_import, unused_element
 
+import 'package:juragan99/data/profile.dart';
+import 'package:juragan99/data/user.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/settings/change_password_screen.dart';
 import 'package:juragan99/screens/settings/update_profile_screen.dart';
@@ -21,9 +23,37 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
+    getToken();
+  }
+
+  getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token');
+    String email = prefs.getString('email');
+    setState(() {
+      variable.token = token;
+      variable.email = email;
+    });
+    getUser(email);
+  }
+
+  getUser(email) async {
+    await Profile.list(email).then((value) {
+      setState(() {
+        variable.first_name = value['first_name'];
+        variable.last_name = value['last_name'];
+        variable.address = value['address'];
+        variable.phone = value['phone'];
+        variable.identity = value['identity'];
+        variable.identity_number = value['identity_number'];
+        isLoading = false;
+      });
+    });
   }
 
   removeUser() async {
@@ -46,7 +76,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           child: Column(
             children: [
               headerWidget(context),
-              bodyWidget(context),
+              (isLoading)
+                  ? Container(
+                      height: 100,
+                      child: Center(child: CircularProgressIndicator()))
+                  : bodyWidget(context),
               updateProfileButtonWidget(context),
               changePasswordButtonWidget(context),
               // historyButtonWidget(context),

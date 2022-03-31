@@ -4,8 +4,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/otp.dart';
 import 'package:juragan99/data/profile.dart';
 import 'package:juragan99/data/user.dart';
+import 'package:juragan99/screens/auth/otp/email_verification_screen.dart';
 import 'package:juragan99/screens/settings/my_profile_screen.dart';
 
 import 'package:juragan99/utils/colors.dart';
@@ -37,9 +39,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   String token;
   String email;
-  String firstName;
-  String lastName;
-  String address;
   String phone;
 
   getUser() async {
@@ -54,39 +53,33 @@ class _SignInScreenState extends State<SignInScreen> {
           );
         } else {
           setState(() {
-            variable.token = value.token;
-            variable.email = value.email;
+            token = value.token;
+            email = value.email;
+            phone = value.phone;
           });
-          getProfile(value.email);
-          storeUser(value.token, value.email);
+          modalPickOTP(context);
         }
       },
     );
   }
 
-  getProfile(String email) async {
-    await Profile.list(email).then((value) {
-      setState(() {
-        variable.first_name = value['first_name'];
-        variable.last_name = value['last_name'];
-        variable.address = value['address'];
-        variable.phone = value['phone'];
-        variable.identity = value['identity'];
-        variable.identity_number = value['identity_number'];
-      });
-    });
-    nextPage();
-  }
-
-  storeUser(String token, String email) async {
-    final pref = await SharedPreferences.getInstance();
-    await pref.setString('token', token);
-    await pref.setString('email', email);
-  }
-
-  nextPage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => MyProfileScreen()));
+  _setOtp() async {
+    await SetOtp.list(email, phone).then(
+      (value) {
+        if (value['status'] == 200) {
+          Navigator.pop(context);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => EmailVerificationScreen(
+                email: email,
+                phone: phone,
+                token: token,
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -205,7 +198,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: "Example@email.com",
+                  hintText: "Email",
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   labelStyle: CustomStyle.textStyle,
@@ -323,6 +316,48 @@ class _SignInScreenState extends State<SignInScreen> {
           },
         )
       ],
+    );
+  }
+
+  modalPickOTP(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          title: const Text('Pilih Metode OTP'),
+          content: SingleChildScrollView(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      variable.isEmail = true;
+                    });
+                    _setOtp();
+                  },
+                  child: Text(
+                    "Email",
+                    style: TextStyle(color: CustomColor.red),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      variable.isEmail = false;
+                    });
+                    Navigator.pop(context);
+                    _setOtp();
+                  },
+                  child: Text(
+                    "Whatsapp",
+                    style: TextStyle(color: CustomColor.red),
+                  ))
+            ],
+          )),
+        );
+      },
     );
   }
 }

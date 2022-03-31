@@ -40,13 +40,15 @@ class _SplashScreenState extends State<SplashScreen> {
         variable.token = token;
         variable.email = email;
       });
-      getProfile(email);
+      getProfile(email, token);
     }
   }
 
-  getProfile(String email) async {
+  getProfile(String email, String token) async {
     await Profile.list(email).then((value) {
       setState(() {
+        variable.first_name = token;
+        variable.email = value['email'];
         variable.first_name = value['first_name'];
         variable.last_name = value['last_name'];
         variable.address = value['address'];

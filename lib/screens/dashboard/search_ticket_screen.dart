@@ -167,9 +167,17 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                       fontSize: Dimensions.smallTextSize),
                 ),
                 Text(
-                  payment_status,
+                  (payment_status == "0")
+                      ? "Belum Dibayar"
+                      : (payment_status == "1")
+                          ? "Sudah Dibayar"
+                          : "Gagal",
                   style: TextStyle(
-                      color: CustomColor.red,
+                      color: (payment_status == "0")
+                          ? CustomColor.darkGrey
+                          : (payment_status == "1")
+                              ? CustomColor.red
+                              : CustomColor.grey,
                       fontWeight: FontWeight.bold,
                       fontSize: Dimensions.smallTextSize),
                 ),

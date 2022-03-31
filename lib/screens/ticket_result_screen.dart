@@ -173,7 +173,11 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  payment_status,
+                  (payment_status == "0")
+                      ? "Belum Dibayar"
+                      : (payment_status == "1")
+                          ? "Sudah Dibayar"
+                          : "Gagal",
                   style: TextStyle(
                       color: CustomColor.white,
                       fontSize: Dimensions.defaultTextSize,

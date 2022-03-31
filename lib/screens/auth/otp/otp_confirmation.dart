@@ -1,10 +1,9 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unrelated_type_equality_checks
 
 import 'dart:async';
 
+import 'package:juragan99/data/otp.dart';
 import 'package:juragan99/widgets/back_widget.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -16,6 +15,8 @@ class OtpConfirmation extends StatefulWidget {
   final String title;
   final String subTitle;
   final String emailAddress;
+  final String email;
+  final String phone;
   final Future<String> Function(String) validateOtp;
   final void Function(BuildContext) routeCallback;
   Color topColor;
@@ -41,25 +42,29 @@ class OtpConfirmation extends StatefulWidget {
     this.icon,
     this.keyboardBackgroundColor,
     this.emailAddress,
+    this.email,
+    this.phone,
   }) : super(key: key) {
     this._isGradientApplied = false;
   }
 
-  OtpConfirmation.withGradientBackground(
-      {Key key,
-      this.title = "Verification Code",
-      this.subTitle = "please enter the OTP sent to your\n device",
-      this.otpLength = 4,
-      @required this.validateOtp,
-      @required this.routeCallback,
-      this.themeColor = Colors.white,
-      this.titleColor = Colors.white,
-      @required this.topColor,
-      @required this.bottomColor,
-      this.keyboardBackgroundColor,
-      this.icon,
-      this.emailAddress})
-      : super(key: key) {
+  OtpConfirmation.withGradientBackground({
+    Key key,
+    this.title = "Verification Code",
+    this.subTitle = "please enter the OTP sent to your\n device",
+    this.otpLength = 4,
+    @required this.validateOtp,
+    @required this.routeCallback,
+    this.themeColor = Colors.white,
+    this.titleColor = Colors.white,
+    @required this.topColor,
+    @required this.bottomColor,
+    this.keyboardBackgroundColor,
+    this.icon,
+    this.emailAddress,
+    this.email,
+    this.phone,
+  }) : super(key: key) {
     this._isGradientApplied = true;
   }
 
@@ -78,6 +83,23 @@ class _OtpConfirmationState extends State<OtpConfirmation>
   void initState() {
     otpValues = List<int>.filled(widget.otpLength, null, growable: false);
     super.initState();
+  }
+
+  _setOtp() async {
+    await SetOtp.list(widget.email, widget.phone).then(
+      (value) {
+        if (value['status'] == 200) {
+          Fluttertoast.showToast(
+            msg: "Dikirim",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.red,
+            textColor: Colors.black,
+            fontSize: Dimensions.defaultTextSize,
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -168,10 +190,6 @@ class _OtpConfirmationState extends State<OtpConfirmation>
         SizedBox(
           height: Dimensions.heightSize,
         ),
-        // Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 20),
-        //   child: _getSubtitleText,
-        // ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: _getInputField,
@@ -183,12 +201,17 @@ class _OtpConfirmationState extends State<OtpConfirmation>
               "Kode tidak terkirim? ",
               style: CustomStyle.textStyle,
             ),
-            Text(
-              "Kirim ulang",
-              style: TextStyle(
-                  fontSize: Dimensions.defaultTextSize,
-                  color: CustomColor.primaryColor,
-                  fontWeight: FontWeight.bold),
+            GestureDetector(
+              child: Text(
+                " Kirim ulang",
+                style: TextStyle(
+                    fontSize: Dimensions.defaultTextSize,
+                    color: CustomColor.primaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                _setOtp();
+              },
             ),
           ],
         ),
@@ -393,16 +416,10 @@ class _OtpConfirmationState extends State<OtpConfirmation>
         }
       }
       if (currentField == widget.otpLength - 1) {
-        showLoadingButton = true;
+        // showLoadingButton = true;
         String otp = otpValues.join();
         widget.validateOtp(otp).then((value) {
-          showLoadingButton = false;
-          if (value == null) {
-            widget.routeCallback(context);
-          } else if (value.isNotEmpty) {
-            showToast(context, value);
-            clearOtp();
-          }
+          // showLoadingButton = false;
         });
       }
     });
@@ -417,12 +434,12 @@ class _OtpConfirmationState extends State<OtpConfirmation>
   ///to show error  message
   showToast(BuildContext context, String msg) {
     Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey,
-        textColor: Colors.black,
-        fontSize: Dimensions.defaultTextSize);
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      backgroundColor: Colors.red,
+      textColor: Colors.black,
+      fontSize: Dimensions.defaultTextSize,
+    );
   }
 }

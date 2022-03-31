@@ -23,6 +23,9 @@ String password_login;
 
 //Registration
 
+//OTP
+bool isEmail = true;
+
 //HomeScreen
 var selectedFromCity;
 var selectedToCity;
