@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ClassModel {
   final String id;
@@ -41,7 +42,7 @@ class GetClassList {
   static list(
     String type,
   ) async {
-    String url = "https://api-j99.pesoros.com/datakelas";
+    String url = dotenv.env['BASE_URL'] + "/datakelas";
 
     Uri parseUrl = Uri.parse(
       url,

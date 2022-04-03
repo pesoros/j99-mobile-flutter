@@ -26,6 +26,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:juragan99/data/city.dart';
 
@@ -115,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       onFind: (String) async {
                         var response = await Dio().post(
-                          "https://api-j99.pesoros.com/datakota",
+                          dotenv.env['BASE_URL'] + "/datakota",
                         );
                         var dataFromCity =
                             CityModel.fromJsonList(response.data);
@@ -158,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         onFind: (String) async {
                           var response = await Dio().post(
-                            "https://api-j99.pesoros.com/datakota",
+                            dotenv.env['BASE_URL'] + "/datakota",
                           );
                           var dataToCity =
                               CityModel.fromJsonList(response.data);
@@ -260,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       onFind: (String) async {
                         var response = await Dio().post(
-                          "https://api-j99.pesoros.com/datakelas",
+                          dotenv.env['BASE_URL'] + "/datakelas",
                         );
                         var kelasArmada =
                             ClassModel.fromJsonList(response.data);

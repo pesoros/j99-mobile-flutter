@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class FilterPulangScreen extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
   }
 
   getUnitType() async {
-    var response = await Dio().post("https://api-j99.pesoros.com/dataunit");
+    var response = await Dio().post(dotenv.env['BASE_URL'] + "/dataunit");
     var data = UnitTypeModel.fromJsonList(response.data);
     setState(() {
       unitType = data;
@@ -69,7 +70,7 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
   }
 
   getCity() async {
-    var response = await Dio().post("https://api-j99.pesoros.com/datakota");
+    var response = await Dio().post(dotenv.env['BASE_URL'] + "/datakota");
     var data = CityModel.fromJsonList(response.data);
     setState(() {
       city = data;
@@ -77,7 +78,7 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
   }
 
   getClassList() async {
-    var response = await Dio().post("https://api-j99.pesoros.com/datakelas");
+    var response = await Dio().post(dotenv.env['BASE_URL'] + "/datakelas");
     var data = ClassModel.fromJsonList(response.data);
     setState(() {
       classList = data;

@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SlotPergiList {
   static list(String trip_id_no, String trip_route_id,
       String fleet_registration_id, String type) async {
-    String url = "https://api-j99.pesoros.com/seatlist";
+    String url = dotenv.env['BASE_URL'] + "/seatlist";
 
     Uri parseUrl = Uri.parse(
       url,

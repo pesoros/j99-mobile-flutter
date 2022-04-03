@@ -3,10 +3,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class BusPulangList {
   static list() async {
-    String url = "https://api-j99.pesoros.com/listbus";
+    String url = dotenv.env['BASE_URL'] + "/listbus";
 
     Uri parse_url = Uri.parse(
       url,

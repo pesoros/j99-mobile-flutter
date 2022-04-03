@@ -2,6 +2,7 @@
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChangePassword {
   static list(
@@ -9,7 +10,7 @@ class ChangePassword {
     String newPassword,
     String confNewPassword,
   ) async {
-    String url = "https://api-j99.pesoros.com/account/password/change";
+    String url = dotenv.env['BASE_URL'] + "/account/password/change";
 
     Uri parseUrl = Uri.parse(
       url,

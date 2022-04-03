@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CheckRegistration {
   static list(String email) async {
-    String url = "https://api-j99.pesoros.com/checkregis";
+    String url = dotenv.env['BASE_URL'] + "/checkregis";
 
     Uri parseUrl = Uri.parse(
       url,

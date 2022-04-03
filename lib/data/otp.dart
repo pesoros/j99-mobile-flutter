@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SetOtp {
   static list(String email, String phone) async {
-    String url = "https://api-j99.pesoros.com/otp/set";
+    String url = dotenv.env['BASE_URL'] + "/otp/set";
 
     Uri parseUrl = Uri.parse(
       url,
@@ -22,7 +23,7 @@ class SetOtp {
 
 class CheckOtp {
   static list(String otpCode, String email, String phone) async {
-    String url = "https://api-j99.pesoros.com/otp/check";
+    String url = dotenv.env['BASE_URL'] + "/otp/check";
 
     Uri parseUrl = Uri.parse(
       url,

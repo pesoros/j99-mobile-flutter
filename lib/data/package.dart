@@ -3,10 +3,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Package {
   static list(String code) async {
-    String url = "https://api-j99.pesoros.com/paket/cek";
+    String url = dotenv.env['BASE_URL'] + "/paket/cek";
 
     Uri parseUrl = Uri.parse(
       url,
@@ -20,7 +21,7 @@ class Package {
 
 class Trace {
   static list(String code) async {
-    String url = "https://api-j99.pesoros.com/paket/cek";
+    String url = dotenv.env['BASE_URL'] + "/paket/cek";
 
     Uri parseUrl = Uri.parse(
       url,

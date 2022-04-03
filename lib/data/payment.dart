@@ -2,10 +2,11 @@
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PaymentList {
   static list() async {
-    String url = "https://api-j99.pesoros.com/datapaymentmethod";
+    String url = dotenv.env['BASE_URL'] + "/datapaymentmethod";
 
     Uri parseUrl = Uri.parse(
       url,

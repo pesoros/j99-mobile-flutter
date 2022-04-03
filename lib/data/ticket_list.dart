@@ -4,10 +4,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class TicketList {
   static list() async {
-    String url = "https://api-j99.pesoros.com/account/profile/historyticket";
+    String url = dotenv.env['BASE_URL'] + "/account/profile/historyticket";
 
     Uri parseUrl = Uri.parse(
       url,

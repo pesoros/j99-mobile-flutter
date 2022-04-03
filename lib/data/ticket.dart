@@ -4,9 +4,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Ticket {
   static list(String booking_code) async {
-    String url = "https://api-j99.pesoros.com/ticket/cek";
+    String url = dotenv.env['BASE_URL'] + "/ticket/cek";
 
     Uri parseUrl = Uri.parse(
       url,
@@ -20,7 +22,7 @@ class Ticket {
 
 class TicketPassanggerList {
   static list(String code) async {
-    String url = "https://api-j99.pesoros.com/ticket/cek";
+    String url = dotenv.env['BASE_URL'] + "/ticket/cek";
 
     Uri parseUrl = Uri.parse(
       url,

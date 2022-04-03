@@ -4,10 +4,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:convert' as convert;
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class BookingList {
   static list() async {
-    String url = "https://api-j99.pesoros.com/booking/add";
+    String url = dotenv.env['BASE_URL'] + "/booking/add";
 
     Uri parseUrl = Uri.parse(url);
 

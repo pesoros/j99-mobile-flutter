@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Pariwisata {
   static list(
@@ -9,7 +10,7 @@ class Pariwisata {
     String busType,
     String description,
   ) async {
-    String url = "https://api-j99.pesoros.com/contact/pariwisata";
+    String url = dotenv.env['BASE_URL'] + "/contact/pariwisata";
 
     Uri parseUrl = Uri.parse(
       url,

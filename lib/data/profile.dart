@@ -2,10 +2,11 @@
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Profile {
   static list(String email) async {
-    String url = "https://api-j99.pesoros.com/account/profile";
+    String url = dotenv.env['BASE_URL'] + "/account/profile";
 
     Uri parseUrl = Uri.parse(
       url,

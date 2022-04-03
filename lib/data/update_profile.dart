@@ -2,6 +2,7 @@
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UpdateProfile {
   static list(
@@ -13,7 +14,7 @@ class UpdateProfile {
     String identity_number,
     String identity,
   ) async {
-    String url = "https://api-j99.pesoros.com/account/profile/update";
+    String url = dotenv.env['BASE_URL'] + "/account/profile/update";
 
     Uri parseUrl = Uri.parse(
       url,
