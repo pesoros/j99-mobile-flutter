@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_dotenv",
+      "rootUri": "file:///Users/paratonsp/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_dotenv-5.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_launcher_icons",
       "rootUri": "file:///Users/paratonsp/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.8.1",
       "packageUri": "lib/",
@@ -578,7 +584,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-04-03T07:40:42.850220Z",
+  "generated": "2022-04-03T10:44:39.474077Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }
