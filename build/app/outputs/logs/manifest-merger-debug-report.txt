@@ -8,9 +8,10 @@ MERGED from /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android
 MERGED from [:shared_preferences_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/shared_preferences_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:hexcolor] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/hexcolor/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:sqflite] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:fluttertoast] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:path_provider_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-19:12
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/014b4fd3a86321a4a383a47577aeeaf2/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/31e636660de7a70a8c70169a01b3097c/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/6f08dd0d2840d2a87019f03205248ed7/loader-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -61,6 +62,8 @@ application
 ADDED from /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/android/app/src/main/AndroidManifest.xml:8:4-34:19
 MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
 MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-17:19
+MERGED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-17:19
 MERGED from [androidx.core:core:1.6.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/3db6d125c6afcb0a6fe221b28e1b5f57/core-1.6.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.6.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/3db6d125c6afcb0a6fe221b28e1b5f57/core-1.6.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/ae65f2a7121d828c47c96dad312c1e05/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
@@ -117,12 +120,14 @@ MERGED from [:hexcolor] /Users/paratonsp/Documents/flutterProject/j99-mobile-flu
 MERGED from [:hexcolor] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/hexcolor/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/path_provider_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/014b4fd3a86321a4a383a47577aeeaf2/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/014b4fd3a86321a4a383a47577aeeaf2/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/paratonsp/.gradle/caches/transforms-2/files-2.1/31e636660de7a70a8c70169a01b3097c/viewpager-1.0.0/AndroidManifest.xml:20:5-44
@@ -169,3 +174,19 @@ ADDED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99
 		ADDED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
 	android:name
 		ADDED from [:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-74
+provider#com.twwm.share_files_and_screenshot_widgets.ShareFilesAndScreenshotWidgetsFileProvider
+ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-99
+	android:exported
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-114
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-15:78
+	android:resource
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:15:17-75
+	android:name
+		ADDED from [:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:14:17-67

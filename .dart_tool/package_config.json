@@ -344,6 +344,12 @@
       "languageVersion": "2.6"
     },
     {
+      "name": "share_files_and_screenshot_widgets",
+      "rootUri": "file:///Users/paratonsp/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/share_files_and_screenshot_widgets-1.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///Users/paratonsp/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.13",
       "packageUri": "lib/",
@@ -572,7 +578,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-03-30T18:12:23.818550Z",
+  "generated": "2022-04-03T07:40:42.850220Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

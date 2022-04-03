@@ -9,6 +9,7 @@ import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/data/ticket.dart';
 import 'package:juragan99/data/ticket_list.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/passengger_ticket_result_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
@@ -225,37 +226,41 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                   itemBuilder: (context, index) {
                     TicketPassanggerListModal ticket = _ticketList[index];
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _dataTicketPassanggerLeft(
-                                  "No. Tiket: ", ticket.ticket_number),
-                              _dataTicketPassanggerLeft("Nama: ", ticket.name),
-                              _dataTicketPassanggerLeft("Kelas: ", ticket.type),
-                              _dataTicketPassanggerLeft(
-                                  "Keberangkatan: ", ticket.drop_trip_location),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              _dataTicketPassanggerRight(
-                                  "No. Kursi: ", ticket.seat_number),
-                              _dataTicketPassanggerRight(
-                                  "Bagasi: ", ticket.baggage),
-                              _dataTicketPassanggerRight(
-                                  "Makanan: ", ticket.food_name),
-                              _dataTicketPassanggerRight(
-                                  "Tujuan", ticket.drop_trip_location),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                _dataTicketPassangger(
+                                    "No. Tiket: ", ticket.ticket_number),
+                                _dataTicketPassangger("Nama: ", ticket.name),
+                              ],
+                            ),
+                            TextButton.icon(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PassenggerTicketResultScreen(
+                                        booking_code: ticket.ticket_number,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.remove_red_eye,
+                                  color: CustomColor.red,
+                                ),
+                                label: Text(
+                                  "Lihat Tiket",
+                                  style: TextStyle(color: CustomColor.red),
+                                ))
+                          ],
+                        ));
                   },
                 ),
               )
@@ -287,46 +292,16 @@ class _TicketResultScreen extends State<TicketResultScreen> {
     );
   }
 
-  _dataTicketPassanggerLeft(String title, String value) {
+  _dataTicketPassangger(String title, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
             style: TextStyle(
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: Dimensions.defaultTextSize,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  _dataTicketPassanggerRight(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: Dimensions.defaultTextSize,
-            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

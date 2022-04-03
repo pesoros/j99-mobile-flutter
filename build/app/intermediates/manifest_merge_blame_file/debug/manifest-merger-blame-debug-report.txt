@@ -83,6 +83,24 @@
 52-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
 53            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 53-->[:url_launcher_android] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/url_launcher_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
-54    </application>
-55
-56</manifest>
+54
+55        <provider
+55-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-16:20
+56            android:name="com.twwm.share_files_and_screenshot_widgets.ShareFilesAndScreenshotWidgetsFileProvider"
+56-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-114
+57            android:authorities="com.juragan99trans.fileprovider.share_files_and_screenshot_widgets"
+57-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-99
+58            android:exported="false"
+58-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-37
+59            android:grantUriPermissions="true" >
+59-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-47
+60            <meta-data
+60-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-15:78
+61                android:name="android.support.FILE_PROVIDER_PATHS"
+61-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:14:17-67
+62                android:resource="@xml/share_files_and_screenshot_widgets" />
+62-->[:share_files_and_screenshot_widgets] /Users/paratonsp/Documents/flutterProject/j99-mobile-flutter/build/share_files_and_screenshot_widgets/intermediates/library_manifest/debug/AndroidManifest.xml:15:17-75
+63        </provider>
+64    </application>
+65
+66</manifest>
