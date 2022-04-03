@@ -54,7 +54,136 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // resetVariable();
+    resetVariable();
+  }
+
+  resetVariable() {
+//Login
+    variable.email_login = null;
+    variable.password_login = null;
+
+//Registration
+
+//OTP
+    variable.isEmail = true;
+
+//HomeScreen
+    variable.selectedFromCity = null;
+    variable.selectedToCity = null;
+    variable.selectedKelasArmada = "";
+    variable.selectedUnitType = "1";
+    variable.selectedJumlahPenumpang = null;
+    variable.datePergi = 'Pergi';
+    variable.datePulang = 'Pulang';
+    variable.checkPulangPergi = false;
+
+//FilterSearch
+    variable.pergi_sort_by = "Harga Terendah";
+    variable.pulang_sort_by = "Harga Terendah";
+
+//Bus
+    variable.pergi_trip_id_no = null;
+    variable.pergi_trip_route_id = null;
+    variable.pergi_shedule_id = null;
+    variable.pergi_pickup_trip_location = null;
+    variable.pergi_drop_trip_location = null;
+    variable.pergi_type = null;
+    variable.pergi_type_class = null;
+    variable.pergi_fleet_seats = null;
+    variable.pergi_fleet_registration_id = null;
+    variable.pergi_price = null;
+    variable.pergi_duration = null;
+    variable.pergi_start = null;
+    variable.pergi_end = null;
+    variable.pergi_seatPicked = null;
+    variable.pergi_seatAvail = null;
+    variable.pergi_resto_id = null;
+
+    variable.pulang_trip_id_no = null;
+    variable.pulang_trip_route_id = null;
+    variable.pulang_shedule_id = null;
+    variable.pulang_pickup_trip_location = null;
+    variable.pulang_drop_trip_location = null;
+    variable.pulang_type = null;
+    variable.pulang_type_class = null;
+    variable.pulang_fleet_seats = null;
+    variable.pulang_fleet_registration_id = null;
+    variable.pulang_price = null;
+    variable.pulang_duration = null;
+    variable.pulang_start = null;
+    variable.pulang_end = null;
+    variable.pulang_seatPicked = null;
+    variable.pulang_seatAvail = null;
+    variable.pulang_resto_id = null;
+
+//PassanggerForm
+    variable.checkBuyerPassengger = false;
+    variable.checkBuyerPassenggerName = "";
+    variable.checkBuyerPassenggerPhone = "";
+
+//Passangger1
+    variable.namePassengger1 = null;
+    variable.phonePassengger1 = null;
+    variable.foodPergiPassengger1 = null;
+    variable.foodIdPergiPassengger1 = null;
+    variable.baggagePergiPassengger1 = "0";
+    variable.foodPulangPassengger1 = null;
+    variable.foodIdPulangPassengger1 = null;
+    variable.baggagePulangPassengger1 = "0";
+    variable.seatPergiPassengger1 = null;
+    variable.seatPulangPassengger1 = null;
+
+//Passangger2
+    variable.namePassengger2 = null;
+    variable.phonePassengger2 = null;
+    variable.foodPergiPassengger2 = null;
+    variable.foodIdPergiPassengger2 = null;
+    variable.baggagePergiPassengger2 = "0";
+    variable.foodPulangPassengger2 = null;
+    variable.foodIdPulangPassengger2 = null;
+    variable.baggagePulangPassengger2 = "0";
+    variable.seatPergiPassengger2 = null;
+    variable.seatPulangPassengger2 = null;
+
+//Passangger3
+    variable.namePassengger3 = null;
+    variable.phonePassengger3 = null;
+    variable.foodPergiPassengger3 = null;
+    variable.foodIdPergiPassengger3 = null;
+    variable.baggagePergiPassengger3 = "0";
+    variable.foodPulangPassengger3 = null;
+    variable.foodIdPulangPassengger3 = null;
+    variable.baggagePulangPassengger3 = "0";
+    variable.seatPergiPassengger3 = null;
+    variable.seatPulangPassengger3 = null;
+
+//Passangger4
+    variable.namePassengger4 = null;
+    variable.phonePassengger4 = null;
+    variable.foodPergiPassengger4 = null;
+    variable.foodIdPergiPassengger4 = null;
+    variable.baggagePergiPassengger4 = "0";
+    variable.foodPulangPassengger4 = null;
+    variable.foodIdPulangPassengger4 = null;
+    variable.baggagePulangPassengger4 = "0";
+    variable.seatPergiPassengger4 = null;
+    variable.seatPulangPassengger4 = null;
+
+//Payment
+    variable.selectedPayment = null;
+    variable.selectedPaymentCategories = null;
+    variable.kodePromo = "";
+    variable.totalPrice = "";
+
+//Response Payment
+    variable.status = null;
+    variable.bank_code = null;
+    variable.merchant_code = null;
+    variable.name = null;
+    variable.account_number = null;
+    variable.expiration_date = null;
+    variable.external_id = null;
+    variable.total_price = null;
   }
 
   @override
@@ -443,6 +572,6 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       MaterialPageRoute(builder: (context) => SearchResultPergiScreen()),
     );
-    // resetVariable();
+    resetVariable();
   }
 }

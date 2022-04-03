@@ -31,6 +31,11 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   getUser() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString('token');

@@ -86,7 +86,6 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                 : (isLoadingTrace == true)
                     ? Center(child: CircularProgressIndicator())
                     : bodyWidget(context),
-            buttonWidget(context),
           ],
         ),
       ),
@@ -104,6 +103,8 @@ class _TicketResultScreen extends State<TicketResultScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _resiWidget(context),
+            SizedBox(height: 30),
+            buttonWidget(context),
           ],
         ),
       ),
@@ -239,26 +240,26 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                                 _dataTicketPassangger("Nama: ", ticket.name),
                               ],
                             ),
-                            TextButton.icon(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          PassenggerTicketResultScreen(
-                                        booking_code: ticket.ticket_number,
-                                      ),
+                            (payment_status == "0")
+                                ? Column()
+                                : TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PassenggerTicketResultScreen(
+                                            booking_code: ticket.ticket_number,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.remove_red_eye,
+                                      color: CustomColor.red,
+                                      size: Dimensions.extraLargeTextSize,
                                     ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.remove_red_eye,
-                                  color: CustomColor.red,
-                                ),
-                                label: Text(
-                                  "Lihat Tiket",
-                                  style: TextStyle(color: CustomColor.red),
-                                ))
+                                  )
                           ],
                         ));
                   },

@@ -99,7 +99,7 @@ class _PassenggerTicketResultWidgetScreen
       child: Scaffold(
         backgroundColor: CustomColor.darkGrey,
         body: Stack(
-          children: [bodyWidget(context), buttonWidget(context)],
+          children: [bodyWidget(context)],
         ),
       ),
     );
@@ -109,7 +109,7 @@ class _PassenggerTicketResultWidgetScreen
     return Padding(
       padding: const EdgeInsets.only(
         top: 0,
-        bottom: 70,
+        bottom: 0,
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -122,7 +122,9 @@ class _PassenggerTicketResultWidgetScreen
                       height: MediaQuery.of(context).size.height,
                       child: Center(child: CircularProgressIndicator()))
                   : _invoiceWidget(context),
-            )
+            ),
+            SizedBox(height: 30),
+            buttonWidget(context)
           ],
         ),
       ),
@@ -251,15 +253,6 @@ class _PassenggerTicketResultWidgetScreen
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _dataTrip("Asal", pickup_trip_location),
-                  DottedLine(
-                    direction: Axis.horizontal,
-                    lineLength: MediaQuery.of(context).size.width / 3,
-                    lineThickness: 1.0,
-                    dashLength: 5.0,
-                    dashColor: CustomColor.darkGrey,
-                    dashGapLength: 5.0,
-                    dashGapColor: Colors.transparent,
-                  ),
                   _dataTrip("Tujuan", drop_trip_location),
                 ],
               ),
