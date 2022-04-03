@@ -67,7 +67,7 @@ class _PassenggerTicketResultWidgetScreen
 
   getScreenShot() {
     ShareFilesAndScreenshotWidgets().shareScreenshot(previewContainer,
-        originalSize, "Ticket", "{$ticket_number}.png", "image/png",
+        originalSize, "Ticket", "$name-$ticket_number.png", "image/png",
         text: "");
   }
 
