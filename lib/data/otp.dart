@@ -16,7 +16,6 @@ class SetOtp {
           ? {"sendBy": "email", "email": email}
           : {"sendBy": "wa", "phone": phone},
     );
-    print(response.body);
     return jsonDecode(response.body);
   }
 }
