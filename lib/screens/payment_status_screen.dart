@@ -231,28 +231,13 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              _dataTicketPassanggerLeft(
+                              _dataTicketPassangger(
                                   "No. Tiket: ", ticket.ticket_number),
-                              _dataTicketPassanggerLeft("Nama: ", ticket.name),
-                              _dataTicketPassanggerLeft("Kelas: ", ticket.type),
-                              _dataTicketPassanggerLeft(
-                                  "Keberangkatan: ", ticket.drop_trip_location),
+                              _dataTicketPassangger("Nama: ", ticket.name),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              _dataTicketPassanggerRight(
-                                  "No. Kursi: ", ticket.seat_number),
-                              _dataTicketPassanggerRight(
-                                  "Bagasi: ", ticket.baggage),
-                              _dataTicketPassanggerRight(
-                                  "Makanan: ", ticket.food_name),
-                              _dataTicketPassanggerRight(
-                                  "Tujuan", ticket.drop_trip_location),
-                            ],
-                          )
                         ],
                       ),
                     );
@@ -287,46 +272,16 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
     );
   }
 
-  _dataTicketPassanggerLeft(String title, String value) {
+  _dataTicketPassangger(String title, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
             style: TextStyle(
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: Dimensions.defaultTextSize,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  _dataTicketPassanggerRight(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: Dimensions.defaultTextSize,
-            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

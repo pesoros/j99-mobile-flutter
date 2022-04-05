@@ -222,7 +222,11 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
                                     controller: keteranganController,
                                     decoration: InputDecoration(
                                       labelText: "Keterangan",
-                                      contentPadding: EdgeInsets.only(left: 10),
+                                      contentPadding: EdgeInsets.only(
+                                          left: 12,
+                                          top: 20,
+                                          right: 12,
+                                          bottom: 20),
                                       labelStyle: CustomStyle.textStyle,
                                       focusedBorder: CustomStyle.focusBorder,
                                       enabledBorder:

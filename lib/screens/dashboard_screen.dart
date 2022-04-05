@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             title: Image.asset(
               'assets/images/j99-logo.png',
               fit: BoxFit.contain,
-              height: 35,
+              width: MediaQuery.of(context).size.width / 2.5,
             ),
             actions: <Widget>[
               Padding(

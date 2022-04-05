@@ -1,9 +1,9 @@
 name: juragan99
-description: A new Flutter application.
+description: Booking Application for Juragan99 Trans Bus.
 
 publish_to: 'none' 
 
-version: 1.0.0+1
+version: 1.0.0+4
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

@@ -171,7 +171,9 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                       ? "Belum Dibayar"
                       : (payment_status == "1")
                           ? "Sudah Dibayar"
-                          : "Gagal",
+                          : (payment_status == "2")
+                              ? "Gagal"
+                              : "",
                   style: TextStyle(
                       color: (payment_status == "0")
                           ? CustomColor.darkGrey
@@ -226,31 +228,33 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
             ),
             Row(
               children: [
-                GestureDetector(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        color: CustomColor.red,
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Text(
-                      "Cek Tiket",
-                      style: TextStyle(
-                          color: CustomColor.white,
-                          fontSize: Dimensions.smallTextSize),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TicketResultScreen(
-                          booking_code: booking_code,
+                (payment_status == "2")
+                    ? Container(width: 60, height: 30)
+                    : GestureDetector(
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 60,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: CustomColor.red,
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Text(
+                            "Cek Tiket",
+                            style: TextStyle(
+                                color: CustomColor.white,
+                                fontSize: Dimensions.smallTextSize),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                )
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TicketResultScreen(
+                                booking_code: booking_code,
+                              ),
+                            ),
+                          );
+                        },
+                      )
               ],
             )
           ],
