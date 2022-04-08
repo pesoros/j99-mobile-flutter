@@ -237,8 +237,8 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _dataTicketPassangger(
-                                    "No. Tiket: ", ticket.ticket_number),
+                                // _dataTicketPassangger(
+                                //     "No. Tiket: ", ticket.ticket_number),
                                 _dataTicketPassangger("Nama: ", ticket.name),
                                 Padding(
                                   padding: const EdgeInsets.only(

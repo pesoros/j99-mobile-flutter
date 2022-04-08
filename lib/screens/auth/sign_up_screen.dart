@@ -515,17 +515,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     "Email",
                     style: TextStyle(color: CustomColor.red),
                   )),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      variable.isEmail = false;
-                    });
-                    _setOtp();
-                  },
-                  child: Text(
-                    "Whatsapp",
-                    style: TextStyle(color: CustomColor.red),
-                  ))
+              // TextButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         variable.isEmail = false;
+              //       });
+              //       _setOtp();
+              //     },
+              //     child: Text(
+              //       "Whatsapp",
+              //       style: TextStyle(color: CustomColor.red),
+              //     ))
             ],
           )),
         );
