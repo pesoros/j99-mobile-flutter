@@ -85,7 +85,6 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                 : (isLoadingTrace == true)
                     ? Center(child: CircularProgressIndicator())
                     : bodyWidget(context),
-            buttonWidget(context),
           ],
         ),
       ),
@@ -103,6 +102,8 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _resiWidget(context),
+            SizedBox(height: 30),
+            buttonWidget(context),
           ],
         ),
       ),
@@ -204,6 +205,10 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
               // _dataBooking("Status Pembayaran: ", payment_status),
               // _dataBooking("Perjalanan: ", round_trip),
               // _dataBooking("Total Penumpang: ", total_seat),
+              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
+              _dataBooking(" ", _ticketList[0].drop_trip_location),
+              _dataBooking(
+                  "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
               _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Tanggal: ", tanggal(tempDate)),
               SizedBox(height: 10),
@@ -236,6 +241,35 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                               _dataTicketPassangger(
                                   "No. Tiket: ", ticket.ticket_number),
                               _dataTicketPassangger("Nama: ", ticket.name),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: Dimensions.heightSize * 0.5),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      ticket.pickup_trip_location,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.defaultTextSize),
+                                    ),
+                                    Text(
+                                      " - ",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.defaultTextSize),
+                                    ),
+                                    Text(
+                                      ticket.drop_trip_location,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.defaultTextSize,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ],

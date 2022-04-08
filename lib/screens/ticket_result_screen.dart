@@ -205,7 +205,10 @@ class _TicketResultScreen extends State<TicketResultScreen> {
               // _dataBooking("Kode Booking: ", booking_code),
               // _dataBooking("Status Pembayaran: ", payment_status),
               // _dataBooking("Perjalanan: ", round_trip),
-              // _dataBooking("Total Penumpang: ", total_seat),
+              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
+              _dataBooking(" ", _ticketList[0].drop_trip_location),
+              _dataBooking(
+                  "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
               _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Tanggal: ", tanggal(tempDate)),
               SizedBox(height: 10),
@@ -227,39 +230,77 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                   itemBuilder: (context, index) {
                     TicketPassanggerListModal ticket = _ticketList[index];
                     return Padding(
-                        padding: EdgeInsets.only(bottom: 20),
+                        padding: EdgeInsets.only(bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 _dataTicketPassangger(
                                     "No. Tiket: ", ticket.ticket_number),
                                 _dataTicketPassangger("Nama: ", ticket.name),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: Dimensions.heightSize * 0.5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ticket.pickup_trip_location,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
+                                      Text(
+                                        " - ",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
+                                      Text(
+                                        ticket.drop_trip_location,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.defaultTextSize,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                             (payment_status == "0")
                                 ? Column()
-                                : TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PassenggerTicketResultScreen(
-                                            booking_code: ticket.ticket_number,
+                                : Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PassenggerTicketResultScreen(
+                                                booking_code:
+                                                    ticket.ticket_number,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          "Cek Tiket",
+                                          style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize,
+                                            color: CustomColor.red,
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.remove_red_eye,
-                                      color: CustomColor.red,
-                                      size: Dimensions.extraLargeTextSize,
-                                    ),
-                                  )
+                                      ),
+                                    ],
+                                  ),
                           ],
                         ));
                   },

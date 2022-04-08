@@ -107,7 +107,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
 
     getBaggageStatus();
-    getPromoKodeValue();
     getTotalPrice();
     getGrandTotalPrice();
   }
@@ -155,21 +154,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
-  getPromoKodeValue() {
-    if (promoValue == null) {
-      setState(() {});
-    }
-  }
-
   getTotalPrice() {
     if (variable.checkPulangPergi == true) {
+      double total_pergi_price = double.parse(variable.pergi_price) *
+          double.parse(variable.selectedJumlahPenumpang);
+      double total_pulang_price = double.parse(variable.pulang_price) *
+          double.parse(variable.selectedJumlahPenumpang);
       setState(() {
-        totalPrice = double.parse(variable.pergi_price) +
-            double.parse(variable.pulang_price);
+        totalPrice = total_pergi_price + total_pulang_price;
       });
     } else {
       setState(() {
-        totalPrice = double.parse(variable.pergi_price);
+        totalPrice = double.parse(variable.pergi_price) *
+            double.parse(variable.selectedJumlahPenumpang);
       });
     }
   }

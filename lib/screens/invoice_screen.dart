@@ -15,6 +15,7 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -53,11 +54,8 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
         bottom: 70,
       ),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _invoiceWidget(context),
-          ],
+        child: Center(
+          child: _invoiceWidget(context),
         ),
       ),
     );
@@ -145,7 +143,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(30),
           child: Column(
             children: [
               _data(
@@ -164,19 +162,96 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
                           variable.selectedFromCity.toString(),
                       "x " + variable.selectedJumlahPenumpang + " Tiket")
                   : Padding(padding: EdgeInsets.only()),
-              Divider(
-                color: Colors.grey,
-              ),
-              _data("Total Pembayaran", rupiah(variable.total_price)),
-              SizedBox(height: 20),
+              // Divider(
+              //   color: Colors.grey,
+              // ),
+              SizedBox(height: 10),
               Divider(
                 color: Colors.black,
                 thickness: 2,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
+              Padding(
+                padding:
+                    const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total Pembayaran: ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: Dimensions.defaultTextSize,
+                          ),
+                        ),
+                        Text(
+                          rupiah(variable.total_price),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: Dimensions.defaultTextSize,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () {
+                            Fluttertoast.showToast(
+                              msg: "Disalin",
+                              backgroundColor: CustomColor.red,
+                              textColor: CustomColor.white,
+                              gravity: ToastGravity.CENTER,
+                            );
+                            Clipboard.setData(
+                                new ClipboardData(text: variable.total_price));
+                          },
+                          child: Text(
+                            "Salin",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: Dimensions.defaultTextSize),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               _dataPembayaran("Bank:", variable.bank_code),
               _dataPembayaran("Kode Bank:", variable.merchant_code),
-              _dataPembayaran("Nomor Rekening:", variable.account_number),
+              _dataPembayaran("Nomor Rekening:", ""),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    variable.account_number,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: Dimensions.defaultTextSize,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () {
+                      Fluttertoast.showToast(
+                        msg: "Disalin",
+                        backgroundColor: CustomColor.red,
+                        textColor: CustomColor.white,
+                        gravity: ToastGravity.CENTER,
+                      );
+                      Clipboard.setData(
+                          new ClipboardData(text: variable.account_number));
+                    },
+                    child: Text(
+                      "Salin",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: Dimensions.defaultTextSize),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ));
@@ -196,7 +271,9 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           Text(
             price,
             style: TextStyle(
-                color: Colors.black, fontSize: Dimensions.defaultTextSize),
+                color: Colors.black,
+                fontSize: Dimensions.defaultTextSize,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),

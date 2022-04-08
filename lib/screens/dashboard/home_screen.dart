@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> jumlahPenumpang = ["1", "2", "3", "4"];
 
+  DateTime dateNow = DateTime.now();
   DateTime selectedDatePergi = DateTime.now();
   DateTime selectedDatePulang = DateTime.now();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -544,13 +545,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _selectDatePergi(BuildContext context) async {
     final DateTime pickedPergi = await DatePicker.showDatePicker(context,
         showTitleActions: true,
-        minTime: selectedDatePulang,
-        maxTime: selectedDatePulang.add(Duration(days: 90)),
-        currentTime: selectedDatePulang,
+        minTime: dateNow,
+        maxTime: dateNow.add(Duration(days: 90)),
+        currentTime: dateNow,
         locale: LocaleType.id);
     setState(() {
-      selectedDatePergi = pickedPergi;
-      variable.datePergi = "${selectedDatePergi.toLocal()}".split(' ')[0];
+      if (pickedPergi != null) {
+        selectedDatePergi = pickedPergi;
+        variable.datePergi = "${selectedDatePergi.toLocal()}".split(' ')[0];
+      }
     });
   }
 
@@ -558,12 +561,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final DateTime pickedPulang = await DatePicker.showDatePicker(context,
         showTitleActions: true,
         minTime: selectedDatePergi.add(Duration(days: 1)),
-        maxTime: selectedDatePulang.add(Duration(days: 90)),
-        currentTime: selectedDatePergi.add(Duration(days: 1)),
+        maxTime: selectedDatePergi.add(Duration(days: 90)),
+        currentTime: dateNow.add(Duration(days: 1)),
         locale: LocaleType.id);
     setState(() {
-      selectedDatePulang = pickedPulang;
-      variable.datePulang = "${selectedDatePulang.toLocal()}".split(' ')[0];
+      if (pickedPulang != null) {
+        selectedDatePulang = pickedPulang;
+        variable.datePulang = "${selectedDatePulang.toLocal()}".split(' ')[0];
+      }
     });
   }
 

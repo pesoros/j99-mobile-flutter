@@ -1269,12 +1269,14 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 phonePassenggerController1.text == "" ||
                 variable.foodPergiPassengger1 == null ||
                 variable.baggagePergiPassengger1 == null ||
+                variable.seatPergiPassengger1 == null ||
                 namePassenggerController2.text == null ||
                 phonePassenggerController2.text == null ||
                 namePassenggerController2.text == "" ||
                 phonePassenggerController2.text == "" ||
-                variable.foodPulangPassengger2 == null ||
-                variable.baggagePulangPassengger2 == null) {
+                variable.foodPergiPassengger2 == null ||
+                variable.baggagePergiPassengger2 == null ||
+                variable.seatPergiPassengger2 == null) {
               Fluttertoast.showToast(
                 msg: "Lengkapi data terlebih dahulu",
                 backgroundColor: CustomColor.red,
@@ -1439,6 +1441,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PaymentScreen()));
                 }
+              } else {
+                variable.namePassengger1 = namePassenggerController1.text;
+                variable.phonePassengger1 = phonePassenggerController1.text;
+                variable.namePassengger2 = namePassenggerController2.text;
+                variable.phonePassengger2 = phonePassenggerController2.text;
+                variable.namePassengger3 = namePassenggerController3.text;
+                variable.phonePassengger3 = phonePassenggerController3.text;
+                variable.namePassengger4 = namePassenggerController4.text;
+                variable.phonePassengger4 = phonePassenggerController4.text;
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PaymentScreen()));
               }
             }
           }

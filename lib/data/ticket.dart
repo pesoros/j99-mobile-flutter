@@ -32,9 +32,11 @@ class TicketPassanggerList {
     });
 
     List<TicketPassanggerListModal> list = [];
+
     for (var data in jsonDecode(response.body)['ticket'] as List) {
       list.add(TicketPassanggerListModal.fromJson(data));
     }
+
     return list;
   }
 }
