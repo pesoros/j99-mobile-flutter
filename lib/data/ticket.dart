@@ -20,6 +20,21 @@ class Ticket {
   }
 }
 
+class TicketPayment {
+  static list(String booking_code) async {
+    String url = dotenv.env['BASE_URL'] + "/ticket/cek";
+
+    Uri parseUrl = Uri.parse(
+      url,
+    );
+    final response = await http.post(parseUrl, body: {
+      "code": booking_code,
+    });
+    print(jsonDecode(response.body)['payment_registration']);
+    return jsonDecode(response.body)['payment_registration'];
+  }
+}
+
 class TicketPassanggerList {
   static list(String code) async {
     String url = dotenv.env['BASE_URL'] + "/ticket/cek";

@@ -45,19 +45,23 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
           setState(() {
             emptyList = true;
           });
+          return "false";
         } else {
           setState(() {
             _ticketList = value;
             emptyList = false;
           });
+          return "false";
         }
       },
     );
   }
 
-  void _onRefresh() async {
-    await getTicketList();
-    _refreshController.refreshCompleted();
+  void _onRefresh() {
+    getTicketList();
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      _refreshController.refreshCompleted();
+    });
   }
 
   @override
@@ -152,7 +156,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              booking_code,
+              "Subxxxxx - Jakxxxxx",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -189,6 +193,34 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
         ),
         SizedBox(height: 10),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("No. Booking: ",
+                    style: TextStyle(
+                        color: CustomColor.grey,
+                        fontSize: Dimensions.smallTextSize)),
+                Text(booking_code,
+                    style: TextStyle(
+                        color: CustomColor.darkGrey,
+                        fontSize: Dimensions.smallTextSize)),
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(tanggal(tempDate),
+                    style: TextStyle(
+                        color: CustomColor.darkGrey,
+                        fontSize: Dimensions.smallTextSize)),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 3),
+        Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("Total Kursi: ",
@@ -201,17 +233,6 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                     fontSize: Dimensions.smallTextSize)),
           ],
         ),
-        SizedBox(height: 3),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(tanggal(tempDate),
-                style: TextStyle(
-                    color: CustomColor.darkGrey,
-                    fontSize: Dimensions.smallTextSize)),
-          ],
-        ),
-        SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

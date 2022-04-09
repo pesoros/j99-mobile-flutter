@@ -19,6 +19,8 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 
@@ -34,6 +36,7 @@ class TicketResultScreen extends StatefulWidget {
 class _TicketResultScreen extends State<TicketResultScreen> {
   bool isLoadingPackage = true;
   bool isLoadingTrace = true;
+  bool isLoadingPayment = true;
 
   String booking_code;
   String round_trip;
@@ -42,12 +45,19 @@ class _TicketResultScreen extends State<TicketResultScreen> {
   String total_seat;
   String created_at;
 
+  String payment_method;
+  String payment_channel_code;
+  String va_number;
+  String dekstop_link;
+  String mobile_link;
+
   List<TicketPassanggerListModal> _ticketList = [];
 
   @override
   void initState() {
     super.initState();
     getTicket();
+    getTicketPayment();
     getTicketList();
   }
 
@@ -61,6 +71,19 @@ class _TicketResultScreen extends State<TicketResultScreen> {
         total_seat = value['total_seat'];
         created_at = value['created_at'];
         isLoadingPackage = false;
+      });
+    });
+  }
+
+  getTicketPayment() async {
+    await TicketPayment.list(widget.booking_code).then((value) {
+      setState(() {
+        payment_method = value['payment_method'];
+        payment_channel_code = value['payment_channel_code'];
+        va_number = value['va_number'];
+        dekstop_link = value['dekstop_link'];
+        mobile_link = value['mobile_link'];
+        isLoadingPayment = false;
       });
     });
   }
@@ -85,7 +108,9 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                 ? Center(child: CircularProgressIndicator())
                 : (isLoadingTrace == true)
                     ? Center(child: CircularProgressIndicator())
-                    : bodyWidget(context),
+                    : (isLoadingPayment == true)
+                        ? Center(child: CircularProgressIndicator())
+                        : bodyWidget(context),
           ],
         ),
       ),
@@ -202,14 +227,83 @@ class _TicketResultScreen extends State<TicketResultScreen> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              // _dataBooking("Kode Booking: ", booking_code),
-              // _dataBooking("Status Pembayaran: ", payment_status),
-              // _dataBooking("Perjalanan: ", round_trip),
+              _dataBooking("Metode Pembayaran: ", payment_method),
+              _dataBooking("Bank: ", payment_channel_code),
+              (payment_method == "EWALLET")
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: Dimensions.heightSize * 0.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Link Pembayaran: ",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.defaultTextSize),
+                          ),
+                          InkWell(
+                              child: new Text(
+                                'Link',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: Dimensions.defaultTextSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () => launch(mobile_link)),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: Dimensions.heightSize * 0.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "No. Rekening",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.defaultTextSize),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Fluttertoast.showToast(
+                                    msg: "Disalin",
+                                    backgroundColor: CustomColor.red,
+                                    textColor: CustomColor.white,
+                                    gravity: ToastGravity.CENTER,
+                                  );
+                                  Clipboard.setData(
+                                      new ClipboardData(text: va_number));
+                                },
+                                child: Text(
+                                  "Salin",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: Dimensions.defaultTextSize),
+                                ),
+                              ),
+                              Text(
+                                "  " + va_number,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: Dimensions.defaultTextSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+              SizedBox(height: 20),
+              _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
               _dataBooking(" ", _ticketList[0].drop_trip_location),
               _dataBooking(
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
-              _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Tanggal: ", tanggal(tempDate)),
               SizedBox(height: 10),
               Divider(
