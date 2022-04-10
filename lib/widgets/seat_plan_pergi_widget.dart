@@ -478,10 +478,6 @@ class _SeatPlanPergiWidgetScreen extends State<SeatPlanPergiWidget> {
               Navigator.pop(context);
             }
           }
-          print(variable.seatPergiPassengger1);
-          print(variable.seatPergiPassengger2);
-          print(variable.seatPergiPassengger3);
-          print(variable.seatPergiPassengger4);
         },
       ),
     );

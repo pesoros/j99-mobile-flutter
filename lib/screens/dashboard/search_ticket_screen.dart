@@ -87,7 +87,6 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                     itemCount: _ticketList.length,
                     itemBuilder: (context, index) {
                       TicketListModal ticket = _ticketList[index];
-
                       return Container(
                         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Center(
@@ -98,6 +97,8 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                           ticket.total_price,
                           ticket.total_seat,
                           ticket.created_at,
+                          ticket.from,
+                          ticket.to,
                         )),
                       );
                     }),
@@ -112,6 +113,8 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
     String total_price,
     String total_seat,
     String created_at,
+    String from,
+    String to,
   ) {
     return Card(
       shape: OutlineInputBorder(
@@ -131,6 +134,8 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                 total_price,
                 total_seat,
                 created_at,
+                from,
+                to,
               ),
             ],
           ),
@@ -147,6 +152,8 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
     String total_price,
     String total_seat,
     String created_at,
+    String from,
+    String to,
   ) {
     DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(created_at);
     return Column(
@@ -156,7 +163,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Subxxxxx - Jakxxxxx",
+              from,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -191,6 +198,15 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
             ),
           ],
         ),
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Text(
+            to,
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: Dimensions.defaultTextSize),
+          ),
+        ]),
         SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

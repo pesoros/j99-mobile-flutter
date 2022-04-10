@@ -30,7 +30,6 @@ class TicketPayment {
     final response = await http.post(parseUrl, body: {
       "code": booking_code,
     });
-    print(jsonDecode(response.body)['payment_registration']);
     return jsonDecode(response.body)['payment_registration'];
   }
 }

@@ -37,6 +37,8 @@ class TicketListModal {
   String total_price;
   String total_seat;
   String created_at;
+  String from;
+  String to;
 
   TicketListModal({
     this.booking_code,
@@ -44,7 +46,8 @@ class TicketListModal {
     this.payment_status,
     this.total_price,
     this.total_seat,
-    this.created_at,
+    this.from,
+    this.to,
   });
 
   TicketListModal.fromJson(Map<String, dynamic> json) {
@@ -54,6 +57,8 @@ class TicketListModal {
     total_price = json['total_price'];
     total_seat = json['total_seat'];
     created_at = json['created_at'];
+    from = json['from'];
+    to = json['to'];
   }
 
   Map<String, dynamic> toJson() {
@@ -64,6 +69,8 @@ class TicketListModal {
     data['total_price'] = this.total_price;
     data['total_seat'] = this.total_seat;
     data['created_at'] = this.created_at;
+    data['from'] = this.from;
+    data['to'] = this.to;
 
     return data;
   }
