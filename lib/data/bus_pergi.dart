@@ -20,11 +20,16 @@ class BusPergiList {
       "tanggal": variable.datePergi,
       "kelas": variable.selectedKelasArmada,
     });
-    List<BusPergi> list = [];
-    for (var data in jsonDecode(response.body) as List) {
-      list.add(BusPergi.fromJson(data));
+    if (jsonDecode(response.body).toString() ==
+        "{status: 404, error: 404, messages: {error: Data Not Found}}") {
+      return null;
+    } else {
+      List<BusPergi> list = [];
+      for (var data in jsonDecode(response.body) as List) {
+        list.add(BusPergi.fromJson(data));
+      }
+      return list;
     }
-    return list;
   }
 }
 

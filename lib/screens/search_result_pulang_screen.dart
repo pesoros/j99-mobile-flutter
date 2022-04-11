@@ -35,7 +35,9 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
   List<BusPulang> _listBus = [];
   DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePulang);
 
-  bool isLoading = false;
+  bool isLoading = true;
+
+  bool busNotAvailable = false;
 
   @override
   void initState() {
@@ -45,10 +47,17 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
 
   initializeData() async {
     await BusPulangList.list().then((value) {
-      setState(() {
-        _listBus = value;
-        isLoading = true;
-      });
+      if (value != null) {
+        setState(() {
+          _listBus = value;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+          busNotAvailable = true;
+        });
+      }
     });
   }
 
@@ -62,8 +71,10 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
             children: [
               headerWidget(context),
               isLoading
-                  ? bodyWidget(context)
-                  : Center(child: CircularProgressIndicator()),
+                  ? Center(child: CircularProgressIndicator())
+                  : busNotAvailable
+                      ? Center(child: Text("Bus tidak tersedia."))
+                      : bodyWidget(context),
               filterWidget(context),
             ],
           ),

@@ -12,6 +12,7 @@ class PaymentList {
       url,
     );
     final response = await http.get(parseUrl);
+    print(response.body);
     List<Payment> list = [];
     for (var data in jsonDecode(response.body) as List) {
       list.add(Payment.fromJson(data));

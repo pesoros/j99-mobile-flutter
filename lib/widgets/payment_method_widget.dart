@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, missing_return
 
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/slot_pergi.dart';
@@ -139,54 +139,57 @@ class _PaymentMethodWidgetScreen extends State<PaymentMethodWidget> {
         physics: NeverScrollableScrollPhysics(),
         children: List.generate(_paymentList.length, (index) {
           Payment payment = _paymentList[index];
-          return Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
-            child: GestureDetector(
-              child: Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                height: 50,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border:
-                        Border.all(color: CustomColor.grey.withOpacity(0.5)),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(Dimensions.radius))),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${payment.channel_code}'.toUpperCase(),
-                        style: TextStyle(
-                            color: CustomColor.darkGrey,
-                            fontSize: Dimensions.defaultTextSize,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: Dimensions.defaultTextSize,
-                      )
-                    ]),
+          if (payment.is_enabled) {
+            return Padding(
+              padding:
+                  const EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+              child: GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border:
+                          Border.all(color: CustomColor.grey.withOpacity(0.5)),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(Dimensions.radius))),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${payment.channel_code}'.toUpperCase(),
+                          style: TextStyle(
+                              color: CustomColor.darkGrey,
+                              fontSize: Dimensions.defaultTextSize,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: Dimensions.defaultTextSize,
+                        )
+                      ]),
+                ),
+                onTap: () async {
+                  if (payment.channel_category == 'EWALLET') {
+                    setState(() {
+                      variable.selectedPayment = 'ID_' + payment.channel_code;
+                      variable.selectedPaymentCategories =
+                          payment.channel_category;
+                    });
+                  } else {
+                    setState(() {
+                      variable.selectedPayment = payment.channel_code;
+                      variable.selectedPaymentCategories =
+                          payment.channel_category;
+                    });
+                  }
+                  Navigator.of(context).pop();
+                },
               ),
-              onTap: () async {
-                if (payment.channel_category == 'EWALLET') {
-                  setState(() {
-                    variable.selectedPayment = 'ID_' + payment.channel_code;
-                    variable.selectedPaymentCategories =
-                        payment.channel_category;
-                  });
-                } else {
-                  setState(() {
-                    variable.selectedPayment = payment.channel_code;
-                    variable.selectedPaymentCategories =
-                        payment.channel_category;
-                  });
-                }
-
-                Navigator.of(context).pop();
-              },
-            ),
-          );
+            );
+          } else {
+            return Padding(padding: EdgeInsets.all(0));
+          }
         }),
       ),
     );

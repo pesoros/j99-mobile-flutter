@@ -20,11 +20,17 @@ class BusPulangList {
       "tanggal": variable.datePulang,
       "kelas": variable.selectedKelasArmada,
     });
-    List<BusPulang> list = [];
-    for (var data in jsonDecode(response.body) as List) {
-      list.add(BusPulang.fromJson(data));
+
+    if (jsonDecode(response.body).toString() ==
+        "{status: 404, error: 404, messages: {error: Data Not Found}}") {
+      return null;
+    } else {
+      List<BusPulang> list = [];
+      for (var data in jsonDecode(response.body) as List) {
+        list.add(BusPulang.fromJson(data));
+      }
+      return list;
     }
-    return list;
   }
 }
 

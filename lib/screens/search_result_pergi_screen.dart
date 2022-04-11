@@ -35,7 +35,9 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
   List<BusPergi> _listBus = [];
   DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePergi);
 
-  bool isLoading = false;
+  bool isLoading = true;
+
+  bool busNotAvailable = false;
 
   @override
   void initState() {
@@ -45,10 +47,17 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
 
   getBusList() async {
     await BusPergiList.list().then((value) {
-      setState(() {
-        _listBus = value;
-        isLoading = true;
-      });
+      if (value != null) {
+        setState(() {
+          _listBus = value;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+          busNotAvailable = true;
+        });
+      }
     });
   }
 
@@ -64,8 +73,10 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
             children: [
               headerWidget(context),
               isLoading
-                  ? bodyWidget(context)
-                  : Center(child: CircularProgressIndicator()),
+                  ? Center(child: CircularProgressIndicator())
+                  : busNotAvailable
+                      ? Center(child: Text("Bus tidak tersedia."))
+                      : bodyWidget(context),
               filterWidget(context),
             ],
           ),
