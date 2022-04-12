@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import, non_constant_identifier_names
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/data/package.dart';
 import 'package:juragan99/screens/package_result.dart';
 import 'package:juragan99/utils/dimensions.dart';
@@ -142,10 +143,20 @@ class _SearchPackageScreenState extends State<SearchPackageScreen> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PackageResultScreen(
-                                    code: codeController.text,
-                                  )));
+                          if (codeController.text == "" ||
+                              codeController.text == null) {
+                            Fluttertoast.showToast(
+                              msg: "Isi nomor resi",
+                              backgroundColor: CustomColor.red,
+                              textColor: CustomColor.white,
+                              gravity: ToastGravity.CENTER,
+                            );
+                          } else {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PackageResultScreen(
+                                      code: codeController.text,
+                                    )));
+                          }
                         },
                       ),
                     ),

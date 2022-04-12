@@ -15,7 +15,12 @@ class Package {
     final response = await http.post(parseUrl, body: {
       "code": code,
     });
-    return jsonDecode(response.body);
+    if (jsonDecode(response.body).toString() ==
+        "{status: 404, error: 404, messages: {error: Data Not Found}}") {
+      return null;
+    } else {
+      return jsonDecode(response.body);
+    }
   }
 }
 

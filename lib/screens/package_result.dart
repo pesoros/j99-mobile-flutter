@@ -30,6 +30,7 @@ class PackageResultScreen extends StatefulWidget {
 class _PackageResultScreen extends State<PackageResultScreen> {
   bool isLoadingPackage = true;
   bool isLoadingTrace = true;
+  bool notAvailable = false;
 
   String packet_code;
   String sender_name;
@@ -54,20 +55,27 @@ class _PackageResultScreen extends State<PackageResultScreen> {
 
   getPackage() async {
     await Package.list(widget.code).then((value) {
-      setState(() {
-        packet_code = value['packet_code'];
-        sender_name = value['sender_name'];
-        sender_phone = value['sender_phone'];
-        receiver_name = value['receiver_name'];
-        receiver_phone = value['receiver_phone'];
-        pool_sender_id = value['pool_sender_id'];
-        pool_receiver_id = value['pool_receiver_id'];
-        type = value['type'];
-        description = value['description'];
-        weight = value['weight'];
-        created_at = value['created_at'];
-        isLoadingPackage = false;
-      });
+      if (value == null) {
+        setState(() {
+          isLoadingPackage = false;
+          notAvailable = true;
+        });
+      } else {
+        setState(() {
+          packet_code = value['packet_code'];
+          sender_name = value['sender_name'];
+          sender_phone = value['sender_phone'];
+          receiver_name = value['receiver_name'];
+          receiver_phone = value['receiver_phone'];
+          pool_sender_id = value['pool_sender_id'];
+          pool_receiver_id = value['pool_receiver_id'];
+          type = value['type'];
+          description = value['description'];
+          weight = value['weight'];
+          created_at = value['created_at'];
+          isLoadingPackage = false;
+        });
+      }
     });
   }
 
@@ -91,7 +99,13 @@ class _PackageResultScreen extends State<PackageResultScreen> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : bodyWidget(context),
+                : notAvailable
+                    ? Center(
+                        child: Text(
+                        "Paket tidak ada / Nomor resi salah",
+                        style: TextStyle(color: Colors.white),
+                      ))
+                    : bodyWidget(context),
             buttonWidget(context),
           ],
         ),
