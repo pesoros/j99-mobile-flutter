@@ -13,10 +13,7 @@ class Registration {
     String confpassword,
     String firstName,
     String lastName,
-    String address,
     String phone,
-    String identity,
-    String identityNumber,
   ) async {
     String url = dotenv.env['BASE_URL'] + "/register";
 
@@ -32,10 +29,10 @@ class Registration {
         "confpassword": confpassword,
         "firstName": firstName,
         "lastName": lastName,
-        "address": address,
+        "address": "",
         "phone": phone,
-        "identity": identity,
-        "identityNumber": identityNumber,
+        "identity": "",
+        "identityNumber": "",
       },
     );
     return jsonDecode(response.body)['messages'];

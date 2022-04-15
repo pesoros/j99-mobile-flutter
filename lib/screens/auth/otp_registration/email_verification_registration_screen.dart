@@ -16,10 +16,7 @@ class EmailVerificationRegistrationScreen extends StatefulWidget {
   String confpassword;
   String firstName;
   String lastName;
-  String address;
   String phone;
-  String identity;
-  String identityNumber;
 
   EmailVerificationRegistrationScreen({
     this.email,
@@ -27,10 +24,7 @@ class EmailVerificationRegistrationScreen extends StatefulWidget {
     this.confpassword,
     this.firstName,
     this.lastName,
-    this.address,
     this.phone,
-    this.identity,
-    this.identityNumber,
   });
 
   @override
@@ -104,10 +98,7 @@ class _EmailVerificationRegistrationScreenState
       widget.confpassword,
       widget.firstName,
       widget.lastName,
-      widget.address,
       widget.phone,
-      widget.identity,
-      widget.identityNumber,
     ).then((value) {
       if (value == "registration succeed") {
         loginRegistration(context);

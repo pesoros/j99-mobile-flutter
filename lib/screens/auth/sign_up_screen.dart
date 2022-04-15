@@ -29,17 +29,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController identityNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
   bool _toggleVisibility = true;
   bool checkedValue = false;
-
-  List _listIdentitityType = ["KTP", "Paspor", "SIM"];
-  String identityType = "KTP";
 
   @override
   void initState() {
@@ -59,10 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 confpassword: confirmPasswordController.text,
                 firstName: firstNameController.text,
                 lastName: lastNameController.text,
-                address: addressController.text,
                 phone: phoneController.text,
-                identity: identityType,
-                identityNumber: identityNumberController.text,
               ),
             ),
           );
@@ -192,34 +184,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: Dimensions.heightSize * 0.5,
               ),
               Text(
-                "Alamat",
-                style: TextStyle(color: Colors.black),
-              ),
-              SizedBox(
-                height: Dimensions.heightSize * 0.5,
-              ),
-              TextFormField(
-                style: CustomStyle.textStyle,
-                controller: addressController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    hintText: "Alamat",
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                    labelStyle: CustomStyle.textStyle,
-                    filled: true,
-                    fillColor: Colors.transparent,
-                    hintStyle: CustomStyle.textStyle,
-                    focusedBorder: CustomStyle.focusBorder,
-                    enabledBorder: CustomStyle.focusErrorBorder,
-                    focusedErrorBorder: CustomStyle.focusErrorBorder,
-                    errorBorder: CustomStyle.focusErrorBorder,
-                    prefixIcon: Icon(Icons.location_on)),
-              ),
-              SizedBox(
-                height: Dimensions.heightSize * 0.5,
-              ),
-              Text(
                 "No. Handphone",
                 style: TextStyle(color: Colors.black),
               ),
@@ -245,86 +209,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               SizedBox(height: Dimensions.heightSize * 0.5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Tipe Identitas",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: Dimensions.heightSize * 0.5,
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        child: DropdownSearch(
-                          mode: Mode.BOTTOM_SHEET,
-                          showClearButton: false,
-                          maxHeight: 250,
-                          items: _listIdentitityType,
-                          selectedItem: _listIdentitityType[0],
-                          showSearchBox: false,
-                          dropdownSearchDecoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 10),
-                            labelStyle: CustomStyle.textStyle,
-                            focusedBorder: CustomStyle.focusBorder,
-                            enabledBorder: CustomStyle.focusErrorBorder,
-                            focusedErrorBorder: CustomStyle.focusErrorBorder,
-                            errorBorder: CustomStyle.focusErrorBorder,
-                            hintStyle: CustomStyle.textStyle,
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              identityType = value;
-                            });
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nomor Identitas",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: Dimensions.heightSize * 0.5,
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: TextFormField(
-                          style: CustomStyle.textStyle,
-                          controller: identityNumberController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: "No. Identitas",
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            labelStyle: CustomStyle.textStyle,
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            hintStyle: CustomStyle.textStyle,
-                            focusedBorder: CustomStyle.focusBorder,
-                            enabledBorder: CustomStyle.focusErrorBorder,
-                            focusedErrorBorder: CustomStyle.focusErrorBorder,
-                            errorBorder: CustomStyle.focusErrorBorder,
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              SizedBox(
-                height: Dimensions.heightSize * 0.5,
-              ),
               Text(
                 Strings.email,
                 style: TextStyle(color: Colors.black),
@@ -466,27 +350,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         onTap: () async {
-          await CheckRegistration.list(emailController.text).then((value) {
-            if (value['status'] == 200) {
-              if (passwordController.text != confirmPasswordController.text) {
+          if (firstNameController.text != "" ||
+              lastNameController.text != "" ||
+              emailController.text != "" ||
+              phoneController.text != "" ||
+              passwordController.text != "" ||
+              confirmPasswordController.text != "") {
+            await CheckRegistration.list(emailController.text).then((value) {
+              if (value['status'] == 200) {
+                if (passwordController.text != confirmPasswordController.text) {
+                  Fluttertoast.showToast(
+                    msg: "Konfirmasi sandi tidak cocok",
+                    backgroundColor: CustomColor.red,
+                    textColor: CustomColor.white,
+                    gravity: ToastGravity.CENTER,
+                  );
+                } else {
+                  modalPickOTP(context);
+                }
+              } else {
                 Fluttertoast.showToast(
-                  msg: "Konfirmasi sandi tidak cocok",
+                  msg: "Email telah terdaftar",
                   backgroundColor: CustomColor.red,
                   textColor: CustomColor.white,
                   gravity: ToastGravity.CENTER,
                 );
-              } else {
-                modalPickOTP(context);
               }
-            } else {
-              Fluttertoast.showToast(
-                msg: "Email telah terdaftar",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
-            }
-          });
+            });
+          } else {
+            Fluttertoast.showToast(
+              msg: "Lengkapi data",
+              backgroundColor: CustomColor.red,
+              textColor: CustomColor.white,
+              gravity: ToastGravity.CENTER,
+            );
+          }
         },
       ),
     );
