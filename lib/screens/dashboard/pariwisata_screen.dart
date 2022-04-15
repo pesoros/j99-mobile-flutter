@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:juragan99/data/carousel.dart';
 import 'package:juragan99/data/pariwisata.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/strings.dart';
@@ -20,12 +21,11 @@ class PariwisataScreen extends StatefulWidget {
 }
 
 class _PariwisataScreenState extends State<PariwisataScreen> {
-  final imageList = [
-    "http://www.juragan99trans.id/images/premium/TK_Premium.jpg",
-    "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
-    "http://www.juragan99trans.id/images/executive/TK_merc.jpg",
-    "http://www.juragan99trans.id/images/medium/TK_medium.jpg",
-  ];
+  bool imageLoad = true;
+  bool prefixLoad = true;
+  String imagePrefix;
+  List imageList;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -35,6 +35,27 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
   @override
   void initState() {
     super.initState();
+    getImagePrefix();
+    getImage();
+  }
+
+  getImagePrefix() async {
+    await ImagePrefix.list().then((value) {
+      setState(() {
+        imagePrefix = value;
+        prefixLoad = false;
+      });
+    });
+  }
+
+  getImage() async {
+    await ImageList.list().then((value) {
+      setState(() {
+        imageList = value;
+        imageLoad = false;
+        print(imageLoad);
+      });
+    });
   }
 
   sendForm() async {
@@ -290,18 +311,22 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
 
   carouselWidget(BuildContext context) {
     return Expanded(
-      child: Swiper(
-        autoplay: true,
-        itemCount: imageList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return CachedNetworkImage(
-            imageUrl: imageList[index],
-            errorWidget: (context, url, error) => Icon(Icons.error),
-            fit: BoxFit.cover,
-          );
-        },
-        // itemCount: 1,
-      ),
+      child: (imageLoad || prefixLoad)
+          ? Center(child: CircularProgressIndicator())
+          : Swiper(
+              autoplay: true,
+              itemCount: imageList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CachedNetworkImage(
+                  imageUrl: imagePrefix + imageList[index].image,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  fit: BoxFit.cover,
+                );
+              },
+              // itemCount: 1,
+            ),
     );
   }
 }

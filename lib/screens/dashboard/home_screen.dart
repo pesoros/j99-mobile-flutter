@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/widgets.dart';
+import 'package:juragan99/data/carousel.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
 import 'package:juragan99/screens/customer_feedback_screen.dart';
@@ -38,12 +39,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final imageList = [
-    "http://www.juragan99trans.id/images/premium/TK_Premium.jpg",
-    "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
-    "http://www.juragan99trans.id/images/executive/TK_merc.jpg",
-    "http://www.juragan99trans.id/images/medium/TK_medium.jpg",
-  ];
+  bool imageLoad = true;
+  bool prefixLoad = true;
+  String imagePrefix;
+  List imageList;
 
   List<String> jumlahPenumpang = ["1", "2", "3", "4"];
 
@@ -55,6 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    getImagePrefix();
+    getImage();
     resetVariable();
   }
 
@@ -185,6 +186,24 @@ class _HomeScreenState extends State<HomeScreen> {
     variable.expiration_date = null;
     variable.external_id = null;
     variable.total_price = null;
+  }
+
+  getImagePrefix() async {
+    await ImagePrefix.list().then((value) {
+      setState(() {
+        imagePrefix = value;
+        prefixLoad = false;
+      });
+    });
+  }
+
+  getImage() async {
+    await ImageList.list().then((value) {
+      setState(() {
+        imageList = value;
+        imageLoad = false;
+      });
+    });
   }
 
   @override
@@ -467,18 +486,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   carouselWidget(BuildContext context) {
     return Expanded(
-      child: Swiper(
-        autoplay: true,
-        itemCount: imageList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return CachedNetworkImage(
-            imageUrl: imageList[index],
-            errorWidget: (context, url, error) => Icon(Icons.error),
-            fit: BoxFit.cover,
-          );
-        },
-        // itemCount: 1,
-      ),
+      child: (imageLoad || prefixLoad)
+          ? Center(child: CircularProgressIndicator())
+          : Swiper(
+              autoplay: true,
+              itemCount: imageList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CachedNetworkImage(
+                  imageUrl: imagePrefix + imageList[index].image,
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  fit: BoxFit.cover,
+                );
+              },
+              // itemCount: 1,
+            ),
     );
   }
 
