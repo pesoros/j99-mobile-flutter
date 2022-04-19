@@ -1531,21 +1531,32 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             children: [
               _data(
-                variable.selectedFromCity.toString() +
-                    " - " +
-                    variable.selectedToCity.toString() +
-                    " x " +
-                    variable.selectedJumlahPenumpang,
-                rupiah(variable.pergi_price),
+                variable.selectedFromCity.toString(),
+                " x " +
+                    variable.selectedJumlahPenumpang +
+                    " " +
+                    rupiah(variable.pergi_price),
+              ),
+              _data(
+                variable.selectedToCity.toString(),
+                "",
               ),
               (variable.checkPulangPergi == true)
+                  ? SizedBox(height: 10)
+                  : Padding(padding: EdgeInsets.all(0)),
+              (variable.checkPulangPergi == true)
                   ? _data(
-                      variable.selectedToCity.toString() +
-                          " - " +
-                          variable.selectedFromCity.toString() +
-                          " x " +
-                          variable.selectedJumlahPenumpang,
-                      rupiah(variable.pulang_price),
+                      variable.selectedToCity.toString(),
+                      " x " +
+                          variable.selectedJumlahPenumpang +
+                          " " +
+                          rupiah(variable.pergi_price),
+                    )
+                  : Padding(padding: EdgeInsets.all(0)),
+              (variable.checkPulangPergi == true)
+                  ? _data(
+                      variable.selectedFromCity.toString(),
+                      "",
                     )
                   : Padding(padding: EdgeInsets.all(0)),
               // _data("Promo", rupiah(promoValue)),

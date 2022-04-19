@@ -146,21 +146,22 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              _data(
-                  variable.pergi_type_class +
-                      ": " +
-                      variable.selectedToCity.toString() +
-                      " - " +
-                      variable.selectedFromCity.toString(),
+              _data(variable.pergi_type_class, ""),
+              _data(variable.selectedFromCity.toString(),
                   "x " + variable.selectedJumlahPenumpang + " Tiket"),
+              _data(variable.selectedToCity.toString(), ""),
               (variable.checkPulangPergi == true)
-                  ? _data(
-                      variable.pulang_type_class +
-                          ": " +
-                          variable.selectedToCity.toString() +
-                          " - " +
-                          variable.selectedFromCity.toString(),
+                  ? SizedBox(height: 10)
+                  : Padding(padding: EdgeInsets.only()),
+              (variable.checkPulangPergi == true)
+                  ? _data(variable.pulang_type_class, "")
+                  : Padding(padding: EdgeInsets.only()),
+              (variable.checkPulangPergi == true)
+                  ? _data(variable.selectedToCity.toString(),
                       "x " + variable.selectedJumlahPenumpang + " Tiket")
+                  : Padding(padding: EdgeInsets.only()),
+              (variable.checkPulangPergi == true)
+                  ? _data(variable.selectedFromCity.toString(), "")
                   : Padding(padding: EdgeInsets.only()),
               // Divider(
               //   color: Colors.grey,

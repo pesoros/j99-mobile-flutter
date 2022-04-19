@@ -129,6 +129,7 @@ class _BusDetailModalPulangWidgetState
       child: Column(
         children: <Widget>[
           _busInfoWidget(context),
+          SizedBox(height: 10),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

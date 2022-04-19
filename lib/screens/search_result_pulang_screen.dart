@@ -144,23 +144,14 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Text(
-                      //   "JKT",
-                      //   style: TextStyle(
-                      //       color: CustomColor.white,
-                      //       fontSize: Dimensions.largeTextSize,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
-                      Text(
-                        variable.selectedToCity.toString(),
-                        style: TextStyle(
-                            color: CustomColor.grey,
-                            fontSize: Dimensions.largeTextSize),
-                      ),
-                    ],
+                  Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    child: Text(
+                      variable.selectedToCity.toString(),
+                      style: TextStyle(
+                          color: CustomColor.grey,
+                          fontSize: Dimensions.defaultTextSize),
+                    ),
                   ),
                   DottedLine(
                     direction: Axis.horizontal,
@@ -171,24 +162,16 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                     dashGapLength: 5.0,
                     dashGapColor: Colors.transparent,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      // Text(
-                      //   "SUB",
-                      //   style: TextStyle(
-                      //       color: CustomColor.white,
-                      //       fontSize: Dimensions.largeTextSize,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
-                      Text(
-                        variable.selectedFromCity.toString(),
-                        style: TextStyle(
-                            color: CustomColor.grey,
-                            fontSize: Dimensions.largeTextSize),
-                      ),
-                    ],
-                  )
+                  Container(
+                    width: MediaQuery.of(context).size.width / 4,
+                    child: Text(
+                      variable.selectedFromCity.toString(),
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                          color: CustomColor.grey,
+                          fontSize: Dimensions.defaultTextSize),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -196,7 +179,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                  margin: EdgeInsets.only(top: 10, left: 30, right: 30),
                   child: Text(
                     tanggal(tempDate),
                     style: TextStyle(
@@ -205,7 +188,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                  margin: EdgeInsets.only(top: 10, left: 30, right: 30),
                   child: Text(
                     "Tiket Pulang",
                     style: TextStyle(
