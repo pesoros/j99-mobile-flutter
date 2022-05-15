@@ -36,7 +36,6 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
   DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePergi);
 
   bool isLoading = true;
-
   bool busNotAvailable = false;
 
   @override
@@ -51,11 +50,14 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
         setState(() {
           _listBus = value;
           isLoading = false;
+          busNotAvailable = false;
+          tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePergi);
         });
       } else {
         setState(() {
           isLoading = false;
           busNotAvailable = true;
+          tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePergi);
         });
       }
     });

@@ -53,7 +53,6 @@ class _PariwisataScreenState extends State<PariwisataScreen> {
       setState(() {
         imageList = value;
         imageLoad = false;
-        print(imageLoad);
       });
     });
   }

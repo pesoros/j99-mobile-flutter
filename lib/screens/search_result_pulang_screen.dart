@@ -51,11 +51,14 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
         setState(() {
           _listBus = value;
           isLoading = false;
+          busNotAvailable = false;
+          tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePulang);
         });
       } else {
         setState(() {
           isLoading = false;
           busNotAvailable = true;
+          tempDate = new DateFormat("yyyy-MM-dd").parse(variable.datePulang);
         });
       }
     });
