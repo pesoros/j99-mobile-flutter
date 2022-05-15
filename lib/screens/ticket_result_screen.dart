@@ -23,6 +23,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class TicketResultScreen extends StatefulWidget {
   final String booking_code;
@@ -250,7 +251,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                                     fontSize: Dimensions.defaultTextSize,
                                     fontWeight: FontWeight.bold),
                               ),
-                              onTap: () => launch(mobile_link)),
+                              onTap: () => launchUrlString(mobile_link)),
                         ],
                       ),
                     )

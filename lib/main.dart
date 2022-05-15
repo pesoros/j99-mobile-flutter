@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:juragan99/screens/splash_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:flutter/material.dart';

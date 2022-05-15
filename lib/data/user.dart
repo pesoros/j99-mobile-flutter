@@ -15,6 +15,7 @@ class UserList {
       "email": email,
       "password": password,
     });
+    print(response.body);
     final data = jsonDecode(response.body);
     final list = User.fromJson(data);
     return list;

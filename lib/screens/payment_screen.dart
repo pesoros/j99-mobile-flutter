@@ -27,6 +27,7 @@ import 'package:juragan99/screens/invoice_screen.dart';
 import 'package:juragan99/widgets/payment_method_widget.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -1849,7 +1850,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   _ewalletUrl(
       BuildContext context, String payment_url, String booking_code) async {
-    if (await launch(payment_url)) {
+    if (await launchUrlString(payment_url)) {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(

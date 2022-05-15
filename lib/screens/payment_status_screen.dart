@@ -22,6 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PaymentStatusScreen extends StatefulWidget {
   final String booking_code;
@@ -249,7 +250,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                                     fontSize: Dimensions.defaultTextSize,
                                     fontWeight: FontWeight.bold),
                               ),
-                              onTap: () => launch(mobile_link)),
+                              onTap: () => launchUrlString(mobile_link)),
                         ],
                       ),
                     )
