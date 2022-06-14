@@ -371,18 +371,19 @@ class _SignInScreenState extends State<SignInScreen> {
                     "Email",
                     style: TextStyle(color: CustomColor.red),
                   )),
-              // TextButton(
-              //     onPressed: () {
-              //       setState(() {
-              //         variable.isEmail = false;
-              //       });
-              //       Navigator.pop(context);
-              //       _setOtp();
-              //     },
-              //     child: Text(
-              //       "Whatsapp",
-              //       style: TextStyle(color: CustomColor.red),
-              //     ))
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    variable.isEmail = false;
+                  });
+                  Navigator.pop(context);
+                  _setOtp();
+                },
+                child: Text(
+                  "Whatsapp",
+                  style: TextStyle(color: CustomColor.red),
+                ),
+              )
             ],
           )),
         );
