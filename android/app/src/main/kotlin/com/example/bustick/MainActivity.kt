@@ -1,4 +1,4 @@
-package com.juragan99trans.id
+package com.j99trans
 
 import io.flutter.embedding.android.FlutterActivity
 
