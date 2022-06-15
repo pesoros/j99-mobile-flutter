@@ -8,14 +8,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Ticket {
   static list(String booking_code) async {
-    String url = dotenv.env['BASE_URL'] + "/ticket/cek";
+    String url = dotenv.env['BASE_URL'] + "/content/disclaimer";
 
-    Uri parseUrl = Uri.parse(
-      url,
-    );
-    final response = await http.post(parseUrl, body: {
-      "code": booking_code,
-    });
+    Uri parseUrl = Uri.parse(url);
+    final response = await http.get(parseUrl);
     return jsonDecode(response.body);
   }
 }

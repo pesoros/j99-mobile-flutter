@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import, missing_return, unnecessary_statements, non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:juragan99/data/bus_pergi.dart';
@@ -14,12 +16,15 @@ import 'package:juragan99/widgets/back_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:html2md/html2md.dart' as html2md;
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:juragan99/widgets/seat_plan_pergi_widget.dart';
 import 'package:juragan99/widgets/seat_plan_pulang_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 class PassenggerFormScreen extends StatefulWidget {
   @override
@@ -27,6 +32,10 @@ class PassenggerFormScreen extends StatefulWidget {
 }
 
 class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
+  bool acceptAttention = false;
+  bool attentionContentBool = true;
+  String attentionContent;
+
   TextEditingController nameBuyerController = TextEditingController(
       text: variable.first_name + " " + variable.last_name);
   TextEditingController phoneBuyerController =
@@ -50,9 +59,22 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
 
   int index = 0;
 
+  getAttention() async {
+    String url = dotenv.env['BASE_URL'] + "/content/disclaimer";
+    var uri = Uri.parse(url);
+
+    var response = await http.get(uri);
+    setState(() {
+      String data = html2md.convert(jsonDecode(response.body)["content"]);
+      attentionContent = data;
+      attentionContentBool = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    getAttention();
   }
 
   @override
@@ -113,7 +135,11 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
               ? _dataPassenggerWidget4(context)
               : Container(),
           _pickSeatButton(context),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
+          _attentionWidget(context),
+          // SizedBox(height: 20),
+          _acceptAttention(context),
+          SizedBox(height: 20),
           _buttonWidget(context),
         ]),
       ),
@@ -1118,7 +1144,6 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
   _pickSeatButton(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: 20,
         left: 30,
         right: 30,
       ),
@@ -1221,82 +1246,91 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           ),
         ),
         onTap: () {
-          //1
-          if (variable.selectedJumlahPenumpang == "1") {
-            if (namePassenggerController1.text == null ||
-                phonePassenggerController1.text == null ||
-                namePassenggerController1.text == "" ||
-                phonePassenggerController1.text == "" ||
-                variable.foodPergiPassengger1 == null ||
-                variable.baggagePergiPassengger1 == null ||
-                variable.seatPergiPassengger1 == null) {
-              Fluttertoast.showToast(
-                msg: "Lengkapi data terlebih dahulu",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
-            } else {
-              if (variable.checkPulangPergi == true) {
-                if (variable.foodPulangPassengger1 == null ||
-                    variable.baggagePulangPassengger1 == null ||
-                    variable.seatPulangPassengger1 == null) {
-                  Fluttertoast.showToast(
-                    msg: "Lengkapi data terlebih dahulu",
-                    backgroundColor: CustomColor.red,
-                    textColor: CustomColor.white,
-                    gravity: ToastGravity.CENTER,
-                  );
+          if (acceptAttention) {
+            //1
+            if (variable.selectedJumlahPenumpang == "1") {
+              if (namePassenggerController1.text == null ||
+                  phonePassenggerController1.text == null ||
+                  namePassenggerController1.text == "" ||
+                  phonePassenggerController1.text == "" ||
+                  variable.foodPergiPassengger1 == null ||
+                  variable.baggagePergiPassengger1 == null ||
+                  variable.seatPergiPassengger1 == null) {
+                Fluttertoast.showToast(
+                  msg: "Lengkapi data terlebih dahulu",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              } else {
+                if (variable.checkPulangPergi == true) {
+                  if (variable.foodPulangPassengger1 == null ||
+                      variable.baggagePulangPassengger1 == null ||
+                      variable.seatPulangPassengger1 == null) {
+                    Fluttertoast.showToast(
+                      msg: "Lengkapi data terlebih dahulu",
+                      backgroundColor: CustomColor.red,
+                      textColor: CustomColor.white,
+                      gravity: ToastGravity.CENTER,
+                    );
+                  } else {
+                    variable.namePassengger1 = namePassenggerController1.text;
+                    variable.phonePassengger1 = phonePassenggerController1.text;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PaymentScreen()));
+                  }
                 } else {
                   variable.namePassengger1 = namePassenggerController1.text;
                   variable.phonePassengger1 = phonePassenggerController1.text;
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PaymentScreen()));
                 }
-              } else {
-                variable.namePassengger1 = namePassenggerController1.text;
-                variable.phonePassengger1 = phonePassenggerController1.text;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PaymentScreen()));
               }
             }
-          }
-          //2
-          if (variable.selectedJumlahPenumpang == "2") {
-            if (namePassenggerController1.text == null ||
-                phonePassenggerController1.text == null ||
-                namePassenggerController1.text == "" ||
-                phonePassenggerController1.text == "" ||
-                variable.foodPergiPassengger1 == null ||
-                variable.baggagePergiPassengger1 == null ||
-                variable.seatPergiPassengger1 == null ||
-                namePassenggerController2.text == null ||
-                phonePassenggerController2.text == null ||
-                namePassenggerController2.text == "" ||
-                phonePassenggerController2.text == "" ||
-                variable.foodPergiPassengger2 == null ||
-                variable.baggagePergiPassengger2 == null ||
-                variable.seatPergiPassengger2 == null) {
-              Fluttertoast.showToast(
-                msg: "Lengkapi data terlebih dahulu",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
-            } else {
-              if (variable.checkPulangPergi == true) {
-                if (variable.foodPulangPassengger1 == null ||
-                    variable.baggagePulangPassengger1 == null ||
-                    variable.seatPulangPassengger1 == null ||
-                    variable.foodPulangPassengger2 == null ||
-                    variable.baggagePulangPassengger2 == null ||
-                    variable.seatPulangPassengger2 == null) {
-                  Fluttertoast.showToast(
-                    msg: "Lengkapi data terlebih dahulu",
-                    backgroundColor: CustomColor.red,
-                    textColor: CustomColor.white,
-                    gravity: ToastGravity.CENTER,
-                  );
+            //2
+            if (variable.selectedJumlahPenumpang == "2") {
+              if (namePassenggerController1.text == null ||
+                  phonePassenggerController1.text == null ||
+                  namePassenggerController1.text == "" ||
+                  phonePassenggerController1.text == "" ||
+                  variable.foodPergiPassengger1 == null ||
+                  variable.baggagePergiPassengger1 == null ||
+                  variable.seatPergiPassengger1 == null ||
+                  namePassenggerController2.text == null ||
+                  phonePassenggerController2.text == null ||
+                  namePassenggerController2.text == "" ||
+                  phonePassenggerController2.text == "" ||
+                  variable.foodPergiPassengger2 == null ||
+                  variable.baggagePergiPassengger2 == null ||
+                  variable.seatPergiPassengger2 == null) {
+                Fluttertoast.showToast(
+                  msg: "Lengkapi data terlebih dahulu",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              } else {
+                if (variable.checkPulangPergi == true) {
+                  if (variable.foodPulangPassengger1 == null ||
+                      variable.baggagePulangPassengger1 == null ||
+                      variable.seatPulangPassengger1 == null ||
+                      variable.foodPulangPassengger2 == null ||
+                      variable.baggagePulangPassengger2 == null ||
+                      variable.seatPulangPassengger2 == null) {
+                    Fluttertoast.showToast(
+                      msg: "Lengkapi data terlebih dahulu",
+                      backgroundColor: CustomColor.red,
+                      textColor: CustomColor.white,
+                      gravity: ToastGravity.CENTER,
+                    );
+                  } else {
+                    variable.namePassengger1 = namePassenggerController1.text;
+                    variable.phonePassengger1 = phonePassenggerController1.text;
+                    variable.namePassengger2 = namePassenggerController2.text;
+                    variable.phonePassengger2 = phonePassenggerController2.text;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PaymentScreen()));
+                  }
                 } else {
                   variable.namePassengger1 = namePassenggerController1.text;
                   variable.phonePassengger1 = phonePassenggerController1.text;
@@ -1305,59 +1339,61 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PaymentScreen()));
                 }
-              } else {
-                variable.namePassengger1 = namePassenggerController1.text;
-                variable.phonePassengger1 = phonePassenggerController1.text;
-                variable.namePassengger2 = namePassenggerController2.text;
-                variable.phonePassengger2 = phonePassenggerController2.text;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PaymentScreen()));
               }
             }
-          }
-          //3
-          if (variable.selectedJumlahPenumpang == "3") {
-            if (namePassenggerController1.text == null ||
-                phonePassenggerController1.text == null ||
-                namePassenggerController1.text == "" ||
-                phonePassenggerController1.text == "" ||
-                variable.foodPergiPassengger1 == null ||
-                variable.baggagePergiPassengger1 == null ||
-                namePassenggerController2.text == null ||
-                phonePassenggerController2.text == null ||
-                namePassenggerController2.text == "" ||
-                phonePassenggerController2.text == "" ||
-                variable.foodPergiPassengger2 == null ||
-                variable.baggagePergiPassengger2 == null ||
-                namePassenggerController3.text == null ||
-                phonePassenggerController3.text == null ||
-                namePassenggerController3.text == "" ||
-                phonePassenggerController3.text == "" ||
-                variable.foodPergiPassengger3 == null ||
-                variable.baggagePergiPassengger3 == null) {
-              Fluttertoast.showToast(
-                msg: "Lengkapi data terlebih dahulu",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
-            } else {
-              if (variable.checkPulangPergi == true) {
-                if (variable.foodPulangPassengger1 == null ||
-                    variable.baggagePulangPassengger1 == null ||
-                    variable.seatPulangPassengger1 == null ||
-                    variable.foodPulangPassengger2 == null ||
-                    variable.baggagePulangPassengger2 == null ||
-                    variable.seatPulangPassengger2 == null ||
-                    variable.foodPulangPassengger3 == null ||
-                    variable.baggagePulangPassengger3 == null ||
-                    variable.seatPulangPassengger3 == null) {
-                  Fluttertoast.showToast(
-                    msg: "Lengkapi data terlebih dahulu",
-                    backgroundColor: CustomColor.red,
-                    textColor: CustomColor.white,
-                    gravity: ToastGravity.CENTER,
-                  );
+            //3
+            if (variable.selectedJumlahPenumpang == "3") {
+              if (namePassenggerController1.text == null ||
+                  phonePassenggerController1.text == null ||
+                  namePassenggerController1.text == "" ||
+                  phonePassenggerController1.text == "" ||
+                  variable.foodPergiPassengger1 == null ||
+                  variable.baggagePergiPassengger1 == null ||
+                  namePassenggerController2.text == null ||
+                  phonePassenggerController2.text == null ||
+                  namePassenggerController2.text == "" ||
+                  phonePassenggerController2.text == "" ||
+                  variable.foodPergiPassengger2 == null ||
+                  variable.baggagePergiPassengger2 == null ||
+                  namePassenggerController3.text == null ||
+                  phonePassenggerController3.text == null ||
+                  namePassenggerController3.text == "" ||
+                  phonePassenggerController3.text == "" ||
+                  variable.foodPergiPassengger3 == null ||
+                  variable.baggagePergiPassengger3 == null) {
+                Fluttertoast.showToast(
+                  msg: "Lengkapi data terlebih dahulu",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              } else {
+                if (variable.checkPulangPergi == true) {
+                  if (variable.foodPulangPassengger1 == null ||
+                      variable.baggagePulangPassengger1 == null ||
+                      variable.seatPulangPassengger1 == null ||
+                      variable.foodPulangPassengger2 == null ||
+                      variable.baggagePulangPassengger2 == null ||
+                      variable.seatPulangPassengger2 == null ||
+                      variable.foodPulangPassengger3 == null ||
+                      variable.baggagePulangPassengger3 == null ||
+                      variable.seatPulangPassengger3 == null) {
+                    Fluttertoast.showToast(
+                      msg: "Lengkapi data terlebih dahulu",
+                      backgroundColor: CustomColor.red,
+                      textColor: CustomColor.white,
+                      gravity: ToastGravity.CENTER,
+                    );
+                  } else {
+                    variable.namePassengger1 = namePassenggerController1.text;
+                    variable.phonePassengger1 = phonePassenggerController1.text;
+                    variable.namePassengger2 = namePassenggerController2.text;
+                    variable.phonePassengger2 = phonePassenggerController2.text;
+                    variable.namePassengger3 = namePassenggerController3.text;
+                    variable.phonePassengger3 = phonePassenggerController3.text;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PaymentScreen()));
+                  }
                 } else {
                   variable.namePassengger1 = namePassenggerController1.text;
                   variable.phonePassengger1 = phonePassenggerController1.text;
@@ -1368,67 +1404,69 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PaymentScreen()));
                 }
-              } else {
-                variable.namePassengger1 = namePassenggerController1.text;
-                variable.phonePassengger1 = phonePassenggerController1.text;
-                variable.namePassengger2 = namePassenggerController2.text;
-                variable.phonePassengger2 = phonePassenggerController2.text;
-                variable.namePassengger3 = namePassenggerController3.text;
-                variable.phonePassengger3 = phonePassenggerController3.text;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PaymentScreen()));
               }
             }
-          }
-          //4
-          if (variable.selectedJumlahPenumpang == "4") {
-            if (namePassenggerController1.text == null ||
-                phonePassenggerController1.text == null ||
-                namePassenggerController1.text == "" ||
-                phonePassenggerController1.text == "" ||
-                variable.foodPergiPassengger1 == null ||
-                variable.baggagePergiPassengger1 == null ||
-                namePassenggerController2.text == null ||
-                phonePassenggerController2.text == null ||
-                namePassenggerController2.text == "" ||
-                phonePassenggerController2.text == "" ||
-                variable.foodPergiPassengger2 == null ||
-                variable.baggagePergiPassengger2 == null ||
-                namePassenggerController3.text == null ||
-                phonePassenggerController3.text == null ||
-                namePassenggerController3.text == "" ||
-                phonePassenggerController3.text == "" ||
-                variable.foodPergiPassengger3 == null ||
-                variable.baggagePergiPassengger3 == null ||
-                namePassenggerController4.text == null ||
-                phonePassenggerController4.text == null ||
-                namePassenggerController4.text == "" ||
-                phonePassenggerController4.text == "" ||
-                variable.foodPergiPassengger4 == null ||
-                variable.baggagePergiPassengger4 == null) {
-              Fluttertoast.showToast(
-                msg: "Lengkapi data terlebih dahulu",
-                backgroundColor: CustomColor.red,
-                textColor: CustomColor.white,
-                gravity: ToastGravity.CENTER,
-              );
-            } else {
-              if (variable.checkPulangPergi == true) {
-                if (variable.foodPulangPassengger1 == null ||
-                    variable.baggagePulangPassengger1 == null ||
-                    variable.seatPulangPassengger1 == null ||
-                    variable.foodPulangPassengger2 == null ||
-                    variable.baggagePulangPassengger2 == null ||
-                    variable.seatPulangPassengger2 == null ||
-                    variable.foodPulangPassengger3 == null ||
-                    variable.baggagePulangPassengger3 == null ||
-                    variable.seatPulangPassengger3 == null) {
-                  Fluttertoast.showToast(
-                    msg: "Lengkapi data terlebih dahulu",
-                    backgroundColor: CustomColor.red,
-                    textColor: CustomColor.white,
-                    gravity: ToastGravity.CENTER,
-                  );
+            //4
+            if (variable.selectedJumlahPenumpang == "4") {
+              if (namePassenggerController1.text == null ||
+                  phonePassenggerController1.text == null ||
+                  namePassenggerController1.text == "" ||
+                  phonePassenggerController1.text == "" ||
+                  variable.foodPergiPassengger1 == null ||
+                  variable.baggagePergiPassengger1 == null ||
+                  namePassenggerController2.text == null ||
+                  phonePassenggerController2.text == null ||
+                  namePassenggerController2.text == "" ||
+                  phonePassenggerController2.text == "" ||
+                  variable.foodPergiPassengger2 == null ||
+                  variable.baggagePergiPassengger2 == null ||
+                  namePassenggerController3.text == null ||
+                  phonePassenggerController3.text == null ||
+                  namePassenggerController3.text == "" ||
+                  phonePassenggerController3.text == "" ||
+                  variable.foodPergiPassengger3 == null ||
+                  variable.baggagePergiPassengger3 == null ||
+                  namePassenggerController4.text == null ||
+                  phonePassenggerController4.text == null ||
+                  namePassenggerController4.text == "" ||
+                  phonePassenggerController4.text == "" ||
+                  variable.foodPergiPassengger4 == null ||
+                  variable.baggagePergiPassengger4 == null) {
+                Fluttertoast.showToast(
+                  msg: "Lengkapi data terlebih dahulu",
+                  backgroundColor: CustomColor.red,
+                  textColor: CustomColor.white,
+                  gravity: ToastGravity.CENTER,
+                );
+              } else {
+                if (variable.checkPulangPergi == true) {
+                  if (variable.foodPulangPassengger1 == null ||
+                      variable.baggagePulangPassengger1 == null ||
+                      variable.seatPulangPassengger1 == null ||
+                      variable.foodPulangPassengger2 == null ||
+                      variable.baggagePulangPassengger2 == null ||
+                      variable.seatPulangPassengger2 == null ||
+                      variable.foodPulangPassengger3 == null ||
+                      variable.baggagePulangPassengger3 == null ||
+                      variable.seatPulangPassengger3 == null) {
+                    Fluttertoast.showToast(
+                      msg: "Lengkapi data terlebih dahulu",
+                      backgroundColor: CustomColor.red,
+                      textColor: CustomColor.white,
+                      gravity: ToastGravity.CENTER,
+                    );
+                  } else {
+                    variable.namePassengger1 = namePassenggerController1.text;
+                    variable.phonePassengger1 = phonePassenggerController1.text;
+                    variable.namePassengger2 = namePassenggerController2.text;
+                    variable.phonePassengger2 = phonePassenggerController2.text;
+                    variable.namePassengger3 = namePassenggerController3.text;
+                    variable.phonePassengger3 = phonePassenggerController3.text;
+                    variable.namePassengger4 = namePassenggerController4.text;
+                    variable.phonePassengger4 = phonePassenggerController4.text;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PaymentScreen()));
+                  }
                 } else {
                   variable.namePassengger1 = namePassenggerController1.text;
                   variable.phonePassengger1 = phonePassenggerController1.text;
@@ -1441,19 +1479,15 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PaymentScreen()));
                 }
-              } else {
-                variable.namePassengger1 = namePassenggerController1.text;
-                variable.phonePassengger1 = phonePassenggerController1.text;
-                variable.namePassengger2 = namePassenggerController2.text;
-                variable.phonePassengger2 = phonePassenggerController2.text;
-                variable.namePassengger3 = namePassenggerController3.text;
-                variable.phonePassengger3 = phonePassenggerController3.text;
-                variable.namePassengger4 = namePassenggerController4.text;
-                variable.phonePassengger4 = phonePassenggerController4.text;
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PaymentScreen()));
               }
             }
+          } else {
+            Fluttertoast.showToast(
+              msg: "Setujui Disclaimer dahulu",
+              backgroundColor: CustomColor.red,
+              textColor: CustomColor.white,
+              gravity: ToastGravity.CENTER,
+            );
           }
         },
       ),
@@ -1636,5 +1670,51 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             MaterialPageRoute(builder: (context) => SeatPlanPulangWidget()));
       }
     }
+  }
+
+  _attentionWidget(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(Dimensions.radius)),
+        child: Column(
+          children: [
+            (attentionContentBool)
+                ? SizedBox()
+                : MarkdownBody(
+                    data: attentionContent,
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _acceptAttention(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text("Ya, Saya mengerti"),
+          Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              activeColor: CustomColor.red,
+              value: acceptAttention,
+              onChanged: (bool value) {
+                setState(() {
+                  acceptAttention = value;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

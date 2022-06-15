@@ -36,6 +36,8 @@ dependencies:
   flutter_datetime_picker: 
     git: https://github.com/Realank/flutter_datetime_picker.git
   flutter_dotenv: ^5.0.2
+  html2md: ^1.2.6
+  flutter_markdown: ^0.5.2
 
 dev_dependencies:
   flutter_test:
