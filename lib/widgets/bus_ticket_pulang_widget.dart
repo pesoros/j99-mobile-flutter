@@ -23,6 +23,7 @@ class BusTicketPulangWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String type_class;
+  final String image;
   final String fleet_seats;
   final String fleet_registration_id;
   final String price;
@@ -46,6 +47,7 @@ class BusTicketPulangWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.type_class,
+    this.image,
     this.fleet_seats,
     this.fleet_registration_id,
     this.price,
@@ -210,6 +212,7 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
                                 bus: widget.bus,
                                 type: widget.bus.pulang_type,
                                 type_class: widget.bus.pulang_type_class,
+                                image: widget.bus.pulang_image,
                                 price: widget.bus.pulang_price,
                                 start: widget.bus.pulang_start,
                                 end: widget.bus.pulang_end,

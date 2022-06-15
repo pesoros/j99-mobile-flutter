@@ -25,6 +25,7 @@ class BusTicketPergiWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String type_class;
+  final String image;
   final String fleet_seats;
   final String fleet_registration_id;
   final String price;
@@ -45,6 +46,7 @@ class BusTicketPergiWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.type_class,
+    this.image,
     this.fleet_seats,
     this.fleet_registration_id,
     this.price,
@@ -208,6 +210,7 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                                 bus: widget.bus,
                                 type: widget.bus.pergi_type,
                                 type_class: widget.bus.pergi_type_class,
+                                image: widget.bus.pergi_image,
                                 price: widget.bus.pergi_price,
                                 start: widget.bus.pergi_start,
                                 end: widget.bus.pergi_end,

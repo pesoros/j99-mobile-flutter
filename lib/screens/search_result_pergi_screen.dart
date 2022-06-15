@@ -313,6 +313,7 @@ class _SearchResultPergiScreenState extends State<SearchResultPergiScreen> {
                 drop_trip_location: bus.pergi_drop_trip_location,
                 type: bus.pergi_type,
                 type_class: bus.pergi_type_class,
+                image: bus.pergi_image,
                 fleet_seats: bus.pergi_fleet_seats,
                 fleet_registration_id: bus.pergi_fleet_seats,
                 price: bus.pergi_price,

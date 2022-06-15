@@ -21,6 +21,7 @@ class BusDetailModalPergiWidget extends StatefulWidget {
   final String drop_trip_location;
   final String type;
   final String type_class;
+  final String image;
   final String fleet_seats;
   final String fleet_registration_id;
   final String price;
@@ -40,6 +41,7 @@ class BusDetailModalPergiWidget extends StatefulWidget {
     this.drop_trip_location,
     this.type,
     this.type_class,
+    this.image,
     this.fleet_seats,
     this.fleet_registration_id,
     this.price,
@@ -152,7 +154,7 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: CachedNetworkImage(
-          imageUrl: "http://www.juragan99trans.id/images/executive/TK_hino.jpg",
+          imageUrl: widget.image,
           errorWidget: (context, url, error) => Icon(Icons.error),
           height: 200,
           width: MediaQuery.of(context).size.width,
