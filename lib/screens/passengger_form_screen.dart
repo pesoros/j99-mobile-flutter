@@ -59,6 +59,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
 
   int index = 0;
 
+  List<FoodModel> listFoodPergi;
+  List<FoodModel> listFoodPulang;
+
   getAttention() async {
     String url = dotenv.env['BASE_URL'] + "/content/disclaimer";
     var uri = Uri.parse(url);
@@ -361,12 +364,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         errorBorder: CustomStyle.focusErrorBorder,
                         hintStyle: CustomStyle.textStyle,
                       ),
+                      popupItemBuilder: _customDropdown,
                       onFind: (String) async {
                         var response = await Dio().post(
                           dotenv.env['BASE_URL'] + "/datarestomenu",
                           options: Options(
                               contentType: Headers.formUrlEncodedContentType),
-                          data: {'idResto': variable.pergi_resto_id},
+                          data: {
+                            'idResto': variable.pergi_resto_id,
+                            'class': variable.pergi_type
+                          },
                         );
                         var foodList = FoodModel.fromJsonList(response.data);
                         return foodList;
@@ -430,13 +437,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                               errorBorder: CustomStyle.focusErrorBorder,
                               hintStyle: CustomStyle.textStyle,
                             ),
+                            popupItemBuilder: _customDropdown,
                             onFind: (String) async {
                               var response = await Dio().post(
                                 dotenv.env['BASE_URL'] + "/datarestomenu",
                                 options: Options(
                                     contentType:
                                         Headers.formUrlEncodedContentType),
-                                data: {'idResto': variable.pulang_resto_id},
+                                data: {
+                                  'idResto': variable.pulang_resto_id,
+                                  'class': variable.pulang_type
+                                },
                               );
                               var foodList =
                                   FoodModel.fromJsonList(response.data);
@@ -577,12 +588,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         errorBorder: CustomStyle.focusErrorBorder,
                         hintStyle: CustomStyle.textStyle,
                       ),
+                      popupItemBuilder: _customDropdown,
                       onFind: (String) async {
                         var response = await Dio().post(
                           dotenv.env['BASE_URL'] + "/datarestomenu",
                           options: Options(
                               contentType: Headers.formUrlEncodedContentType),
-                          data: {'idResto': variable.pergi_resto_id},
+                          data: {
+                            'idResto': variable.pergi_resto_id,
+                            'class': variable.pergi_type,
+                          },
                         );
                         var foodList = FoodModel.fromJsonList(response.data);
                         return foodList;
@@ -646,13 +661,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                               errorBorder: CustomStyle.focusErrorBorder,
                               hintStyle: CustomStyle.textStyle,
                             ),
+                            popupItemBuilder: _customDropdown,
                             onFind: (String) async {
                               var response = await Dio().post(
                                 dotenv.env['BASE_URL'] + "/datarestomenu",
                                 options: Options(
                                     contentType:
                                         Headers.formUrlEncodedContentType),
-                                data: {'idResto': variable.pulang_resto_id},
+                                data: {
+                                  'idResto': variable.pulang_resto_id,
+                                  'class': variable.pulang_type
+                                },
                               );
                               var foodList =
                                   FoodModel.fromJsonList(response.data);
@@ -793,12 +812,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         errorBorder: CustomStyle.focusErrorBorder,
                         hintStyle: CustomStyle.textStyle,
                       ),
+                      popupItemBuilder: _customDropdown,
                       onFind: (String) async {
                         var response = await Dio().post(
                           dotenv.env['BASE_URL'] + "/datarestomenu",
                           options: Options(
                               contentType: Headers.formUrlEncodedContentType),
-                          data: {'idResto': variable.pergi_resto_id},
+                          data: {
+                            'idResto': variable.pergi_resto_id,
+                            'class': variable.pergi_type,
+                          },
                         );
                         var foodList = FoodModel.fromJsonList(response.data);
                         return foodList;
@@ -862,13 +885,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                               errorBorder: CustomStyle.focusErrorBorder,
                               hintStyle: CustomStyle.textStyle,
                             ),
+                            popupItemBuilder: _customDropdown,
                             onFind: (String) async {
                               var response = await Dio().post(
                                 dotenv.env['BASE_URL'] + "/datarestomenu",
                                 options: Options(
                                     contentType:
                                         Headers.formUrlEncodedContentType),
-                                data: {'idResto': variable.pulang_resto_id},
+                                data: {
+                                  'idResto': variable.pulang_resto_id,
+                                  'class': variable.pulang_type
+                                },
                               );
                               var foodList =
                                   FoodModel.fromJsonList(response.data);
@@ -1009,12 +1036,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                         errorBorder: CustomStyle.focusErrorBorder,
                         hintStyle: CustomStyle.textStyle,
                       ),
+                      popupItemBuilder: _customDropdown,
                       onFind: (String) async {
                         var response = await Dio().post(
                           dotenv.env['BASE_URL'] + "/datarestomenu",
                           options: Options(
                               contentType: Headers.formUrlEncodedContentType),
-                          data: {'idResto': variable.pergi_resto_id},
+                          data: {
+                            'idResto': variable.pergi_resto_id,
+                            'class': variable.pergi_type
+                          },
                         );
                         var foodList = FoodModel.fromJsonList(response.data);
                         return foodList;
@@ -1078,13 +1109,17 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                               errorBorder: CustomStyle.focusErrorBorder,
                               hintStyle: CustomStyle.textStyle,
                             ),
+                            popupItemBuilder: _customDropdown,
                             onFind: (String) async {
                               var response = await Dio().post(
                                 dotenv.env['BASE_URL'] + "/datarestomenu",
                                 options: Options(
                                     contentType:
                                         Headers.formUrlEncodedContentType),
-                                data: {'idResto': variable.pulang_resto_id},
+                                data: {
+                                  'idResto': variable.pulang_resto_id,
+                                  'class': variable.pulang_type
+                                },
                               );
                               var foodList =
                                   FoodModel.fromJsonList(response.data);
@@ -1246,250 +1281,77 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
           ),
         ),
         onTap: () {
-          if (acceptAttention) {
-            //1
-            if (variable.selectedJumlahPenumpang == "1") {
-              if (namePassenggerController1.text == null ||
-                  phonePassenggerController1.text == null ||
-                  namePassenggerController1.text == "" ||
-                  phonePassenggerController1.text == "" ||
-                  variable.foodPergiPassengger1 == null ||
-                  variable.baggagePergiPassengger1 == null ||
-                  variable.seatPergiPassengger1 == null) {
-                Fluttertoast.showToast(
-                  msg: "Lengkapi data terlebih dahulu",
-                  backgroundColor: CustomColor.red,
-                  textColor: CustomColor.white,
-                  gravity: ToastGravity.CENTER,
-                );
-              } else {
-                if (variable.checkPulangPergi == true) {
-                  if (variable.foodPulangPassengger1 == null ||
-                      variable.baggagePulangPassengger1 == null ||
-                      variable.seatPulangPassengger1 == null) {
-                    Fluttertoast.showToast(
-                      msg: "Lengkapi data terlebih dahulu",
-                      backgroundColor: CustomColor.red,
-                      textColor: CustomColor.white,
-                      gravity: ToastGravity.CENTER,
-                    );
-                  } else {
-                    variable.namePassengger1 = namePassenggerController1.text;
-                    variable.phonePassengger1 = phonePassenggerController1.text;
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PaymentScreen()));
-                  }
-                } else {
-                  variable.namePassengger1 = namePassenggerController1.text;
-                  variable.phonePassengger1 = phonePassenggerController1.text;
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PaymentScreen()));
-                }
+          //1
+          if (variable.selectedJumlahPenumpang == "1") {
+            _validasiPenumpang1();
+          }
+          //2
+          if (variable.selectedJumlahPenumpang == "2") {
+            _validasiPenumpang2().then((value) {
+              if (value) {
+                _validasiPenumpang1();
               }
-            }
-            //2
-            if (variable.selectedJumlahPenumpang == "2") {
-              if (namePassenggerController1.text == null ||
-                  phonePassenggerController1.text == null ||
-                  namePassenggerController1.text == "" ||
-                  phonePassenggerController1.text == "" ||
-                  variable.foodPergiPassengger1 == null ||
-                  variable.baggagePergiPassengger1 == null ||
-                  variable.seatPergiPassengger1 == null ||
-                  namePassenggerController2.text == null ||
-                  phonePassenggerController2.text == null ||
-                  namePassenggerController2.text == "" ||
-                  phonePassenggerController2.text == "" ||
-                  variable.foodPergiPassengger2 == null ||
-                  variable.baggagePergiPassengger2 == null ||
-                  variable.seatPergiPassengger2 == null) {
-                Fluttertoast.showToast(
-                  msg: "Lengkapi data terlebih dahulu",
-                  backgroundColor: CustomColor.red,
-                  textColor: CustomColor.white,
-                  gravity: ToastGravity.CENTER,
-                );
-              } else {
-                if (variable.checkPulangPergi == true) {
-                  if (variable.foodPulangPassengger1 == null ||
-                      variable.baggagePulangPassengger1 == null ||
-                      variable.seatPulangPassengger1 == null ||
-                      variable.foodPulangPassengger2 == null ||
-                      variable.baggagePulangPassengger2 == null ||
-                      variable.seatPulangPassengger2 == null) {
-                    Fluttertoast.showToast(
-                      msg: "Lengkapi data terlebih dahulu",
-                      backgroundColor: CustomColor.red,
-                      textColor: CustomColor.white,
-                      gravity: ToastGravity.CENTER,
-                    );
-                  } else {
-                    variable.namePassengger1 = namePassenggerController1.text;
-                    variable.phonePassengger1 = phonePassenggerController1.text;
-                    variable.namePassengger2 = namePassenggerController2.text;
-                    variable.phonePassengger2 = phonePassenggerController2.text;
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PaymentScreen()));
+            });
+          }
+          //3
+          if (variable.selectedJumlahPenumpang == "3") {
+            _validasiPenumpang3().then((value) {
+              if (value) {
+                _validasiPenumpang2().then((value) {
+                  if (value) {
+                    _validasiPenumpang1();
                   }
-                } else {
-                  variable.namePassengger1 = namePassenggerController1.text;
-                  variable.phonePassengger1 = phonePassenggerController1.text;
-                  variable.namePassengger2 = namePassenggerController2.text;
-                  variable.phonePassengger2 = phonePassenggerController2.text;
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PaymentScreen()));
-                }
+                });
               }
-            }
-            //3
-            if (variable.selectedJumlahPenumpang == "3") {
-              if (namePassenggerController1.text == null ||
-                  phonePassenggerController1.text == null ||
-                  namePassenggerController1.text == "" ||
-                  phonePassenggerController1.text == "" ||
-                  variable.foodPergiPassengger1 == null ||
-                  variable.baggagePergiPassengger1 == null ||
-                  namePassenggerController2.text == null ||
-                  phonePassenggerController2.text == null ||
-                  namePassenggerController2.text == "" ||
-                  phonePassenggerController2.text == "" ||
-                  variable.foodPergiPassengger2 == null ||
-                  variable.baggagePergiPassengger2 == null ||
-                  namePassenggerController3.text == null ||
-                  phonePassenggerController3.text == null ||
-                  namePassenggerController3.text == "" ||
-                  phonePassenggerController3.text == "" ||
-                  variable.foodPergiPassengger3 == null ||
-                  variable.baggagePergiPassengger3 == null) {
-                Fluttertoast.showToast(
-                  msg: "Lengkapi data terlebih dahulu",
-                  backgroundColor: CustomColor.red,
-                  textColor: CustomColor.white,
-                  gravity: ToastGravity.CENTER,
-                );
-              } else {
-                if (variable.checkPulangPergi == true) {
-                  if (variable.foodPulangPassengger1 == null ||
-                      variable.baggagePulangPassengger1 == null ||
-                      variable.seatPulangPassengger1 == null ||
-                      variable.foodPulangPassengger2 == null ||
-                      variable.baggagePulangPassengger2 == null ||
-                      variable.seatPulangPassengger2 == null ||
-                      variable.foodPulangPassengger3 == null ||
-                      variable.baggagePulangPassengger3 == null ||
-                      variable.seatPulangPassengger3 == null) {
-                    Fluttertoast.showToast(
-                      msg: "Lengkapi data terlebih dahulu",
-                      backgroundColor: CustomColor.red,
-                      textColor: CustomColor.white,
-                      gravity: ToastGravity.CENTER,
-                    );
-                  } else {
-                    variable.namePassengger1 = namePassenggerController1.text;
-                    variable.phonePassengger1 = phonePassenggerController1.text;
-                    variable.namePassengger2 = namePassenggerController2.text;
-                    variable.phonePassengger2 = phonePassenggerController2.text;
-                    variable.namePassengger3 = namePassenggerController3.text;
-                    variable.phonePassengger3 = phonePassenggerController3.text;
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PaymentScreen()));
+            });
+          }
+          //4
+          if (variable.selectedJumlahPenumpang == "4") {
+            _validasiPenumpang4().then((value) {
+              if (value) {
+                _validasiPenumpang3().then((value) {
+                  if (value) {
+                    _validasiPenumpang2().then((value) {
+                      if (value) {
+                        _validasiPenumpang1();
+                      }
+                    });
                   }
-                } else {
-                  variable.namePassengger1 = namePassenggerController1.text;
-                  variable.phonePassengger1 = phonePassenggerController1.text;
-                  variable.namePassengger2 = namePassenggerController2.text;
-                  variable.phonePassengger2 = phonePassenggerController2.text;
-                  variable.namePassengger3 = namePassenggerController3.text;
-                  variable.phonePassengger3 = phonePassenggerController3.text;
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PaymentScreen()));
-                }
+                });
               }
-            }
-            //4
-            if (variable.selectedJumlahPenumpang == "4") {
-              if (namePassenggerController1.text == null ||
-                  phonePassenggerController1.text == null ||
-                  namePassenggerController1.text == "" ||
-                  phonePassenggerController1.text == "" ||
-                  variable.foodPergiPassengger1 == null ||
-                  variable.baggagePergiPassengger1 == null ||
-                  namePassenggerController2.text == null ||
-                  phonePassenggerController2.text == null ||
-                  namePassenggerController2.text == "" ||
-                  phonePassenggerController2.text == "" ||
-                  variable.foodPergiPassengger2 == null ||
-                  variable.baggagePergiPassengger2 == null ||
-                  namePassenggerController3.text == null ||
-                  phonePassenggerController3.text == null ||
-                  namePassenggerController3.text == "" ||
-                  phonePassenggerController3.text == "" ||
-                  variable.foodPergiPassengger3 == null ||
-                  variable.baggagePergiPassengger3 == null ||
-                  namePassenggerController4.text == null ||
-                  phonePassenggerController4.text == null ||
-                  namePassenggerController4.text == "" ||
-                  phonePassenggerController4.text == "" ||
-                  variable.foodPergiPassengger4 == null ||
-                  variable.baggagePergiPassengger4 == null) {
-                Fluttertoast.showToast(
-                  msg: "Lengkapi data terlebih dahulu",
-                  backgroundColor: CustomColor.red,
-                  textColor: CustomColor.white,
-                  gravity: ToastGravity.CENTER,
-                );
-              } else {
-                if (variable.checkPulangPergi == true) {
-                  if (variable.foodPulangPassengger1 == null ||
-                      variable.baggagePulangPassengger1 == null ||
-                      variable.seatPulangPassengger1 == null ||
-                      variable.foodPulangPassengger2 == null ||
-                      variable.baggagePulangPassengger2 == null ||
-                      variable.seatPulangPassengger2 == null ||
-                      variable.foodPulangPassengger3 == null ||
-                      variable.baggagePulangPassengger3 == null ||
-                      variable.seatPulangPassengger3 == null) {
-                    Fluttertoast.showToast(
-                      msg: "Lengkapi data terlebih dahulu",
-                      backgroundColor: CustomColor.red,
-                      textColor: CustomColor.white,
-                      gravity: ToastGravity.CENTER,
-                    );
-                  } else {
-                    variable.namePassengger1 = namePassenggerController1.text;
-                    variable.phonePassengger1 = phonePassenggerController1.text;
-                    variable.namePassengger2 = namePassenggerController2.text;
-                    variable.phonePassengger2 = phonePassenggerController2.text;
-                    variable.namePassengger3 = namePassenggerController3.text;
-                    variable.phonePassengger3 = phonePassenggerController3.text;
-                    variable.namePassengger4 = namePassenggerController4.text;
-                    variable.phonePassengger4 = phonePassenggerController4.text;
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PaymentScreen()));
-                  }
-                } else {
-                  variable.namePassengger1 = namePassenggerController1.text;
-                  variable.phonePassengger1 = phonePassenggerController1.text;
-                  variable.namePassengger2 = namePassenggerController2.text;
-                  variable.phonePassengger2 = phonePassenggerController2.text;
-                  variable.namePassengger3 = namePassenggerController3.text;
-                  variable.phonePassengger3 = phonePassenggerController3.text;
-                  variable.namePassengger4 = namePassenggerController4.text;
-                  variable.phonePassengger4 = phonePassenggerController4.text;
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PaymentScreen()));
-                }
-              }
-            }
-          } else {
-            Fluttertoast.showToast(
-              msg: "Setujui Disclaimer dahulu",
-              backgroundColor: CustomColor.red,
-              textColor: CustomColor.white,
-              gravity: ToastGravity.CENTER,
-            );
+            });
           }
         },
+      ),
+    );
+  }
+
+  Widget _customDropdown(
+      BuildContext context, FoodModel item, bool isSelected) {
+    return Container(
+      height: 120,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 0.7, color: Colors.grey),
+        ),
+      ),
+      padding: EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.food_name,
+            style: TextStyle(
+                fontSize: Dimensions.extraLargeTextSize,
+                fontWeight: FontWeight.bold),
+          ),
+          SizedBox(width: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(item.image),
+          ),
+        ],
       ),
     );
   }
@@ -1716,5 +1578,204 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
         ],
       ),
     );
+  }
+
+  _notif(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      backgroundColor: CustomColor.red,
+      textColor: CustomColor.white,
+      gravity: ToastGravity.CENTER,
+    );
+  }
+
+  _goToPaymentScreen(BuildContext context) {
+    if (acceptAttention) {
+      setState(() {
+        variable.namePassengger1 = namePassenggerController1.text ?? "";
+        variable.phonePassengger1 = phonePassenggerController1.text;
+        variable.namePassengger2 = namePassenggerController2.text;
+        variable.phonePassengger2 = phonePassenggerController2.text;
+        variable.namePassengger3 = namePassenggerController3.text;
+        variable.phonePassengger3 = phonePassenggerController3.text;
+        variable.namePassengger4 = namePassenggerController4.text;
+        variable.phonePassengger4 = phonePassenggerController4.text;
+      });
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PaymentScreen()));
+    } else {
+      _notif("Setujui Disclaimer dahulu");
+    }
+  }
+
+  _validasiPenumpang1() {
+    if (namePassenggerController1.text == null ||
+        namePassenggerController1.text.isEmpty) {
+      _notif("Isi nama terlebih dahulu");
+    } else {
+      if (phonePassenggerController1.text == null ||
+          phonePassenggerController1.text.isEmpty) {
+        _notif("Isi nomor telepon terlebih dahulu");
+      } else {
+        if (variable.foodPergiPassengger1 == null) {
+          _notif("Pilih makanan terlebih dahulu");
+        } else {
+          if (variable.baggagePergiPassengger1 == null) {
+            _notif("Pilih bagasi terlebih dahulu");
+          } else {
+            if (variable.seatPergiPassengger1 == null) {
+              _notif("Pilih kursi terlebih dahulu");
+            } else {
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger1 == null) {
+                  _notif("Pilih makanan pulang terlebih dahulu");
+                } else {
+                  if (variable.baggagePulangPassengger1 == null) {
+                    _notif("Pilih bagasi pulang terlebih dahulu");
+                  } else {
+                    if (variable.seatPulangPassengger1 == null) {
+                      _notif("Pilih kursi pulang terlebih dahulu");
+                    } else {
+                      _goToPaymentScreen(context);
+                    }
+                  }
+                }
+              } else {
+                _goToPaymentScreen(context);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  _validasiPenumpang2() async {
+    var val = true;
+    if (namePassenggerController2.text == null ||
+        namePassenggerController2.text.isEmpty) {
+      _notif("Isi nama terlebih dahulu");
+    } else {
+      if (phonePassenggerController2.text == null ||
+          phonePassenggerController2.text.isEmpty) {
+        _notif("Isi nomor telepon terlebih dahulu");
+      } else {
+        if (variable.foodPergiPassengger2 == null) {
+          _notif("Pilih makanan terlebih dahulu");
+        } else {
+          if (variable.baggagePergiPassengger2 == null) {
+            _notif("Pilih bagasi terlebih dahulu");
+          } else {
+            if (variable.seatPergiPassengger2 == null) {
+              _notif("Pilih kursi terlebih dahulu");
+            } else {
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger2 == null) {
+                  _notif("Pilih makanan pulang terlebih dahulu");
+                } else {
+                  if (variable.baggagePulangPassengger2 == null) {
+                    _notif("Pilih bagasi pulang terlebih dahulu");
+                  } else {
+                    if (variable.seatPulangPassengger2 == null) {
+                      _notif("Pilih kursi pulang terlebih dahulu");
+                    } else {
+                      return val;
+                    }
+                  }
+                }
+              } else {
+                return val;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  _validasiPenumpang3() {
+    var val = true;
+    if (namePassenggerController3.text == null ||
+        namePassenggerController3.text.isEmpty) {
+      _notif("Isi nama terlebih dahulu");
+    } else {
+      if (phonePassenggerController3.text == null ||
+          phonePassenggerController3.text.isEmpty) {
+        _notif("Isi nomor telepon terlebih dahulu");
+      } else {
+        if (variable.foodPergiPassengger3 == null) {
+          _notif("Pilih makanan terlebih dahulu");
+        } else {
+          if (variable.baggagePergiPassengger3 == null) {
+            _notif("Pilih bagasi terlebih dahulu");
+          } else {
+            if (variable.seatPergiPassengger3 == null) {
+              _notif("Pilih kursi terlebih dahulu");
+            } else {
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger3 == null) {
+                  _notif("Pilih makanan pulang terlebih dahulu");
+                } else {
+                  if (variable.baggagePulangPassengger3 == null) {
+                    _notif("Pilih bagasi pulang terlebih dahulu");
+                  } else {
+                    if (variable.seatPulangPassengger3 == null) {
+                      _notif("Pilih kursi pulang terlebih dahulu");
+                    } else {
+                      return val;
+                    }
+                  }
+                }
+              } else {
+                return val;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  _validasiPenumpang4() {
+    var val = true;
+    if (namePassenggerController4.text == null ||
+        namePassenggerController4.text.isEmpty) {
+      _notif("Isi nama terlebih dahulu");
+    } else {
+      if (phonePassenggerController4.text == null ||
+          phonePassenggerController4.text.isEmpty) {
+        _notif("Isi nomor telepon terlebih dahulu");
+      } else {
+        if (variable.foodPergiPassengger4 == null) {
+          _notif("Pilih makanan terlebih dahulu");
+        } else {
+          if (variable.baggagePergiPassengger4 == null) {
+            _notif("Pilih bagasi terlebih dahulu");
+          } else {
+            if (variable.seatPergiPassengger4 == null) {
+              _notif("Pilih kursi terlebih dahulu");
+            } else {
+              if (variable.checkPulangPergi == true) {
+                if (variable.foodPulangPassengger4 == null) {
+                  _notif("Pilih makanan pulang terlebih dahulu");
+                } else {
+                  if (variable.baggagePulangPassengger4 == null) {
+                    _notif("Pilih bagasi pulang terlebih dahulu");
+                  } else {
+                    if (variable.seatPulangPassengger4 == null) {
+                      _notif("Pilih kursi pulang terlebih dahulu");
+                    } else {
+                      return val;
+                    }
+                  }
+                }
+              } else {
+                return val;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

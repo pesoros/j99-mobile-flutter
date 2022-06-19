@@ -153,6 +153,7 @@ class _BusDetailModalPulangWidgetState
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: CachedNetworkImage(
+          fit: BoxFit.cover,
           imageUrl: widget.image,
           errorWidget: (context, url, error) => Icon(Icons.error),
           height: 200,
@@ -321,6 +322,17 @@ class _BusDetailModalPulangWidgetState
                               : Colors.grey,
                           border: Border.all(color: CustomColor.grey),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
+                      child: Center(
+                        child: Text(
+                          slot.pulang_name,
+                          style: TextStyle(
+                              color: slot.pulang_isAvailable
+                                  ? CustomColor.darkGrey
+                                  : CustomColor.white,
+                              fontSize: Dimensions.extraSmallTextSize,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                   )
                 : Padding(

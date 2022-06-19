@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, non_constant_identifier_names, unused_field
+// ignore_for_file: unused_element, non_constant_identifier_names, unused_field, unrelated_type_equality_checks
 
 import 'package:dotted_line/dotted_line.dart';
 import 'package:indonesia/indonesia.dart';
@@ -245,34 +245,52 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   },
                 ),
                 SizedBox(width: 10),
-                GestureDetector(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        color: CustomColor.red,
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Text(
-                      "Pesan",
-                      style: TextStyle(
-                          color: CustomColor.white,
-                          fontSize: Dimensions.smallTextSize),
-                    ),
-                  ),
-                  onTap: () {
-                    _saveBus(context);
-                    (variable.token == null)
-                        ? Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignInScreen()))
-                        : (variable.checkPulangPergi == true)
-                            ? Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    SearchResultPulangScreen()))
-                            : Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => PassenggerFormScreen()));
-                  },
-                )
+                (widget.bus.pergi_seatAvail == 0)
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: 60,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: CustomColor.grey,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Text(
+                          "Pesan",
+                          style: TextStyle(
+                              color: CustomColor.white,
+                              fontSize: Dimensions.smallTextSize),
+                        ),
+                      )
+                    : GestureDetector(
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 60,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: CustomColor.red,
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Text(
+                            "Pesan",
+                            style: TextStyle(
+                                color: CustomColor.white,
+                                fontSize: Dimensions.smallTextSize),
+                          ),
+                        ),
+                        onTap: () {
+                          _saveBus(context);
+                          (variable.token == null)
+                              ? Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SignInScreen()))
+                              : (variable.checkPulangPergi == true)
+                                  ? Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SearchResultPulangScreen()))
+                                  : Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PassenggerFormScreen()));
+                        },
+                      )
               ],
             )
           ],

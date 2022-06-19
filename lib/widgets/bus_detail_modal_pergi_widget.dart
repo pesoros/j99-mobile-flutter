@@ -136,6 +136,7 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _detailsWidget(context),
                 _availableSeatWidget(context),
@@ -154,6 +155,7 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: CachedNetworkImage(
+          fit: BoxFit.cover,
           imageUrl: widget.image,
           errorWidget: (context, url, error) => Icon(Icons.error),
           height: 200,
@@ -172,30 +174,6 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold)),
-          Row(
-            children: [
-              Icon(
-                Icons.electrical_services,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.smoking_rooms,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.wc,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-              Icon(
-                Icons.coffee,
-                size: Dimensions.defaultTextSize,
-                color: CustomColor.grey,
-              ),
-            ],
-          ),
           SizedBox(height: 10),
           Row(
             children: [
@@ -324,6 +302,17 @@ class _BusDetailModalPergiWidgetState extends State<BusDetailModalPergiWidget> {
                               : Colors.grey,
                           border: Border.all(color: CustomColor.grey),
                           borderRadius: BorderRadius.all(Radius.circular(6))),
+                      child: Center(
+                        child: Text(
+                          slot.pergi_name,
+                          style: TextStyle(
+                              color: slot.pergi_isAvailable
+                                  ? CustomColor.darkGrey
+                                  : CustomColor.white,
+                              fontSize: Dimensions.extraSmallTextSize,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                   )
                 : Padding(

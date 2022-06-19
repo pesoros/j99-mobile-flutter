@@ -4,24 +4,28 @@ class FoodModel {
   final String id;
   final String id_resto;
   final String food_name;
+  final String food_class;
+  final String image;
 
   FoodModel({
     this.id,
     this.id_resto,
     this.food_name,
+    this.food_class,
+    this.image,
   });
 
   factory FoodModel.fromJson(Map<String, dynamic> json) {
-    if (json == null) return null;
     return FoodModel(
       id: json["id"],
       id_resto: json["id_resto"],
       food_name: json["food_name"],
+      food_class: json["class"],
+      image: json["image"],
     );
   }
 
   static List<FoodModel> fromJsonList(List list) {
-    if (list == null) return null;
     return list.map((item) => FoodModel.fromJson(item)).toList();
   }
 

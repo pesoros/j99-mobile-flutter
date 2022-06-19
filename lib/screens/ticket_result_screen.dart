@@ -318,9 +318,11 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Container(
-                height: MediaQuery.of(context).size.height / 3,
+                // height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemCount: _ticketList.length,
                   itemBuilder: (context, index) {
                     TicketPassanggerListModal ticket = _ticketList[index];
