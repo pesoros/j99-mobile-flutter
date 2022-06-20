@@ -45,6 +45,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
   String total_price;
   String total_seat;
   String created_at;
+  String expired;
 
   String payment_method;
   String payment_channel_code;
@@ -71,6 +72,8 @@ class _TicketResultScreen extends State<TicketResultScreen> {
         total_price = value['total_price'];
         total_seat = value['total_seat'];
         created_at = value['created_at'];
+        expired = value['expired'];
+        print(expired);
         isLoadingPackage = false;
       });
     });
@@ -222,6 +225,8 @@ class _TicketResultScreen extends State<TicketResultScreen> {
 
   _resiDetail(BuildContext context) {
     DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(created_at);
+    DateTime expDate = new DateFormat("yyyy-MM-dd").parse(expired);
+    DateTime expTime = new DateFormat("yyyy-MM-dd hh:mm").parse(expired);
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
@@ -306,6 +311,13 @@ class _TicketResultScreen extends State<TicketResultScreen> {
               _dataBooking(
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
               _dataBooking("Tanggal: ", tanggal(tempDate)),
+              _dataBooking(
+                  "Bayar sebelum: ",
+                  tanggal(expDate) +
+                      " " +
+                      expTime.hour.toString() +
+                      ":" +
+                      expTime.minute.toString()),
               SizedBox(height: 10),
               Divider(
                 color: Colors.black,

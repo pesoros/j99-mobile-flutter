@@ -1347,9 +1347,16 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(width: 10),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(item.image),
+          SizedBox(
+            width: 120,
+            height: 120,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                item.image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ],
       ),
