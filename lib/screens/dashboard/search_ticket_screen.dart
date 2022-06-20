@@ -270,8 +270,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                     : GestureDetector(
                         child: Container(
                           alignment: Alignment.center,
-                          width: 60,
-                          height: 30,
+                          padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: CustomColor.red,
                               borderRadius: BorderRadius.circular(6)),
