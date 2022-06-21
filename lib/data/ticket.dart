@@ -44,6 +44,7 @@ class TicketPassanggerList {
     });
 
     List<TicketPassanggerListModal> list = [];
+    print(jsonDecode(response.body));
 
     for (var data in jsonDecode(response.body)['ticket'] as List) {
       list.add(TicketPassanggerListModal.fromJson(data));
@@ -62,6 +63,7 @@ class TicketPassanggerListModal {
   String drop_trip_location;
   String baggage;
   String food_name;
+  String booking_date;
 
   TicketPassanggerListModal({
     this.name,
@@ -72,6 +74,7 @@ class TicketPassanggerListModal {
     this.drop_trip_location,
     this.baggage,
     this.food_name,
+    this.booking_date,
   });
 
   TicketPassanggerListModal.fromJson(Map<String, dynamic> json) {
@@ -83,6 +86,7 @@ class TicketPassanggerListModal {
     drop_trip_location = json['drop_trip_location'];
     baggage = json['baggage'];
     food_name = json['food_name'];
+    booking_date = json['booking_date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -95,6 +99,7 @@ class TicketPassanggerListModal {
     data['drop_trip_location'] = this.drop_trip_location;
     data['baggage'] = this.baggage;
     data['food_name'] = this.food_name;
+    data['booking_date'] = this.booking_date;
 
     return data;
   }

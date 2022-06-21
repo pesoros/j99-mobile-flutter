@@ -73,7 +73,6 @@ class _TicketResultScreen extends State<TicketResultScreen> {
         total_seat = value['total_seat'];
         created_at = value['created_at'];
         expired = value['expired'];
-        print(expired);
         isLoadingPackage = false;
       });
     });
@@ -97,6 +96,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
       setState(() {
         _ticketList = value;
         isLoadingTrace = false;
+        print(_ticketList[0].booking_date);
       });
     });
   }
@@ -306,18 +306,19 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                     ),
               SizedBox(height: 20),
               _dataBooking("Total Harga: ", rupiah(total_price)),
-              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
-              _dataBooking(" ", _ticketList[0].drop_trip_location),
+              _dataBooking("Tanggal Pesanan: ",
+                  DateFormat("yyyy-MM-dd HH:mm").parse(created_at).toString()),
+              _dataBooking("Bayar sebelum: ", expired),
+              SizedBox(height: 20),
+              _dataBooking("Tanggal Pergi:", _ticketList[0].booking_date),
+              (round_trip == "1")
+                  ? _dataBooking("Tanggal Pulang:",
+                      _ticketList[_ticketList.length - 1].booking_date)
+                  : SizedBox(),
               _dataBooking(
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
-              _dataBooking("Tanggal: ", tanggal(tempDate)),
-              _dataBooking(
-                  "Bayar sebelum: ",
-                  tanggal(expDate) +
-                      " " +
-                      expTime.hour.toString() +
-                      ":" +
-                      expTime.minute.toString()),
+              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
+              _dataBooking(" ", _ticketList[0].drop_trip_location),
               SizedBox(height: 10),
               Divider(
                 color: Colors.black,
