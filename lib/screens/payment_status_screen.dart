@@ -9,6 +9,7 @@ import 'package:juragan99/data/slot_pergi.dart';
 import 'package:juragan99/data/ticket.dart';
 import 'package:juragan99/data/ticket_list.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
+import 'package:juragan99/screens/passengger_ticket_result_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/utils/colors.dart';
 import 'package:juragan99/utils/custom_style.dart';
@@ -44,6 +45,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
   String total_price;
   String total_seat;
   String created_at;
+  String expired;
 
   String payment_method;
   String payment_channel_code;
@@ -70,6 +72,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
         total_price = value['total_price'];
         total_seat = value['total_seat'];
         created_at = value['created_at'];
+        expired = value['expired'];
         isLoadingPackage = false;
       });
     });
@@ -93,6 +96,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
       setState(() {
         _ticketList = value;
         isLoadingTrace = false;
+        print(_ticketList[0].booking_date);
       });
     });
   }
@@ -220,7 +224,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
   }
 
   _resiDetail(BuildContext context) {
-    DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(created_at);
+    DateFormat dateFormat = DateFormat("HH:mm - dd-MM-yyy");
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
@@ -299,12 +303,29 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                       ),
                     ),
               SizedBox(height: 20),
-              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
-              _dataBooking(" ", _ticketList[0].drop_trip_location),
+              _dataBooking("Total Harga: ", rupiah(total_price)),
+              _dataBooking("Tanggal Pesanan: ",
+                  dateFormat.format(DateTime.parse(created_at)).toString()),
+              _dataBooking("Bayar sebelum: ",
+                  dateFormat.format(DateTime.parse(expired)).toString()),
+              SizedBox(height: 20),
+              _dataBooking(
+                  "Tanggal Pergi:",
+                  dateFormat
+                      .format(DateTime.parse(_ticketList[0].booking_date))
+                      .toString()),
+              (round_trip == "1")
+                  ? _dataBooking(
+                      "Tanggal Pulang:",
+                      dateFormat
+                          .format(DateTime.parse(
+                              _ticketList[_ticketList.length - 1].booking_date))
+                          .toString())
+                  : SizedBox(),
               _dataBooking(
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
-              _dataBooking("Total Harga: ", rupiah(total_price)),
-              _dataBooking("Tanggal: ", tanggal(tempDate)),
+              _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
+              _dataBooking(" ", _ticketList[0].drop_trip_location),
               SizedBox(height: 10),
               Divider(
                 color: Colors.black,
@@ -317,58 +338,88 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Container(
-                height: MediaQuery.of(context).size.height / 3,
+                // height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemCount: _ticketList.length,
                   itemBuilder: (context, index) {
                     TicketPassanggerListModal ticket = _ticketList[index];
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _dataTicketPassangger(
-                                  "No. Tiket: ", ticket.ticket_number),
-                              _dataTicketPassangger("Nama: ", ticket.name),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: Dimensions.heightSize * 0.5),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      ticket.pickup_trip_location,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: Dimensions.defaultTextSize),
-                                    ),
-                                    Text(
-                                      " - ",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: Dimensions.defaultTextSize),
-                                    ),
-                                    Text(
-                                      ticket.drop_trip_location,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: Dimensions.defaultTextSize,
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // _dataTicketPassangger(
+                                //     "No. Tiket: ", ticket.ticket_number),
+                                _dataTicketPassangger("Nama: ", ticket.name),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: Dimensions.heightSize * 0.5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        ticket.pickup_trip_location,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        " - ",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                Dimensions.defaultTextSize),
+                                      ),
+                                      Text(
+                                        ticket.drop_trip_location,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.defaultTextSize,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
+                              ],
+                            ),
+                            (payment_status == "0")
+                                ? Column()
+                                : Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PassenggerTicketResultScreen(
+                                                booking_code:
+                                                    ticket.ticket_number,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          "Cek Tiket",
+                                          style: TextStyle(
+                                            fontSize:
+                                                Dimensions.defaultTextSize,
+                                            color: CustomColor.red,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                          ],
+                        ));
                   },
                 ),
               )

@@ -224,9 +224,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
   }
 
   _resiDetail(BuildContext context) {
-    DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(created_at);
-    DateTime expDate = new DateFormat("yyyy-MM-dd").parse(expired);
-    DateTime expTime = new DateFormat("yyyy-MM-dd hh:mm").parse(expired);
+    DateFormat dateFormat = DateFormat("HH:mm - dd-MM-yyy");
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
@@ -307,13 +305,22 @@ class _TicketResultScreen extends State<TicketResultScreen> {
               SizedBox(height: 20),
               _dataBooking("Total Harga: ", rupiah(total_price)),
               _dataBooking("Tanggal Pesanan: ",
-                  DateFormat("yyyy-MM-dd HH:mm").parse(created_at).toString()),
-              _dataBooking("Bayar sebelum: ", expired),
+                  dateFormat.format(DateTime.parse(created_at)).toString()),
+              _dataBooking("Bayar sebelum: ",
+                  dateFormat.format(DateTime.parse(expired)).toString()),
               SizedBox(height: 20),
-              _dataBooking("Tanggal Pergi:", _ticketList[0].booking_date),
+              _dataBooking(
+                  "Tanggal Pergi:",
+                  dateFormat
+                      .format(DateTime.parse(_ticketList[0].booking_date))
+                      .toString()),
               (round_trip == "1")
-                  ? _dataBooking("Tanggal Pulang:",
-                      _ticketList[_ticketList.length - 1].booking_date)
+                  ? _dataBooking(
+                      "Tanggal Pulang:",
+                      dateFormat
+                          .format(DateTime.parse(
+                              _ticketList[_ticketList.length - 1].booking_date))
+                          .toString())
                   : SizedBox(),
               _dataBooking(
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
