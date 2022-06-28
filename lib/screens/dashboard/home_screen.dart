@@ -252,8 +252,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       label: "Kota Asal",
                       showSearchBox: true,
                       selectedItem: variable.selectedFromCity,
-                      searchBoxDecoration:
-                          InputDecoration(labelText: "Kota Asal"),
+                      searchBoxDecoration: InputDecoration(
+                        labelText: "Kota Asal",
+                        suffixIcon: Icon(Icons.search),
+                      ),
                       dropdownSearchDecoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 10),
                         labelStyle: CustomStyle.textStyle,
@@ -295,8 +297,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         label: "Kota Tujuan",
                         showSearchBox: true,
                         selectedItem: variable.selectedToCity,
-                        searchBoxDecoration:
-                            InputDecoration(labelText: "Kota Tujuan"),
+                        searchBoxDecoration: InputDecoration(
+                          labelText: "Kota Tujuan",
+                          suffixIcon: Icon(Icons.search),
+                        ),
                         dropdownSearchDecoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10),
                           labelStyle: CustomStyle.textStyle,

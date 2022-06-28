@@ -17,11 +17,13 @@ import 'package:juragan99/utils/custom_style.dart';
 import 'package:juragan99/widgets/back_widget.dart';
 import 'package:juragan99/screens/auth/sign_up_screen.dart';
 import 'package:juragan99/dialog/forgot_password_dialog.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../dashboard_screen.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -192,7 +194,21 @@ class _SignInScreenState extends State<SignInScreen> {
         SizedBox(height: 20),
         buttonWidget(context),
         SizedBox(height: 30),
-        newHereWidget(context)
+        newHereWidget(context),
+      ],
+    );
+  }
+
+  forgotPassword(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          child: Text("Lupa Password?"),
+          onTap: () {
+            launchUrlString("https://tiketjuragan99.id/forgot-password");
+          },
+        )
       ],
     );
   }
@@ -288,6 +304,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 obscureText: _toggleVisibility,
               ),
               SizedBox(height: Dimensions.heightSize),
+              forgotPassword(context),
             ],
           ),
         ));
