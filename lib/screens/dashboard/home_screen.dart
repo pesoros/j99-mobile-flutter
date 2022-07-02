@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:juragan99/data/carousel.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
@@ -456,27 +457,51 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 onTap: () {
-                  if (variable.selectedFromCity == null ||
-                      variable.selectedFromCity == null ||
-                      variable.selectedJumlahPenumpang == null ||
-                      variable.datePergi == "Pergi") {
+                  if (variable.selectedFromCity == null) {
                     Fluttertoast.showToast(
-                      msg: "Lengkapi Data",
+                      msg: "Isi kota keberangkatan terlebih dahulu",
                       backgroundColor: CustomColor.red,
                       textColor: CustomColor.white,
                       gravity: ToastGravity.CENTER,
                     );
                   } else {
-                    if (variable.checkPulangPergi == true &&
-                        variable.datePulang == "Pulang") {
+                    if (variable.selectedToCity == null) {
                       Fluttertoast.showToast(
-                        msg: "Lengkapi Data",
+                        msg: "Isi kota tujuan terlebih dahulu",
                         backgroundColor: CustomColor.red,
                         textColor: CustomColor.white,
                         gravity: ToastGravity.CENTER,
                       );
                     } else {
-                      _navigateSearchResult(context);
+                      if (variable.selectedJumlahPenumpang == null) {
+                        Fluttertoast.showToast(
+                          msg: "Isi jumlah penumpang terlebih dahulu",
+                          backgroundColor: CustomColor.red,
+                          textColor: CustomColor.white,
+                          gravity: ToastGravity.CENTER,
+                        );
+                      } else {
+                        if (variable.datePergi == "Pergi") {
+                          Fluttertoast.showToast(
+                            msg: "Isi tanggal pergi terlebih dahulu",
+                            backgroundColor: CustomColor.red,
+                            textColor: CustomColor.white,
+                            gravity: ToastGravity.CENTER,
+                          );
+                        } else {
+                          if (variable.checkPulangPergi == true &&
+                              variable.datePulang == "Pulang") {
+                            Fluttertoast.showToast(
+                              msg: "Isi tanggal pulang terlebih dahulu",
+                              backgroundColor: CustomColor.red,
+                              textColor: CustomColor.white,
+                              gravity: ToastGravity.CENTER,
+                            );
+                          } else {
+                            _navigateSearchResult(context);
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -580,6 +605,13 @@ class _HomeScreenState extends State<HomeScreen> {
       if (pickedPergi != null) {
         selectedDatePergi = pickedPergi;
         variable.datePergi = "${selectedDatePergi.toLocal()}".split(' ')[0];
+        if (variable.datePulang != "Pulang") {
+          DateTime tempDate = DateTime.parse(variable.datePulang);
+          if (tempDate.isBefore(pickedPergi)) {
+            DateTime newPulang = pickedPergi.add(Duration(days: 1));
+            variable.datePulang = "${newPulang.toLocal()}".split(' ')[0];
+          }
+        }
       }
     });
   }

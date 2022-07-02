@@ -96,7 +96,6 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
       setState(() {
         _ticketList = value;
         isLoadingTrace = false;
-        print(_ticketList[0].booking_date);
       });
     });
   }
@@ -265,7 +264,9 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "No. Rekening",
+                            (payment_method == "VIRTUAL_ACCOUNT")
+                                ? "No. Virtual Account:"
+                                : "No. Rekening:",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: Dimensions.defaultTextSize),

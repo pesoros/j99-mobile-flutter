@@ -96,7 +96,6 @@ class _TicketResultScreen extends State<TicketResultScreen> {
       setState(() {
         _ticketList = value;
         isLoadingTrace = false;
-        print(_ticketList[0].booking_date);
       });
     });
   }
@@ -265,7 +264,9 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "No. Rekening",
+                            (payment_method == "VIRTUAL_ACCOUNT")
+                                ? "No. Virtual Account:"
+                                : "No. Rekening:",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: Dimensions.defaultTextSize),
@@ -390,7 +391,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                                 ),
                               ],
                             ),
-                            (payment_status == "0")
+                            (payment_status == "1")
                                 ? Column()
                                 : Column(
                                     children: [

@@ -44,7 +44,6 @@ class TicketPassanggerList {
     });
 
     List<TicketPassanggerListModal> list = [];
-    print(jsonDecode(response.body));
 
     for (var data in jsonDecode(response.body)['ticket'] as List) {
       list.add(TicketPassanggerListModal.fromJson(data));

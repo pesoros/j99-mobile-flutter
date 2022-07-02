@@ -2,7 +2,6 @@
 
 import 'package:dotted_line/dotted_line.dart';
 import 'package:indonesia/indonesia.dart';
-import 'package:juragan99/data/class.dart';
 import 'package:juragan99/screens/auth/sign_in_screen.dart';
 import 'package:juragan99/screens/search_result_pulang_screen.dart';
 import 'package:juragan99/utils/colors.dart';
@@ -64,11 +63,21 @@ class BusTicketPergiWidget extends StatefulWidget {
 
 class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
   BusPergi bus;
-  List<ClassList> _classList = [];
+
+  bool jamLewat = false;
 
   @override
   void initState() {
     super.initState();
+    String dateNowS = variable.datePergi + " " + widget.bus.pergi_start;
+    DateTime tempDate = DateTime.parse(dateNowS);
+    DateTime nowDate = DateTime.now();
+
+    if (tempDate.isBefore(nowDate)) {
+      setState(() {
+        jamLewat = true;
+      });
+    }
   }
 
   @override
@@ -245,7 +254,9 @@ class _BusTicketPergiWidgetState extends State<BusTicketPergiWidget> {
                   },
                 ),
                 SizedBox(width: 10),
-                (widget.bus.pergi_seatAvail == 0)
+                (widget.bus.pergi_seatAvail <
+                            double.parse(variable.selectedJumlahPenumpang) ||
+                        jamLewat)
                     ? Container(
                         alignment: Alignment.center,
                         width: 60,

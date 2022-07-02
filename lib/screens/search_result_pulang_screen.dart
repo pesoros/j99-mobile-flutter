@@ -345,6 +345,7 @@ class _SearchResultPulangScreenState extends State<SearchResultPulangScreen> {
             );
           }),
     );
+    initializeData();
     setState(() {});
   }
 }

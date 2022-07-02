@@ -59,6 +59,11 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
     getUnitType();
     getCity();
     getClassList();
+    if (variable.selectedKelasArmada != "") {
+      setState(() {
+        _valClassList = variable.selectedKelasArmada;
+      });
+    }
   }
 
   getUnitType() async {
@@ -255,7 +260,7 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
               child: DropdownButton(
                 isExpanded: true,
                 hint: Text("Urut Berdasarkan"),
-                value: _valSortBy,
+                value: variable.pulang_sort_by,
                 items: sortBy.map((value) {
                   return DropdownMenuItem(
                     child: Text(value),
@@ -391,30 +396,55 @@ class _FilterPulangScreenState extends State<FilterPulangScreen> {
 
   buttonWidget(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 30, left: 30, right: 30, top: 30),
-      child: GestureDetector(
-        child: Container(
-          height: Dimensions.buttonHeight,
-          decoration: BoxDecoration(
-              color: CustomColor.red,
-              borderRadius: BorderRadius.circular(Dimensions.radius)),
-          child: Center(
-            child: Text(
-              "Simpan",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Dimensions.largeTextSize,
-                  fontWeight: FontWeight.bold),
+        padding: EdgeInsets.only(bottom: 30, left: 30, right: 30, top: 30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              child: Container(
+                width: MediaQuery.of(context).size.width / 2.5,
+                height: Dimensions.buttonHeight,
+                decoration: BoxDecoration(
+                    color: CustomColor.red,
+                    borderRadius: BorderRadius.circular(Dimensions.radius)),
+                child: Center(
+                  child: Text(
+                    "Reset",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Dimensions.largeTextSize,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              onTap: () {
+                variable.selectedKelasArmada = "";
+                variable.pulang_sort_by = "Harga Terendah";
+                Navigator.pop(context);
+              },
             ),
-          ),
-        ),
-        onTap: () {
-          if (_valClassList == null) {
-            variable.selectedKelasArmada = "";
-          }
-          Navigator.pop(context);
-        },
-      ),
-    );
+            GestureDetector(
+              child: Container(
+                width: MediaQuery.of(context).size.width / 2.5,
+                height: Dimensions.buttonHeight,
+                decoration: BoxDecoration(
+                    color: CustomColor.red,
+                    borderRadius: BorderRadius.circular(Dimensions.radius)),
+                child: Center(
+                  child: Text(
+                    "Simpan",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Dimensions.largeTextSize,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ));
   }
 }

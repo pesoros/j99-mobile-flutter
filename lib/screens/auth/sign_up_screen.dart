@@ -126,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: TextFormField(
                           style: CustomStyle.textStyle,
                           controller: firstNameController,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.name,
                           decoration: InputDecoration(
                             hintText: "Nama Depan",
                             contentPadding: EdgeInsets.symmetric(
@@ -160,7 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: TextFormField(
                           style: CustomStyle.textStyle,
                           controller: lastNameController,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.name,
                           decoration: InputDecoration(
                             hintText: "Nama Belakang",
                             contentPadding: EdgeInsets.symmetric(
@@ -193,6 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               TextFormField(
                 style: CustomStyle.textStyle,
                 controller: phoneController,
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   hintText: "No. Handphone",
                   contentPadding:

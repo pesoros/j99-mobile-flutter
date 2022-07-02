@@ -241,6 +241,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 TextFormField(
                   style: CustomStyle.textStyle,
                   controller: phoneController,
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                     hintText: "Nomor Handphone",
                     contentPadding:
@@ -255,26 +256,26 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     hintStyle: CustomStyle.textStyle,
                   ),
                 ),
-                SizedBox(height: 10),
-                Text("Nomor Identitas"),
-                SizedBox(height: 5),
-                TextFormField(
-                  style: CustomStyle.textStyle,
-                  controller: identity_numberController,
-                  decoration: InputDecoration(
-                    hintText: "Nomor Identitas",
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                    labelStyle: CustomStyle.textStyle,
-                    focusedBorder: CustomStyle.focusBorder,
-                    enabledBorder: CustomStyle.focusErrorBorder,
-                    focusedErrorBorder: CustomStyle.focusErrorBorder,
-                    errorBorder: CustomStyle.focusErrorBorder,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintStyle: CustomStyle.textStyle,
-                  ),
-                ),
+                // SizedBox(height: 10),
+                // Text("Nomor Identitas"),
+                // SizedBox(height: 5),
+                // TextFormField(
+                //   style: CustomStyle.textStyle,
+                //   controller: identity_numberController,
+                //   decoration: InputDecoration(
+                //     hintText: "Nomor Identitas",
+                //     contentPadding:
+                //         EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                //     labelStyle: CustomStyle.textStyle,
+                //     focusedBorder: CustomStyle.focusBorder,
+                //     enabledBorder: CustomStyle.focusErrorBorder,
+                //     focusedErrorBorder: CustomStyle.focusErrorBorder,
+                //     errorBorder: CustomStyle.focusErrorBorder,
+                //     filled: true,
+                //     fillColor: Colors.white,
+                //     hintStyle: CustomStyle.textStyle,
+                //   ),
+                // ),
               ],
             ),
           ),

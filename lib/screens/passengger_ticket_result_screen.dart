@@ -223,7 +223,8 @@ class _PassenggerTicketResultWidgetScreen
   _invoiceDetail(BuildContext context) {
     String new_qrcode = qrcode.substring(22);
     Uint8List bytes = base64Decode(new_qrcode);
-    DateTime tempDate = new DateFormat("yyyy-MM-dd").parse(booking_date);
+    DateTime tempDate = DateFormat("yyyy-MM-dd").parse(booking_date);
+    double tempPrice = double.parse(price) / 2;
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Column(
@@ -238,7 +239,7 @@ class _PassenggerTicketResultWidgetScreen
                   _dataHeader("Kode Booking: ", booking_code),
                   _dataHeader("No. Tiket: ", ticket_number),
                   _dataHeader("Tanggal: ", tanggal(tempDate)),
-                  _dataHeader("Harga: ", rupiah(price)),
+                  _dataHeader("Harga: ", rupiah(tempPrice)),
                 ],
               ),
             ),

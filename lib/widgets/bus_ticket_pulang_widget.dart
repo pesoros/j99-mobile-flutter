@@ -67,10 +67,20 @@ class BusTicketPulangWidget extends StatefulWidget {
 
 class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
   BusPulang bus;
+  bool jamLewat = false;
 
   @override
   void initState() {
     super.initState();
+    String dateNowS = variable.datePulang + " " + widget.bus.pulang_start;
+    DateTime tempDate = DateTime.parse(dateNowS);
+    DateTime nowDate = DateTime.now();
+
+    if (tempDate.isBefore(nowDate)) {
+      setState(() {
+        jamLewat = true;
+      });
+    }
   }
 
   @override
@@ -247,30 +257,48 @@ class _BusTicketPulangWidgetState extends State<BusTicketPulangWidget> {
                   },
                 ),
                 SizedBox(width: 10),
-                GestureDetector(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    height: 30,
-                    decoration: BoxDecoration(
-                        color: CustomColor.red,
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Text(
-                      "Pesan",
-                      style: TextStyle(
-                          color: CustomColor.white,
-                          fontSize: Dimensions.smallTextSize),
-                    ),
-                  ),
-                  onTap: () {
-                    _saveBus(context);
-                    (variable.token == null)
-                        ? Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignInScreen()))
-                        : Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PassenggerFormScreen()));
-                  },
-                )
+                (widget.bus.pulang_seatAvail <
+                            double.parse(variable.selectedJumlahPenumpang) ||
+                        jamLewat)
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: 60,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: CustomColor.grey,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Text(
+                          "Pesan",
+                          style: TextStyle(
+                              color: CustomColor.white,
+                              fontSize: Dimensions.smallTextSize),
+                        ),
+                      )
+                    : GestureDetector(
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 60,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: CustomColor.red,
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Text(
+                            "Pesan",
+                            style: TextStyle(
+                                color: CustomColor.white,
+                                fontSize: Dimensions.smallTextSize),
+                          ),
+                        ),
+                        onTap: () {
+                          _saveBus(context);
+                          (variable.token == null)
+                              ? Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SignInScreen()))
+                              : Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      PassenggerFormScreen()));
+                        },
+                      )
               ],
             )
           ],

@@ -18,7 +18,7 @@ class BusPergiList {
       "berangkat": variable.selectedFromCity.toString(),
       "tujuan": variable.selectedToCity.toString(),
       "tanggal": variable.datePergi,
-      "kelas": variable.selectedKelasArmada,
+      "kelas": variable.selectedKelasArmada ?? "",
     });
     if (jsonDecode(response.body).toString() ==
         "{status: 404, error: 404, messages: {error: Data Not Found}}") {
