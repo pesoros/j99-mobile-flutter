@@ -221,7 +221,11 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
               ),
               _dataPembayaran("Bank:", variable.bank_code),
               _dataPembayaran("Kode Bank:", variable.merchant_code),
-              _dataPembayaran("Nomor Rekening:", ""),
+              _dataPembayaran(
+                  (variable.selectedPaymentCategories == "VIRTUAL_ACCOUNT")
+                      ? "No. Virtual Account:"
+                      : "No. Rekening:",
+                  ""),
               Row(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [

@@ -401,7 +401,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 40,
                     child: DropdownSearch<ClassModel>(
                       mode: Mode.BOTTOM_SHEET,
-                      showClearButton: true,
                       maxHeight: 225,
                       label: "Kelas Armada",
                       dropdownSearchDecoration: InputDecoration(
@@ -419,6 +418,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                         var kelasArmada =
                             ClassModel.fromJsonList(response.data);
+                        kelasArmada
+                            .add(ClassModel(id: "0", kelas: "Semua Kelas"));
+                        kelasArmada.sort((a, b) => a.id.compareTo(b.id));
                         return kelasArmada;
                       },
                       onChanged: (ClassModel data) {

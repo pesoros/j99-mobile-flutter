@@ -18,7 +18,10 @@ class BusPulangList {
       "berangkat": variable.selectedToCity.toString(),
       "tujuan": variable.selectedFromCity.toString(),
       "tanggal": variable.datePulang,
-      "kelas": variable.selectedKelasArmada,
+      "kelas": (variable.selectedKelasArmada == null ||
+              variable.selectedKelasArmada == "0")
+          ? ""
+          : variable.selectedKelasArmada,
     });
 
     if (jsonDecode(response.body).toString() ==

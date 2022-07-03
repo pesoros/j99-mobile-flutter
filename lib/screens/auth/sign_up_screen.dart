@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:juragan99/data/check_registration.dart';
 import 'package:juragan99/data/otp.dart';
@@ -194,6 +195,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: CustomStyle.textStyle,
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+                ],
                 decoration: InputDecoration(
                   hintText: "No. Handphone",
                   contentPadding:

@@ -86,6 +86,8 @@ class _FilterPergiScreenState extends State<FilterPergiScreen> {
   getClassList() async {
     var response = await Dio().post(dotenv.env['BASE_URL'] + "/datakelas");
     var data = ClassModel.fromJsonList(response.data);
+    data.add(ClassModel(id: "0", kelas: "Semua Kelas"));
+    data.sort((a, b) => a.id.compareTo(b.id));
     setState(() {
       classList = data;
     });

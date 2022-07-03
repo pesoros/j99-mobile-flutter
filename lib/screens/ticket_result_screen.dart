@@ -391,7 +391,7 @@ class _TicketResultScreen extends State<TicketResultScreen> {
                                 ),
                               ],
                             ),
-                            (payment_status == "1")
+                            (payment_status == "0")
                                 ? Column()
                                 : Column(
                                     children: [
