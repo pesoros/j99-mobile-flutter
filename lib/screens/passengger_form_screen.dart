@@ -288,7 +288,9 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              (variable.selectedJumlahPenumpang == "1")
+                  ? "Data Penumpang"
+                  : "Data Penumpang 1",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -512,7 +514,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 2",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -736,7 +738,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 3",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -960,7 +962,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 4",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -1700,7 +1702,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
     }
   }
 
-  _validasiPenumpang3() {
+  _validasiPenumpang3() async {
     var val = true;
     if (namePassenggerController3.text == null ||
         namePassenggerController3.text.isEmpty) {
@@ -1743,7 +1745,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
     }
   }
 
-  _validasiPenumpang4() {
+  _validasiPenumpang4() async {
     var val = true;
     if (namePassenggerController4.text == null ||
         namePassenggerController4.text.isEmpty) {

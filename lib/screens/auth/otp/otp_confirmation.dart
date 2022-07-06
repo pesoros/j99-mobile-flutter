@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, unrelated_type_equality_checks
+// ignore_for_file: unused_element, unrelated_type_equality_checks, unused_field
 
 import 'dart:async';
 
@@ -79,9 +79,31 @@ class _OtpConfirmationState extends State<OtpConfirmation>
   List<int> otpValues;
   bool showLoadingButton = false;
 
+  Timer _timer;
+  int _start = 10;
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
   @override
   void initState() {
     otpValues = List<int>.filled(widget.otpLength, null, growable: false);
+    startTimer();
     super.initState();
   }
 
@@ -203,14 +225,20 @@ class _OtpConfirmationState extends State<OtpConfirmation>
             ),
             GestureDetector(
               child: Text(
-                " Kirim ulang",
+                ("$_start" == "0")
+                    ? "Kirim ulang"
+                    : "Tunggu " + "$_start" + " detik",
                 style: TextStyle(
                     fontSize: Dimensions.defaultTextSize,
-                    color: CustomColor.primaryColor,
+                    color: ("$_start" == "0")
+                        ? CustomColor.primaryColor
+                        : Colors.grey,
                     fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                _setOtp();
+                if ("$_start" == "0") {
+                  _setOtp();
+                }
               },
             ),
           ],

@@ -3,7 +3,7 @@ description: Booking Application for Juragan99 Trans Bus.
 
 publish_to: 'none' 
 
-version: 1.0.4+1
+version: 1.0.4+5
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

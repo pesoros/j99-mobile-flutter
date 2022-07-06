@@ -371,7 +371,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              (variable.selectedJumlahPenumpang == "1")
+                  ? "Data Penumpang"
+                  : "Data Penumpang 1",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -660,7 +662,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 2",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -949,7 +951,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 3",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
@@ -1238,7 +1240,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             alignment: Alignment.centerLeft,
             margin: EdgeInsets.only(left: 40, top: 20),
             child: Text(
-              "Data Penumpang",
+              "Data Penumpang 4",
               style: TextStyle(
                   fontSize: Dimensions.defaultTextSize,
                   fontWeight: FontWeight.bold),
