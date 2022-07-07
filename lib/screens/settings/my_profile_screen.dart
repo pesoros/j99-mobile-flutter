@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, unused_import, unused_element
+// ignore_for_file: must_be_immutable, unused_import, unused_element, unused_local_variable
 
 import 'package:juragan99/data/profile.dart';
 import 'package:juragan99/data/user.dart';
@@ -16,6 +16,8 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MyProfileScreen extends StatefulWidget {
   @override
@@ -68,6 +70,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     variable.phone = null;
   }
 
+  deleteUser() async {
+    String url = dotenv.env['BASE_URL'] + "/account/delete";
+
+    Uri parseUrl = Uri.parse(url);
+    final response = await http.post(parseUrl, headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }, body: {
+      "email": variable.email,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -84,6 +97,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               updateProfileButtonWidget(context),
               changePasswordButtonWidget(context),
               // historyButtonWidget(context),
+              deleteButtonWidget(context),
               logoutButtonWidget(context)
             ],
           ),
@@ -274,6 +288,32 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
+  deleteButtonWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+      child: GestureDetector(
+        child: Container(
+          height: Dimensions.buttonHeight,
+          decoration: BoxDecoration(
+              color: CustomColor.red,
+              borderRadius: BorderRadius.circular(Dimensions.radius)),
+          child: Center(
+            child: Text(
+              "Hapus Akun",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Dimensions.defaultTextSize,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        onTap: () async {
+          modalDeleteAccount(context);
+        },
+      ),
+    );
+  }
+
   logoutButtonWidget(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
@@ -341,6 +381,49 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  modalDeleteAccount(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          title: Text('Hapus Akun?'),
+          content: SingleChildScrollView(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Tidak",
+                    style: TextStyle(color: CustomColor.red),
+                  )),
+              TextButton(
+                onPressed: () {
+                  deleteUser();
+                  removeUser();
+                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardScreen(0)),
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                child: Text(
+                  "Ya",
+                  style: TextStyle(color: CustomColor.red),
+                ),
+              )
+            ],
+          )),
+        );
+      },
     );
   }
 }
