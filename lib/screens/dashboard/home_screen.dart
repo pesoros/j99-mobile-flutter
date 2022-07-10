@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:core';
+import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -71,14 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
     variable.isEmail = true;
 
 //HomeScreen
-    variable.selectedFromCity = null;
-    variable.selectedToCity = null;
-    variable.selectedKelasArmada = "";
-    variable.selectedUnitType = "1";
-    variable.selectedJumlahPenumpang = null;
-    variable.datePergi = 'Pergi';
-    variable.datePulang = 'Pulang';
-    variable.checkPulangPergi = false;
+    // variable.selectedFromCity = null;
+    // variable.selectedToCity = null;
+    // variable.selectedKelasArmada = "";
+    // variable.selectedUnitType = "1";
+    // variable.selectedJumlahPenumpang = null;
+    // variable.datePergi = 'Pergi';
+    // variable.datePulang = 'Pulang';
+    // variable.checkPulangPergi = false;
 
 //FilterSearch
     variable.pergi_sort_by = "Harga Terendah";
@@ -332,25 +333,49 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Column(children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Pulang-Pergi?",
-                          style:
-                              TextStyle(fontSize: Dimensions.defaultTextSize),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Pulang-Pergi?",
+                              style: TextStyle(
+                                  fontSize: Dimensions.defaultTextSize),
+                            ),
+                            Transform.scale(
+                              scale: 0.7,
+                              child: CupertinoSwitch(
+                                activeColor: CustomColor.red,
+                                value: variable.checkPulangPergi,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    variable.checkPulangPergi = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
-                        Transform.scale(
-                          scale: 0.7,
-                          child: CupertinoSwitch(
-                            activeColor: CustomColor.red,
-                            value: variable.checkPulangPergi,
-                            onChanged: (bool value) {
-                              setState(() {
-                                variable.checkPulangPergi = value;
-                              });
-                            },
+                        SizedBox(
+                          child: Transform.rotate(
+                            angle: 90 * math.pi / 180,
+                            child: IconButton(
+                              icon: Icon(Icons.swap_horiz_sharp),
+                              color: CustomColor.red,
+                              onPressed: () {
+                                setState(() {
+                                  var tempFrom;
+                                  var tempTo;
+                                  tempFrom = variable.selectedFromCity;
+                                  tempTo = variable.selectedToCity;
+                                  variable.selectedFromCity = tempTo;
+                                  variable.selectedToCity = tempFrom;
+                                });
+                              },
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Row(
@@ -609,7 +634,7 @@ class _HomeScreenState extends State<HomeScreen> {
         variable.datePergi = "${selectedDatePergi.toLocal()}".split(' ')[0];
         if (variable.datePulang != "Pulang") {
           DateTime tempDate = DateTime.parse(variable.datePulang);
-          if (tempDate.isBefore(pickedPergi)) {
+          if (tempDate.isBefore(pickedPergi) || tempDate == pickedPergi) {
             DateTime newPulang = pickedPergi.add(Duration(days: 1));
             variable.datePulang = "${newPulang.toLocal()}".split(' ')[0];
           }
