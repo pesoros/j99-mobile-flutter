@@ -53,6 +53,7 @@ class _PassenggerTicketResultWidgetScreen
   String price = "";
   String code_type = "";
   String qrcode = "";
+  String adult = "";
 
   GlobalKey previewContainer = new GlobalKey();
   int originalSize = 800;
@@ -88,6 +89,7 @@ class _PassenggerTicketResultWidgetScreen
         price = value['price'];
         code_type = value['code_type'];
         qrcode = value['qrcode'];
+        adult = value['adult'];
         isLoading = false;
       });
     });
@@ -224,7 +226,7 @@ class _PassenggerTicketResultWidgetScreen
     String new_qrcode = qrcode.substring(22);
     Uint8List bytes = base64Decode(new_qrcode);
     DateTime tempDate = DateFormat("yyyy-MM-dd").parse(booking_date);
-    double tempPrice = double.parse(price) / 2;
+    double tempPrice = double.parse(price) / double.parse(adult);
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Column(
