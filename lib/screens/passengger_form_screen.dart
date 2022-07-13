@@ -196,6 +196,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Container(
                     height: 50,
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       style: CustomStyle.textStyle,
                       controller: phoneBuyerController,
                       decoration: InputDecoration(
@@ -329,6 +330,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Container(
                     height: 50,
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       style: CustomStyle.textStyle,
                       controller: phonePassenggerController1,
                       decoration: InputDecoration(
@@ -553,6 +555,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Container(
                     height: 50,
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       style: CustomStyle.textStyle,
                       controller: phonePassenggerController2,
                       decoration: InputDecoration(
@@ -777,6 +780,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Container(
                     height: 50,
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       style: CustomStyle.textStyle,
                       controller: phonePassenggerController3,
                       decoration: InputDecoration(
@@ -1001,6 +1005,7 @@ class _PassenggerFormScreenState extends State<PassenggerFormScreen> {
                   Container(
                     height: 50,
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       style: CustomStyle.textStyle,
                       controller: phonePassenggerController4,
                       decoration: InputDecoration(

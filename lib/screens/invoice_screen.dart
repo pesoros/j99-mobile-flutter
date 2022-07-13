@@ -1,9 +1,11 @@
 // ignore_for_file: unused_import, non_constant_identifier_names, must_be_immutable
 
 import 'package:indonesia/indonesia.dart';
+import 'package:intl/intl.dart';
 import 'package:juragan99/data/bus_pergi.dart';
 import 'package:juragan99/data/class.dart';
 import 'package:juragan99/data/slot_pergi.dart';
+import 'package:juragan99/data/ticket.dart';
 import 'package:juragan99/screens/dashboard_screen.dart';
 import 'package:juragan99/screens/payment_screen.dart';
 import 'package:juragan99/screens/payment_status_screen.dart';
@@ -18,6 +20,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 
 import 'package:juragan99/utils/variables.dart' as variable;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class InvoiceScreen extends StatefulWidget {
   String booking_code;
@@ -30,9 +33,57 @@ class InvoiceScreen extends StatefulWidget {
 }
 
 class _InvoiceWidgetScreen extends State<InvoiceScreen> {
+  bool isLoadingPackage = true;
+  bool isLoadingTrace = true;
+  bool isLoadingPayment = true;
+
+  String booking_code;
+  String round_trip;
+  String payment_status;
+  String total_price;
+  String total_seat;
+  String created_at;
+  String expired;
+
+  String payment_method;
+  String payment_channel_code;
+  String va_number;
+  String dekstop_link;
+  String mobile_link;
+
   @override
   void initState() {
     super.initState();
+    getTicket();
+    getTicketPayment();
+  }
+
+  getTicket() async {
+    await Ticket.list(widget.booking_code).then((value) {
+      setState(() {
+        booking_code = value['booking_code'];
+        round_trip = value['round_trip'];
+        payment_status = value['payment_status'];
+        total_price = value['total_price'];
+        total_seat = value['total_seat'];
+        created_at = value['created_at'];
+        expired = value['expired'];
+        isLoadingPackage = false;
+      });
+    });
+  }
+
+  getTicketPayment() async {
+    await TicketPayment.list(widget.booking_code).then((value) {
+      setState(() {
+        payment_method = value['payment_method'];
+        payment_channel_code = value['payment_channel_code'];
+        va_number = value['va_number'];
+        dekstop_link = value['dekstop_link'];
+        mobile_link = value['mobile_link'];
+        isLoadingPayment = false;
+      });
+    });
   }
 
   @override
@@ -53,11 +104,15 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
         top: 0,
         bottom: 70,
       ),
-      child: SingleChildScrollView(
-        child: Center(
-          child: _invoiceWidget(context),
-        ),
-      ),
+      child: (isLoadingPackage && isLoadingPayment)
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Center(
+                child: _invoiceWidget(context),
+              ),
+            ),
     );
   }
 
@@ -140,6 +195,7 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
   }
 
   _invoiceDetail(BuildContext context) {
+    DateFormat dateFormat = DateFormat("HH:mm - dd-MM-yyy");
     return Container(
         margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10, top: 10),
         child: Padding(
@@ -163,100 +219,92 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
               (variable.checkPulangPergi == true)
                   ? _data(variable.selectedFromCity.toString(), "")
                   : Padding(padding: EdgeInsets.only()),
-              // Divider(
-              //   color: Colors.grey,
-              // ),
               SizedBox(height: 10),
               Divider(
                 color: Colors.black,
                 thickness: 2,
               ),
               SizedBox(height: 10),
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Total Pembayaran: ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: Dimensions.defaultTextSize,
-                          ),
-                        ),
-                        Text(
-                          rupiah(variable.total_price),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: Dimensions.defaultTextSize,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () {
-                            Fluttertoast.showToast(
-                              msg: "Disalin",
-                              backgroundColor: CustomColor.red,
-                              textColor: CustomColor.white,
-                              gravity: ToastGravity.CENTER,
-                            );
-                            Clipboard.setData(
-                                new ClipboardData(text: variable.total_price));
-                          },
-                          child: Text(
-                            "Salin",
+              _dataBooking("Metode Pembayaran: ", payment_method),
+              _dataBooking("Bank: ", payment_channel_code),
+              (payment_method == "EWALLET")
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: Dimensions.heightSize * 0.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Link Pembayaran: ",
                             style: TextStyle(
-                                color: Colors.blue,
+                                color: Colors.black,
                                 fontSize: Dimensions.defaultTextSize),
                           ),
-                        )
-                      ],
+                          InkWell(
+                              child: new Text(
+                                'Link',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: Dimensions.defaultTextSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () => launchUrlString(mobile_link)),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: Dimensions.heightSize * 0.5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            (payment_method == "VIRTUAL_ACCOUNT")
+                                ? "No. Virtual Account:"
+                                : "No. Rekening:",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.defaultTextSize),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Fluttertoast.showToast(
+                                    msg: "Disalin",
+                                    backgroundColor: CustomColor.red,
+                                    textColor: CustomColor.white,
+                                    gravity: ToastGravity.CENTER,
+                                  );
+                                  Clipboard.setData(
+                                      new ClipboardData(text: va_number));
+                                },
+                                child: Text(
+                                  "Salin",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: Dimensions.defaultTextSize),
+                                ),
+                              ),
+                              Text(
+                                "  " + va_number,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: Dimensions.defaultTextSize,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              _dataPembayaran("Bank:", variable.bank_code),
-              _dataPembayaran("Kode Bank:", variable.merchant_code),
-              _dataPembayaran(
-                  (variable.selectedPaymentCategories == "VIRTUAL_ACCOUNT")
-                      ? "No. Virtual Account:"
-                      : "No. Rekening:",
-                  ""),
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    variable.account_number,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: Dimensions.defaultTextSize,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () {
-                      Fluttertoast.showToast(
-                        msg: "Disalin",
-                        backgroundColor: CustomColor.red,
-                        textColor: CustomColor.white,
-                        gravity: ToastGravity.CENTER,
-                      );
-                      Clipboard.setData(
-                          new ClipboardData(text: variable.account_number));
-                    },
-                    child: Text(
-                      "Salin",
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: Dimensions.defaultTextSize),
-                    ),
-                  )
-                ],
-              ),
+              SizedBox(height: 20),
+              _dataBooking("Total Harga: ", rupiah(total_price)),
+              _dataBooking("Tanggal Pesanan: ",
+                  dateFormat.format(DateTime.parse(created_at)).toString()),
+              _dataBooking("Bayar sebelum: ",
+                  dateFormat.format(DateTime.parse(expired)).toString()),
+              // SizedBox(height: 20),
             ],
           ),
         ));
@@ -285,20 +333,19 @@ class _InvoiceWidgetScreen extends State<InvoiceScreen> {
     );
   }
 
-  _dataPembayaran(String title, String value) {
+  _dataBooking(String title, String subTitle) {
     return Padding(
       padding: const EdgeInsets.only(bottom: Dimensions.heightSize * 0.5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: TextStyle(
                 color: Colors.black, fontSize: Dimensions.defaultTextSize),
           ),
-          SizedBox(width: 5),
           Text(
-            value,
+            subTitle,
             style: TextStyle(
                 color: Colors.black,
                 fontSize: Dimensions.defaultTextSize,
