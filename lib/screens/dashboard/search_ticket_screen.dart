@@ -4,6 +4,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:indonesia/indonesia.dart';
 import 'package:intl/intl.dart';
 import 'package:juragan99/data/ticket_list.dart';
+import 'package:juragan99/screens/payment_status_screen.dart';
 import 'package:juragan99/screens/ticket_result_screen.dart';
 import 'package:juragan99/utils/dimensions.dart';
 import 'package:juragan99/utils/strings.dart';
@@ -284,7 +285,7 @@ class _SearchTicketScreenState extends State<SearchTicketScreen> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => TicketResultScreen(
+                              builder: (context) => PaymentStatusScreen(
                                 booking_code: booking_code,
                               ),
                             ),

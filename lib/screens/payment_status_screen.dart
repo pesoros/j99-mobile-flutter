@@ -21,6 +21,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
+import 'package:html2md/html2md.dart' as html2md;
 
 import 'package:juragan99/utils/variables.dart' as variable;
 import 'package:url_launcher/url_launcher_string.dart';
@@ -38,6 +39,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
   bool isLoadingPackage = true;
   bool isLoadingTrace = true;
   bool isLoadingPayment = true;
+  bool _expanded = false;
 
   String booking_code;
   String round_trip;
@@ -54,6 +56,7 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
   String mobile_link;
 
   List<TicketPassanggerListModal> _ticketList = [];
+  List<PayemntTutorial> listPaymentTutorial = [];
 
   @override
   void initState() {
@@ -73,6 +76,16 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
         total_seat = value['total_seat'];
         created_at = value['created_at'];
         expired = value['expired'];
+        List<PayemntTutorial> temp = [];
+        for (var data in value['payment_tutorial'] as List) {
+          temp.add(PayemntTutorial(
+            channel: data['channel'],
+            gate: data['gate'],
+            title: data['title'],
+            context: data['context'],
+          ));
+        }
+        listPaymentTutorial = temp;
         isLoadingPackage = false;
       });
     });
@@ -327,10 +340,15 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
                   "Pulang Pergi? ", (round_trip == "0") ? "Tidak" : "Ya"),
               _dataBooking("Perjalanan: ", _ticketList[0].pickup_trip_location),
               _dataBooking(" ", _ticketList[0].drop_trip_location),
-              SizedBox(height: 10),
               Divider(
                 color: Colors.black,
-                thickness: 2,
+                thickness: 1,
+              ),
+              _tutorialPembayaran(),
+              // SizedBox(height: 10),
+              Divider(
+                color: Colors.black,
+                thickness: 1,
               ),
               SizedBox(height: 10),
               Text("Penumpang",
@@ -477,6 +495,61 @@ class _PaymentStatusScreen extends State<PaymentStatusScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  _tutorialPembayaran() {
+    return ExpansionPanelList(
+      elevation: 0,
+      animationDuration: Duration(milliseconds: 300),
+      children: [
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) {
+            return ListTile(
+              title: Text(
+                'Tata Cara Pembayaran',
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
+            );
+          },
+          body: Column(
+            children: [
+              for (int i = 0; i < listPaymentTutorial.length; i++) ...[
+                ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      listPaymentTutorial[i].channel +
+                          " - " +
+                          listPaymentTutorial[i].gate,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      html2md.convert(listPaymentTutorial[i].context),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ],
+          ),
+          isExpanded: _expanded,
+          canTapOnHeader: true,
+        ),
+      ],
+      expansionCallback: (panelIndex, isExpanded) {
+        _expanded = !_expanded;
+        setState(() {});
+      },
     );
   }
 }

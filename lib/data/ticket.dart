@@ -103,3 +103,17 @@ class TicketPassanggerListModal {
     return data;
   }
 }
+
+class PayemntTutorial {
+  String channel;
+  String gate;
+  String title;
+  String context;
+
+  PayemntTutorial({
+    this.channel,
+    this.gate,
+    this.title,
+    this.context,
+  });
+}
